@@ -1,0 +1,11 @@
+{
+  "id": "fee-reg",
+  "label": "Registration Fee",
+  "classRange": "Nursery to XII",
+  "type": "one-time",
+  "refundable": false,
+  "amount": 1000,
+  "note": "One-time, non-refundable upon registration",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}

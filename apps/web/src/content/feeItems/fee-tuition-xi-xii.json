@@ -1,0 +1,11 @@
+{
+  "id": "fee-tuition-xi-xii",
+  "label": "Tuition Fee (Monthly / Quarterly)",
+  "classRange": "XI to XII",
+  "type": "quarterly",
+  "refundable": false,
+  "amount": 10050,
+  "note": "₹3,350/month payable quarterly in 4 instalments",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}

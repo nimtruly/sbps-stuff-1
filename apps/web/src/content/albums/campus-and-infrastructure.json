@@ -1,0 +1,30 @@
+{
+  "id": "campus-and-infrastructure",
+  "title": "Campus Life & State-of-the-art Infrastructure",
+  "slug": "campus-and-infrastructure",
+  "date": "2025-01-15",
+  "cover": "/brand/DJI_20240917155020_0011_D-scaled.jpg",
+  "category": "Campus",
+  "images": [
+    {
+      "url": "/brand/DJI_20240917155020_0011_D-scaled.jpg",
+      "alt": "Panoramic aerial campus view of Social Baluni Public School",
+      "caption": "Lush campus on Haridwar Bypass Road"
+    },
+    {
+      "url": "/brand/IMG_7698-scaled.jpg",
+      "alt": "Students engaged in composite science laboratory experiment",
+      "caption": "Modern science laboratories"
+    },
+    {
+      "url": "/brand/IMG_0930-scaled.jpg",
+      "alt": "Interactive digital classroom session",
+      "caption": "Smart audio-visual classrooms"
+    },
+    {
+      "url": "/brand/IMG_0650-scaled.jpg",
+      "alt": "School library and reading resources",
+      "caption": "Extensive school library"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "fee-caution",
+  "label": "Caution Money",
+  "classRange": "All Classes",
+  "type": "refundable",
+  "refundable": true,
+  "amount": 5000,
+  "note": "Refundable on withdrawal / TC",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}

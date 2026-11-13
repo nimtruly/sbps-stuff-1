@@ -1,0 +1,11 @@
+{
+  "id": "fee-adm-nur-ix",
+  "label": "Admission Fee",
+  "classRange": "Nursery to IX",
+  "type": "one-time",
+  "refundable": false,
+  "amount": 35000,
+  "note": "Payable at time of provisional admission",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}
