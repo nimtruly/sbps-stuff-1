@@ -3,58 +3,34 @@ import PageLayout from '../../../layouts/PageLayout.astro';
 import { cms } from '../../../lib/cms';
 
 const leaders = await cms.getLeaders();
-const breadcrumbs = [
-  { name: 'About Us', href: '/about/' },
-  { name: 'Leadership Messages', href: '/about/leadership/' },
-];
+const initials = (name: string) => name.replace(/^(Dr|Mr|Mrs|Ms)\.?\s*/, '').split(/[\s.]+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join('');
+const firstSentence = (m: string) => (m.replace(/\s+,/g, ',').match(/[^.!?]+[.!?]+/) ?? [m])[0].trim();
 ---
 
 <PageLayout
-  title="Leadership Messages"
-  description="Guiding vision from the founders, chairmen, managing directors, and principal of Social Baluni Public School, Dehradun."
-  breadcrumbs={breadcrumbs}
+  title="Leadership"
+  description="Messages from the chairmen, managing directors and Principal of Social Baluni Public School."
+  breadcrumbs={[{ label: 'About', href: '/about/' }, { label: 'Leadership', href: '/about/leadership/' }]}
 >
-  <div class="space-y-12 max-w-5xl mx-auto">
-    <div class="space-y-8">
-      {leaders.map((l) => (
-        <div class="p-6 sm:p-8 rounded-2xl bg-paper-50 border border-paper-300 shadow-sm flex flex-col md:flex-row gap-6 items-start">
-          <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-paper-200 border-2 border-crimson-700 shrink-0 mx-auto md:mx-0">
-            <img
-              src={l.photo}
-              alt={l.name}
-              class="w-full h-full object-cover"
-              onerror="this.src='/favicon.svg'"
-            />
+  <ul class="border-t-2 border-ink" role="list">
+    {leaders.map((l) => (
+      <li class="border-b border-paper-300">
+        <a href={`/about/leadership/${l.id}/`} class="group grid grid-cols-[4.5rem_1fr] gap-5 py-6 sm:grid-cols-[6rem_1fr_2fr] sm:gap-8">
+          {l.photo ? (
+            <img src={l.photo} alt={`Portrait of ${l.name}`} width="150" height="150" loading="lazy" class="aspect-square w-full object-cover" />
+          ) : (
+            <span class="flex aspect-square w-full items-center justify-center bg-crimson-700 font-display text-3xl font-bold text-white [font-stretch:80%]" aria-hidden="true">{initials(l.name)}</span>
+          )}
+          <div>
+            <h2 class="text-2xl font-bold group-hover:text-crimson-700">{l.name}</h2>
+            <p class="mt-1 text-paper-700">{l.role}, {l.org}</p>
+            {l.credentials && <p class="text-sm text-paper-600">{l.credentials}</p>}
           </div>
-
-          <div class="flex-1 space-y-3 text-center md:text-left">
-            <div>
-              <h2 class="font-serif text-2xl font-bold text-crimson-950">
-                {l.name}
-              </h2>
-              <div class="text-xs sm:text-sm font-semibold text-crimson-700">
-                {l.role}, {l.org}
-              </div>
-              {l.credentials && (
-                <div class="text-xs text-paper-500 font-medium">{l.credentials}</div>
-              )}
-            </div>
-
-            <p class="text-xs sm:text-sm text-paper-700 leading-relaxed line-clamp-3 italic">
-              "{l.message}"
-            </p>
-
-            <div>
-              <a
-                href={`/about/leadership/${l.id}/`}
-                class="inline-flex items-center gap-1.5 text-xs font-bold text-crimson-800 hover:text-crimson-900 underline"
-              >
-                Read Complete Message from {l.name.split(' ')[0]} {l.name.split(' ').slice(-1)} &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
+          <p class="col-span-2 text-paper-800 sm:col-span-1">
+            {firstSentence(l.message)} <span class="font-semibold text-crimson-700 underline">Read the message</span>
+          </p>
+        </a>
+      </li>
+    ))}
+  </ul>
 </PageLayout>

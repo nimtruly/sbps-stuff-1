@@ -1,144 +1,50 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
-import Button from '../../../components/ui/Button.astro';
+import Photo from '../../../components/ui/Photo.astro';
 import { cms } from '../../../lib/cms';
 
 const programmes = await cms.getProgrammes();
-const breadcrumbs = [
-  { name: 'Academics', href: '/academics/' },
-  { name: 'Integrated Programmes', href: '/academics/integrated-programme/' },
-];
+const features = programmes[0]?.features ?? [];
 ---
 
 <PageLayout
-  title="Integrated Programmes: Schooling + Competitive Coaching"
-  description="Master CBSE board examinations and national entrance tests (NEET, JEE, NDA, Olympiads) under one unified timetable with Baluni Classes and Doon Baluni Defence Academy."
-  breadcrumbs={breadcrumbs}
+  title="Integrated programmes"
+  description="CBSE schooling and competitive-exam preparation on the same campus: 2, 4 and 5-year programmes for NEET, JEE, NTSE, Olympiads and NDA."
+  breadcrumbs={[{ label: 'Academics', href: '/academics/' }, { label: 'Integrated programmes', href: '/academics/integrated-programme/' }]}
 >
-  <div class="space-y-16 max-w-5xl mx-auto">
-    <!-- Hero Pitch -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-      <div class="space-y-6">
-        <div class="inline-block px-3 py-1 bg-crimson-100 text-crimson-800 rounded-full text-xs font-semibold">
-          Dual Excellence Under One Roof
-        </div>
-        <h2 class="font-serif text-3xl font-bold text-crimson-950 leading-tight">
-          One Campus. One Timetable. Double the Performance.
-        </h2>
-        <p class="text-sm sm:text-base text-paper-700 leading-relaxed">
-          The Social Baluni Public School Integrated Programme is designed to solve the biggest dilemma facing modern high school students: how to prepare for fiercely competitive national examinations (NEET, JEE, NDA) without compromising on CBSE school attendance, board percentages, and mental well-being.
-        </p>
-        <div class="flex flex-wrap gap-4 pt-2">
-          <Button href="/admissions/enquire/" variant="primary" size="md">
-            Enquire for Integrated Batch
-          </Button>
-          <Button href="/academics/day-boarding/" variant="outline" size="md">
-            Learn About Day Boarding
-          </Button>
-        </div>
-      </div>
-
-      <div class="rounded-2xl overflow-hidden shadow-xl border border-paper-300">
-        <img
-          src="/images/sports-balance-1280.webp"
-          alt="SBPS students collaborating on campus"
-          class="w-full h-full object-cover max-h-[380px]"
-        />
-      </div>
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,68ch)_1fr]">
+    <div class="prose-sbps">
+      <p>
+        Students who finish Class X face a new, more competitive stage. The integrated programmes cover the school syllabus and entrance-exam preparation together, in line with each other, so students never fall behind in either. They run for 2, 4 or 5 years, with coaching by Baluni Classes and, for defence, Doon Baluni Defence Academy.
+      </p>
     </div>
-
-    <!-- Programme Offerings Grid -->
-    <section class="space-y-8">
-      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
-        Available Integrated Pathways
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {programmes.map((p) => (
-          <div class="p-8 rounded-2xl bg-paper-50 border border-paper-300 shadow-sm flex flex-col justify-between hover:border-crimson-700 transition-colors">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-1 bg-crimson-100 text-crimson-800 rounded-full text-xs font-bold uppercase">
-                  {p.duration}
-                </span>
-                <span class="text-xs text-paper-500 font-medium">Partner: {p.partner.split(' ')[0]}</span>
-              </div>
-
-              <div>
-                <h3 class="font-serif text-2xl font-bold text-paper-900">
-                  {p.title}
-                </h3>
-                <div class="text-xs text-crimson-700 font-semibold mt-1">
-                  Eligibility: {p.eligibility}
-                </div>
-              </div>
-
-              <p class="text-xs sm:text-sm text-paper-700 leading-relaxed">
-                {p.summary}
-              </p>
-
-              <div class="space-y-1.5 pt-2">
-                {p.features.slice(0, 3).map((f) => (
-                  <div class="flex items-start gap-2 text-xs text-paper-700">
-                    <span class="text-forest-700 font-bold">✓</span>
-                    <span>{f}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div class="mt-8 pt-4 border-t border-paper-200">
-              <a
-                href={`/academics/integrated-programme/${p.slug}/`}
-                class="inline-flex items-center gap-1.5 text-xs font-bold text-crimson-800 hover:text-crimson-900 hover:underline"
-              >
-                View Detailed Curriculum & Batch Details &rarr;
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Why Integrated Over Outside Coaching -->
-    <section class="bg-paper-50 p-8 sm:p-12 rounded-2xl border border-paper-300 space-y-6">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-900">
-        Why Choose the SBPS Integrated Pathway Over Evening Coaching?
-      </h2>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs sm:text-sm border-collapse">
-          <thead>
-            <tr class="border-b-2 border-paper-300 text-paper-900 font-serif">
-              <th class="py-3 px-4 font-bold">Comparison Factor</th>
-              <th class="py-3 px-4 font-bold text-crimson-800">SBPS Integrated Model</th>
-              <th class="py-3 px-4 font-bold text-paper-600">Traditional School + Evening Coaching</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-paper-200 text-paper-700">
-            <tr>
-              <td class="py-3.5 px-4 font-semibold text-paper-900">Daily Travel & Transit</td>
-              <td class="py-3.5 px-4 text-forest-800 font-medium">Zero evening transit. All coaching happens on campus.</td>
-              <td class="py-3.5 px-4 text-paper-500">2–3 hours wasted daily in evening city traffic.</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold text-paper-900">Curriculum Harmony</td>
-              <td class="py-3.5 px-4 text-forest-800 font-medium">CBSE and entrance topics synchronized by one master plan.</td>
-              <td class="py-3.5 px-4 text-paper-500">Conflicting topic sequences causing severe student confusion.</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold text-paper-900">Sleep & Physical Health</td>
-              <td class="py-3.5 px-4 text-forest-800 font-medium">8 hours of restful sleep + regular sports academy sessions.</td>
-              <td class="py-3.5 px-4 text-paper-500">Chronic sleep deprivation and burnout by Class XII.</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold text-paper-900">Doubt Clarification</td>
-              <td class="py-3.5 px-4 text-forest-800 font-medium">Same faculty available during day boarding doubt desks.</td>
-              <td class="py-3.5 px-4 text-paper-500">Large crowded batches where doubts go unaddressed.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <Photo name="science-lab" sizes="(min-width: 1024px) 30vw, 100vw" class="aspect-[3/2] w-full object-cover" />
   </div>
+
+  <ul class="mt-12 grid border-t-2 border-ink md:grid-cols-2" role="list">
+    {programmes.map((p, i) => (
+      <li class:list={['border-b-2 border-ink', i % 2 === 0 ? 'md:border-r-2' : '']}>
+        <a href={`/academics/integrated-programme/${p.slug}/`} class:list={['group block h-full py-8 md:px-8', i % 2 === 0 && 'md:pl-0']}>
+          <h2 class="text-3xl font-extrabold group-hover:text-crimson-700">{p.title}</h2>
+          <p class="measure mt-3 text-paper-700">{p.summary}</p>
+          <span class="mt-4 inline-flex items-center gap-2 font-semibold text-crimson-700 underline">Read more</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <section class="mt-16" aria-labelledby="how-title">
+    <h2 id="how-title" class="text-4xl font-extrabold">How it works</h2>
+    <ol class="mt-8 grid gap-x-12 border-t-2 border-ink md:grid-cols-2" role="list">
+      {features.map((f) => {
+        const [head, ...rest] = f.split(': ');
+        return (
+          <li class="border-b border-paper-300 py-5">
+            <h3 class="text-xl font-bold">{head}</h3>
+            <p class="mt-1 text-paper-700">{rest.join(': ')}</p>
+          </li>
+        );
+      })}
+    </ol>
+  </section>
 </PageLayout>

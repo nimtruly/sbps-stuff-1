@@ -17,7 +17,7 @@ export const POST: APIRoute = (ctx) =>
         parentName: d.parentName,
         studentName: d.studentName ?? 'Not specified',
         grade: d.grade,
-        email: d.email,
+        email: d.email ?? '',
         phone: d.phone,
         preferredContact: d.preferredContact,
         message: d.message ?? null,

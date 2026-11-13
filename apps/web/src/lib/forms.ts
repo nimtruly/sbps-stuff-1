@@ -53,7 +53,14 @@ export const enquirySchema = z.object({
   parentName: trimmed(100),
   studentName: optional(100),
   grade: trimmed(60),
-  email,
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .max(160)
+    .optional()
+    .transform((v) => (v ? v : undefined))
+    .pipe(z.string().email().optional()),
   phone,
   preferredContact: z.enum(['phone', 'whatsapp', 'email']).catch('phone'),
   message: optional(2000),

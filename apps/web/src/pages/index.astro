@@ -1,574 +1,373 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/ui/Button.astro';
-import YouTubeFacade from '../components/ui/YouTubeFacade.astro';
+import Photo from '../components/ui/Photo.astro';
 import { cms } from '../lib/cms';
+import { withNoticeRefs, formatDate } from '../lib/refs';
+import { school } from '../data/nav';
 
-const siteSettings = await cms.getSiteSettings();
-const stats = await cms.getStats(true); // Verified only!
-const notices = (await cms.getNotices()).slice(0, 3);
+const notices = withNoticeRefs(await cms.getNotices()).slice(0, 4);
 const articles = (await cms.getArticles(false)).slice(0, 3);
-const faqs = await cms.getFAQs('home');
 const principal = await cms.getLeaderById('principal');
+const houses = await cms.getHouses();
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
-// FAQPage JSON-LD
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: f.answer,
-    },
-  })),
-};
+const principalPara = principal?.message.split('\n\n').find((p) => p.length > 120 && !p.includes('Greg Reid')) ?? '';
+// First two sentences of the Principal's own message (spacing tidied only)
+const principalQuote = (principalPara.replace(/\s+,/g, ',').match(/[^.!?]+[.!?]+/g) ?? []).slice(0, 2).join(' ').trim();
+
+const classes = ['Nursery', 'LKG', 'UKG', 'Class I', 'Class II', 'Class III', 'Class IV', 'Class V', 'Class VI', 'Class VII', 'Class VIII', 'Class IX', 'Class X', 'Class XI', 'Class XII'];
+
+// 38th National Games, Uttarakhand: selections by sport (legacy list page)
+const nationalGames = [
+  { sport: 'Fencing', students: 10 },
+  { sport: 'Badminton', students: 5 },
+  { sport: 'Archery', students: 3 },
+  { sport: 'Kalaripayattu', students: 3 },
+  { sport: 'Shooting', students: 2 },
+];
+
+const steps = [
+  { letter: 'A', title: 'Register', text: 'Registration runs from the last week of December to the last week of February. Fill in the form from the registration booklet and hand it to the school office.' },
+  { letter: 'B', title: 'Admission test', text: 'The office gives you a letter with the registration number, roll number, date and time of the test.' },
+  { letter: 'C', title: 'Interview', text: 'Students who qualify in the test are called for an interview.' },
+  { letter: 'D', title: 'Admission', text: 'Admission depends on the test, the interview and the seats available. It stays provisional until documents are submitted and the fee is paid.' },
+];
 ---
 
 <BaseLayout
-  title="Social Baluni Public School | CBSE School in Dehradun with Integrated Coaching"
-  description="Social Baluni Public School (SBPS) Dehradun is a premier CBSE school (Nursery–XII) offering day boarding and integrated coaching with Baluni Classes for NEET, JEE & NDA."
-  schema={faqSchema}
+  title="Social Baluni Public School, Dehradun | CBSE school with NEET, JEE and NDA preparation"
+  description="Social Baluni Public School is a co-educational CBSE school in Dehradun, Nursery to XII, with integrated NEET, JEE, NTSE and NDA preparation on campus and a strong sports programme."
 >
-  <!-- 1. Hero Section (No sliders, real campus photography) -->
-  <section class="relative bg-paper-900 text-white overflow-hidden">
-    <!-- Background Image with Overlay -->
-    <div class="absolute inset-0 z-0">
-      <img
-        src="/images/campus-aerial-1280.webp"
-        alt="Aerial view of Social Baluni Public School campus in Dehradun"
-        class="w-full h-full object-cover opacity-35 object-center"
-        loading="eager"
-      />
-      <div class="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/75 to-transparent"></div>
-    </div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-28 sm:pb-36">
-      <div class="max-w-3xl space-y-6">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-800/80 border border-crimson-600/50 text-saffron-300 text-xs font-semibold tracking-wide">
-          <span>CBSE Affiliated 3530479</span>
-          <span class="text-paper-400">•</span>
-          <span>Nursery to Class XII</span>
-          <span class="text-paper-400">•</span>
-          <span>Day Boarding</span>
-        </div>
-
-        <!-- Single H1 on Homepage -->
-        <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15]">
-          CBSE School in Dehradun with <span class="text-saffron-400">Integrated NEET, JEE & NDA</span> Preparation
+  <!-- First viewport: the tie panel and the campus -->
+  <section class="grid lg:min-h-[calc(100svh-7.5rem)] lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]" aria-labelledby="hero-title">
+    <div class="tie-field relative lg:pr-5">
+      <div class="tie-field absolute inset-y-0 right-0 hidden w-5 lg:block" aria-hidden="true"></div>
+      <div class="relative flex h-full flex-col justify-center bg-crimson-700/[0.93] px-4 py-10 text-white sm:px-8 lg:px-12 lg:py-12 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+        <h1 id="hero-title" class="max-w-[13ch] text-[2.75rem] font-extrabold sm:text-6xl xl:text-7xl">
+          School and NEET, JEE, NDA preparation under one roof
         </h1>
-
-        <p class="text-base sm:text-xl text-paper-200 leading-relaxed font-normal">
-          Learn to grow with academic rigour. We combine CBSE education with integrated competitive coaching by Baluni Classes and Doon Baluni Defence Academy under one roof.
+        <p class="mt-5 text-lg font-medium text-crimson-50">
+          CBSE · Nursery to XII · Dehradun · <span class="whitespace-nowrap">Learn to grow</span>
         </p>
 
-        <div class="flex flex-wrap items-center gap-4 pt-2">
-          <Button href="/admissions/enquire/" variant="gold" size="lg">
-            Enquire for Admission
-          </Button>
-          <Button href="/contact/" variant="outline" size="lg" class="text-white border-white hover:bg-white/10">
-            Book a Campus Visit
-          </Button>
-        </div>
+        <form method="POST" action="/api/enquiry" class="mt-8 max-w-md border-2 border-ink bg-paper-50 p-5 text-ink sm:p-6" aria-labelledby="callback-title">
+          <h2 id="callback-title" class="text-2xl font-bold">Ask for a call back</h2>
+          <p class="mt-1 text-sm text-paper-700">The admissions office will phone you.</p>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            <label class="sm:col-span-2">
+              <span class="text-sm font-semibold">Parent's name</span>
+              <input name="parentName" required autocomplete="name" class="mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none" />
+            </label>
+            <label>
+              <span class="text-sm font-semibold">Phone</span>
+              <input name="phone" type="tel" required inputmode="tel" autocomplete="tel" class="mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none" />
+            </label>
+            <label>
+              <span class="text-sm font-semibold">Class</span>
+              <select name="grade" required class="mt-1 h-12 w-full border-2 border-paper-400 bg-white px-2 text-base focus:border-ink focus:outline-none">
+                <option value="">Choose</option>
+                {classes.map((c) => <option>{c}</option>)}
+              </select>
+            </label>
+          </div>
+          <input type="hidden" name="preferredContact" value="phone" />
+          {turnstileKey && <div class="cf-turnstile mt-3" data-sitekey={turnstileKey}></div>}
+          <button type="submit" class="mt-4 inline-flex h-12 w-full items-center justify-center bg-saffron-500 text-lg font-bold text-ink hover:bg-saffron-400 active:bg-saffron-600">
+            Request a call back
+          </button>
+        </form>
       </div>
     </div>
-  </section>
 
-  <!-- 2. Proof Strip (Overlapping card with verified stats) -->
-  <section class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20">
-    <div class="bg-paper-50 rounded-2xl shadow-xl border border-paper-300 p-6 sm:p-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-paper-200">
-        {stats.slice(0, 4).map((s, idx) => (
-          <div class={`text-center space-y-1 ${idx > 0 ? 'pt-4 sm:pt-0 sm:pl-4' : ''}`}>
-            <div class="font-serif text-2xl sm:text-3xl font-bold text-crimson-800 tabular-nums">
-              {s.value}
-            </div>
-            <div class="text-sm font-semibold text-paper-900">{s.label}</div>
-            <div class="text-xs text-paper-600 leading-tight">{s.context}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Persona Chooser ("Find the right path") -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
-        Find the Right Path for Your Child
-      </h2>
-      <p class="mt-3 text-base text-paper-700">
-        Personalised learning pathways tailored to each developmental milestone.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <a href="/academics/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-        <div>
-          <div class="w-10 h-10 rounded-lg bg-crimson-50 text-crimson-800 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
-            N–V
-          </div>
-          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
-            Early Years & Primary
-          </h3>
-          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
-            Nursery to Class V powered by the XSEED experiential learning pedagogy, fostering curiosity, language, and foundational numeracy.
-          </p>
-        </div>
-        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
-          Explore Primary &rarr;
-        </span>
-      </a>
-
-      <a href="/academics/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-        <div>
-          <div class="w-10 h-10 rounded-lg bg-forest-50 text-forest-800 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
-            VI–VIII
-          </div>
-          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
-            Middle School
-          </h3>
-          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
-            Class VI to VIII with disciplined conceptual grounding in Science, Mathematics, and competitive foundation Olympiad aptitude.
-          </p>
-        </div>
-        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
-          Explore Middle School &rarr;
-        </span>
-      </a>
-
-      <a href="/academics/integrated-programme/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-        <div>
-          <div class="w-10 h-10 rounded-lg bg-saffron-50 text-paper-900 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
-            IX–XII
-          </div>
-          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
-            NEET & JEE Integrated
-          </h3>
-          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
-            Class IX to XII with synchronised CBSE board syllabus and rigorous entrance exam coaching by Baluni Classes faculty.
-          </p>
-        </div>
-        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
-          Explore Medical & Engg &rarr;
-        </span>
-      </a>
-
-      <a href="/academics/integrated-programme/nda/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-        <div>
-          <div class="w-10 h-10 rounded-lg bg-crimson-100 text-crimson-900 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
-            NDA
-          </div>
-          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
-            Defence Services Wing
-          </h3>
-          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
-            Dedicated officer preparation with Doon Baluni Defence Academy, obstacle course training, shooting academy, and SSB mentoring.
-          </p>
-        </div>
-        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
-          Explore Defence Pathway &rarr;
-        </span>
-      </a>
-    </div>
-  </section>
-
-  <!-- 4. Five Core Pillars (Real photo cards) -->
-  <section class="bg-paper-200/50 py-16 sm:py-24 border-y border-paper-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
-          The Five Pillars of Social Baluni
-        </h2>
-        <p class="mt-3 text-base text-paper-700">
-          A balanced education delivering intellectual rigour, physical grit, and moral grounding.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        <!-- Pillar 1 -->
-        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
-          <div class="h-44 overflow-hidden">
-            <img src="/images/cultural-programme-1280.webp" alt="Academics classroom learning" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-          </div>
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-serif text-base font-bold text-paper-900">Academic Rigour</h3>
-              <p class="mt-1 text-xs text-paper-600">CBSE curriculum enriched by experiential discovery and continuous evaluation.</p>
-            </div>
-            <a href="/academics/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Pillar 2 -->
-        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
-          <div class="h-44 overflow-hidden">
-            <img src="/images/student-presentation-1280.webp" alt="Integrated science laboratory coaching" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-          </div>
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-serif text-base font-bold text-paper-900">Integrated Coaching</h3>
-              <p class="mt-1 text-xs text-paper-600">NEET & JEE preparation by Baluni Classes within regular school hours.</p>
-            </div>
-            <a href="/academics/integrated-programme/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Pillar 3 -->
-        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
-          <div class="h-44 overflow-hidden">
-            <img src="/images/sports-cycling-1280.webp" alt="Defence academy training and march past" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-          </div>
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-serif text-base font-bold text-paper-900">Defence Pathway</h3>
-              <p class="mt-1 text-xs text-paper-600">Officer grooming, SSB mentorship, and daily endurance drills.</p>
-            </div>
-            <a href="/academics/integrated-programme/nda/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Pillar 4 -->
-        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
-          <div class="h-44 overflow-hidden">
-            <img src="/images/sports-balance-1280.webp" alt="Sports and athletic competitions" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-          </div>
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-serif text-base font-bold text-paper-900">Sports Academies</h3>
-              <p class="mt-1 text-xs text-paper-600">Shooting range, boxing academy, cricket, football, and martial arts.</p>
-            </div>
-            <a href="/campus-life/sports/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Pillar 5 -->
-        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
-          <div class="h-44 overflow-hidden">
-            <img src="/images/assembly-performance-1280.webp" alt="Co-curricular house celebrations" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-          </div>
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-serif text-base font-bold text-paper-900">Himalayan Houses</h3>
-              <p class="mt-1 text-xs text-paper-600">Alaknanda, Bhilangna, Bhagirathi, and Mandakini river house traditions.</p>
-            </div>
-            <a href="/about/house-system/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Integrated Programme Explainer (Split Layout) -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div class="space-y-6">
-        <div class="inline-block px-3 py-1 bg-crimson-100 text-crimson-800 rounded-full text-xs font-semibold">
-          School + Coaching Under One Roof
-        </div>
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950 leading-tight">
-          Eliminate Evening Travel Fatigue. Master Boards and Entrances Together.
-        </h2>
-        <p class="text-base text-paper-700 leading-relaxed">
-          At Social Baluni Public School, senior students do not waste valuable evening hours in traffic shuttling between school and distant coaching centres. Our integrated model synchronises CBSE school requirements with Baluni Classes' intensive competitive entrance modules.
-        </p>
-
-        <div class="space-y-3 pt-2">
-          <div class="flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
-              ✓
-            </div>
-            <div>
-              <strong class="text-sm font-semibold text-paper-900">Unified Timetable:</strong>
-              <span class="text-xs text-paper-600 ml-1">Theory in morning sessions followed by entrance problem-solving drills.</span>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
-              ✓
-            </div>
-            <div>
-              <strong class="text-sm font-semibold text-paper-900">Supervised Day Boarding:</strong>
-              <span class="text-xs text-paper-600 ml-1">Doubt removal, assignment completion, and laboratory practicals on campus.</span>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
-              ✓
-            </div>
-            <div>
-              <strong class="text-sm font-semibold text-paper-900">Baluni Classes Pedagogy:</strong>
-              <span class="text-xs text-paper-600 ml-1">Experienced senior medical and engineering mentors with proven rank records.</span>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
-              ✓
-            </div>
-            <div>
-              <strong class="text-sm font-semibold text-paper-900">Restored Family Evenings:</strong>
-              <span class="text-xs text-paper-600 ml-1">Students return home with schoolwork done, ready for sound sleep and recovery.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-4 flex flex-wrap gap-4">
-          <Button href="/academics/integrated-programme/" variant="primary" size="md">
-            Explore Integrated Programmes
-          </Button>
-          <Button href="/admissions/enquire/" variant="outline" size="md">
-            Schedule Academic Counselling
-          </Button>
-        </div>
-      </div>
-
-      <!-- Campus Life Visual -->
-      <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-paper-300">
-        <img
-          src="/images/sports-balance-1280.webp"
-          alt="SBPS campus sports meet and student teamwork"
-          class="w-full h-auto object-cover max-h-[500px]"
-        />
-        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-ink/90 via-ink/60 to-transparent p-6 text-white">
-          <div class="font-serif font-bold text-lg">Integrated Excellence</div>
-          <div class="text-xs text-paper-300 mt-1">Classroom instruction backed by 20+ years of Baluni Group coaching legacy.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Notices and Latest News -->
-  <section class="bg-paper-50 py-16 sm:py-24 border-t border-paper-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <!-- Notices Column -->
-        <div class="space-y-6">
-          <div class="flex items-center justify-between border-b border-paper-300 pb-3">
-            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-900">
-              Notices & Circulars
-            </h2>
-            <a href="/notices/" class="text-xs font-semibold text-crimson-700 hover:underline">
-              View All Notices &rarr;
-            </a>
-          </div>
-
-          <div class="space-y-4">
-            {notices.map((n) => (
-              <div class="p-4 rounded-xl bg-paper-100 border border-paper-300/80 hover:border-crimson-600 transition-colors">
-                <div class="flex items-center gap-2 mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-crimson-100 text-crimson-800">
-                    {n.category}
-                  </span>
-                  <span class="text-xs text-paper-500 tabular-nums">{n.date}</span>
-                  {n.pinned && (
-                    <span class="text-[10px] font-bold text-saffron-950 bg-saffron-200 border border-saffron-300 px-1.5 py-0.5 rounded">
-                      Pinned
-                    </span>
-                  )}
-                </div>
-                <h3 class="font-serif text-base font-bold text-paper-900">
-                  {n.title}
-                </h3>
-                <p class="mt-1 text-xs text-paper-700 line-clamp-2 leading-relaxed">
-                  {n.body}
-                </p>
-                {n.attachments && n.attachments.length > 0 && (
-                  <div class="mt-2 flex gap-2">
-                    {n.attachments.map((att) => (
-                      <a href={att.url} target="_blank" class="text-xs text-crimson-700 font-semibold hover:underline inline-flex items-center gap-1">
-                        📄 {att.title}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Latest Articles / News Column -->
-        <div class="space-y-6">
-          <div class="flex items-center justify-between border-b border-paper-300 pb-3">
-            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-900">
-              Latest Happenings & News
-            </h2>
-            <a href="/blog/" class="text-xs font-semibold text-crimson-700 hover:underline">
-              View All Articles &rarr;
-            </a>
-          </div>
-
-          <div class="space-y-4">
-            {articles.map((art) => (
-              <a href={`/blog/${art.slug}/`} class="group block p-4 rounded-xl bg-paper-100 border border-paper-300/80 hover:border-crimson-600 transition-colors">
-                <div class="flex items-center gap-2 mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-forest-100 text-forest-800">
-                    {art.category}
-                  </span>
-                  <span class="text-xs text-paper-500 tabular-nums">{art.publishedAt}</span>
-                </div>
-                <h3 class="font-serif text-base font-bold text-paper-900 group-hover:text-crimson-800">
-                  {art.title}
-                </h3>
-                <p class="mt-1 text-xs text-paper-700 line-clamp-2 leading-relaxed">
-                  {art.excerpt}
-                </p>
-                <span class="mt-2 text-xs font-semibold text-crimson-700 inline-block group-hover:underline">
-                  Read article &rarr;
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Principal's Message Section -->
-  {principal && (
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      <div class="bg-paper-50 rounded-2xl border border-paper-300 p-8 sm:p-12 shadow-sm">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
-          <div class="text-center md:text-left space-y-2">
-            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto md:mx-0 overflow-hidden bg-paper-200 border-4 border-crimson-700 shadow">
-              <img
-                src={principal.photo}
-                alt={principal.name}
-                class="w-full h-full object-cover"
-                onerror="this.src='/favicon.svg'"
-              />
-            </div>
-            <div class="font-serif text-lg font-bold text-paper-900">{principal.name}</div>
-            <div class="text-xs text-crimson-700 font-semibold">{principal.role}</div>
-            <div class="text-[11px] text-paper-500">{principal.credentials}</div>
-          </div>
-
-          <div class="md:col-span-3 space-y-4">
-            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-950">
-              "Learn to Grow: Nurturing Leaders for Tomorrow"
-            </h2>
-            <p class="text-sm sm:text-base text-paper-700 leading-relaxed italic border-l-4 border-crimson-700 pl-4 bg-paper-100/50 py-2">
-              "{principal.message}"
-            </p>
-            <div class="pt-2">
-              <a href="/about/leadership/principal/" class="text-xs font-semibold text-crimson-700 hover:underline inline-flex items-center gap-1">
-                Read Principal's Complete Address &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- 8. Campus Video & Inspection -->
-  <section class="bg-paper-900 text-white py-16 sm:py-24">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
-      <div class="max-w-2xl mx-auto space-y-3">
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">
-          Experience Life at Social Baluni Public School
-        </h2>
-        <p class="text-sm sm:text-base text-paper-300">
-          Take a digital walk through our smart classrooms, sports fields, shooting academy, and laboratory facilities.
-        </p>
-      </div>
-
-      <!-- lite-youtube facade (no heavy iframe on page load) -->
-      <YouTubeFacade videoId="4ygbcVKNL9Q" title="Social Baluni Public School Dehradun Campus Walkthrough" />
-    </div>
-  </section>
-
-  <!-- 9. Campus Life Gallery Mosaic -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-      <div>
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
-          Moments on Campus
-        </h2>
-        <p class="mt-2 text-sm text-paper-700">
-          Sports championships, house activities, and interactive classroom learning.
-        </p>
-      </div>
-      <a href="/campus-life/gallery/" class="text-xs font-semibold text-crimson-700 hover:underline">
-        Explore Full Photo Gallery &rarr;
-      </a>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="col-span-2 row-span-2 rounded-xl overflow-hidden shadow-sm group">
-        <img src="/images/campus-aerial-1280.webp" alt="Aerial view of SBPS campus" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
-        <img src="/images/sports-balance-1280.webp" alt="Athletic track sports meet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
-        <img src="/images/student-presentation-1280.webp" alt="Science laboratory students" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
-        <img src="/images/sports-cycling-1280.webp" alt="March past ceremony" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
-        <img src="/images/cultural-programme-1280.webp" alt="Smart digital classroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. Frequently Asked Questions (FAQPage) -->
-  <section class="bg-paper-50 py-16 sm:py-24 border-t border-paper-300">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-      <div class="text-center space-y-2">
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
-          Frequently Asked Questions
-        </h2>
-        <p class="text-sm text-paper-700">
-          Everything parents need to know about admissions, day boarding, and integrated coaching.
-        </p>
-      </div>
-
-      <div class="space-y-4">
-        {faqs.map((f) => (
-          <details class="group p-5 rounded-xl bg-paper-100 border border-paper-300 open:bg-paper-50 transition-colors">
-            <summary class="font-serif font-bold text-paper-900 cursor-pointer list-none flex items-center justify-between gap-4">
-              <span>{f.question}</span>
-              <span class="text-crimson-700 font-bold group-open:rotate-180 transition-transform">
-                ↓
-              </span>
-            </summary>
-            <p class="mt-3 text-xs sm:text-sm text-paper-700 leading-relaxed border-t border-paper-200 pt-3">
-              {f.answer}
-            </p>
-          </details>
-        ))}
-      </div>
-
-      <div class="text-center pt-4">
-        <a href="/admissions/faq/" class="text-xs font-semibold text-crimson-700 hover:underline">
-          View all Admissions & Fee FAQs &rarr;
+    <div class="relative flex flex-col bg-ink">
+      <Photo name="campus-aerial" loading="eager" sizes="(min-width: 1024px) 58vw, 100vw" class="h-64 w-full flex-1 object-cover sm:h-96 lg:h-auto" />
+      <div class="grid sm:grid-cols-2">
+        <a href="/admissions/" class="group block bg-forest-700 px-6 py-6 text-white hover:bg-forest-800 sm:px-8">
+          <span class="flex items-center justify-between font-display text-3xl font-bold [font-stretch:80%]">
+            Admissions
+            <svg class="h-6 w-6 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+          </span>
+          <span class="mt-1 block text-[0.9375rem] text-forest-50">How admission works, fees, apply online</span>
+        </a>
+        <a href="/parents/" class="group block bg-ink px-6 py-6 text-white hover:bg-paper-800 sm:px-8">
+          <span class="flex items-center justify-between font-display text-3xl font-bold [font-stretch:80%]">
+            Current parents
+            <svg class="h-6 w-6 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+          </span>
+          <span class="mt-1 block text-[0.9375rem] text-paper-300">Notices, calendar, policies, documents</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- 11. Final Action CTA Band -->
-  <section class="bg-gradient-to-r from-crimson-800 to-crimson-900 text-white py-14">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">
-        Begin Your Journey at Social Baluni Public School
-      </h2>
-      <p class="text-sm sm:text-base text-paper-200 max-w-2xl mx-auto">
-        Registrations open for Session 2027–28. Connect with our admissions counselling team today or visit our Dehradun campus.
+  <div class="tie-spine" data-spine>
+    <!-- One school day, two halves -->
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28 lg:pl-14" aria-labelledby="day-title">
+      <h2 id="day-title" class="max-w-3xl text-4xl font-extrabold sm:text-5xl">One campus for school and entrance preparation</h2>
+      <p class="measure mt-5 text-lg text-paper-700">
+        Students follow the CBSE syllabus and prepare for competitive exams on the school premises, with coaching faculty from Baluni Classes and Doon Baluni Defence Academy. Programmes run for 2, 4 or 5 years.
       </p>
-      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-        <Button href="/admissions/enquire/" variant="gold" size="lg">
-          Submit Admission Enquiry
-        </Button>
-        <Button href="tel:+919690000890" variant="outline" size="lg" class="text-white border-white hover:bg-white/10">
-          Call: +91 96900 00890
-        </Button>
-        <Button href="https://wa.me/919690000890" target="_blank" variant="secondary" size="lg">
-          WhatsApp Admissions
-        </Button>
+
+      <div class="mt-12 grid border-y-2 border-ink lg:grid-cols-2">
+        <div class="py-8 lg:border-r-2 lg:border-ink lg:pr-10">
+          <h3 class="text-3xl font-bold">School</h3>
+          <dl class="mt-6 divide-y divide-paper-300 text-base">
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Board</dt><dd>CBSE, New Delhi</dd></div>
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Classes</dt><dd>Nursery to XII, co-educational</dd></div>
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Primary years</dt><dd>XSEED, an activity-based way of teaching</dd></div>
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Day boarding</dt><dd>Available; <a class="text-crimson-700 underline" href="/academics/day-boarding/">see how it works</a></dd></div>
+          </dl>
+        </div>
+        <div class="border-t-2 border-ink py-8 lg:border-t-0 lg:pl-10">
+          <h3 class="text-3xl font-bold">Preparation</h3>
+          <ul class="mt-6 divide-y divide-paper-300" role="list">
+            {[
+              ['NEET (UG)', 'Medical entrance, with Baluni Classes', '/academics/integrated-programme/neet/'],
+              ['JEE Main and Advanced', 'Engineering entrance, with Baluni Classes', '/academics/integrated-programme/jee/'],
+              ['NTSE and Olympiads', 'Foundation for younger classes', '/academics/integrated-programme/ntse/'],
+              ['NDA and defence', 'With Doon Baluni Defence Academy', '/academics/integrated-programme/nda/'],
+            ].map(([t, d, href]) => (
+              <li>
+                <a href={href} class="group flex items-baseline justify-between gap-4 py-3">
+                  <span>
+                    <span class="block text-lg font-semibold group-hover:text-crimson-700 group-hover:underline">{t}</span>
+                    <span class="block text-[0.9375rem] text-paper-600">{d}</span>
+                  </span>
+                  <svg class="h-5 w-5 shrink-0 text-crimson-700" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p class="measure mt-6 text-[0.9375rem] text-paper-700">
+        Doubt-clearing sessions run on alternate days, and career counselling sessions are held every month.
+      </p>
+    </section>
+
+    <!-- Sports: the scoreboard -->
+    <section class="bg-ink text-white" aria-labelledby="sport-title">
+      <div class="tie-band" aria-hidden="true"></div>
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8 lg:py-24 lg:pl-14">
+        <div>
+          <h2 id="sport-title" class="text-4xl font-extrabold sm:text-5xl">Selected for the 38th National Games</h2>
+          <p class="measure mt-4 text-lg text-paper-300">
+            SBPS students were selected to compete for Uttarakhand at the 38th National Games, in five sports.
+          </p>
+          <table class="mt-8 w-full max-w-md text-left">
+            <caption class="sr-only">Students selected for the 38th National Games, by sport</caption>
+            <thead>
+              <tr class="border-b-2 border-saffron-500 text-sm text-paper-300">
+                <th scope="col" class="py-2 font-semibold">Sport</th>
+                <th scope="col" class="py-2 text-right font-semibold">Students</th>
+              </tr>
+            </thead>
+            <tbody>
+              {nationalGames.map((r) => (
+                <tr class="border-b border-white/15">
+                  <th scope="row" class="py-3 text-xl font-semibold">{r.sport}</th>
+                  <td class="py-3 text-right font-display text-3xl font-bold [font-stretch:75%]">{r.students}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <a href="/blog/38th-national-games-selections/" class="mt-6 inline-block text-[0.9375rem] font-semibold underline">Read the announcement</a>
+        </div>
+        <div class="flex flex-col gap-8">
+          <Photo name="sports-balance" sizes="(min-width: 1024px) 40vw, 100vw" class="aspect-[3/2] w-full object-cover" />
+          <div>
+            <h3 class="text-2xl font-bold">Runner-up, 2024 SFA Inter-School Competition</h3>
+            <p class="mt-2 text-paper-300">Also named best school in fencing, shooting and boxing, and rising school in sports.</p>
+            <a href="/campus-life/sports/" class="mt-4 inline-block text-[0.9375rem] font-semibold underline">All 15 sports at SBPS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admission, lettered steps -->
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28 lg:pl-14" aria-labelledby="adm-title">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <h2 id="adm-title" class="max-w-2xl text-4xl font-extrabold sm:text-5xl">How admission works</h2>
+        <a href="/admissions/apply/" class="inline-flex h-12 items-center border-2 border-ink px-5 font-semibold hover:bg-ink hover:text-white">Apply online</a>
+      </div>
+      <ol class="mt-10 grid border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4" role="list">
+        {steps.map((s, i) => (
+          <li class:list={[
+            'border-b-2 border-ink py-6 sm:pr-6',
+            i % 2 === 1 && 'sm:border-l-2 sm:pl-6',
+            i === 2 && 'lg:border-l-2 lg:pl-6',
+          ]}>
+            <span class="font-display text-6xl font-extrabold text-crimson-700 [font-stretch:75%]" aria-hidden="true">{s.letter}</span>
+            <h3 class="mt-2 text-2xl font-bold"><span class="sr-only">Step {s.letter}: </span>{s.title}</h3>
+            <p class="mt-2 text-[0.9375rem] text-paper-700">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-10 grid gap-10 lg:grid-cols-2">
+        <div>
+          <h3 class="text-2xl font-bold">Age on 1 April of the year of admission</h3>
+          <table class="mt-4 w-full max-w-sm text-left text-base">
+            <tbody>
+              {[['Nursery', '3+'], ['LKG', '4+'], ['UKG', '5+'], ['Class I', '6+']].map(([c, a]) => (
+                <tr class="border-b border-paper-300"><th scope="row" class="py-2.5 font-semibold">{c}</th><td class="py-2.5 text-right">{a} years</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold">Fees</h3>
+          <p class="measure mt-3 text-paper-700">
+            The current fee structure is in the school's official PDF. Fees are paid by crossed cheque, demand draft or cash at the City Office, in four quarterly instalments.
+          </p>
+          <a href="/admissions/fees/" class="mt-4 inline-block font-semibold text-crimson-700 underline">Fees and the fee PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current parents -->
+    <section class="border-y-2 border-ink bg-paper-50" aria-labelledby="parents-title">
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[7fr_5fr] lg:px-8 lg:pl-14">
+        <div>
+          <h2 id="parents-title" class="text-4xl font-extrabold sm:text-5xl">Notices</h2>
+          {notices.length > 0 ? (
+            <ul class="mt-8 border-t-2 border-ink" role="list">
+              {notices.map((n) => (
+                <li class="border-b border-paper-300">
+                  <a href={`/notices/${n.id}/`} class="group grid gap-1 py-4 sm:grid-cols-[7rem_1fr] sm:gap-6">
+                    <span class="text-sm text-paper-600">
+                      <time datetime={n.date}>{formatDate(n.date)}</time>
+                      <span class="block font-semibold text-ink" data-figure>{n.ref}</span>
+                    </span>
+                    <span class="text-lg font-semibold group-hover:text-crimson-700 group-hover:underline">{n.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="mt-6 text-paper-700">No notices right now.</p>
+          )}
+          <a href="/notices/" class="mt-6 inline-block font-semibold text-crimson-700 underline">All notices</a>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">For current parents</h2>
+          <ul class="mt-6 border-t-2 border-ink text-lg" role="list">
+            {[
+              ['Academic calendar (PDF)', '/documents/2025/06/10.-ANNUAL-ACADEMIC-CALENDER-1.pdf'],
+              ['Fee structure (PDF)', '/documents/2026/01/FEE-1.pdf'],
+              ['Rules and policies', '/parents/policies/'],
+              ['Transfer certificate', '/parents/transfer-certificate/'],
+              ['CBSE mandatory disclosure', '/disclosure/'],
+            ].map(([t, href]) => (
+              <li class="border-b border-paper-300">
+                <a href={href} class="flex items-center justify-between py-3.5 font-semibold hover:text-crimson-700">
+                  {t}
+                  <svg class="h-5 w-5 text-crimson-700" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principal -->
+    {principal && principalQuote && (
+      <section class="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[5fr_7fr] lg:px-8 lg:py-28 lg:pl-14" aria-labelledby="principal-title">
+        <Photo name="students-uniform" sizes="(min-width: 1024px) 38vw, 100vw" class="aspect-[4/3] w-full object-cover" />
+        <figure>
+          <h2 id="principal-title" class="text-sm font-semibold text-paper-600">From the Principal</h2>
+          <blockquote class="mt-4 font-display text-2xl font-semibold leading-snug [font-stretch:88%] sm:text-3xl">
+            <p>{principalQuote}</p>
+          </blockquote>
+          <figcaption class="mt-6 text-base">
+            <span class="font-bold">{principal.name}</span>, {principal.role}
+            <a href="/about/leadership/principal/" class="ml-2 text-crimson-700 underline">Read the full message</a>
+          </figcaption>
+        </figure>
+      </section>
+    )}
+
+    <!-- Life on campus -->
+    <section class="bg-paper-200" aria-labelledby="life-title">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:pl-14">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <h2 id="life-title" class="text-4xl font-extrabold sm:text-5xl">On campus</h2>
+          <a href="/campus-life/gallery/" class="font-semibold text-crimson-700 underline">Photo gallery</a>
+        </div>
+        <div class="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:grid-rows-2">
+          <figure class="col-span-2 row-span-2"><Photo name="cultural-programme" sizes="(min-width: 1024px) 50vw, 100vw" class="aspect-[3/2] h-full w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">A cultural programme in front of the main building</figcaption></figure>
+          <figure><Photo name="science-lab" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Science lab</figcaption></figure>
+          <figure><Photo name="music-room" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Music room</figcaption></figure>
+          <figure><Photo name="library-reading" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Library</figcaption></figure>
+          <figure><Photo name="yoga" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Yoga in the courtyard</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Houses -->
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:pl-14" aria-labelledby="houses-title">
+      <h2 id="houses-title" class="text-4xl font-extrabold sm:text-5xl">Four houses, four Himalayan rivers</h2>
+      <p class="measure mt-4 text-lg text-paper-700">Every student belongs to a house. Houses earn points through the year for academics, cultural and sports events, discipline and behaviour.</p>
+      <ul class="mt-10 grid border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4" role="list">
+        {houses.map((h: any) => (
+          <li class="border-b border-paper-300 py-5 sm:pr-6">
+            <h3 class="text-3xl font-bold">{h.id.charAt(0).toUpperCase() + h.id.slice(1)}</h3>
+            <p class="mt-2 line-clamp-3 text-[0.9375rem] text-paper-700">{h.description}</p>
+          </li>
+        ))}
+      </ul>
+      <a href="/about/house-system/" class="mt-6 inline-block font-semibold text-crimson-700 underline">About the house system</a>
+    </section>
+
+    {articles.length > 0 && (
+      <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 lg:pl-14" aria-labelledby="news-title">
+        <h2 id="news-title" class="text-4xl font-extrabold sm:text-5xl">News</h2>
+        <ul class="mt-8 grid gap-8 border-t-2 border-ink pt-8 md:grid-cols-3" role="list">
+          {articles.map((a) => (
+            <li>
+              <a href={`/blog/${a.slug}/`} class="group block">
+                <time class="text-sm text-paper-600" datetime={a.publishedAt}>{formatDate(a.publishedAt)}</time>
+                <h3 class="mt-1 text-2xl font-bold group-hover:text-crimson-700 group-hover:underline">{a.title}</h3>
+                <p class="mt-2 text-[0.9375rem] text-paper-700">{a.excerpt}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+
+  <!-- Close: visit the school -->
+  <section class="tie-field" aria-labelledby="visit-title">
+    <div class="bg-crimson-700/90">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-20 text-white sm:px-6 lg:grid-cols-[7fr_5fr] lg:px-8 lg:pl-14">
+        <div>
+          <h2 id="visit-title" class="text-4xl font-extrabold sm:text-6xl">Come and see the school</h2>
+          <p class="measure mt-4 text-lg text-crimson-50">{school.address}.</p>
+        </div>
+        <div class="flex flex-col gap-3 self-end">
+          <a href="/admissions/enquire/" class="inline-flex h-14 items-center justify-center bg-saffron-500 px-6 text-lg font-bold text-ink hover:bg-saffron-400">Book a visit</a>
+          <a href={school.phoneHref} class="inline-flex h-14 items-center justify-center border-2 border-white px-6 text-lg font-semibold hover:bg-white hover:text-crimson-800" data-figure>Call {school.phone}</a>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Signature: the tie stripe draws itself down the page spine as you read.
+  const spine = document.querySelector<HTMLElement>('[data-spine]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (spine && !reduce) {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const r = spine.getBoundingClientRect();
+      const seen = (window.innerHeight * 0.85 - r.top) / r.height;
+      spine.style.setProperty('--spine-progress', String(Math.min(1, Math.max(0.04, seen))));
+    };
+    update();
+    window.addEventListener('scroll', () => (frame ||= requestAnimationFrame(update)), { passive: true });
+    window.addEventListener('resize', () => (frame ||= requestAnimationFrame(update)));
+  }
+</script>

@@ -1,0 +1,29 @@
+---
+import images from '../../data/images.json';
+
+interface Props {
+  name: keyof typeof images;
+  sizes?: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  alt?: string;
+}
+
+const { name, sizes = '100vw', class: className = '', loading = 'lazy', alt } = Astro.props;
+const img = images[name];
+const srcset = img.widths.map((w) => `/images/${name}-${w}.webp ${w}w`).join(', ');
+const src = `/images/${name}-${img.widths[img.widths.length - 1]}.webp`;
+---
+
+<img
+  src={src}
+  srcset={srcset}
+  sizes={sizes}
+  width={img.width}
+  height={img.height}
+  alt={alt ?? img.alt}
+  loading={loading}
+  decoding="async"
+  fetchpriority={loading === 'eager' ? 'high' : undefined}
+  class={className}
+/>

@@ -1,55 +1,33 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
-import GalleryLightbox from '../../../components/islands/GalleryLightbox';
-import { getCollection } from 'astro:content';
+import { cms } from '../../../lib/cms';
 
 export async function getStaticPaths() {
-  const albums = await getCollection('albums');
-  return albums.map((album) => ({
-    params: { album: album.data.slug },
-    props: { album },
-  }));
+  const albums = await cms.getAlbums();
+  return albums.map((album) => ({ params: { album: album.slug }, props: { album } }));
 }
 
 const { album } = Astro.props;
-
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Campus Life', href: '/campus-life/' },
-  { label: 'Photo Gallery', href: '/campus-life/gallery/' },
-  { label: album.data.title, href: `/campus-life/gallery/${album.data.slug}/` },
-];
 ---
 
 <PageLayout
-  title={album.data.title}
-  description={`Photo gallery of ${album.data.title} at Social Baluni Public School, Dehradun.`}
-  breadcrumbs={breadcrumbs}
+  title={album.title}
+  description={`Photographs: ${album.title.toLowerCase()} at Social Baluni Public School, Dehradun.`}
+  breadcrumbs={[
+    { label: 'Campus life', href: '/campus-life/' },
+    { label: 'Photo gallery', href: '/campus-life/gallery/' },
+    { label: album.title, href: `/campus-life/gallery/${album.slug}/` },
+  ]}
 >
-  <div class="mb-10">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="px-2.5 py-0.5 rounded bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider">
-        {album.data.category}
-      </span>
-      <span class="text-xs text-paper-500">
-        {new Date(album.data.date).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
-      </span>
-    </div>
-    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
-      {album.data.title}
-    </h2>
-    <p class="text-sm text-paper-600">
-      Click on any photo below to expand in full-screen view and navigate with keyboard arrow keys.
-    </p>
-  </div>
-
-  <section class="mb-16">
-    <GalleryLightbox client:idle images={album.data.images} />
-  </section>
-
-  <div class="border-t border-paper-200 pt-8">
-    <a href="/campus-life/gallery/" class="text-sm font-semibold text-crimson-700 hover:text-crimson-900 inline-flex items-center gap-1">
-      ← Back to all photo albums
-    </a>
-  </div>
+  <ul class="grid gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-3" role="list">
+    {album.images.map((img, i) => (
+      <li>
+        <a href={img.url} class="group block" aria-label={`Open full-size photo: ${img.alt}`}>
+          <img src={img.url} alt={img.alt} width="1280" height="853" loading={i < 3 ? 'eager' : 'lazy'} class="aspect-[3/2] w-full object-cover outline-offset-4 group-hover:outline group-hover:outline-2 group-hover:outline-ink" />
+        </a>
+        <p class="mt-2 text-sm text-paper-700">{img.caption ?? img.alt}</p>
+      </li>
+    ))}
+  </ul>
+  <a href="/campus-life/gallery/" class="mt-12 inline-block font-semibold underline">All albums</a>
 </PageLayout>

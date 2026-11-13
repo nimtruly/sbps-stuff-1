@@ -1,196 +1,65 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import Button from '../../components/Button.astro';
+import { school } from '../../data/nav';
 
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Admissions', href: '/admissions/' },
-  { label: 'Enquire', href: '/admissions/enquire/' },
-];
-
-const grades = [
-  'Nursery', 'LKG', 'UKG',
-  'Class I', 'Class II', 'Class III', 'Class IV', 'Class V',
-  'Class VI', 'Class VII', 'Class VIII',
-  'Class IX', 'Class X',
-  'Class XI (Medical / NEET)', 'Class XI (Non-Medical / JEE)', 'Class XI (Commerce / Humanities / Defence)',
-  'Class XII (Medical / Non-Medical / Commerce / Humanities)'
-];
-
+const classes = ['Nursery', 'LKG', 'UKG', 'Class I', 'Class II', 'Class III', 'Class IV', 'Class V', 'Class VI', 'Class VII', 'Class VIII', 'Class IX', 'Class X', 'Class XI', 'Class XII'];
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const field = 'mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none';
 ---
 
 <PageLayout
-  title="Admission Enquiry"
-  description="Submit an admission enquiry for Social Baluni Public School, Dehradun. Our academic counsellors will contact you within 24 hours."
-  breadcrumbs={breadcrumbs}
+  title="Admission enquiry"
+  description="Ask about admission, day boarding or the integrated programmes, or ask to visit the school. The admissions office will contact you."
+  breadcrumbs={[{ label: 'Admissions', href: '/admissions/' }, { label: 'Enquire', href: '/admissions/enquire/' }]}
 >
-  <div class="max-w-3xl">
-    <div class="mb-8">
-      <span class="inline-block px-3 py-1 rounded-full bg-saffron-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-2 border border-saffron-200">
-        Session 2027–28
-      </span>
-      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
-        Admission Enquiry & Campus Visit
-      </h2>
-      <p class="text-base sm:text-lg text-paper-700 leading-relaxed">
-        Fill out the enquiry form below. Our admissions coordinator will get in touch with you to answer questions about the curriculum, day boarding, integrated competitive coaching, or schedule a campus tour.
-      </p>
-    </div>
+  <div class="grid gap-14 lg:grid-cols-[7fr_5fr]">
+    <form method="POST" action="/api/enquiry" class="grid gap-5 sm:grid-cols-2" aria-label="Admission enquiry">
+      <label>
+        <span class="font-semibold">Parent's name</span>
+        <input name="parentName" required autocomplete="name" class={field} />
+      </label>
+      <label>
+        <span class="font-semibold">Child's name <span class="font-normal text-paper-600">(optional)</span></span>
+        <input name="studentName" class={field} />
+      </label>
+      <label>
+        <span class="font-semibold">Phone</span>
+        <input name="phone" type="tel" required inputmode="tel" autocomplete="tel" class={field} />
+      </label>
+      <label>
+        <span class="font-semibold">Email <span class="font-normal text-paper-600">(optional)</span></span>
+        <input name="email" type="email" autocomplete="email" class={field} />
+      </label>
+      <label>
+        <span class="font-semibold">Class applying for</span>
+        <select name="grade" required class={field}>
+          <option value="">Choose a class</option>
+          {classes.map((c) => <option>{c}</option>)}
+        </select>
+      </label>
+      <label>
+        <span class="font-semibold">How should we contact you?</span>
+        <select name="preferredContact" class={field}>
+          <option value="phone">Phone call</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="email">Email</option>
+        </select>
+      </label>
+      <label class="sm:col-span-2">
+        <span class="font-semibold">Questions or a preferred visit day <span class="font-normal text-paper-600">(optional)</span></span>
+        <textarea name="message" rows="4" maxlength="2000" class="mt-1 w-full border-2 border-paper-400 bg-white p-3 text-base focus:border-ink focus:outline-none"></textarea>
+      </label>
+      {turnstileKey && <div class="cf-turnstile sm:col-span-2" data-sitekey={turnstileKey}></div>}
+      <button type="submit" class="h-12 bg-saffron-500 px-6 text-lg font-bold text-ink hover:bg-saffron-400 sm:col-span-2 sm:justify-self-start">Send enquiry</button>
+    </form>
 
-    <div class="bg-paper-50 rounded-2xl border border-paper-300 p-6 sm:p-10 shadow-sm mb-12">
-      <form method="POST" action="/api/enquiry" class="space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="parentName" class="block text-sm font-semibold text-ink mb-2">
-              Parent / Guardian Name <span class="text-crimson-700">*</span>
-            </label>
-            <input
-              type="text"
-              id="parentName"
-              name="parentName"
-              required
-              class="w-full px-4 py-3 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm transition-all"
-              placeholder="e.g. Rajesh Kumar"
-            />
-          </div>
-
-          <div>
-            <label for="studentName" class="block text-sm font-semibold text-ink mb-2">
-              Student Full Name <span class="text-crimson-700">*</span>
-            </label>
-            <input
-              type="text"
-              id="studentName"
-              name="studentName"
-              required
-              class="w-full px-4 py-3 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm transition-all"
-              placeholder="e.g. Aarav Kumar"
-            />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="phone" class="block text-sm font-semibold text-ink mb-2">
-              Mobile Number (WhatsApp) <span class="text-crimson-700">*</span>
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-              pattern="[0-9]{10}"
-              class="w-full px-4 py-3 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm transition-all"
-              placeholder="10-digit mobile number"
-            />
-          </div>
-
-          <div>
-            <label for="email" class="block text-sm font-semibold text-ink mb-2">
-              Email Address <span class="text-crimson-700">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              class="w-full px-4 py-3 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm transition-all"
-              placeholder="name@example.com"
-            />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label for="grade" class="block text-sm font-semibold text-ink mb-2">
-              Grade Applying For <span class="text-crimson-700">*</span>
-            </label>
-            <select
-              id="grade"
-              name="grade"
-              required
-              class="w-full px-4 py-3 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm transition-all"
-            >
-              <option value="">Select Grade</option>
-              {grades.map((g) => (
-                <option value={g}>{g}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label for="preferredContact" class="block text-sm font-semibold text-ink mb-2">
-              Preferred Contact Channel
-            </label>
-            <select
-              id="preferredContact"
-              name="preferredContact"
-              class="w-full px-4 py-3 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm transition-all"
-            >
-              <option value="phone">Phone Call</option>
-              <option value="whatsapp">WhatsApp Message</option>
-              <option value="email">Email</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label for="message" class="block text-sm font-semibold text-ink mb-2">
-            Questions or Specific Interests (Optional)
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            class="w-full px-4 py-3 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm transition-all"
-            placeholder="Tell us about your child's current school, competitive exam aspirations (NEET/JEE/NDA), or transport requirements..."
-          ></textarea>
-        </div>
-
-        {turnstileKey && (
-          <div class="cf-turnstile" data-sitekey={turnstileKey}></div>
-        )}
-
-        <div class="pt-2">
-          <Button type="submit" variant="primary" size="lg" class="w-full sm:w-auto">
-            Submit Admission Enquiry →
-          </Button>
-          <p class="text-xs text-paper-500 mt-3">
-            By submitting, you agree to receive communications from SBPS regarding admissions. Your information is protected under our <a href="/privacy/" class="underline">Privacy Policy</a>.
-          </p>
-        </div>
-      </form>
-    </div>
-
-    <!-- Direct Contact Options -->
-    <div class="border-t border-paper-200 pt-8">
-      <h2 class="text-lg font-serif font-bold text-ink mb-4">Need Immediate Assistance?</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <a
-          href="tel:01352733333"
-          class="flex items-center gap-3 p-4 rounded-xl bg-paper-100 hover:bg-paper-200 transition-colors border border-paper-200"
-        >
-          <span class="text-2xl">📞</span>
-          <div>
-            <div class="text-xs text-paper-600 uppercase font-bold tracking-wider">Admissions Helpline</div>
-            <div class="text-sm font-semibold text-ink">0135-2733333 / 7055000000</div>
-          </div>
-        </a>
-
-        <a
-          href="https://wa.me/917055000000?text=Hello%20SBPS%20Admissions%20Desk"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center gap-3 p-4 rounded-xl bg-paper-100 hover:bg-paper-200 transition-colors border border-paper-200"
-        >
-          <span class="text-2xl">💬</span>
-          <div>
-            <div class="text-xs text-paper-600 uppercase font-bold tracking-wider">Chat on WhatsApp</div>
-            <div class="text-sm font-semibold text-ink">+91 7055000000</div>
-          </div>
-        </a>
-      </div>
-    </div>
+    <aside class="border-t-2 border-ink pt-5" aria-labelledby="other-ways">
+      <h2 id="other-ways" class="text-2xl font-bold">Prefer to talk?</h2>
+      <ul class="mt-4 space-y-2 text-lg" role="list">
+        {school.phones.map((p) => <li><a class="font-semibold hover:text-crimson-700 hover:underline" href={`tel:${p.replace(/\s/g, '')}`} data-figure>{p}</a></li>)}
+        <li><a class="font-semibold hover:text-crimson-700 hover:underline" href={school.whatsapp} rel="noopener">WhatsApp</a></li>
+      </ul>
+      <p class="mt-6 text-paper-700">Registration runs from the last week of December to the last week of February. <a href="/admissions/" class="font-semibold text-crimson-700 underline">How admission works</a></p>
+    </aside>
   </div>
 </PageLayout>

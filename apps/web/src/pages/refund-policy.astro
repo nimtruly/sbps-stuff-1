@@ -1,86 +1,14 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import InfoPage from '../components/InfoPage.astro';
 
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Fee Refund Policy', href: '/refund-policy/' },
-];
+const body = "- **Registration and admission fees** are non-refundable. Amounts paid for registration and admission in one year cannot be transferred to another year.\n- **Caution (security) money** is refundable.\n- **Monthly fees** are non-refundable.\n\nFor any question about a refund, contact the school office:\n\n- Phone: [+91 96900 00890](tel:+919690000890)\n- Email: [info@sbpsdoon.com](mailto:info@sbpsdoon.com)";
 ---
 
-<PageLayout
-  title="Fee Refund Policy & Cancellation Guidelines"
-  description="Official Fee Refund and Cancellation Policy of Social Baluni Public School, Dehradun (in compliance with CBSE, RBI, and Razorpay guidelines)."
-  breadcrumbs={breadcrumbs}
->
-  <div class="max-w-3xl">
-    <div class="mb-10">
-      <span class="inline-block px-3 py-1 rounded-full bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-2">
-        Mandatory Gateway Compliance
-      </span>
-      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
-        Fee Refund & Cancellation Policy
-      </h2>
-      <p class="text-xs text-paper-500">
-        In accordance with the guidelines of the Central Board of Secondary Education (CBSE) and standard payment aggregator directives.
-      </p>
-    </div>
-
-    <div class="space-y-8 text-paper-800 leading-relaxed text-sm sm:text-base">
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">1. Registration & Prospectus Charges</h2>
-        <p>
-          The fee paid towards the School Prospectus, Registration Form, and Entrance Assessment is strictly <strong>non-refundable</strong> and non-transferable under any circumstances, regardless of whether admission is subsequently offered or accepted.
-        </p>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">2. Admission Fee & Withdrawal Before Session Commencement</h2>
-        <p class="mb-3">
-          If a parent decides to withdraw their child after paying admission fees and composite charges before the official commencement of the new academic session:
-        </p>
-        <ul class="list-disc list-inside space-y-1.5 text-sm text-paper-700">
-          <li><strong>Withdrawal requested 30 days prior to commencement:</strong> Tuition fee and annual composite charges are refunded after deducting an administrative processing charge (up to ₹1,000 as per CBSE norms).</li>
-          <li><strong>Withdrawal requested within 15 days of commencement:</strong> One month's tuition fee is retained, and the balance composite fees and security deposit are refunded.</li>
-        </ul>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">3. Withdrawal Mid-Session</h2>
-        <p>
-          If a student is withdrawn mid-session, tuition and transport fees must be cleared up to the end of the academic quarter in which the Transfer Certificate (TC) is applied for. No refund of tuition fees for that active quarter will be granted.
-        </p>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">4. Security Deposit (Caution Money)</h2>
-        <p>
-          The Security Deposit / Caution Money collected at the time of admission is <strong>100% refundable</strong> when the student formally leaves the school. The refund is processed via NEFT/RTGS to the parent's registered bank account after submission of the original deposit receipt and successful clearance of no-dues certificates from the school library, science labs, and accounts desk.
-        </p>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">5. Duplicate or Failed Online Transactions (Razorpay)</h2>
-        <p>
-          In the event of an inadvertent double-payment or technical glitch during an online transaction via the Razorpay payment gateway where the account has been debited twice for a single fee instalment:
-        </p>
-        <ul class="list-disc list-inside space-y-1.5 text-sm text-paper-700 mt-2">
-          <li>The parent should immediately notify the accounts office via email at <a href="mailto:accounts@sbpsdoon.com" class="text-crimson-700 font-bold underline">accounts@sbpsdoon.com</a> with the payment reference / UTR number.</li>
-          <li>Upon verification, the duplicate charge will be initiated for refund to the original source instrument within <strong>3 to 5 business days</strong>, subject to the issuing bank's settlement cycle (typically 5–7 banking days).</li>
-        </ul>
-      </section>
-
-      <section class="bg-paper-100 p-6 rounded-2xl border border-paper-300">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">6. Accounts Helpdesk & Queries</h2>
-        <p class="text-sm text-paper-700 mb-2">
-          For any fee reconciliation or refund status queries, please write to:
-        </p>
-        <div class="text-xs sm:text-sm font-sans space-y-1 text-paper-900">
-          <div><strong>Department:</strong> Accounts & Finance Section</div>
-          <div><strong>School:</strong> Social Baluni Public School, Dehradun</div>
-          <div><strong>Email:</strong> <a href="mailto:accounts@sbpsdoon.com" class="text-crimson-700 underline font-semibold">accounts@sbpsdoon.com</a></div>
-          <div><strong>Accounts Counter Hours:</strong> Monday – Saturday, 9:00 AM to 2:00 PM</div>
-        </div>
-      </section>
-    </div>
-  </div>
-</PageLayout>
+<InfoPage
+  title="Fee refund policy"
+  description="Which fees Social Baluni Public School refunds, and how to ask about a refund."
+  breadcrumbs={[{"label": "Refund policy", "href": "/refund-policy/"}]}
+  body={body}
+  
+  related={[["Fees", "/admissions/fees/"], ["Pay fees", "/parents/pay-fees/"]]}
+></InfoPage>

@@ -1,230 +1,133 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
+interface NavItem {
+  title: string;
+  href: string;
+}
 interface NavSection {
   title: string;
   href: string;
-  items?: { title: string; href: string; desc?: string }[];
+  items: NavItem[];
 }
 
-const navSections: NavSection[] = [
-  {
-    title: 'About',
-    href: '/about/',
-    items: [
-      { title: 'Our Story & Vision', href: '/about/', desc: 'Founded in 2014, Mandakini Seva Samiti unit' },
-      { title: 'Leadership Messages', href: '/about/leadership/', desc: 'Messages from Chairmen, MDs & Principal' },
-      { title: 'Campus & Facilities', href: '/about/campus/', desc: 'Labs, transport, sports, and infrastructure' },
-      { title: 'River House System', href: '/about/house-system/', desc: 'Alaknanda, Bhilangna, Bhagirathi, Mandakini' },
-      { title: 'Baluni Group', href: '/baluni-group/', desc: 'Sister institutions across Uttarakhand & UP' },
-    ],
-  },
-  {
-    title: 'Academics',
-    href: '/academics/',
-    items: [
-      { title: 'Curriculum & Pedagogy', href: '/academics/', desc: 'Nursery to XII with XSEED experiential learning' },
-      { title: 'Integrated Programme', href: '/academics/integrated-programme/', desc: 'School + NEET, JEE & NDA under one roof' },
-      { title: 'Day Boarding', href: '/academics/day-boarding/', desc: 'Extended academic & sports day programme' },
-      { title: 'Results & Achievers', href: '/academics/results/', desc: 'CBSE board performance & competitive exam ranks' },
-    ],
-  },
-  {
-    title: 'Admissions',
-    href: '/admissions/',
-    items: [
-      { title: 'Admissions Process', href: '/admissions/', desc: 'Timeline, age criteria & document checklist' },
-      { title: 'Fee Structure', href: '/admissions/fees/', desc: 'Transparent fee schedule & quarterly breakdown' },
-      { title: 'Enquire Now', href: '/admissions/enquire/', desc: 'Request callback or schedule campus visit' },
-      { title: 'Online Application', href: '/admissions/apply/', desc: 'Complete admission application form' },
-      { title: 'Admissions FAQ', href: '/admissions/faq/', desc: 'Frequently asked parent questions' },
-    ],
-  },
-  {
-    title: 'Campus Life',
-    href: '/campus-life/',
-    items: [
-      { title: 'Campus Life Overview', href: '/campus-life/', desc: 'Holistic learning beyond classrooms' },
-      { title: 'Sports & Academies', href: '/campus-life/sports/', desc: '15 sports, boxing, shooting & cricket' },
-      { title: 'Co-Curricular Activities', href: '/campus-life/co-curricular/', desc: 'Clubs, debates, arts & music' },
-      { title: 'Photo Gallery', href: '/campus-life/gallery/', desc: 'Visual moments of campus events' },
-    ],
-  },
-  {
-    title: 'Parents',
-    href: '/parents/',
-    items: [
-      { title: 'Parents Hub', href: '/parents/', desc: 'Central updates, portal links & notice board' },
-      { title: 'Notices & Circulars', href: '/notices/', desc: 'Official administrative & exam notices' },
-      { title: 'Academic Year Planner', href: '/parents/year-planner/', desc: 'Calendar of exams, holidays and events' },
-      { title: 'Rules & Policies', href: '/parents/policies/', desc: 'Discipline, leaves, child protection & safety' },
-      { title: 'Transfer Certificate (TC)', href: '/parents/transfer-certificate/', desc: 'TC procedure and issued certificates' },
-      { title: 'Pay Tuition Fees', href: '/parents/pay-fees/', desc: 'Online fee payment via Razorpay' },
-    ],
-  },
-  {
-    title: 'Contact',
-    href: '/contact/',
-    items: [
-      { title: 'Contact Us & Map', href: '/contact/', desc: 'Campus address, direct phone & directions' },
-      { title: 'Careers', href: '/careers/', desc: 'Join our teaching & administrative faculty' },
-      { title: 'CBSE Disclosure', href: '/disclosure/', desc: 'Mandatory Public Disclosure (Appendix-IX)' },
-    ],
-  },
-];
+interface Props {
+  sections: NavSection[];
+  utility: NavItem[];
+}
 
-export default function MobileNav() {
+export default function MobileNav({ sections, utility }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [active, setActive] = useState<string | null>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    const main = document.getElementById('main-content');
+    const footer = document.querySelector('footer');
+    const bar = document.querySelector('[data-mobile-bar]');
+    const outside = [main, footer, bar].filter(Boolean) as HTMLElement[];
+
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+      document.documentElement.style.overflow = 'hidden';
+      outside.forEach((el) => el.setAttribute('inert', ''));
+      closeRef.current?.focus();
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsOpen(false);
+      };
+      window.addEventListener('keydown', onKey);
+      return () => window.removeEventListener('keydown', onKey);
     }
-    return () => {
-      document.body.style.overflow = '';
-    };
+    document.documentElement.style.overflow = '';
+    outside.forEach((el) => el.removeAttribute('inert'));
+    return undefined;
   }, [isOpen]);
 
-  const toggleSection = (title: string) => {
-    setActiveSection(activeSection === title ? null : title);
+  const close = () => {
+    setIsOpen(false);
+    toggleRef.current?.focus();
   };
 
   return (
     <div class="lg:hidden">
       <button
+        ref={toggleRef}
         type="button"
-        class="p-2.5 rounded-md text-crimson-800 hover:text-crimson-900 hover:bg-paper-200 transition-colors focus-visible:outline-2 focus-visible:outline-crimson-700"
-        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        class="inline-flex h-11 items-center gap-2 border-2 border-ink px-3 text-[0.9375rem] font-semibold text-ink"
         aria-expanded={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
+        aria-controls="mobile-menu"
+        onClick={() => setIsOpen(true)}
       >
-        {isOpen ? (
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        )}
+        <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M1 3.5h14M1 8h14M1 12.5h14" stroke="currentColor" stroke-width="1.75" />
+        </svg>
+        Menu
       </button>
 
       {isOpen && (
-        <div class="fixed inset-0 z-50 flex">
-          {/* Backdrop */}
-          <div
-            class="fixed inset-0 bg-ink/50 backdrop-blur-sm transition-opacity"
-            onClick={() => setIsOpen(false)}
-            aria-hidden="true"
-          />
-
-          {/* Drawer */}
-          <div class="relative ml-auto w-full max-w-sm bg-paper-100 h-full shadow-2xl flex flex-col z-10 overflow-y-auto">
-            {/* Drawer Header */}
-            <div class="p-4 border-b border-paper-300 flex items-center justify-between bg-paper-50">
-              <span class="font-serif font-bold text-crimson-800 text-lg">Menu</span>
-              <button
-                type="button"
-                class="p-2 text-paper-700 hover:text-crimson-800 rounded-md"
-                onClick={() => setIsOpen(false)}
-                aria-label="Close menu"
-              >
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Quick Actions */}
-            <div class="p-4 grid grid-cols-2 gap-2 bg-crimson-50 border-b border-crimson-100">
-              <a
-                href="/admissions/enquire/"
-                class="flex items-center justify-center py-2 px-3 bg-crimson-700 text-white rounded font-medium text-xs text-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Enquire Now
-              </a>
-              <a
-                href="/parents/pay-fees/"
-                class="flex items-center justify-center py-2 px-3 bg-forest-800 text-white rounded font-medium text-xs text-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Pay Fees
-              </a>
-            </div>
-
-            {/* Nav List */}
-            <nav class="flex-1 px-4 py-4 space-y-1">
-              <a
-                href="/"
-                class="block py-2.5 px-3 rounded-md text-sm font-semibold text-paper-900 hover:bg-paper-200"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </a>
-
-              {navSections.map((sec) => (
-                <div key={sec.title} class="border-b border-paper-200/60 pb-1">
-                  <button
-                    type="button"
-                    class="w-full flex items-center justify-between py-2.5 px-3 rounded-md text-sm font-semibold text-paper-900 hover:bg-paper-200 text-left"
-                    onClick={() => toggleSection(sec.title)}
-                  >
-                    <span>{sec.title}</span>
-                    <svg
-                      class={`h-4 w-4 text-paper-500 transition-transform ${activeSection === sec.title ? 'rotate-180' : ''}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-
-                  {activeSection === sec.title && sec.items && (
-                    <div class="pl-4 pr-2 py-1 space-y-1 bg-paper-50/50 rounded-md">
-                      {sec.items.map((item) => (
-                        <a
-                          key={item.href}
-                          href={item.href}
-                          class="block py-1.5 px-2 text-xs font-medium text-paper-800 hover:text-crimson-700 hover:bg-paper-200/60 rounded"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          <div class="font-semibold text-paper-900">{item.title}</div>
-                          {item.desc && <div class="text-[11px] text-paper-600 line-clamp-1">{item.desc}</div>}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-
-              <a
-                href="/search/"
-                class="block py-2.5 px-3 rounded-md text-sm font-semibold text-paper-900 hover:bg-paper-200"
-                onClick={() => setIsOpen(false)}
-              >
-                Search Site
-              </a>
-            </nav>
-
-            {/* Drawer Footer Contact */}
-            <div class="p-4 border-t border-paper-300 bg-paper-200/40 text-xs text-paper-700 space-y-1.5">
-              <div class="font-semibold text-paper-900">Social Baluni Public School</div>
-              <div>Haridwar Bypass Road, Brahmanwala, Dehradun</div>
-              <div class="pt-1 flex items-center gap-3">
-                <a href="tel:+919690000890" class="text-crimson-700 font-semibold hover:underline">
-                  +91 96900 00890
-                </a>
-                <span>•</span>
-                <a href="mailto:info@sbpsdoon.com" class="text-crimson-700 font-semibold hover:underline">
-                  info@sbpsdoon.com
-                </a>
-              </div>
-            </div>
+        <div id="mobile-menu" class="fixed inset-0 z-50 flex flex-col bg-paper-50" role="dialog" aria-modal="true" aria-label="Site menu">
+          <div class="tie-band h-2" aria-hidden="true"></div>
+          <div class="flex h-16 items-center justify-between border-b-2 border-ink px-4">
+            <span class="font-display text-xl font-bold [font-stretch:78%]">Menu</span>
+            <button
+              ref={closeRef}
+              type="button"
+              class="inline-flex h-11 items-center gap-2 px-3 text-[0.9375rem] font-semibold"
+              onClick={close}
+            >
+              Close
+              <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="m3 3 10 10M13 3 3 13" stroke="currentColor" stroke-width="1.75" />
+              </svg>
+            </button>
           </div>
+
+          <nav class="flex-1 overflow-y-auto px-4 pb-28" aria-label="Main">
+            <ul role="list">
+              {sections.map((s) => {
+                const open = active === s.title;
+                const id = `m-${s.title.replace(/\s+/g, '-').toLowerCase()}`;
+                return (
+                  <li class="border-b border-paper-300">
+                    <button
+                      type="button"
+                      class="flex w-full items-center justify-between py-4 text-left font-display text-2xl font-bold [font-stretch:80%]"
+                      aria-expanded={open}
+                      aria-controls={id}
+                      onClick={() => setActive(open ? null : s.title)}
+                    >
+                      {s.title}
+                      <svg class={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`} viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                        <path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.75" />
+                      </svg>
+                    </button>
+                    <ul id={id} hidden={!open} class="pb-3" role="list">
+                      {s.items.map((item) => (
+                        <li>
+                          <a href={item.href} class="block py-2.5 pl-4 text-base text-paper-800 hover:text-crimson-700">
+                            {item.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ul>
+            <ul class="mt-6 grid gap-1" role="list">
+              {utility.map((u) => (
+                <li>
+                  <a href={u.href} class="block py-2 text-base font-semibold text-ink underline">
+                    {u.title}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href="/search/" class="block py-2 text-base font-semibold text-ink underline">
+                  Search
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       )}
     </div>

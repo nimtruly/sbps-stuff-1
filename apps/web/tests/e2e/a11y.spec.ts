@@ -8,7 +8,7 @@ const PAGES_TO_AUDIT = [
   '/admissions/',
   '/disclosure/',
   '/contact/',
-  '/blog/38th-national-games-sbps-students/',
+  '/blog/38th-national-games-selections/',
 ];
 
 test.describe('WCAG 2.2 AA Accessibility Audits', () => {

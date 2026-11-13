@@ -1,220 +1,73 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import Button from '../components/Button.astro';
-
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Contact Us', href: '/contact/' },
-];
+import Photo from '../components/ui/Photo.astro';
+import { school } from '../data/nav';
 
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const topics = ['Admissions', 'Day boarding', 'Integrated programmes', 'Fees', 'Transport', 'Something else'];
+const field = 'mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none';
 ---
 
 <PageLayout
-  title="Contact Us & Campus Directions"
-  description="Get in touch with Social Baluni Public School, Dehradun. Find campus location, phone numbers, email addresses, and visiting hours."
-  breadcrumbs={breadcrumbs}
+  title="Contact the school"
+  description="Address, phone numbers and email for Social Baluni Public School, Dehradun, and a form to send us a message."
+  breadcrumbs={[{ label: 'Contact', href: '/contact/' }]}
 >
-  <div class="mb-12">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-4">
-      Get In Touch
-    </div>
-    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink mb-4 tracking-tight">
-      We’re Here to Help
-    </h2>
-    <p class="text-lg text-paper-700 max-w-3xl leading-relaxed">
-      Whether you are exploring admissions for your child, inquiring about transport routes, or scheduling a personal campus tour, our administrative team is at your service.
-    </p>
-  </div>
-
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
-    <!-- Contact Info & Map Details -->
-    <div class="lg:col-span-5 space-y-8">
-      <!-- Campus Address -->
-      <div class="bg-paper-50 rounded-2xl p-6 border border-paper-200 shadow-2xs">
-        <div class="flex items-start gap-4">
-          <span class="text-2xl p-2.5 rounded-lg bg-crimson-100 text-crimson-800">📍</span>
-          <div>
-            <h2 class="text-lg font-serif font-bold text-ink mb-1">Campus Address</h2>
-            <p class="text-sm text-paper-700 leading-relaxed">
-              Social Baluni Public School<br />
-              Haridwar Bypass Road, Brahmanwala,<br />
-              Near Radhaswami Satsang Bhawan,<br />
-              Dehradun, Uttarakhand — 248001
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Phone Numbers -->
-      <div class="bg-paper-50 rounded-2xl p-6 border border-paper-200 shadow-2xs">
-        <div class="flex items-start gap-4">
-          <span class="text-2xl p-2.5 rounded-lg bg-crimson-100 text-crimson-800">📞</span>
-          <div>
-            <h2 class="text-lg font-serif font-bold text-ink mb-1">Telephone & WhatsApp</h2>
-            <div class="space-y-1 text-sm text-paper-800 font-medium">
-              <div>Admissions: <a href="tel:+919690000890" class="hover:text-crimson-700 font-bold">+91 96900 00890</a></div>
-              <div>Administrative Office: <a href="tel:+919690000895" class="hover:text-crimson-700 font-bold">+91 96900 00895</a></div>
-              <div>Helpdesk: <a href="tel:+919084717836" class="hover:text-crimson-700 font-bold">+91 90847 17836</a></div>
-              <div class="pt-1">
-                WhatsApp: <a href="https://wa.me/919690000890" target="_blank" rel="noopener noreferrer" class="text-forest-700 font-bold hover:underline">+91 96900 00890 ↗</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Office Hours & Emails -->
-      <div class="bg-paper-50 rounded-2xl p-6 border border-paper-200 shadow-2xs">
-        <div class="flex items-start gap-4">
-          <span class="text-2xl p-2.5 rounded-lg bg-crimson-100 text-crimson-800">✉️</span>
-          <div>
-            <h2 class="text-lg font-serif font-bold text-ink mb-1">Email & Visiting Hours</h2>
-            <div class="space-y-2 text-sm text-paper-700">
-              <div>General: <a href="mailto:info@sbpsdoon.com" class="font-bold text-crimson-700">info@sbpsdoon.com</a></div>
-              <div>Careers: <a href="mailto:careers@sbpsdoon.com" class="font-bold text-crimson-700">careers@sbpsdoon.com</a></div>
-              <div class="pt-2 text-xs border-t border-paper-200">
-                <strong>Office Visiting Hours:</strong><br />
-                Monday – Saturday: 8:30 AM to 3:30 PM<br />
-                (Closed on Sundays and Gazetted Holidays)
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Static Map Card (Zero-weight, links to Google Maps) -->
-      <div class="rounded-2xl overflow-hidden border border-paper-300 bg-paper-100 shadow-xs">
-        <div class="p-4 border-b border-paper-200 flex items-center justify-between">
-          <span class="text-xs font-bold text-ink uppercase tracking-wider">Campus Location Map</span>
-          <a
-            href="https://maps.google.com/?q=Social+Baluni+Public+School+Dehradun"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-xs font-bold text-crimson-700 hover:underline"
-          >
-            Open in Google Maps ↗
-          </a>
-        </div>
-        <a
-          href="https://maps.google.com/?q=Social+Baluni+Public+School+Dehradun"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block group relative overflow-hidden bg-paper-200 aspect-16/9"
-        >
-          <img
-            src="/images/campus-aerial-1280.webp"
-            alt="Map and aerial view of Social Baluni Public School campus, Dehradun"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            loading="lazy"
-          />
-          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/20 transition-colors flex items-center justify-center">
-            <span class="px-4 py-2 rounded-lg bg-white/95 text-ink font-bold text-xs shadow-md group-hover:scale-105 transition-transform">
-              📍 Click to Navigate via Google Maps
-            </span>
-          </div>
-        </a>
-      </div>
+  <div class="grid gap-14 lg:grid-cols-[5fr_7fr]">
+    <div class="space-y-10">
+      <section aria-labelledby="addr-title">
+        <h2 id="addr-title" class="text-2xl font-bold">Address</h2>
+        <address class="mt-3 text-lg not-italic">
+          Social Baluni Public School<br />
+          Haridwar Bypass Road, Brahmanwala<br />
+          Near Radhaswami Satsang Bhawan<br />
+          Dehradun, Uttarakhand
+        </address>
+        <a href="https://maps.google.com/?q=Social+Baluni+Public+School+Dehradun" rel="noopener" class="mt-3 inline-block font-semibold text-crimson-700 underline">Open in Google Maps</a>
+      </section>
+      <section aria-labelledby="phone-title">
+        <h2 id="phone-title" class="text-2xl font-bold">Phone and email</h2>
+        <ul class="mt-3 space-y-1.5 text-lg" role="list">
+          {school.phones.map((p) => (
+            <li><a href={`tel:${p.replace(/\s/g, '')}`} class="font-semibold hover:text-crimson-700 hover:underline" data-figure>{p}</a></li>
+          ))}
+          <li><a href={`mailto:${school.email}`} class="font-semibold hover:text-crimson-700 hover:underline">{school.email}</a></li>
+          <li><a href={school.whatsapp} rel="noopener" class="font-semibold hover:text-crimson-700 hover:underline">WhatsApp the school</a></li>
+        </ul>
+      </section>
+      <Photo name="campus-entrance" sizes="(min-width: 1024px) 38vw, 100vw" class="aspect-[4/3] w-full object-cover" />
     </div>
 
-    <!-- Contact Enquiry Form -->
-    <div class="lg:col-span-7">
-      <div class="bg-paper-50 rounded-2xl border border-paper-300 p-6 sm:p-10 shadow-sm">
-        <h2 class="text-2xl font-serif font-bold text-ink mb-2">Send Us a Direct Message</h2>
-        <p class="text-sm text-paper-700 mb-8">
-          Fill out the form below and our administrative office will respond within 24 working hours.
-        </p>
-
-        <form method="POST" action="/api/enquiry" class="space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label for="contactName" class="block text-sm font-semibold text-ink mb-2">
-                Your Full Name <span class="text-crimson-700">*</span>
-              </label>
-              <input
-                type="text"
-                id="contactName"
-                name="parentName"
-                required
-                class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
-                placeholder="Name"
-              />
-            </div>
-
-            <div>
-              <label for="contactPhone" class="block text-sm font-semibold text-ink mb-2">
-                Mobile Number <span class="text-crimson-700">*</span>
-              </label>
-              <input
-                type="tel"
-                id="contactPhone"
-                name="phone"
-                required
-                pattern="[0-9]{10}"
-                class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
-                placeholder="10-digit number"
-              />
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label for="contactEmail" class="block text-sm font-semibold text-ink mb-2">
-                Email Address <span class="text-crimson-700">*</span>
-              </label>
-              <input
-                type="email"
-                id="contactEmail"
-                name="email"
-                required
-                class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
-                placeholder="name@example.com"
-              />
-            </div>
-
-            <div>
-              <label for="subject" class="block text-sm font-semibold text-ink mb-2">
-                Nature of Inquiry
-              </label>
-              <select
-                id="subject"
-                name="grade"
-                class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
-              >
-                <option value="General Inquiry">General School Inquiry</option>
-                <option value="Admission Inquiry">Admissions 2027–28</option>
-                <option value="Day Boarding Inquiry">Day Boarding & Transport</option>
-                <option value="Integrated Coaching">Integrated NEET/JEE/NDA Coaching</option>
-                <option value="Accounts & Fees">Accounts & Fee Receipts</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label for="message" class="block text-sm font-semibold text-ink mb-2">
-              Your Message <span class="text-crimson-700">*</span>
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              required
-              rows="5"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
-              placeholder="How can we assist you?"
-            ></textarea>
-          </div>
-
-          {turnstileKey && (
-            <div class="cf-turnstile" data-sitekey={turnstileKey}></div>
-          )}
-
-          <div>
-            <Button type="submit" variant="primary" size="lg" class="w-full sm:w-auto">
-              Send Message →
-            </Button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <section aria-labelledby="form-title" class="border-t-2 border-ink pt-6">
+      <h2 id="form-title" class="text-3xl font-bold">Send a message</h2>
+      <p class="mt-2 text-paper-700">The school office will reply by phone or email.</p>
+      <form method="POST" action="/api/enquiry" class="mt-6 grid gap-5 sm:grid-cols-2">
+        <label class="sm:col-span-2">
+          <span class="font-semibold">Your name</span>
+          <input name="parentName" required autocomplete="name" class={field} />
+        </label>
+        <label>
+          <span class="font-semibold">Phone</span>
+          <input name="phone" type="tel" required inputmode="tel" autocomplete="tel" class={field} />
+        </label>
+        <label>
+          <span class="font-semibold">Email <span class="font-normal text-paper-600">(optional)</span></span>
+          <input name="email" type="email" autocomplete="email" class={field} />
+        </label>
+        <label class="sm:col-span-2">
+          <span class="font-semibold">About</span>
+          <select name="grade" required class={field}>
+            {topics.map((t) => <option>{t}</option>)}
+          </select>
+        </label>
+        <label class="sm:col-span-2">
+          <span class="font-semibold">Message</span>
+          <textarea name="message" rows="5" maxlength="2000" class="mt-1 w-full border-2 border-paper-400 bg-white p-3 text-base focus:border-ink focus:outline-none"></textarea>
+        </label>
+        <input type="hidden" name="preferredContact" value="phone" />
+        {turnstileKey && <div class="cf-turnstile sm:col-span-2" data-sitekey={turnstileKey}></div>}
+        <button type="submit" class="h-12 bg-crimson-700 px-6 text-lg font-bold text-white hover:bg-crimson-800 sm:col-span-2 sm:justify-self-start">Send message</button>
+      </form>
+    </section>
   </div>
 </PageLayout>

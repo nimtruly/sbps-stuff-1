@@ -1,87 +1,14 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import InfoPage from '../components/InfoPage.astro';
 
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Privacy Policy', href: '/privacy/' },
-];
+const body = "This page explains what happens to information you give through the Social Baluni Public School website.\n\n### What we collect\n\n- **Enquiry and contact forms:** your name, phone number, the class or topic, and anything you write. Email is optional.\n- **Online application:** the student's name, gender, date of birth, class, previous school, parents' names and occupations, mobile number, email and address.\n- **Job applications:** your name, contact details, position, experience, qualifications and note.\n- **Notice subscriptions:** your email address.\n\nWe also record the internet address (IP) a form was sent from, to stop spam and abuse.\n\n### Why\n\nOnly to answer your enquiry, process an application, consider a job applicant, or send school notices you asked for.\n\n### Who can see it\n\nAuthorised school staff. The information is stored on Cloudflare's servers and may be sent to the school by email through an email provider. We do not sell it or use it for advertising.\n\n### Your choices\n\nTo see, correct or delete information you have sent, or to stop receiving notices, contact the school office at [info@sbpsdoon.com](mailto:info@sbpsdoon.com) or [+91 96900 00890](tel:+919690000890).";
 ---
 
-<PageLayout
-  title="Privacy Policy & DPDP Act 2023 Compliance"
-  description="Privacy policy and data governance practices of Social Baluni Public School, Dehradun in compliance with India's Digital Personal Data Protection (DPDP) Act 2023."
-  breadcrumbs={breadcrumbs}
->
-  <div class="max-w-3xl prose-sm">
-    <div class="mb-10">
-      <span class="inline-block px-3 py-1 rounded-full bg-forest-100 text-forest-800 text-xs font-bold uppercase tracking-wider mb-2">
-        DPDP Act 2023 Compliant
-      </span>
-      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
-        Privacy Policy & Data Governance
-      </h2>
-      <p class="text-xs text-paper-500">
-        Last updated: November 2026 • Effective for all parents, students, visitors, and applicants.
-      </p>
-    </div>
-
-    <div class="space-y-8 text-paper-800 leading-relaxed text-sm sm:text-base">
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">1. Overview & Scope</h2>
-        <p>
-          Social Baluni Public School ("SBPS", "we", "our") respects the fundamental privacy rights of its students, parents, guardians, faculty, and website visitors. This policy outlines our collection, storage, processing, and protection of digital personal data in strict compliance with the <strong>Digital Personal Data Protection Act, 2023 (DPDP Act)</strong> and the Information Technology Act, 2000 of India.
-        </p>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">2. Data We Collect & Grounds for Processing</h2>
-        <p class="mb-3">We collect personal data solely for specified, lawful educational and administrative purposes:</p>
-        <ul class="list-disc list-inside space-y-1.5 text-sm text-paper-700">
-          <li><strong>Admission Enquiries & Applications:</strong> Student's full name, date of birth, gender, previous school records, parent/guardian names, residential address, telephone numbers, and email address.</li>
-          <li><strong>Academic & Medical Records:</strong> Attendance, report cards, immunization status, emergency contacts, and blood group for student health and safety.</li>
-          <li><strong>Fee Transactions:</strong> Transaction identifiers, payment timestamps, and masked payment modes via authorized PCI-DSS certified payment processors (Razorpay). <em>We never store credit card numbers or banking passwords.</em></li>
-          <li><strong>Digital Communications:</strong> WhatsApp numbers and email addresses for academic circulars and notification broadcasts.</li>
-        </ul>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">3. Third-Party Service Providers & Technical Data Flow</h2>
-        <p class="mb-3">To ensure secure, high-performance services, our web systems interact with vetted technical infrastructure:</p>
-        <ul class="list-disc list-inside space-y-1.5 text-sm text-paper-700">
-          <li><strong>Cloudflare (Cloudflare Pages, D1 Database):</strong> Content delivery network, DDoS mitigation, and encrypted SQLite storage hosted on ISO 27001 certified edge networks.</li>
-          <li><strong>Cloudflare Turnstile:</strong> Privacy-first bot protection without tracking cookies or user fingerprinting.</li>
-          <li><strong>Razorpay:</strong> Encrypted payment gateway adhering to RBI and PCI-DSS Level 1 compliance.</li>
-          <li><strong>Resend:</strong> Secure transactional email dispatch for fee receipts and admission acknowledgements.</li>
-          <li><strong>OneSignal & WhatsApp:</strong> Direct opt-in communication channels for school circulars.</li>
-        </ul>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">4. Protection of Children’s Personal Data</h2>
-        <p>
-          In strict adherence to Section 9 of the DPDP Act 2023, SBPS does not engage in behavioral tracking or targeted behavioral advertising directed at children. Parental or lawful guardian consent is mandatory prior to the processing of any minor child’s personal information.
-        </p>
-      </section>
-
-      <section class="bg-paper-50 p-6 rounded-2xl border border-paper-200">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">5. Data Retention & Erasure Rights</h2>
-        <p>
-          Student academic records are retained in compliance with statutory CBSE regulations. Prospective admission enquiries that do not result in enrollment are pruned after twelve (12) months. Parents possess the right to request access, correction, or erasure of their digital contact data by writing to our Data Grievance Officer.
-        </p>
-      </section>
-
-      <section class="bg-paper-100 p-6 rounded-2xl border border-paper-300">
-        <h2 class="text-xl font-serif font-bold text-ink mb-2">6. Grievance Officer & Contact</h2>
-        <p class="mb-3 text-sm text-paper-700">
-          In case of any queries, grievances, or requests concerning data protection, you may reach our designated Data Protection Officer:
-        </p>
-        <div class="text-xs sm:text-sm font-sans space-y-1 text-paper-900">
-          <div><strong>Designation:</strong> Data Protection & Grievance Officer</div>
-          <div><strong>Address:</strong> Social Baluni Public School, Haridwar Bypass Road, Brahmanwala, Dehradun — 248001</div>
-          <div><strong>Email:</strong> <a href="mailto:grievance@sbpsdoon.com" class="text-crimson-700 underline font-semibold">grievance@sbpsdoon.com</a></div>
-          <div><strong>Response Timeline:</strong> Within 15 working days as per statutory DPDP mandates.</div>
-        </div>
-      </section>
-    </div>
-  </div>
-</PageLayout>
+<InfoPage
+  title="Privacy"
+  description="What information this website collects, why, and who can see it."
+  breadcrumbs={[{"label": "Privacy", "href": "/privacy/"}]}
+  body={body}
+  
+  related={[["Terms of use", "/terms/"], ["Contact", "/contact/"]]}
+></InfoPage>

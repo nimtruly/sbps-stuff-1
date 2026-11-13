@@ -1,0 +1,54 @@
+---
+/**
+ * Template for the school's information pages: an optional photo, the page copy
+ * (light markdown, sourced from the legacy site) and related links.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Prose from './ui/Prose.astro';
+import Photo from './ui/Photo.astro';
+import images from '../data/images.json';
+
+interface Props {
+  title: string;
+  description?: string;
+  breadcrumbs?: { label: string; href: string }[];
+  body: string;
+  photo?: keyof typeof images;
+  related?: [string, string][];
+  source?: string;
+}
+
+const { title, description, breadcrumbs = [], body, photo, related = [] } = Astro.props;
+---
+
+<PageLayout title={title} description={description} breadcrumbs={breadcrumbs}>
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,68ch)_1fr] lg:gap-16">
+    <div>
+      {photo && (
+        <figure class="mb-10">
+          <Photo name={photo} sizes="(min-width: 1024px) 60vw, 100vw" loading="eager" class="aspect-[3/2] w-full object-cover" />
+          <figcaption class="mt-2 text-sm text-paper-600">{images[photo].alt}</figcaption>
+        </figure>
+      )}
+      <Prose text={body} />
+      <slot />
+    </div>
+    {related.length > 0 && (
+      <aside class="lg:pt-1" aria-labelledby="related-title">
+        <div class="border-t-2 border-ink lg:sticky lg:top-36">
+          <h2 id="related-title" class="py-3 text-xl font-bold">See also</h2>
+          <ul class="border-t border-paper-300" role="list">
+            {related.map(([label, href]) => (
+              <li class="border-b border-paper-300">
+                <a href={href} class="flex items-center justify-between gap-4 py-3 text-base font-semibold hover:text-crimson-700">
+                  {label}
+                  <svg class="h-4 w-4 shrink-0 text-crimson-700" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    )}
+  </div>
+</PageLayout>

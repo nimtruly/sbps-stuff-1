@@ -1,0 +1,30 @@
+{
+  "id": "sports-and-activities",
+  "title": "Sports and activities",
+  "slug": "sports-and-activities",
+  "date": "2025-12-03",
+  "cover": "/images/sports-balance-1280.webp",
+  "category": "Sports",
+  "images": [
+    {
+      "url": "/images/sports-balance-1280.webp",
+      "alt": "A student crosses a balance obstacle at the sports meet"
+    },
+    {
+      "url": "/images/sports-cycling-1280.webp",
+      "alt": "A cyclist rides through the school courtyard during a sports event"
+    },
+    {
+      "url": "/images/yoga-1280.webp",
+      "alt": "Students practising yoga on mats in the school courtyard"
+    },
+    {
+      "url": "/images/cultural-programme-1280.webp",
+      "alt": "Students perform a traditional cultural programme in front of the school building"
+    },
+    {
+      "url": "/images/assembly-performance-1280.webp",
+      "alt": "Young students hold up letters spelling MOTHER during a school programme"
+    }
+  ]
+}

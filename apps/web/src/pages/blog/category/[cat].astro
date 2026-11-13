@@ -1,101 +1,37 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
+import { cms } from '../../../lib/cms';
+import { formatDate } from '../../../lib/refs';
+
+const catSlug = (c: string) => c.toLowerCase().replace(/\s+/g, '-');
 
 export async function getStaticPaths() {
-  const articles = await getCollection('articles');
-  const published = articles.filter((a) => !a.data.draft);
-
-  // Group by slugified category
-  const categoriesMap = new Map<string, { name: string; articles: typeof published }>();
-
-  for (const article of published) {
-    const slug = article.data.category.toLowerCase().replace(/\s+/g, '-');
-    if (!categoriesMap.has(slug)) {
-      categoriesMap.set(slug, { name: article.data.category, articles: [] });
-    }
-    categoriesMap.get(slug)!.articles.push(article);
-  }
-
-  return Array.from(categoriesMap.entries()).map(([slug, data]) => ({
-    params: { cat: slug },
-    props: { categoryName: data.name, articles: data.articles },
+  const articles = await cms.getArticles(false);
+  const cats = [...new Set(articles.map((a) => a.category))];
+  return cats.map((c) => ({
+    params: { cat: c.toLowerCase().replace(/\s+/g, '-') },
+    props: { category: c, articles: articles.filter((a) => a.category === c) },
   }));
 }
 
-const { cat } = Astro.params;
-const { categoryName, articles } = Astro.props;
-
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'News & Articles', href: '/blog/' },
-  { label: categoryName, href: `/blog/category/${cat}/` },
-];
+const { category, articles } = Astro.props;
 ---
 
 <PageLayout
-  title={`${categoryName} Articles`}
-  description={`Browse articles and news under ${categoryName} from Social Baluni Public School, Dehradun.`}
-  breadcrumbs={breadcrumbs}
+  title={category}
+  description={`${category} from Social Baluni Public School, Dehradun.`}
+  breadcrumbs={[{ label: 'News', href: '/blog/' }, { label: category, href: `/blog/category/${catSlug(category)}/` }]}
 >
-  <div class="mb-10">
-    <div class="text-xs font-bold text-crimson-800 uppercase tracking-wider mb-2">
-      Category Archive
-    </div>
-    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
-      {categoryName}
-    </h2>
-    <p class="text-sm text-paper-700">
-      Showing {articles.length} {articles.length === 1 ? 'article' : 'articles'} in this category.
-    </p>
-  </div>
-
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-    {articles.map((article) => (
-      <article class="group bg-paper-50 rounded-2xl border border-paper-200 overflow-hidden hover:border-crimson-300 hover:shadow-sm transition-all flex flex-col">
-        <a href={`/blog/${article.data.slug}/`} class="block overflow-hidden aspect-16/10 bg-paper-200 relative">
-          {article.data.cover && (
-            <img
-              src={article.data.cover}
-              alt={article.data.title}
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              loading="lazy"
-            />
-          )}
+  <ul class="border-t-2 border-ink" role="list">
+    {articles.map((a) => (
+      <li class="border-b border-paper-300">
+        <a href={`/blog/${a.slug}/`} class="group block py-6">
+          <span class="text-sm text-paper-600"><time datetime={a.publishedAt}>{formatDate(a.publishedAt)}</time></span>
+          <span class="mt-1 block text-2xl font-bold group-hover:text-crimson-700 group-hover:underline [font-stretch:85%]">{a.title}</span>
+          <span class="measure mt-2 block text-paper-700">{a.excerpt}</span>
         </a>
-
-        <div class="p-6 flex flex-col justify-between flex-1">
-          <div>
-            <time datetime={article.data.publishedAt} class="text-xs text-paper-500 font-medium block mb-2">
-              {new Date(article.data.publishedAt).toLocaleDateString('en-IN', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
-            <h2 class="text-lg font-serif font-bold text-ink group-hover:text-crimson-700 transition-colors mb-2 leading-snug">
-              <a href={`/blog/${article.data.slug}/`}>
-                {article.data.title}
-              </a>
-            </h2>
-            <p class="text-xs text-paper-700 line-clamp-3 mb-4 leading-relaxed">
-              {article.data.excerpt}
-            </p>
-          </div>
-
-          <div class="pt-3 border-t border-paper-200 text-xs font-bold text-crimson-700">
-            <a href={`/blog/${article.data.slug}/`} class="inline-flex items-center gap-1">
-              Read Article →
-            </a>
-          </div>
-        </div>
-      </article>
+      </li>
     ))}
-  </section>
-
-  <div class="border-t border-paper-200 pt-6">
-    <a href="/blog/" class="text-sm font-semibold text-crimson-700 hover:text-crimson-900 inline-flex items-center gap-1">
-      ← Back to all news & articles
-    </a>
-  </div>
+  </ul>
+  <a href="/blog/" class="mt-8 inline-block font-semibold underline">All news</a>
 </PageLayout>

@@ -1,0 +1,11 @@
+---
+import { renderProse } from '../../lib/prose';
+
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: className = '' } = Astro.props;
+---
+
+<div class={`prose-sbps ${className}`} set:html={renderProse(text)} />

@@ -1,12 +1,11 @@
 {
   "id": "baluni-public-school-kotdwar",
   "name": "Baluni Public School, Kotdwar",
-  "type": "CBSE Senior Secondary Co-ed School",
-  "address": "Talla Motadhang, Near BEL Road, Kotdwar, Pauri Garhwal, Uttarakhand",
+  "type": "School",
+  "address": "Talla Motadhang, Tehsil Najibabad, District Bijnor (U.P.), near BEL Road, Kotdwar",
   "phones": [
     "+91 96900 00893"
   ],
   "email": "principal.bpskotdwar@gmail.com",
-  "url": "https://www.sbpsdoon.com/baluni-group/",
-  "logo": "/brand/baluni-group-logo.webp"
+  "url": ""
 }

@@ -10,7 +10,7 @@ export default defineConfig({
   workers: 1,
   reporter: [['list'], ['html', { open: 'never', outputFolder: 'playwright-report' }]],
   use: {
-    baseURL: 'http://localhost:4321',
+    baseURL: 'http://localhost:8788',
     trace: 'on-first-retry',
   },
   projects: [
@@ -31,7 +31,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'pnpm preview',
-    url: 'http://localhost:4321',
+    url: 'http://localhost:8788',
     reuseExistingServer: true,
     timeout: 120000,
   },

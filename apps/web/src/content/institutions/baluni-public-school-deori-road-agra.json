@@ -1,12 +1,11 @@
 {
   "id": "baluni-public-school-deori-road-agra",
   "name": "Baluni Public School, Deori Road, Agra",
-  "type": "CBSE Secondary Co-ed School",
-  "address": "Deori Road, Agra, Uttar Pradesh",
+  "type": "School",
+  "address": "Deori Road, Agra",
   "phones": [
     "0562 3215972"
   ],
   "email": "headmistress.bpsagra@gmail.com",
-  "url": "https://www.sbpsdoon.com/baluni-group/",
-  "logo": "/brand/baluni-group-logo.webp"
+  "url": ""
 }

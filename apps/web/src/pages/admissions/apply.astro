@@ -1,6 +1,5 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import Button from '../../components/Button.astro';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -8,44 +7,30 @@ const breadcrumbs = [
   { label: 'Online Application', href: '/admissions/apply/' },
 ];
 
-const grades = [
-  'Nursery', 'LKG', 'UKG',
-  'Class I', 'Class II', 'Class III', 'Class IV', 'Class V',
-  'Class VI', 'Class VII', 'Class VIII',
-  'Class IX', 'Class X',
-  'Class XI (Medical / NEET Stream)',
-  'Class XI (Non-Medical / JEE Stream)',
-  'Class XI (Commerce Stream)',
-  'Class XI (Humanities / Arts Stream)',
-  'Class XI (Baluni Defence Academy Stream)',
-  'Class XII'
-];
+const grades = ['Nursery', 'LKG', 'UKG', 'Class I', 'Class II', 'Class III', 'Class IV', 'Class V', 'Class VI', 'Class VII', 'Class VIII', 'Class IX', 'Class X', 'Class XI', 'Class XII'];
 
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <PageLayout
-  title="Online Admission Application"
-  description="Formal online admission application for Social Baluni Public School, Dehradun (Session 2027–28)."
+  title="Apply online"
+  description="Apply online for admission to Social Baluni Public School, Dehradun. You will get a reference number when you submit."
   breadcrumbs={breadcrumbs}
 >
   <div class="max-w-4xl">
     <div class="mb-10">
-      <span class="inline-block px-3 py-1 rounded-full bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-2">
-        Academic Session 2027–28
-      </span>
       <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
         Student Admission Registration Form
       </h2>
       <p class="text-base sm:text-lg text-paper-700 leading-relaxed">
-        Please complete all fields carefully. Upon submission, an application reference number will be generated, and our admissions team will schedule the baseline interaction or entrance test.
+        Please complete all fields carefully. When you submit, you get a reference number. The admissions office will contact you about the admission test.
       </p>
     </div>
 
     <form method="POST" action="/api/apply" class="space-y-12">
       <!-- Section 1: Student Information -->
-      <fieldset class="bg-paper-50 rounded-2xl border border-paper-300 p-6 sm:p-8 shadow-xs">
-        <legend class="px-3 text-lg font-serif font-bold text-ink">1. Student Details</legend>
+      <fieldset class="border-t-2 border-ink pt-6">
+        <legend class="pr-3 text-2xl font-serif font-bold text-ink">1. Student Details</legend>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
           <div class="md:col-span-2">
@@ -57,7 +42,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               id="studentName"
               name="studentName"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="First Middle Last Name"
             />
           </div>
@@ -70,7 +55,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               id="gender"
               name="gender"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
             >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
@@ -88,7 +73,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               id="dob"
               name="dob"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
             />
           </div>
 
@@ -100,7 +85,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               id="grade"
               name="grade"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
             >
               <option value="">Select Grade</option>
               {grades.map((g) => (
@@ -112,8 +97,8 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       </fieldset>
 
       <!-- Section 2: Previous School Record -->
-      <fieldset class="bg-paper-50 rounded-2xl border border-paper-300 p-6 sm:p-8 shadow-xs">
-        <legend class="px-3 text-lg font-serif font-bold text-ink">2. Previous Academic Record</legend>
+      <fieldset class="border-t-2 border-ink pt-6">
+        <legend class="pr-3 text-2xl font-serif font-bold text-ink">2. Previous Academic Record</legend>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
           <div class="sm:col-span-2">
@@ -124,7 +109,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               type="text"
               id="previousSchool"
               name="previousSchool"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="School Name, City"
             />
           </div>
@@ -136,7 +121,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
             <select
               id="previousBoard"
               name="previousBoard"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
             >
               <option value="CBSE">CBSE</option>
               <option value="ICSE/ISC">ICSE / ISC</option>
@@ -153,7 +138,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               type="text"
               id="lastClassPercentage"
               name="lastClassPercentage"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="e.g. 88%"
             />
           </div>
@@ -161,8 +146,8 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       </fieldset>
 
       <!-- Section 3: Parents Information -->
-      <fieldset class="bg-paper-50 rounded-2xl border border-paper-300 p-6 sm:p-8 shadow-xs">
-        <legend class="px-3 text-lg font-serif font-bold text-ink">3. Parent / Guardian Details</legend>
+      <fieldset class="border-t-2 border-ink pt-6">
+        <legend class="pr-3 text-2xl font-serif font-bold text-ink">3. Parent / Guardian Details</legend>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
           <div>
@@ -174,7 +159,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               id="fatherName"
               name="fatherName"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="Father's Name"
             />
           </div>
@@ -187,7 +172,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               type="text"
               id="fatherOccupation"
               name="fatherOccupation"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="Profession / Designation"
             />
           </div>
@@ -201,7 +186,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               id="motherName"
               name="motherName"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="Mother's Name"
             />
           </div>
@@ -214,7 +199,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               type="text"
               id="motherOccupation"
               name="motherOccupation"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="Profession / Designation / Homemaker"
             />
           </div>
@@ -229,7 +214,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               name="mobile"
               required
               pattern="[0-9]{10}"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="10-digit number"
             />
           </div>
@@ -243,7 +228,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               id="email"
               name="email"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="parent@example.com"
             />
           </div>
@@ -257,7 +242,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               name="address"
               required
               rows="3"
-              class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+              class="w-full px-3 py-3 border-2 border-paper-400 bg-white text-ink focus:border-ink outline-none text-sm"
               placeholder="House No., Street/Colony, Area/Locality, PIN Code"
             ></textarea>
           </div>
@@ -283,9 +268,9 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         )}
 
         <div class="pt-2">
-          <Button type="submit" variant="primary" size="lg">
-            Submit Application Form →
-          </Button>
+          <button type="submit" class="h-12 bg-saffron-500 px-6 text-lg font-bold text-ink hover:bg-saffron-400">
+            Submit application
+          </button>
         </div>
       </div>
     </form>

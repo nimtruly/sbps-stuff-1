@@ -1,13 +1,12 @@
 {
   "id": "baluni-classes-dehradun",
-  "name": "Baluni Classes, Dehradun (Head Office)",
-  "type": "Coaching Institute for Medical & Engineering",
-  "address": "C-7, Nehru Colony, Near LIC Building, Haridwar Road, Dehradun, Uttarakhand - 248001",
+  "name": "Baluni Classes, Dehradun",
+  "type": "Coaching for medical and engineering entrance exams",
+  "address": "C-7 Nehru Colony, near LIC Building, Haridwar Road, Dehradun 248001",
   "phones": [
     "0135-2669696",
     "+91 96900 00899"
   ],
-  "email": "info@balunigroup.org",
-  "url": "https://www.balunigroup.org/",
-  "logo": "/brand/baluni-group-logo.webp"
+  "email": "",
+  "url": "https://www.balunigroup.org/"
 }

@@ -1,0 +1,46 @@
+{
+  "id": "campus",
+  "title": "Campus and classrooms",
+  "slug": "campus",
+  "date": "2025-12-03",
+  "cover": "/images/campus-aerial-1280.webp",
+  "category": "Campus",
+  "images": [
+    {
+      "url": "/images/campus-aerial-1280.webp",
+      "alt": "Aerial view of the Social Baluni Public School campus on Haridwar Bypass Road, Dehradun"
+    },
+    {
+      "url": "/images/campus-entrance-532.webp",
+      "alt": "Front of the main school building with the Saraswati statue at the entrance"
+    },
+    {
+      "url": "/images/classroom-640.webp",
+      "alt": "Students in a classroom listening to a lesson at the board"
+    },
+    {
+      "url": "/images/science-lab-640.webp",
+      "alt": "Senior students working on an experiment with their teacher in the science lab"
+    },
+    {
+      "url": "/images/library-shelves-640.webp",
+      "alt": "Students choosing books from the library shelves"
+    },
+    {
+      "url": "/images/library-reading-640.webp",
+      "alt": "Younger students reading together at the library tables"
+    },
+    {
+      "url": "/images/music-room-400.webp",
+      "alt": "Students playing harmonium and tabla in the music room"
+    },
+    {
+      "url": "/images/student-presentation-1280.webp",
+      "alt": "Students present a project in the school corridor"
+    },
+    {
+      "url": "/images/students-uniform-1280.webp",
+      "alt": "Primary students in school uniform with their teacher outside the school"
+    }
+  ]
+}

@@ -1,166 +1,78 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Search', href: '/search/' },
-];
 ---
 
 <PageLayout
-  title="Search SBPS Dehradun"
-  description="Search academic programmes, admissions information, fee schedules, news, circulars, and policies of Social Baluni Public School, Dehradun."
-  breadcrumbs={breadcrumbs}
+  title="Search"
+  description="Search the Social Baluni Public School website: admissions, fees, notices, policies and news."
+  breadcrumbs={[{ label: 'Search', href: '/search/' }]}
 >
-  <div class="max-w-3xl">
-    <div class="mb-8">
-      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
-        Search Website
-      </h2>
-      <p class="text-paper-700 text-base">
-        Find information on admissions, curriculum, fee guidelines, policies, notices, and campus facilities.
-      </p>
-    </div>
-
-    <!-- Search Input Box -->
-    <div class="mb-10">
-      <div class="relative">
-        <input
-          type="search"
-          id="site-search-input"
-          placeholder="Type to search (e.g. fees, admissions, NEET, sports, bus)..."
-          class="w-full px-5 py-4 pl-12 rounded-2xl border-2 border-paper-300 bg-white text-ink placeholder-paper-400 focus:border-crimson-600 focus:ring-4 focus:ring-crimson-100 outline-none text-base sm:text-lg shadow-xs transition-all"
-          autofocus
-        />
-        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-paper-400 text-xl pointer-events-none">
-          🔍
-        </span>
-      </div>
-      <div class="mt-3 flex flex-wrap gap-2 text-xs text-paper-500 items-center">
-        <span>Popular queries:</span>
-        <button type="button" class="search-tag px-2.5 py-1 rounded bg-paper-100 hover:bg-paper-200 text-paper-800 transition-colors cursor-pointer">Admissions</button>
-        <button type="button" class="search-tag px-2.5 py-1 rounded bg-paper-100 hover:bg-paper-200 text-paper-800 transition-colors cursor-pointer">Fee Structure</button>
-        <button type="button" class="search-tag px-2.5 py-1 rounded bg-paper-100 hover:bg-paper-200 text-paper-800 transition-colors cursor-pointer">NEET / JEE</button>
-        <button type="button" class="search-tag px-2.5 py-1 rounded bg-paper-100 hover:bg-paper-200 text-paper-800 transition-colors cursor-pointer">NDA</button>
-        <button type="button" class="search-tag px-2.5 py-1 rounded bg-paper-100 hover:bg-paper-200 text-paper-800 transition-colors cursor-pointer">Sports</button>
-        <button type="button" class="search-tag px-2.5 py-1 rounded bg-paper-100 hover:bg-paper-200 text-paper-800 transition-colors cursor-pointer">Transfer Certificate</button>
-      </div>
-    </div>
-
-    <!-- Results Container -->
-    <div id="search-status" class="text-sm text-paper-600 mb-6 hidden"></div>
-    <div id="search-results" class="space-y-4 mb-16">
-      <div id="initial-state" class="text-center py-12 text-paper-500 bg-paper-50 rounded-2xl border border-paper-200">
-        <span class="text-3xl block mb-2">🔎</span>
-        <p class="text-sm">Start typing above to search pages and articles.</p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    interface SearchIndexItem {
-      url: string;
-      title: string;
-      excerpt?: string;
-      content?: string;
-    }
-
-    let searchIndex: SearchIndexItem[] = [];
-    const input = document.getElementById('site-search-input') as HTMLInputElement | null;
-    const resultsContainer = document.getElementById('search-results');
-    const statusContainer = document.getElementById('search-status');
-
-    // Fetch index
-    async function loadIndex() {
-      try {
-        const res = await fetch('/search-index.json');
-        if (res.ok) {
-          searchIndex = await res.json();
-        }
-      } catch (err) {
-        console.warn('Could not load /search-index.json:', err);
-      }
-    }
-
-    loadIndex();
-
-    function performSearch(query: string) {
-      if (!resultsContainer || !statusContainer) return;
-      const clean = query.trim().toLowerCase();
-
-      if (!clean) {
-        statusContainer.classList.add('hidden');
-        resultsContainer.innerHTML = `
-          <div class="text-center py-12 text-paper-500 bg-paper-50 rounded-2xl border border-paper-200">
-            <span class="text-3xl block mb-2">🔎</span>
-            <p class="text-sm">Start typing above to search pages and articles.</p>
-          </div>
-        `;
-        return;
-      }
-
-      const matches = searchIndex.filter((item) => {
-        const titleMatch = item.title?.toLowerCase().includes(clean);
-        const excerptMatch = item.excerpt?.toLowerCase().includes(clean);
-        const contentMatch = item.content?.toLowerCase().includes(clean);
-        return titleMatch || excerptMatch || contentMatch;
-      });
-
-      statusContainer.classList.remove('hidden');
-      statusContainer.textContent = `Found ${matches.length} ${matches.length === 1 ? 'result' : 'results'} for "${query}"`;
-
-      if (matches.length === 0) {
-        resultsContainer.innerHTML = `
-          <div class="text-center py-12 text-paper-600 bg-paper-50 rounded-2xl border border-paper-200">
-            <p class="font-bold text-base mb-1">No matching results found</p>
-            <p class="text-xs text-paper-500">Try adjusting your keywords or browse our <a href="/admissions/" class="underline text-crimson-700">Admissions</a> or <a href="/academics/" class="underline text-crimson-700">Academics</a> sections.</p>
-          </div>
-        `;
-        return;
-      }
-
-      resultsContainer.innerHTML = matches
-        .slice(0, 20)
-        .map(
-          (m) => `
-          <article class="p-5 rounded-xl bg-paper-50 border border-paper-200 hover:border-crimson-300 transition-colors shadow-2xs">
-            <h2 class="text-base sm:text-lg font-serif font-bold text-ink mb-1">
-              <a href="${m.url}" class="hover:text-crimson-700 transition-colors">
-                ${m.title || m.url}
-              </a>
-            </h2>
-            <div class="text-xs text-paper-500 mb-2 font-mono">${m.url}</div>
-            <p class="text-xs sm:text-sm text-paper-700 line-clamp-2 leading-relaxed">
-              ${m.excerpt || m.content?.slice(0, 160) || ''}
-            </p>
-          </article>
-        `
-        )
-        .join('');
-    }
-
-    if (input) {
-      input.addEventListener('input', (e) => {
-        performSearch((e.target as HTMLInputElement).value);
-      });
-    }
-
-    // Attach click listeners to tags
-    document.querySelectorAll('.search-tag').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        if (!input) return;
-        input.value = btn.textContent || '';
-        performSearch(input.value);
-        input.focus();
-      });
-    });
-
-    // Check if URL has ?q=
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get('q');
-    if (q && input) {
-      input.value = q;
-      performSearch(q);
-    }
-  </script>
+  <form action="/search/" method="get" role="search" class="measure flex gap-2" data-search-form>
+    <label for="q" class="sr-only">Search the site</label>
+    <input id="q" name="q" type="search" autocomplete="off" placeholder="For example: fees, admission, NEET" class="h-14 w-full border-2 border-ink bg-white px-4 text-lg focus:outline-none" />
+    <button type="submit" class="h-14 shrink-0 bg-crimson-700 px-6 text-lg font-bold text-white hover:bg-crimson-800">Search</button>
+  </form>
+  <p class="measure mt-4 text-paper-600" data-search-status aria-live="polite"></p>
+  <ol class="measure mt-6 border-t-2 border-ink empty:border-0" data-search-results role="list"></ol>
 </PageLayout>
+
+<script>
+  type Result = { url: string; meta: { title?: string }; excerpt: string };
+  const form = document.querySelector<HTMLFormElement>('[data-search-form]')!;
+  const input = form.querySelector<HTMLInputElement>('input')!;
+  const status = document.querySelector<HTMLElement>('[data-search-status]')!;
+  const list = document.querySelector<HTMLOListElement>('[data-search-results]')!;
+  let pagefind: any;
+
+  async function run(q: string) {
+    list.replaceChildren();
+    if (!q.trim()) {
+      status.textContent = '';
+      return;
+    }
+    status.textContent = 'Searching…';
+    try {
+      // Built by `pagefind --site dist` after the Astro build
+      const bundle = '/pagefind/pagefind.js';
+      pagefind ??= await import(/* @vite-ignore */ bundle);
+      const search = await pagefind.search(q);
+      const results: Result[] = await Promise.all(search.results.slice(0, 15).map((r: any) => r.data()));
+      status.textContent = results.length ? `${search.results.length} result${search.results.length === 1 ? '' : 's'} for “${q}”` : `Nothing found for “${q}”. Try another word.`;
+      for (const r of results) {
+        const li = document.createElement('li');
+        li.className = 'border-b border-paper-300';
+        const a = document.createElement('a');
+        a.href = r.url;
+        a.className = 'block py-4 group';
+        const t = document.createElement('span');
+        t.className = 'block text-xl font-semibold group-hover:text-crimson-700 group-hover:underline';
+        t.textContent = r.meta.title ?? r.url;
+        const ex = document.createElement('span');
+        ex.className = 'mt-1 block text-paper-700';
+        // Pagefind excerpts contain only <mark> tags around matches
+        ex.innerHTML = r.excerpt.replace(/<(?!\/?mark>)[^>]*>/g, '');
+        a.append(t, ex);
+        li.append(a);
+        list.append(li);
+      }
+    } catch {
+      status.textContent = 'Search is not available right now.';
+    }
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    history.replaceState(null, '', `?q=${encodeURIComponent(input.value)}`);
+    run(input.value);
+  });
+  const q = new URLSearchParams(location.search).get('q') ?? '';
+  input.value = q;
+  if (q) run(q);
+</script>
+
+<style is:global>
+  [data-search-results] mark {
+    background: var(--color-saffron-200);
+    color: inherit;
+  }
+</style>

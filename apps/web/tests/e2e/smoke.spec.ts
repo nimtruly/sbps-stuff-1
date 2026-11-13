@@ -21,7 +21,7 @@ const ROUTES_TO_TEST = [
   { path: '/campus-life/gallery/', titleSnippet: 'Gallery' },
   { path: '/notices/', titleSnippet: 'Notices' },
   { path: '/blog/', titleSnippet: 'Blog' },
-  { path: '/blog/38th-national-games-sbps-students/', titleSnippet: 'National Games' },
+  { path: '/blog/38th-national-games-selections/', titleSnippet: 'National Games' },
   { path: '/parents/', titleSnippet: 'Parents' },
   { path: '/parents/year-planner/', titleSnippet: 'Year Planner' },
   { path: '/parents/policies/', titleSnippet: 'School Policies' },
@@ -61,8 +61,9 @@ test.describe('E2E Smoke Tests - Key Routes & Quality Guarantees', () => {
 
   test('Homepage features admission CTA and quick links', async ({ page }) => {
     await page.goto('/');
-    const admissionBtn = page.getByRole('link', { name: /enquire now|apply for admission/i }).first();
-    await expect(admissionBtn).toBeVisible();
+    await expect(page.getByRole('button', { name: /request a call back/i })).toBeVisible();
+    await expect(page.locator('main a[href="/admissions/"]').first()).toBeVisible();
+    await expect(page.locator('main a[href="/parents/"]').first()).toBeVisible();
   });
 
   test('Admissions page contains links to enquiry, application, and fee details', async ({ page }) => {
@@ -74,18 +75,54 @@ test.describe('E2E Smoke Tests - Key Routes & Quality Guarantees', () => {
 
   test('CBSE Disclosure page renders Appendix-IX and validTo dates', async ({ page }) => {
     await page.goto('/disclosure/');
-    await expect(page.getByText('Appendix-IX').first()).toBeVisible();
-    await expect(page.getByText('3530479').first()).toBeVisible();
-    // Check RTE Affiliation document row is present
-    await expect(page.getByText(/rte affiliation|extension of affiliation/i).first()).toBeVisible();
+    await expect(page.locator('main').getByText('3530479').first()).toBeVisible();
+    // Every listed PDF must exist (no placeholder documents)
+    const hrefs = await page.locator('main a[href$=".pdf"]').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    expect(hrefs.length).toBeGreaterThan(5);
+    for (const href of hrefs) {
+      const res = await page.request.get(href!);
+      expect(res.status(), href!).toBe(200);
+      expect((await res.body()).length, href!).toBeGreaterThan(5000);
+    }
+    // An expired certificate is labelled honestly
+    await expect(page.getByText(/validity ended/i).first()).toBeVisible();
   });
 
   test('Search page renders functional input and results container', async ({ page }) => {
     await page.goto('/search/');
-    const searchInput = page.locator('input#site-search-input');
-    await expect(searchInput).toBeVisible();
-    await searchInput.fill('admissions');
-    // Results container should exist
-    await expect(page.locator('#search-results')).toBeAttached();
+    const searchInput = page.getByRole('searchbox', { name: /search the site/i });
+    await searchInput.fill('admission');
+    await searchInput.press('Enter');
+    await expect(page.locator('[data-search-results] li').first()).toBeVisible({ timeout: 10000 });
+  });
+
+  test('Enquiry form posts without JavaScript and lands on the thank-you page', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false, baseURL: 'http://localhost:8788' });
+    const page = await context.newPage();
+    await page.goto('/admissions/enquire/');
+    await page.getByRole('textbox', { name: "Parent's name" }).fill('E2E Test Parent');
+    await page.getByRole('textbox', { name: 'Phone', exact: true }).fill('9876543210');
+    await page.getByRole('combobox', { name: 'Class applying for' }).selectOption('Class V');
+    await page.getByRole('button', { name: /send enquiry/i }).click();
+    await expect(page).toHaveURL(/\/thank-you\/\?form=enquiry/);
+    await expect(page.locator('h1')).toContainText(/thank you/i);
+    await context.close();
+  });
+
+  test('Invalid enquiry lands on the error page, not a false success', async ({ request }) => {
+    const res = await request.post('/api/enquiry', {
+      headers: { Origin: 'http://localhost:8788' },
+      form: { parentName: '', phone: 'x' },
+      maxRedirects: 0,
+    });
+    expect(res.status()).toBe(303);
+    expect(res.headers()['location']).toContain('/form-error/');
+  });
+
+  test('Webhooks refuse unsigned requests', async ({ request }) => {
+    const rzp = await request.post('/api/razorpay/webhook', { data: { event: 'payment.captured' } });
+    expect([401, 503]).toContain(rzp.status());
+    const sanity = await request.post('/api/hooks/sanity', { data: { _type: 'notice' } });
+    expect([401, 503]).toContain(sanity.status());
   });
 });

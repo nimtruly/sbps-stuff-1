@@ -1,101 +1,58 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
-import Button from '../../../components/ui/Button.astro';
+import Prose from '../../../components/ui/Prose.astro';
 import { cms } from '../../../lib/cms';
 
 export async function getStaticPaths() {
   const programmes = await cms.getProgrammes();
-  return programmes.map((p) => ({
-    params: { slug: p.slug },
-    props: { programme: p },
-  }));
+  return programmes.map((p) => ({ params: { slug: p.slug }, props: { programme: p } }));
 }
 
 const { programme } = Astro.props;
-
-const breadcrumbs = [
-  { name: 'Academics', href: '/academics/' },
-  { name: 'Integrated Programmes', href: '/academics/integrated-programme/' },
-  { name: programme.title.split(':')[0], href: `/academics/integrated-programme/${programme.slug}/` },
-];
+const others = (await cms.getProgrammes()).filter((p) => p.slug !== programme.slug);
 ---
 
 <PageLayout
   title={programme.title}
   description={programme.summary}
-  breadcrumbs={breadcrumbs}
+  breadcrumbs={[
+    { label: 'Academics', href: '/academics/' },
+    { label: 'Integrated programmes', href: '/academics/integrated-programme/' },
+    { label: programme.title, href: `/academics/integrated-programme/${programme.slug}/` },
+  ]}
 >
-  <div class="space-y-12 max-w-5xl mx-auto">
-    <!-- Header Summary Card -->
-    <div class="p-8 sm:p-10 rounded-2xl bg-paper-50 border border-paper-300 shadow-sm space-y-6">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <span class="px-3 py-1 bg-crimson-100 text-crimson-800 rounded-full text-xs font-bold uppercase tracking-wide">
-          {programme.duration}
-        </span>
-        <span class="text-xs text-paper-600 font-semibold">
-          Academic Partner: <span class="text-crimson-800">{programme.partner}</span>
-        </span>
-      </div>
-
-      <div class="space-y-2">
-        <div class="text-xs uppercase font-bold text-paper-500">Eligibility & Admission Stage</div>
-        <div class="text-sm font-semibold text-paper-900 bg-paper-100 p-3 rounded-lg border border-paper-200">
-          {programme.eligibility}
-        </div>
-      </div>
-
-      <p class="text-base text-paper-700 leading-relaxed">
-        {programme.summary}
-      </p>
-
-      <div class="pt-2 flex flex-wrap gap-4">
-        <Button href="/admissions/enquire/" variant="primary" size="md">
-          Enquire for Batch Admission
-        </Button>
-        <Button href="tel:+919690000890" variant="outline" size="md">
-          Call Admissions Desk
-        </Button>
-      </div>
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,68ch)_1fr] lg:gap-16">
+    <div>
+      <dl class="mb-10 grid border-y-2 border-ink sm:grid-cols-2">
+        <div class="py-4 sm:pr-6"><dt class="text-sm text-paper-600">Duration</dt><dd class="text-lg font-semibold">{programme.duration}</dd></div>
+        <div class="border-t border-paper-300 py-4 sm:border-l-2 sm:border-t-0 sm:border-ink sm:pl-6"><dt class="text-sm text-paper-600">Taught with</dt><dd class="text-lg font-semibold">{programme.partner}</dd></div>
+      </dl>
+      <Prose text={programme.body.split('\n\n### How the integrated programme works')[0]} />
+      <h2 class="mt-12 text-3xl font-extrabold">How the programme works</h2>
+      <ul class="mt-6 border-t-2 border-ink" role="list">
+        {programme.features.map((f) => {
+          const [head, ...rest] = f.split(': ');
+          return (
+            <li class="border-b border-paper-300 py-4">
+              <h3 class="text-lg font-bold">{head}</h3>
+              <p class="mt-1 text-paper-700">{rest.join(': ')}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <a href="/admissions/enquire/" class="mt-10 inline-flex h-12 items-center bg-crimson-700 px-6 text-lg font-bold text-white hover:bg-crimson-800">Ask about this programme</a>
     </div>
-
-    <!-- Core Features & Pedagogy -->
-    <section class="space-y-6">
-      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
-        Key Architectural Pillars
-      </h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {programme.features.map((feat) => (
-          <div class="p-4 rounded-xl bg-paper-50 border border-paper-300 flex items-start gap-3">
-            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
-              ✓
-            </div>
-            <div class="text-xs sm:text-sm text-paper-800 font-medium leading-relaxed">
-              {feat}
-            </div>
-          </div>
-        ))}
+    <aside aria-labelledby="other-title">
+      <div class="border-t-2 border-ink lg:sticky lg:top-36">
+        <h2 id="other-title" class="py-3 text-xl font-bold">Other programmes</h2>
+        <ul class="border-t border-paper-300" role="list">
+          {others.map((p) => (
+            <li class="border-b border-paper-300">
+              <a href={`/academics/integrated-programme/${p.slug}/`} class="block py-3 font-semibold hover:text-crimson-700">{p.title}</a>
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
-
-    <!-- Detailed Syllabus & Methodology -->
-    <section class="bg-paper-50 p-8 sm:p-10 rounded-2xl border border-paper-300 space-y-6">
-      <h2 class="font-serif text-2xl font-bold text-crimson-900">
-        Course Overview & Academic Delivery
-      </h2>
-      <div class="text-sm sm:text-base text-paper-700 leading-relaxed whitespace-pre-line space-y-4">
-        {programme.body}
-      </div>
-    </section>
-
-    <!-- Navigation & Next Steps -->
-    <div class="pt-6 border-t border-paper-300 flex flex-wrap items-center justify-between gap-4">
-      <a href="/academics/integrated-programme/" class="text-xs font-bold text-crimson-800 hover:underline">
-        &larr; View All Integrated Programmes
-      </a>
-      <Button href="/admissions/apply/" variant="gold" size="sm">
-        Apply Online Now &rarr;
-      </Button>
-    </div>
+    </aside>
   </div>
 </PageLayout>
