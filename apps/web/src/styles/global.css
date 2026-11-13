@@ -33,9 +33,10 @@
   --color-saffron-400: #facc15;
   --color-saffron-500: #efca10; /* Primary Saffron Gold */
   --color-saffron-600: #ca9f07;
-  --color-saffron-700: #a17709;
-  --color-saffron-800: #855c0e;
-  --color-saffron-900: #714c12;
+  --color-saffron-700: #936306;
+  --color-saffron-800: #744c0b;
+  --color-saffron-900: #5c3b0c;
+  --color-saffron-950: #3d2405;
 
   /* Forest Green Crest */
   --color-forest-50: #f0fdf4;
@@ -56,12 +57,12 @@
   --color-paper-200: #f5f2eb;
   --color-paper-300: #e9e4d9;
   --color-paper-400: #d5cebf;
-  --color-paper-500: #b8aea0;
-  --color-paper-600: #93897b;
-  --color-paper-700: #736b60;
-  --color-paper-800: #524c44;
-  --color-paper-900: #2b2724;
-  --color-ink: #181615;
+  --color-paper-500: #6a6256;
+  --color-paper-600: #544d43;
+  --color-paper-700: #3f3932;
+  --color-paper-800: #2c2722;
+  --color-paper-900: #1b1816;
+  --color-ink: #141211;
 
   /* House Colors */
   --color-house-alaknanda: #0284c7;  /* Alaknanda: Azure River */
