@@ -1,0 +1,90 @@
+# Static 301 Redirects for Legacy WordPress URLs (SBPS Revamp)
+
+# Home / Sample / Deprecated
+/home/                                                                  /                               301
+/demo/                                                                  /                               301
+/sample-page/                                                           /                               301
+/diya-decoration/                                                       /                               301
+/online-classes-for-2021-22-session/                                    /                               301
+/wp-login.php                                                           /                               301
+/xmlrpc.php                                                             /                               301
+/wp-admin/*                                                             /                               301
+
+# About & Leadership
+/about-us/                                                              /about/                         301
+/new/about-us/                                                          /about/                         301
+/house-system/                                                          /about/house-system/            301
+/infrastructure/                                                        /about/campus/                  301
+/facility/                                                              /about/campus/                  301
+/chairman-polygon-and-social-group-of-companies/                        /about/leadership/chairman-psgc/ 301
+/principals-message/                                                    /about/leadership/chairman-dbgi/ 301
+/managing-director-psgc/                                                /about/leadership/md-psgc/      301
+/managing-director/                                                     /about/leadership/md-dbgi/      301
+/principal-sbps/                                                        /about/leadership/principal/    301
+
+# Academics & Programmes
+/academic-programme/                                                    /academics/                     301
+/what-is-xseed/                                                         /academics/                     301
+/sbps-day-boarding/                                                     /academics/day-boarding/        301
+/2-4-and-5-year-integrated-programme/                                  /academics/integrated-programme/ 301
+/kvpy/                                                                  /academics/integrated-programme/ 301
+/neet/                                                                  /academics/integrated-programme/neet/ 301
+/jee-main-advance/                                                      /academics/integrated-programme/jee/ 301
+/nda/                                                                   /academics/integrated-programme/nda/ 301
+/baluni-defence-academy/                                                /academics/integrated-programme/nda/ 301
+/national-talent-search-examination/                                    /academics/integrated-programme/ntse/ 301
+
+# Admissions
+/admission-criteria/                                                    /admissions/                    301
+/fee-schedule/                                                          /admissions/fees/               301
+/fee-structure-of-the-school/                                           /admissions/fees/               301
+/enquiry/                                                               /admissions/enquire/            301
+/online-admission-form/                                                 /admissions/apply/              301
+
+# Parents
+/for-parents-guardians/                                                 /parents/                       301
+/transfer-certificate/                                                  /parents/transfer-certificate/ 301
+/for-transfer-certificate/                                              /parents/transfer-certificate/ 301
+/test-exams-promotions/                                                 /parents/policies/test-exams-promotions/ 301
+/leave-rules/                                                           /parents/policies/leave-rules/  301
+/rules-of-discipline/                                                   /parents/policies/rules-of-discipline/ 301
+/student-related-policy/                                                /parents/policies/              301
+/sbps-annual-academic-calender/                                         /parents/year-planner/          301
+/sbps-year-planner-2021-22/                                             /parents/year-planner/          301
+
+# Campus Life & Sports
+/co-curricular-activities/                                              /campus-life/co-curricular/     301
+/admission/co-curricular-activities/                                    /campus-life/co-curricular/     301
+/sports/                                                                /campus-life/sports/            301
+/photo-gallery/5th-annual-sports-meet/                                  /blog/5th-annual-sports-meet/   301
+/photo-gallery/                                                         /campus-life/gallery/           301
+/photo-gallery/*                                                        /campus-life/gallery/           301
+
+# News & Blog Stories
+/38th-national-games-selected-students-list/                            /blog/38th-national-games-sbps-students/ 301
+/prestigious-2024-sfa-inter-school-competition/                         /blog/sfa-inter-school-competition-2024/ 301
+/induction-publicity-programmes-by-indian-air-force-at-social-baluni-public-school/ /blog/indian-air-force-induction-programme/ 301
+
+# CBSE Mandatory Public Disclosure
+/mandatorypublicdisclosure/                                             /disclosure/                    301
+/school-affiliation/                                                    /disclosure/                    301
+/smc/                                                                   /disclosure/                    301
+/pta/                                                                   /disclosure/                    301
+/fire-safety/                                                           /disclosure/                    301
+/buildingsafetycertificate/                                             /disclosure/                    301
+/water-health-and-sanition-certificates/                                /disclosure/                    301
+/self-certification-by-school/                                          /disclosure/                    301
+/recognition-certificate-under-rte-act-2009/                            /disclosure/                    301
+/society-renewal-certificate/                                           /disclosure/                    301
+/last-three-year-result-of-the-board-examination/                       /disclosure/                    301
+
+# Baluni Group Sister Campuses
+/baluni-public-school-kotdwar/                                          /baluni-group/                  301
+/baluni-public-school-sikandarpur-dayalbagh/                            /baluni-group/                  301
+/baluni-public-school-deori-road-agra/                                  /baluni-group/                  301
+
+# Contact
+/contact-us/                                                            /contact/                       301
+
+# Legacy Media Splat
+/wp-content/uploads/*                                                   /documents/:splat               301
