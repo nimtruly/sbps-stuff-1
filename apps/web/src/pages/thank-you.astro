@@ -1,0 +1,52 @@
+---
+export const prerender = false;
+
+import PageLayout from '../layouts/PageLayout.astro';
+
+const form = Astro.url.searchParams.get('form') ?? 'enquiry';
+const rawRef = Astro.url.searchParams.get('ref') ?? '';
+const ref = /^[A-Za-z0-9_-]{4,64}$/.test(rawRef) ? rawRef : '';
+
+const copy: Record<string, { title: string; lead: string; next: { label: string; href: string } }> = {
+  enquiry: {
+    title: 'Thank you, we have your enquiry',
+    lead: 'The admissions office will contact you on the number you gave, usually within two working days.',
+    next: { label: 'Read about the admission process', href: '/admissions/' },
+  },
+  apply: {
+    title: 'Application received',
+    lead: 'Keep your reference number. The admissions office will call you to confirm the next step.',
+    next: { label: 'See the admission process', href: '/admissions/' },
+  },
+  careers: {
+    title: 'Thank you for applying',
+    lead: 'The school office reviews applications and contacts shortlisted candidates.',
+    next: { label: 'Back to careers', href: '/careers/' },
+  },
+  subscribe: {
+    title: 'You are subscribed',
+    lead: 'You will receive school notices by email.',
+    next: { label: 'See the latest notices', href: '/notices/' },
+  },
+};
+const c = copy[form] ?? copy.enquiry;
+Astro.response.headers.set('Cache-Control', 'no-store');
+---
+
+<PageLayout title={c.title} description={c.lead} noindex>
+  <div class="max-w-2xl space-y-6">
+    {ref && (
+      <p class="rounded-xl border border-paper-300 bg-paper-50 p-5 text-ink">
+        Your reference number: <strong class="font-mono text-lg tracking-wide">{ref}</strong>
+      </p>
+    )}
+    <p class="text-paper-700">
+      Urgent? Call the school office on
+      <a class="font-semibold text-crimson-800 underline underline-offset-4" href="tel:+919690000890">+91 96900 00890</a>.
+    </p>
+    <p class="flex flex-wrap gap-4">
+      <a class="inline-flex min-h-11 items-center rounded-lg bg-crimson-700 px-5 font-semibold text-white hover:bg-crimson-800" href={c.next.href}>{c.next.label}</a>
+      <a class="inline-flex min-h-11 items-center rounded-lg border border-paper-300 px-5 font-semibold text-ink hover:bg-paper-100" href="/">Home</a>
+    </p>
+  </div>
+</PageLayout>

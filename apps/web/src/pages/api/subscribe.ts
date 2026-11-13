@@ -1,75 +1,63 @@
 import type { APIRoute } from 'astro';
 import { getDb } from '../../lib/db';
 import { subscribers } from '../../db/schema';
+import { checkRateLimit } from '../../lib/rateLimit';
+import {
+  clientIp,
+  formError,
+  formSuccess,
+  getEnv,
+  isProd,
+  methodNotAllowed,
+  newId,
+  readBody,
+  subscribeSchema,
+} from '../../lib/forms';
 
-export const GET: APIRoute = async () => {
-  return new Response(JSON.stringify({ endpoint: 'subscribe', method: 'POST required' }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
-};
+export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
-  const runtime = (locals as any)?.runtime;
-  const env = runtime?.env || process.env;
+export const GET: APIRoute = () => methodNotAllowed();
+
+export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
+  const env = getEnv(locals);
   const db = getDb(env.DB);
 
-  let email = '';
-  const contentType = request.headers.get('content-type') || '';
-  if (contentType.includes('application/json')) {
-    const data = await request.json();
-    email = data.email;
-  } else {
-    const formData = await request.formData();
-    email = String(formData.get('email') || '');
-  }
+  const rate = await checkRateLimit(db, clientIp(request, clientAddress), 'subscribe', 5, 600);
+  if (!rate.allowed) return formError(request, 'subscribe', 429, 'Too many attempts. Please try again later.');
 
-  if (!email || !email.includes('@')) {
-    return new Response(JSON.stringify({ error: 'Valid email is required' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  const parsed = subscribeSchema.safeParse(await readBody(request));
+  if (!parsed.success) return formError(request, 'subscribe', 400, 'Please enter a valid email address.');
+  const { email } = parsed.data;
 
-  const id = `sub_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
-  const createdAt = new Date().toISOString();
-
+  let stored = false;
   if (db) {
     try {
-      await db.insert(subscribers).values({
-        id,
-        email: email.trim().toLowerCase(),
-        channel: 'web',
-        createdAt,
-      });
+      await db
+        .insert(subscribers)
+        .values({ id: newId('sub'), email, channel: 'web', createdAt: new Date().toISOString() })
+        .onConflictDoNothing();
+      stored = true;
     } catch (err) {
-      // Ignore duplicate email errors
-      console.info('Subscriber insert note:', err);
+      console.error('[subscribe] D1 insert failed', err);
     }
   }
 
-  // Optional Brevo integration if configured
+  let synced = false;
   if (env.BREVO_API_KEY && env.BREVO_LIST_ID) {
     try {
-      await fetch('https://api.brevo.com/v3/contacts', {
+      const res = await fetch('https://api.brevo.com/v3/contacts', {
         method: 'POST',
-        headers: {
-          'api-key': env.BREVO_API_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email.trim().toLowerCase(),
-          listIds: [Number(env.BREVO_LIST_ID)],
-          updateEnabled: true,
-        }),
+        headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, listIds: [Number(env.BREVO_LIST_ID)], updateEnabled: true }),
       });
+      synced = res.ok;
     } catch (err) {
-      console.warn('Brevo sync error:', err);
+      console.error('[subscribe] Brevo sync failed', err);
     }
   }
 
-  return new Response(
-    JSON.stringify({ success: true, message: 'Subscribed to notifications successfully' }),
-    { status: 200, headers: { 'Content-Type': 'application/json' } }
-  );
+  if (isProd && !stored && !synced) {
+    return formError(request, 'subscribe', 503, 'Subscriptions are not available right now. Please try again later.');
+  }
+  return formSuccess(request, 'subscribe');
 };

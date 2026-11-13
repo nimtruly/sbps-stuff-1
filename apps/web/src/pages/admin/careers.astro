@@ -3,12 +3,12 @@ export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { checkAdminAuth } from '../../lib/adminAuth';
+import { getEnv } from '../../lib/forms';
 import { getDb } from '../../lib/db';
 import { careerApplications } from '../../db/schema';
 import { desc } from 'drizzle-orm';
 
-const runtime = (Astro.locals as any)?.runtime;
-const env = runtime?.env || process.env;
+const env = getEnv(Astro.locals);
 
 const authResponse = checkAdminAuth(Astro.request, env);
 if (authResponse) {

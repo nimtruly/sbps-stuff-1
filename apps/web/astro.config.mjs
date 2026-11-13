@@ -12,7 +12,9 @@ export default defineConfig({
   }),
   integrations: [
     preact(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !/^\/(admin|thank-you|form-error|search)\//.test(new URL(page).pathname),
+    }),
   ],
   vite: {
     plugins: [tailwindcss()],

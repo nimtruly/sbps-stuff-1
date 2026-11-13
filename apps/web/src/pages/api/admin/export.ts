@@ -3,13 +3,19 @@ import { checkAdminAuth } from '../../../lib/adminAuth';
 import { getDb } from '../../../lib/db';
 import { enquiries, applications, careerApplications, payments } from '../../../db/schema';
 import { desc } from 'drizzle-orm';
+import { getEnv } from '../../../lib/forms';
+
+export const prerender = false;
 
 function toCsv(rows: Record<string, any>[]): string {
   if (rows.length === 0) return '';
   const headers = Object.keys(rows[0]);
   const escapeCsv = (val: any) => {
     if (val === null || val === undefined) return '';
-    const str = String(val).replace(/"/g, '""');
+    let str = String(val);
+    // Guard against spreadsheet formula injection
+    if (/^[=+\-@\t\r]/.test(str)) str = `'${str}`;
+    str = str.replace(/"/g, '""');
     return `"${str}"`;
   };
 
@@ -21,8 +27,7 @@ function toCsv(rows: Record<string, any>[]): string {
 }
 
 export const GET: APIRoute = async ({ request, locals }) => {
-  const runtime = (locals as any)?.runtime;
-  const env = runtime?.env || process.env;
+  const env = getEnv(locals);
 
   const authResponse = checkAdminAuth(request, env);
   if (authResponse) {
@@ -31,7 +36,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
 
   const db = getDb(env.DB);
   const url = new URL(request.url);
-  const type = url.searchParams.get('type') || 'enquiries';
+  const requested = url.searchParams.get('type') || 'enquiries';
+  const type = ['enquiries', 'applications', 'careers', 'payments'].includes(requested) ? requested : 'enquiries';
 
   let data: any[] = [];
   let filename = `sbps_${type}_${new Date().toISOString().slice(0, 10)}.csv`;
@@ -59,6 +65,7 @@ export const GET: APIRoute = async ({ request, locals }) => {
     headers: {
       'Content-Type': 'text/csv; charset=utf-8',
       'Content-Disposition': `attachment; filename="${filename}"`,
+      'Cache-Control': 'no-store',
     },
   });
 };

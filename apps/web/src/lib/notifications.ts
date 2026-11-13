@@ -1,24 +1,36 @@
 import crypto from 'node:crypto';
 import { notifications } from '../db/schema';
 import type { Database } from './db';
+import { escapeHtml } from './forms';
 
 export function verifySanitySignature(
   rawBody: string,
   signature: string,
   secret: string
 ): boolean {
+  // Sanity GROQ webhooks send `sanity-webhook-signature: t=<ms>,v1=<base64url HMAC-SHA256 of "<t>.<body>">`
   if (!rawBody || !signature || !secret) {
     return false;
   }
   try {
+    const parts = Object.fromEntries(
+      signature.split(',').map((kv) => {
+        const i = kv.indexOf('=');
+        return [kv.slice(0, i).trim(), kv.slice(i + 1).trim()];
+      })
+    );
+    const t = parts.t;
+    const v1 = parts.v1;
+    if (!t || !v1) return false;
+    // Reject signatures older than 10 minutes (replay protection)
+    if (Math.abs(Date.now() - Number(t)) > 10 * 60 * 1000) return false;
     const expected = crypto
       .createHmac('sha256', secret)
-      .update(rawBody)
-      .digest('base64');
-    return crypto.timingSafeEqual(
-      Buffer.from(expected, 'utf8'),
-      Buffer.from(signature, 'utf8')
-    );
+      .update(`${t}.${rawBody}`)
+      .digest('base64url');
+    const a = Buffer.from(expected, 'utf8');
+    const b = Buffer.from(v1.replace(/=+$/, ''), 'utf8');
+    return a.length === b.length && crypto.timingSafeEqual(a, b);
   } catch (err) {
     return false;
   }
@@ -78,7 +90,7 @@ export async function dispatchNotifications(
           subject: payload.title,
           sender: { name: 'Social Baluni Public School', email: 'info@sbpsdoon.com' },
           to: [{ email: 'broadcast@sbpsdoon.com' }],
-          htmlContent: `<h2>${payload.title}</h2><p>${payload.message}</p><p><a href="${payload.url || 'https://www.sbpsdoon.com'}">Read details</a></p>`,
+          htmlContent: `<h2>${escapeHtml(payload.title)}</h2><p>${escapeHtml(payload.message)}</p><p><a href="${escapeHtml(payload.url || 'https://www.sbpsdoon.com')}">Read details</a></p>`,
         }),
       });
       brevoSuccess = res.ok;

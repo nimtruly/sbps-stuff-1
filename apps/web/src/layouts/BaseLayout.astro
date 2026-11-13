@@ -11,6 +11,7 @@ interface Props {
   canonicalUrl?: string;
   type?: 'website' | 'article';
   schema?: Record<string, any> | Array<Record<string, any>>;
+  noindex?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   canonicalUrl = Astro.url.href,
   type = 'website',
   schema,
+  noindex = false,
 } = Astro.props;
 
 const cfBeacon = import.meta.env.CF_BEACON_TOKEN;
@@ -63,6 +65,7 @@ const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [defa
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content={type} />

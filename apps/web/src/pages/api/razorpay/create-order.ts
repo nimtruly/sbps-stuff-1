@@ -2,17 +2,20 @@ import type { APIRoute } from 'astro';
 import { createRazorpayOrder } from '../../../lib/razorpay';
 import { getDb } from '../../../lib/db';
 import { payments } from '../../../db/schema';
+import { getEnv, methodNotAllowed } from '../../../lib/forms';
 
-export const GET: APIRoute = async () => {
-  return new Response(JSON.stringify({ endpoint: 'razorpay/create-order', method: 'POST required' }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
-};
+export const prerender = false;
+
+export const GET: APIRoute = () => methodNotAllowed();
 
 export const POST: APIRoute = async ({ request, locals }) => {
-  const runtime = (locals as any)?.runtime;
-  const env = runtime?.env || process.env;
+  const env = getEnv(locals);
+  if (import.meta.env.PROD && (!env.RAZORPAY_KEY_ID || !env.RAZORPAY_KEY_SECRET)) {
+    return new Response(JSON.stringify({ error: 'Online payment is not configured' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
   const db = getDb(env.DB);
 
   let body: any = {};
@@ -27,7 +30,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   const { amount, feeCategory, studentName, parentEmail, parentPhone } = body;
 
-  if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
+  if (!amount || isNaN(Number(amount)) || Number(amount) < 1 || Number(amount) > 500000) {
     return new Response(JSON.stringify({ error: 'Valid payment amount is required' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
@@ -58,10 +61,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
         amount: Number(amount),
         currency: order.currency,
         status: 'created',
-        feeCategory: feeCategory || 'General Tuition',
-        studentName: studentName || null,
-        parentEmail: parentEmail || null,
-        parentPhone: parentPhone || null,
+        feeCategory: String(feeCategory || 'School fee').slice(0, 80),
+        studentName: studentName ? String(studentName).slice(0, 100) : null,
+        parentEmail: parentEmail ? String(parentEmail).slice(0, 160) : null,
+        parentPhone: parentPhone ? String(parentPhone).slice(0, 20) : null,
         createdAt: new Date().toISOString(),
       });
     } catch (err) {
@@ -74,7 +77,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
-      keyId: env.RAZORPAY_KEY_ID || 'rzp_test_mock',
+      keyId: env.RAZORPAY_KEY_ID || 'rzp_test_mock_dev_only',
     }),
     {
       status: 200,

@@ -4,16 +4,23 @@ import crypto from 'node:crypto';
 
 describe('Sanity Webhook Signature Verification', () => {
   const secret = 'my_sanity_secret_token_123';
-  const body = JSON.stringify({ _type: 'notice', title: 'Winter Vacation Circular' });
-  const validSignature = crypto.createHmac('sha256', secret).update(body).digest('base64');
+  const body = JSON.stringify({ _type: 'notice', title: 'Test circular' });
+  const sign = (t: number, b = body, s = secret) =>
+    `t=${t},v1=${crypto.createHmac('sha256', s).update(`${t}.${b}`).digest('base64url')}`;
 
-  it('validates a valid base64 HMAC signature', () => {
-    expect(verifySanitySignature(body, validSignature, secret)).toBe(true);
+  it('validates a Sanity-format signature (t=…,v1=…)', () => {
+    expect(verifySanitySignature(body, sign(Date.now()), secret)).toBe(true);
   });
 
-  it('rejects an invalid signature or secret', () => {
+  it('rejects an invalid signature, wrong secret or tampered body', () => {
+    const t = Date.now();
     expect(verifySanitySignature(body, 'invalid_sig', secret)).toBe(false);
-    expect(verifySanitySignature(body, validSignature, 'wrong_secret')).toBe(false);
+    expect(verifySanitySignature(body, sign(t), 'wrong_secret')).toBe(false);
+    expect(verifySanitySignature(body.replace('Test', 'Fake'), sign(t), secret)).toBe(false);
+  });
+
+  it('rejects a replayed signature older than 10 minutes', () => {
+    expect(verifySanitySignature(body, sign(Date.now() - 11 * 60 * 1000), secret)).toBe(false);
   });
 });
 

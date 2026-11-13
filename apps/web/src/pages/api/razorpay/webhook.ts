@@ -4,37 +4,31 @@ import { getDb } from '../../../lib/db';
 import { payments } from '../../../db/schema';
 import { sendEmailAlert } from '../../../lib/resend';
 import { eq } from 'drizzle-orm';
+import { emailTable, getEnv, methodNotAllowed } from '../../../lib/forms';
 
-export const GET: APIRoute = async () => {
-  return new Response(JSON.stringify({ endpoint: 'razorpay/webhook', status: 'listening' }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
-};
+export const prerender = false;
+
+export const GET: APIRoute = () => methodNotAllowed();
 
 export const POST: APIRoute = async ({ request, locals }) => {
-  const runtime = (locals as any)?.runtime;
-  const env = runtime?.env || process.env;
+  const env = getEnv(locals);
   const db = getDb(env.DB);
 
   const signature = request.headers.get('x-razorpay-signature');
   const rawBody = await request.text();
 
-  // If webhook secret is configured, verify HMAC signature
-  if (env.RAZORPAY_WEBHOOK_SECRET) {
-    if (!signature) {
-      return new Response(JSON.stringify({ error: 'Missing x-razorpay-signature' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-    const isValid = verifyRazorpaySignature(rawBody, signature, env.RAZORPAY_WEBHOOK_SECRET);
-    if (!isValid) {
-      return new Response(JSON.stringify({ error: 'Invalid webhook signature' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+  // Fail closed: without a configured secret no webhook is trusted.
+  if (!env.RAZORPAY_WEBHOOK_SECRET) {
+    return new Response(JSON.stringify({ error: 'Webhook not configured' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!signature || !verifyRazorpaySignature(rawBody, signature, env.RAZORPAY_WEBHOOK_SECRET)) {
+    return new Response(JSON.stringify({ error: 'Invalid webhook signature' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   let eventData: any = {};
@@ -72,7 +66,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
             .update(payments)
             .set({
               paymentId,
-              signature: signature || 'webhook_verified',
+              signature,
               status: 'paid',
               parentEmail: email || existing.parentEmail,
               parentPhone: phone || existing.parentPhone,
@@ -83,7 +77,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
             id: `pay_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
             orderId,
             paymentId,
-            signature: signature || 'webhook_verified',
+            signature,
             amount,
             currency: 'INR',
             status: 'paid',
@@ -105,19 +99,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
         {
           to: email,
           subject: `Payment Receipt: Social Baluni Public School (₹${amount})`,
-          html: `
-            <h2>Payment Successful — Fee Receipt</h2>
-            <p>Dear Parent,</p>
-            <p>We gratefully acknowledge receipt of your payment for <strong>${feeCategory}</strong>.</p>
-            <table border="1" cellpadding="8" style="border-collapse: collapse; font-size: 14px;">
-              <tr><td><strong>Transaction ID</strong></td><td>${paymentId}</td></tr>
-              <tr><td><strong>Order ID</strong></td><td>${orderId}</td></tr>
-              <tr><td><strong>Amount Paid</strong></td><td>₹${amount}</td></tr>
-              <tr><td><strong>Student Name</strong></td><td>${studentName || 'As enrolled'}</td></tr>
-              <tr><td><strong>Date</strong></td><td>${new Date().toLocaleDateString('en-IN')}</td></tr>
-            </table>
-            <p>This is an automated computer-generated receipt for Social Baluni Public School, Dehradun.</p>
-          `,
+          html:
+            emailTable('Payment received: Social Baluni Public School', [
+              ['For', feeCategory],
+              ['Amount', `INR ${amount}`],
+              ['Student', studentName || 'As enrolled'],
+              ['Transaction ID', paymentId],
+              ['Order ID', orderId],
+              ['Date', new Date().toLocaleDateString('en-IN')],
+            ]) + '<p>This is an automated receipt from Social Baluni Public School, Dehradun.</p>',
         },
         env.RESEND_API_KEY,
         env.ALERT_EMAIL_TO,

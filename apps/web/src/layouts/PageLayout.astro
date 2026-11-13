@@ -13,9 +13,10 @@ interface Props {
   breadcrumbs?: BreadcrumbItem[];
   ogImage?: string;
   schema?: Record<string, any> | Array<Record<string, any>>;
+  noindex?: boolean;
 }
 
-const { title, description, breadcrumbs = [], ogImage, schema } = Astro.props;
+const { title, description, breadcrumbs = [], ogImage, schema, noindex = false } = Astro.props;
 
 // Build BreadcrumbList JSON-LD
 const breadcrumbSchema = breadcrumbs.length > 0 ? {
@@ -43,7 +44,7 @@ const combinedSchemas = [
 ];
 ---
 
-<BaseLayout title={`${title} | Social Baluni Public School, Dehradun`} description={description} ogImage={ogImage} schema={combinedSchemas}>
+<BaseLayout title={`${title} | Social Baluni Public School, Dehradun`} description={description} ogImage={ogImage} schema={combinedSchemas} noindex={noindex}>
   <!-- Page Header Banner -->
   <section class="bg-gradient-to-b from-paper-200/80 to-paper-100 border-b border-paper-300 py-10 sm:py-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

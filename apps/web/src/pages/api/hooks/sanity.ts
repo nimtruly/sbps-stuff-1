@@ -1,36 +1,31 @@
 import type { APIRoute } from 'astro';
 import { verifySanitySignature, dispatchNotifications } from '../../../lib/notifications';
 import { getDb } from '../../../lib/db';
+import { getEnv, methodNotAllowed } from '../../../lib/forms';
 
-export const GET: APIRoute = async () => {
-  return new Response(JSON.stringify({ endpoint: 'hooks/sanity', status: 'listening' }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
-};
+export const prerender = false;
+
+export const GET: APIRoute = () => methodNotAllowed();
 
 export const POST: APIRoute = async ({ request, locals }) => {
-  const runtime = (locals as any)?.runtime;
-  const env = runtime?.env || process.env;
+  const env = getEnv(locals);
   const db = getDb(env.DB);
 
   const rawBody = await request.text();
   const signature = request.headers.get('sanity-webhook-signature');
 
-  if (env.SANITY_WEBHOOK_SECRET) {
-    if (!signature) {
-      return new Response(JSON.stringify({ error: 'Missing sanity-webhook-signature' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-    const isValid = verifySanitySignature(rawBody, signature, env.SANITY_WEBHOOK_SECRET);
-    if (!isValid) {
-      return new Response(JSON.stringify({ error: 'Invalid webhook signature' }), {
-        status: 403,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+  // Fail closed: notifications reach every subscriber, so never act on unsigned calls.
+  if (!env.SANITY_WEBHOOK_SECRET) {
+    return new Response(JSON.stringify({ error: 'Webhook not configured' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (!signature || !verifySanitySignature(rawBody, signature, env.SANITY_WEBHOOK_SECRET)) {
+    return new Response(JSON.stringify({ error: 'Invalid webhook signature' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   let doc: any = {};
