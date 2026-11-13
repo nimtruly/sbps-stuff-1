@@ -1,0 +1,49 @@
+---
+interface Props {
+  variant?: 'full' | 'compact' | 'white';
+  class?: string;
+}
+
+const { variant = 'full', class: className = '' } = Astro.props;
+---
+
+<a href="/" class={`inline-flex items-center gap-3 group text-left ${className}`} aria-label="Social Baluni Public School home">
+  <!-- Reconstructed SVG Crest -->
+  <svg class="h-12 w-12 shrink-0 drop-shadow-sm transition-transform duration-200 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Outer Shield / Circle with Crimson & Gold -->
+    <circle cx="50" cy="50" r="48" fill="#A3262B" stroke="#EFCA10" stroke-width="2.5"/>
+    <circle cx="50" cy="50" r="42" fill="#FAF8F5" stroke="#0B6B2E" stroke-width="1.5"/>
+    
+    <!-- Mountain Peak (Uttarakhand Himalayas) -->
+    <path d="M50 20L34 50H66L50 20Z" fill="#A3262B" opacity="0.15"/>
+    <path d="M50 24L38 48H62L50 24Z" fill="#0B6B2E"/>
+    <path d="M50 24L44 48H56L50 24Z" fill="#FAF8F5" opacity="0.3"/>
+
+    <!-- Open Book of Knowledge -->
+    <path d="M30 64C36 61 44 61 50 64C56 61 64 61 70 64V76C64 73 56 73 50 76C44 73 36 73 30 76V64Z" fill="#A3262B"/>
+    <path d="M50 64V76" stroke="#EFCA10" stroke-width="1.5"/>
+
+    <!-- Flaming Torch of Wisdom (Baluni Legacy) -->
+    <path d="M50 42V58" stroke="#EFCA10" stroke-width="3" stroke-linecap="round"/>
+    <path d="M46 38C46 38 48 32 50 32C52 32 54 38 54 38C54 41 52 43 50 43C48 43 46 41 46 38Z" fill="#EFCA10"/>
+    <path d="M48 39C48 39 49 35 50 35C51 35 52 39 52 39C52 40 51 41 50 41C49 41 48 40 48 39Z" fill="#A3262B"/>
+
+    <!-- Stars -->
+    <polygon points="50,11 52,15 56,15 53,17 54,21 50,19 46,21 47,17 44,15 48,15" fill="#EFCA10"/>
+  </svg>
+
+  <!-- Typography Lockup -->
+  <div class="flex flex-col leading-tight">
+    <span class={`font-serif text-lg sm:text-xl font-bold tracking-tight transition-colors duration-150 ${variant === 'white' ? 'text-white' : 'text-crimson-800 group-hover:text-crimson-900'}`}>
+      Social Baluni
+    </span>
+    <span class={`text-[11px] sm:text-xs font-semibold tracking-wider uppercase ${variant === 'white' ? 'text-saffron-300' : 'text-crimson-600'}`}>
+      Public School • Dehradun
+    </span>
+    {variant === 'full' && (
+      <span class="text-[10px] hidden sm:block text-paper-600">
+        CBSE Affiliation 3530479 (Code: 81702)
+      </span>
+    )}
+  </div>
+</a>

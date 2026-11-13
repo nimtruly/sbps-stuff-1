@@ -1,0 +1,242 @@
+---
+import Logo from '../ui/Logo.astro';
+import Button from '../ui/Button.astro';
+import MobileNav from '../islands/MobileNav';
+
+interface Props {
+  admissionsOpen?: boolean;
+  admissionsSession?: string;
+}
+
+const { admissionsOpen = true, admissionsSession = '2027–28' } = Astro.props;
+---
+
+<header class="sticky top-0 z-40 bg-paper-100/95 backdrop-blur-md border-b border-paper-300">
+  {admissionsOpen && (
+    <div class="bg-crimson-800 text-white text-xs py-1.5 px-4 text-center tracking-wide font-medium">
+      <div class="max-w-7xl mx-auto flex items-center justify-between sm:justify-center gap-3">
+        <span>
+          <strong class="text-saffron-300 font-bold">Admissions Open {admissionsSession}:</strong> Nursery to Class XII with Integrated Coaching
+        </span>
+        <a href="/admissions/enquire/" class="underline decoration-saffron-400 hover:text-saffron-200 shrink-0 font-semibold text-[11px] sm:text-xs">
+          Enquire Now &rarr;
+        </a>
+      </div>
+    </div>
+  )}
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20 gap-4">
+      <!-- Logo Lockup -->
+      <Logo />
+
+      <!-- Desktop Mega-Navigation -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main navigation">
+        <!-- About Dropdown -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="px-3 py-2 text-sm font-semibold text-paper-900 group-hover:text-crimson-700 inline-flex items-center gap-1 rounded-md transition-colors"
+            aria-expanded="false"
+          >
+            About
+            <svg class="h-4 w-4 text-paper-500 group-hover:text-crimson-700 transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-1 w-64 rounded-lg bg-paper-50 shadow-xl border border-paper-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 p-2">
+            <a href="/about/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Our Story & Vision
+              <span class="block text-[11px] font-normal text-paper-600">Foundation 2014, Mandakini Seva Samiti</span>
+            </a>
+            <a href="/about/leadership/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Leadership Messages
+              <span class="block text-[11px] font-normal text-paper-600">Chairmen, MDs & Principal</span>
+            </a>
+            <a href="/about/campus/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Campus & Infrastructure
+              <span class="block text-[11px] font-normal text-paper-600">Labs, transport & safety facilities</span>
+            </a>
+            <a href="/about/house-system/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              River House System
+              <span class="block text-[11px] font-normal text-paper-600">Alaknanda, Bhilangna, Bhagirathi, Mandakini</span>
+            </a>
+            <a href="/baluni-group/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Baluni Group
+              <span class="block text-[11px] font-normal text-paper-600">Sister campuses & coaching institutions</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Academics Dropdown -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="px-3 py-2 text-sm font-semibold text-paper-900 group-hover:text-crimson-700 inline-flex items-center gap-1 rounded-md transition-colors"
+            aria-expanded="false"
+          >
+            Academics
+            <svg class="h-4 w-4 text-paper-500 group-hover:text-crimson-700 transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-1 w-72 rounded-lg bg-paper-50 shadow-xl border border-paper-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 p-2">
+            <a href="/academics/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Curriculum Stages & XSEED
+              <span class="block text-[11px] font-normal text-paper-600">Pre-primary to Senior Secondary</span>
+            </a>
+            <a href="/academics/integrated-programme/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Integrated Programmes
+              <span class="block text-[11px] font-normal text-paper-600">NEET, JEE, NDA & NTSE under one roof</span>
+            </a>
+            <a href="/academics/day-boarding/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Day Boarding Programme
+              <span class="block text-[11px] font-normal text-paper-600">Extended hours, meals & supervised study</span>
+            </a>
+            <a href="/academics/results/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Results & Achievers Wall
+              <span class="block text-[11px] font-normal text-paper-600">CBSE board & competitive selections</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Admissions Dropdown -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="px-3 py-2 text-sm font-semibold text-paper-900 group-hover:text-crimson-700 inline-flex items-center gap-1 rounded-md transition-colors"
+            aria-expanded="false"
+          >
+            Admissions
+            <svg class="h-4 w-4 text-paper-500 group-hover:text-crimson-700 transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-1 w-64 rounded-lg bg-paper-50 shadow-xl border border-paper-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 p-2">
+            <a href="/admissions/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Admissions Process
+              <span class="block text-[11px] font-normal text-paper-600">Timeline, criteria & checklist</span>
+            </a>
+            <a href="/admissions/fees/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Fee Schedule
+              <span class="block text-[11px] font-normal text-paper-600">Tuition fees & instalment details</span>
+            </a>
+            <a href="/admissions/enquire/" class="block px-3 py-2 text-xs font-semibold text-crimson-800 hover:bg-paper-200/60 rounded font-bold">
+              Enquire Now &rarr;
+              <span class="block text-[11px] font-normal text-paper-600">Request counsellor callback</span>
+            </a>
+            <a href="/admissions/apply/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Online Application
+              <span class="block text-[11px] font-normal text-paper-600">Submit full student application</span>
+            </a>
+            <a href="/admissions/faq/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Admissions FAQs
+              <span class="block text-[11px] font-normal text-paper-600">Common questions answered</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Campus Life Dropdown -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="px-3 py-2 text-sm font-semibold text-paper-900 group-hover:text-crimson-700 inline-flex items-center gap-1 rounded-md transition-colors"
+            aria-expanded="false"
+          >
+            Campus Life
+            <svg class="h-4 w-4 text-paper-500 group-hover:text-crimson-700 transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-1 w-64 rounded-lg bg-paper-50 shadow-xl border border-paper-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 p-2">
+            <a href="/campus-life/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Campus Life Overview
+              <span class="block text-[11px] font-normal text-paper-600">Student life & house culture</span>
+            </a>
+            <a href="/campus-life/sports/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Sports & Academies
+              <span class="block text-[11px] font-normal text-paper-600">15+ sports, shooting, boxing & cricket</span>
+            </a>
+            <a href="/campus-life/co-curricular/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Co-Curricular Activities
+              <span class="block text-[11px] font-normal text-paper-600">Debates, robotics, music & arts</span>
+            </a>
+            <a href="/campus-life/gallery/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Photo Gallery
+              <span class="block text-[11px] font-normal text-paper-600">Campus events & achievements</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Parents Dropdown -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="px-3 py-2 text-sm font-semibold text-paper-900 group-hover:text-crimson-700 inline-flex items-center gap-1 rounded-md transition-colors"
+            aria-expanded="false"
+          >
+            Parents
+            <svg class="h-4 w-4 text-paper-500 group-hover:text-crimson-700 transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-1 w-64 rounded-lg bg-paper-50 shadow-xl border border-paper-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 p-2">
+            <a href="/parents/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Parents Hub
+              <span class="block text-[11px] font-normal text-paper-600">Central communication & circulars</span>
+            </a>
+            <a href="/notices/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Notices & Circulars
+              <span class="block text-[11px] font-normal text-paper-600">Administrative & academic notices</span>
+            </a>
+            <a href="/parents/year-planner/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Academic Year Planner
+              <span class="block text-[11px] font-normal text-paper-600">Annual calendar of activities</span>
+            </a>
+            <a href="/parents/policies/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Rules & Policies
+              <span class="block text-[11px] font-normal text-paper-600">Discipline, leave rules & anti-bullying</span>
+            </a>
+            <a href="/parents/transfer-certificate/" class="block px-3 py-2 text-xs font-semibold text-paper-900 hover:bg-paper-200/60 rounded">
+              Transfer Certificate (TC)
+              <span class="block text-[11px] font-normal text-paper-600">Application process & records</span>
+            </a>
+            <a href="/parents/pay-fees/" class="block px-3 py-2 text-xs font-semibold text-forest-800 hover:bg-paper-200/60 rounded font-bold">
+              Pay Fees Online &rarr;
+              <span class="block text-[11px] font-normal text-paper-600">Quarterly tuition fee payment</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact & More -->
+        <a href="/contact/" class="px-3 py-2 text-sm font-semibold text-paper-900 hover:text-crimson-700 rounded-md transition-colors">
+          Contact
+        </a>
+
+        <!-- Search Icon Button -->
+        <a
+          href="/search/"
+          class="p-2 text-paper-700 hover:text-crimson-800 hover:bg-paper-200 rounded-md transition-colors"
+          aria-label="Search website"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </a>
+      </nav>
+
+      <!-- Desktop CTAs -->
+      <div class="hidden lg:flex items-center gap-3 shrink-0">
+        <Button href="/parents/pay-fees/" variant="outline" size="sm">
+          Pay Fees
+        </Button>
+        <Button href="/admissions/enquire/" variant="primary" size="sm">
+          Enquire Now
+        </Button>
+      </div>
+
+      <!-- Mobile Nav Island -->
+      <MobileNav client:media="(max-width: 1024px)" />
+    </div>
+  </div>
+</header>

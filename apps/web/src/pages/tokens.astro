@@ -1,0 +1,129 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Button from '../components/ui/Button.astro';
+
+const breadcrumbs = [{ name: 'Design Tokens', href: '/tokens/' }];
+---
+
+<PageLayout title="Design Tokens & Component Style Guide" description="Official SBPS design system foundation derived from the legacy logo, Himalayan river houses, and typography tokens." breadcrumbs={breadcrumbs}>
+  <div class="space-y-16">
+    <!-- Brand Colours -->
+    <section class="space-y-6">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
+        1. Brand Color Palette (Logo Sourced)
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Crimson Scale -->
+        <div class="bg-paper-50 p-4 rounded-xl border border-paper-300 shadow-sm space-y-3">
+          <h3 class="font-bold text-sm text-paper-900">SBPS Crimson (Primary #A3262B)</h3>
+          <div class="space-y-1.5 text-xs">
+            <div class="h-10 rounded bg-crimson-500 text-white flex items-center justify-between px-3"><span>500</span><span>#d0464c</span></div>
+            <div class="h-10 rounded bg-crimson-600 text-white flex items-center justify-between px-3"><span>600</span><span>#b93137</span></div>
+            <div class="h-12 rounded bg-crimson-700 text-white font-bold flex items-center justify-between px-3 shadow"><span>700 (Core Brand)</span><span>#a3262b</span></div>
+            <div class="h-10 rounded bg-crimson-800 text-white flex items-center justify-between px-3"><span>800</span><span>#862125</span></div>
+            <div class="h-10 rounded bg-crimson-900 text-white flex items-center justify-between px-3"><span>900</span><span>#711f23</span></div>
+          </div>
+        </div>
+
+        <!-- Saffron Gold Scale -->
+        <div class="bg-paper-50 p-4 rounded-xl border border-paper-300 shadow-sm space-y-3">
+          <h3 class="font-bold text-sm text-paper-900">Saffron Gold (Accent #EFCA10)</h3>
+          <div class="space-y-1.5 text-xs">
+            <div class="h-10 rounded bg-saffron-300 text-paper-900 flex items-center justify-between px-3"><span>300</span><span>#fde047</span></div>
+            <div class="h-10 rounded bg-saffron-400 text-paper-900 flex items-center justify-between px-3"><span>400</span><span>#facc15</span></div>
+            <div class="h-12 rounded bg-saffron-500 text-paper-900 font-bold flex items-center justify-between px-3 shadow"><span>500 (Core Accent)</span><span>#efca10</span></div>
+            <div class="h-10 rounded bg-saffron-600 text-white flex items-center justify-between px-3"><span>600</span><span>#ca9f07</span></div>
+            <div class="h-10 rounded bg-saffron-700 text-white flex items-center justify-between px-3"><span>700</span><span>#a17709</span></div>
+          </div>
+        </div>
+
+        <!-- Forest Green Scale -->
+        <div class="bg-paper-50 p-4 rounded-xl border border-paper-300 shadow-sm space-y-3">
+          <h3 class="font-bold text-sm text-paper-900">Forest Green (Crest #0B6B2E)</h3>
+          <div class="space-y-1.5 text-xs">
+            <div class="h-10 rounded bg-forest-600 text-white flex items-center justify-between px-3"><span>600</span><span>#16a34a</span></div>
+            <div class="h-10 rounded bg-forest-700 text-white flex items-center justify-between px-3"><span>700</span><span>#15803d</span></div>
+            <div class="h-12 rounded bg-forest-800 text-white font-bold flex items-center justify-between px-3 shadow"><span>800 (Core Crest)</span><span>#0b6b2e</span></div>
+            <div class="h-10 rounded bg-forest-900 text-white flex items-center justify-between px-3"><span>900</span><span>#14532d</span></div>
+            <div class="h-10 rounded bg-forest-950 text-white flex items-center justify-between px-3"><span>950</span><span>#052e16</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- River Houses -->
+    <section class="space-y-6">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
+        2. Himalayan River House Colors
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl bg-paper-50 border border-paper-300 text-center space-y-2">
+          <div class="w-12 h-12 rounded-full mx-auto bg-house-alaknanda shadow"></div>
+          <div class="font-serif font-bold text-paper-900">Alaknanda</div>
+          <div class="text-xs text-paper-600">Azure River (#0284c7)</div>
+        </div>
+        <div class="p-4 rounded-xl bg-paper-50 border border-paper-300 text-center space-y-2">
+          <div class="w-12 h-12 rounded-full mx-auto bg-house-bhilangna shadow"></div>
+          <div class="font-serif font-bold text-paper-900">Bhilangna</div>
+          <div class="text-xs text-paper-600">Emerald Valley (#059669)</div>
+        </div>
+        <div class="p-4 rounded-xl bg-paper-50 border border-paper-300 text-center space-y-2">
+          <div class="w-12 h-12 rounded-full mx-auto bg-house-bhagirathi shadow"></div>
+          <div class="font-serif font-bold text-paper-900">Bhagirathi</div>
+          <div class="text-xs text-paper-600">Sun Gold (#d97706)</div>
+        </div>
+        <div class="p-4 rounded-xl bg-paper-50 border border-paper-300 text-center space-y-2">
+          <div class="w-12 h-12 rounded-full mx-auto bg-house-mandakini shadow"></div>
+          <div class="font-serif font-bold text-paper-900">Mandakini</div>
+          <div class="text-xs text-paper-600">Glacial Ruby (#b91c1c)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography Scale -->
+    <section class="space-y-6">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
+        3. Typography System (Eczar Serif + Plus Jakarta Sans)
+      </h2>
+      <div class="space-y-4 bg-paper-50 p-6 rounded-xl border border-paper-300">
+        <div>
+          <span class="text-xs text-paper-500 uppercase font-semibold">Display / H1 (Eczar Serif)</span>
+          <p class="font-serif text-4xl sm:text-5xl font-bold text-crimson-950">Learn to Grow with Academic Rigour</p>
+        </div>
+        <div>
+          <span class="text-xs text-paper-500 uppercase font-semibold">Heading / H2 (Eczar Serif)</span>
+          <p class="font-serif text-2xl sm:text-3xl font-bold text-crimson-900">Integrated Schooling & Medical/Engineering Coaching</p>
+        </div>
+        <div>
+          <span class="text-xs text-paper-500 uppercase font-semibold">Subheading / H3 (Eczar Serif)</span>
+          <p class="font-serif text-xl font-bold text-paper-900">Experienced Faculty and Experiential XSEED Pedagogy</p>
+        </div>
+        <div>
+          <span class="text-xs text-paper-500 uppercase font-semibold">Body Text (Plus Jakarta Sans)</span>
+          <p class="text-base text-paper-700 leading-relaxed max-w-2xl">
+            Social Baluni Public School is committed to creating an environment where every student discovers their true potential. We combine CBSE academic rigor with high-calibre entrance exam preparation, comprehensive sports coaching, and traditional values.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons & Interactive Controls -->
+    <section class="space-y-6">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
+        4. Interactive Button Styles
+      </h2>
+      <div class="flex flex-wrap items-center gap-4 bg-paper-50 p-6 rounded-xl border border-paper-300">
+        <Button variant="primary" size="md">Enquire Now (Primary)</Button>
+        <Button variant="secondary" size="md">Campus Tour (Secondary)</Button>
+        <Button variant="outline" size="md">Pay Fees (Outline)</Button>
+        <Button variant="gold" size="md">Admissions Open (Gold)</Button>
+        <Button variant="ghost" size="md">Learn More (Ghost)</Button>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 bg-paper-50 p-6 rounded-xl border border-paper-300">
+        <Button variant="primary" size="sm">Small Button</Button>
+        <Button variant="primary" size="md">Medium Button</Button>
+        <Button variant="primary" size="lg">Large Hero Button</Button>
+      </div>
+    </section>
+  </div>
+</PageLayout>
