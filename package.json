@@ -1,0 +1,12 @@
+{
+  "name": "sbps-workspace",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter web build",
+    "dev": "pnpm --filter web dev",
+    "preview": "pnpm --filter web preview",
+    "test": "pnpm --filter web test",
+    "test:e2e": "pnpm --filter web test:e2e"
+  }
+}
