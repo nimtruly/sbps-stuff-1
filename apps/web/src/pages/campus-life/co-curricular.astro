@@ -1,0 +1,131 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Campus Life', href: '/campus-life/' },
+  { label: 'Co-Curricular Activities', href: '/campus-life/co-curricular/' },
+];
+
+const clubs = [
+  {
+    name: 'Debating & Literary Society',
+    icon: '🎙️',
+    desc: 'Bilingual debates in English and Hindi, elocution, declamation, creative writing workshops, and inter-school Model United Nations (MUN) delegations.',
+  },
+  {
+    name: 'Robotics & STEM Club',
+    icon: '🤖',
+    desc: 'Hands-on experiential electronics, Arduino and Raspberry Pi projects, 3D modelling, and algorithmic coding challenges that nurture future engineers.',
+  },
+  {
+    name: 'Vocal & Instrumental Music Studios',
+    icon: '🎵',
+    desc: 'Training in Indian Classical (Vocal, Harmonium, Tabla), Western instruments (Guitar, Synthesizer, Drums), and the school choral ensemble.',
+  },
+  {
+    name: 'Performing Arts & Classical Dance',
+    icon: '🎭',
+    desc: 'Kathak and Bharatnatyam classical forms alongside contemporary theatrical productions that develop poise, expression, and stage confidence.',
+  },
+  {
+    name: 'Fine Arts & Craft Studio',
+    icon: '🎨',
+    desc: 'Oil painting, watercolours, charcoal sketching, clay sculpting, origami, and traditional Himalayan Aipan folk art exhibitions.',
+  },
+  {
+    name: 'Eco Club & Himalayan Green Warriors',
+    icon: '🌿',
+    desc: 'Environmental stewardship initiatives including rainwater harvesting awareness, waste segregation, tree planting drives, and organic gardening.',
+  },
+  {
+    name: 'Science & Innovation Club',
+    icon: '🔬',
+    desc: 'Annual Baluni Science Exhibition, model making, experimental astrophysics, and participation in CBSE National Science Fairs.',
+  },
+  {
+    name: 'Social Service & Heritage Club',
+    icon: '🤝',
+    desc: 'Community outreach through the Mandakini Seva Samiti, visits to local rural communities, and preservation of Uttarakhand cultural heritage.',
+  },
+];
+---
+
+<PageLayout
+  title="Co-Curricular Activities & Clubs"
+  description="Discover the wide range of creative, literary, scientific, and cultural clubs at Social Baluni Public School, Dehradun."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-saffron-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-4 border border-saffron-200">
+      Holistic Development
+    </div>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink mb-4 tracking-tight">
+      Unleashing Creativity, Expression & Innovation
+    </h2>
+    <p class="text-lg text-paper-700 max-w-3xl leading-relaxed">
+      A balanced education fosters analytical intellect, aesthetic sensitivity, and ethical character in equal measure. Our rich spectrum of co-curricular clubs gives every child the platform to discover hidden talents and express their individuality.
+    </p>
+  </div>
+
+  <!-- Clubs Grid -->
+  <section class="mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {clubs.map((club) => (
+        <div class="bg-paper-50 rounded-2xl p-6 border border-paper-200 hover:border-crimson-300 transition-colors shadow-2xs flex gap-5 items-start">
+          <span class="text-3xl p-3 rounded-xl bg-paper-100 border border-paper-200 shrink-0">
+            {club.icon}
+          </span>
+          <div>
+            <h2 class="text-xl font-bold text-ink mb-2">{club.name}</h2>
+            <p class="text-sm text-paper-700 leading-relaxed">{club.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Annual Events Showcase -->
+  <section class="bg-paper-100 rounded-2xl p-8 sm:p-10 border border-paper-300 mb-16">
+    <h2 class="text-2xl font-serif font-bold text-ink mb-3">Annual Cultural Calendar Highlights</h2>
+    <p class="text-paper-700 text-sm mb-8 max-w-2xl">
+      Key school milestones where students exhibit their creative and academic accomplishments before parents and distinguished guests.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
+      <div class="bg-paper-50 p-5 rounded-xl border border-paper-200">
+        <span class="text-xs font-bold text-crimson-700 uppercase block mb-1">November</span>
+        <h3 class="font-bold text-base text-ink mb-2">Annual Sports Meet</h3>
+        <p class="text-paper-700 leading-relaxed">
+          Four-house athletic competition, torch relay, drill displays, martial arts presentations, and trophy distribution.
+        </p>
+      </div>
+
+      <div class="bg-paper-50 p-5 rounded-xl border border-paper-200">
+        <span class="text-xs font-bold text-crimson-700 uppercase block mb-1">December</span>
+        <h3 class="font-bold text-base text-ink mb-2">Annual Cultural Day</h3>
+        <p class="text-paper-700 leading-relaxed">
+          Theatrical productions, musical symphonies, classical dance ballets, and student awards presentation.
+        </p>
+      </div>
+
+      <div class="bg-paper-50 p-5 rounded-xl border border-paper-200">
+        <span class="text-xs font-bold text-crimson-700 uppercase block mb-1">October</span>
+        <h3 class="font-bold text-base text-ink mb-2">Baluni Science Fair</h3>
+        <p class="text-paper-700 leading-relaxed">
+          Working model demonstrations, robotics exhibitions, scientific symposiums, and live physics experiments.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-crimson-800 text-white rounded-2xl p-8 sm:p-10 text-center shadow-md">
+    <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-3 text-white">Join the Vibrant SBPS Community</h2>
+    <p class="text-crimson-100 max-w-xl mx-auto mb-6 text-sm sm:text-base">
+      Enquire today to learn how our clubs, sports academies, and academic mentorship help children thrive.
+    </p>
+    <Button href="/admissions/enquire/" variant="secondary" size="lg">Enquire for Admissions</Button>
+  </section>
+</PageLayout>

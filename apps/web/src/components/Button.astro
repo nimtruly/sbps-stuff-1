@@ -1,0 +1,12 @@
+---
+import Button from './ui/Button.astro';
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'white';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  [key: string]: any;
+}
+---
+<Button {...Astro.props}><slot /></Button>

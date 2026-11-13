@@ -2,7 +2,8 @@
 import BaseLayout from './BaseLayout.astro';
 
 interface BreadcrumbItem {
-  name: string;
+  name?: string;
+  label?: string;
   href: string;
 }
 
@@ -30,7 +31,7 @@ const breadcrumbSchema = breadcrumbs.length > 0 ? {
     ...breadcrumbs.map((b, idx) => ({
       '@type': 'ListItem',
       position: idx + 2,
-      name: b.name,
+      name: b.name || b.label || '',
       item: `https://www.sbpsdoon.com${b.href}`,
     })),
   ],
@@ -53,9 +54,9 @@ const combinedSchemas = [
             <>
               <span class="text-paper-400" aria-hidden="true">/</span>
               {idx === breadcrumbs.length - 1 ? (
-                <span class="text-paper-900 font-semibold" aria-current="page">{b.name}</span>
+                <span class="text-paper-900 font-semibold" aria-current="page">{b.name || b.label}</span>
               ) : (
-                <a href={b.href} class="hover:text-crimson-700 transition-colors">{b.name}</a>
+                <a href={b.href} class="hover:text-crimson-700 transition-colors">{b.name || b.label}</a>
               )}
             </>
           ))}

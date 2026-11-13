@@ -1,0 +1,176 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Campus Life', href: '/campus-life/' },
+];
+
+const albums = await getCollection('albums');
+---
+
+<PageLayout
+  title="Campus Life"
+  description="Life at Social Baluni Public School, Dehradun: 15+ sports facilities, cultural clubs, river houses, day boarding, and student leadership."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero Section -->
+  <section class="mb-14">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-50 text-forest-800 text-xs font-bold uppercase tracking-wider mb-4 border border-forest-200">
+      <span>●</span> Beyond the Classroom
+    </div>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink mb-4 tracking-tight">
+      Vibrant Campus Life in the Doon Valley
+    </h2>
+    <p class="text-lg text-paper-700 max-w-3xl leading-relaxed">
+      Education at SBPS extends far beyond textbooks. Set in the lush greenery of Dehradun, our students train in Olympic-standard sports, discover creative expression in arts and music, and cultivate camaraderie through our four storied river houses.
+    </p>
+  </section>
+
+  <!-- Core Pillars Grid -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+    <div class="bg-paper-50 rounded-2xl overflow-hidden border border-paper-200 shadow-sm flex flex-col justify-between group hover:border-crimson-300 transition-colors">
+      <div>
+        <div class="aspect-16/10 overflow-hidden bg-paper-200">
+          <img
+            src="/brand/DSC09324-scaled.jpg"
+            alt="Students on athletic track during annual sports meet"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl font-serif font-bold text-ink mb-2">Sports Excellence & Academies</h2>
+          <p class="text-sm text-paper-700 leading-relaxed">
+            15+ outdoor and indoor sports facilities including an 8-lane running track, 10m shooting range, boxing ring, cricket nets, football ground, and basketball courts with professional coaches.
+          </p>
+        </div>
+      </div>
+      <div class="p-6 pt-0">
+        <Button href="/campus-life/sports/" variant="secondary" size="sm" class="w-full">
+          Explore Sports & Academies →
+        </Button>
+      </div>
+    </div>
+
+    <div class="bg-paper-50 rounded-2xl overflow-hidden border border-paper-200 shadow-sm flex flex-col justify-between group hover:border-crimson-300 transition-colors">
+      <div>
+        <div class="aspect-16/10 overflow-hidden bg-paper-200">
+          <img
+            src="/brand/IMG_0930-scaled.jpg"
+            alt="Students participating in music and cultural activities"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl font-serif font-bold text-ink mb-2">Co-Curricular & Creative Arts</h2>
+          <p class="text-sm text-paper-700 leading-relaxed">
+            Debating society, robotics club, Indian classical and contemporary dance, vocal and instrumental music studios, theatrical productions, and fine arts exhibitions.
+          </p>
+        </div>
+      </div>
+      <div class="p-6 pt-0">
+        <Button href="/campus-life/co-curricular/" variant="secondary" size="sm" class="w-full">
+          Explore Co-Curricular Clubs →
+        </Button>
+      </div>
+    </div>
+
+    <div class="bg-paper-50 rounded-2xl overflow-hidden border border-paper-200 shadow-sm flex flex-col justify-between group hover:border-crimson-300 transition-colors">
+      <div>
+        <div class="aspect-16/10 overflow-hidden bg-paper-200">
+          <img
+            src="/brand/DSC04141-scaled.jpg"
+            alt="House march past contingent during parade"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl font-serif font-bold text-ink mb-2">The Four River Houses</h2>
+          <p class="text-sm text-paper-700 leading-relaxed">
+            Named after the sacred rivers of Uttarakhand—Alaknanda, Bhilangna, Bhagirathi, and Mandakini—our house system instils healthy competition, loyalty, and leadership from day one.
+          </p>
+        </div>
+      </div>
+      <div class="p-6 pt-0">
+        <Button href="/about/house-system/" variant="secondary" size="sm" class="w-full">
+          Learn About River Houses →
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery Preview -->
+  <section class="mb-16">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-ink">Campus Photo Galleries</h2>
+        <p class="text-paper-700 text-sm">Visual moments capturing the energy, triumphs, and celebrations of our students.</p>
+      </div>
+      <Button href="/campus-life/gallery/" variant="outline" size="sm">View All Albums →</Button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {albums.map((album) => (
+        <a
+          href={`/campus-life/gallery/${album.data.slug}/`}
+          class="group rounded-2xl overflow-hidden border border-paper-300 bg-paper-50 shadow-xs hover:border-crimson-300 transition-all flex flex-col"
+        >
+          <div class="aspect-16/9 overflow-hidden bg-paper-200 relative">
+            <img
+              src={album.data.cover}
+              alt={album.data.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+            <span class="absolute top-3 right-3 px-2.5 py-1 rounded bg-ink/75 text-white text-xs font-semibold backdrop-blur-xs">
+              {album.data.images.length} Photos
+            </span>
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-bold text-saffron-700 uppercase tracking-wider block mb-1">
+              {album.data.category}
+            </span>
+            <h3 class="text-lg font-bold text-ink group-hover:text-crimson-700 transition-colors">
+              {album.data.title}
+            </h3>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Campus Life Highlights / Day in the Life -->
+  <section class="bg-paper-100 rounded-2xl p-8 sm:p-10 border border-paper-300 mb-16">
+    <h2 class="text-2xl font-serif font-bold text-ink mb-4">A Typical Day at SBPS</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-paper-50 p-4 rounded-xl border border-paper-200">
+        <span class="text-xs font-bold text-crimson-700 block mb-1">07:50 AM – 08:20 AM</span>
+        <h3 class="font-bold text-ink text-sm mb-1">Morning Assembly & Yoga</h3>
+        <p class="text-xs text-paper-700">Prayer, news analysis, thought for the day, and mindfulness exercises in the open amphitheatre.</p>
+      </div>
+
+      <div class="bg-paper-50 p-4 rounded-xl border border-paper-200">
+        <span class="text-xs font-bold text-crimson-700 block mb-1">08:20 AM – 01:50 PM</span>
+        <h3 class="font-bold text-ink text-sm mb-1">Academic Sessions & Labs</h3>
+        <p class="text-xs text-paper-700">Experiential classroom learning, science experiments, computer coding, and library study.</p>
+      </div>
+
+      <div class="bg-paper-50 p-4 rounded-xl border border-paper-200">
+        <span class="text-xs font-bold text-crimson-700 block mb-1">01:50 PM – 02:30 PM</span>
+        <h3 class="font-bold text-ink text-sm mb-1">Nutritious Lunch & Rest</h3>
+        <p class="text-xs text-paper-700">Wholesome vegetarian meal for day-boarders with social etiquette and dining camaraderie.</p>
+      </div>
+
+      <div class="bg-paper-50 p-4 rounded-xl border border-paper-200">
+        <span class="text-xs font-bold text-crimson-700 block mb-1">02:30 PM – 04:00 PM</span>
+        <h3 class="font-bold text-ink text-sm mb-1">Sports & Coaching</h3>
+        <p class="text-xs text-paper-700">Specialized sports training, supervised homework completion, and integrated NEET/JEE/NDA batches.</p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

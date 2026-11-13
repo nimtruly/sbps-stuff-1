@@ -1,0 +1,80 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Button from '../components/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: '404 Not Found', href: '/404/' },
+];
+
+const topLinks = [
+  { label: 'Home Page', href: '/' },
+  { label: 'Admissions Overview', href: '/admissions/' },
+  { label: 'Fee Structure', href: '/admissions/fees/' },
+  { label: 'Academics & Curriculum', href: '/academics/' },
+  { label: 'Integrated Programme (NEET/JEE/NDA)', href: '/academics/integrated-programme/' },
+  { label: 'Campus Life & Sports', href: '/campus-life/' },
+  { label: 'Notices & Circulars', href: '/notices/' },
+  { label: 'Contact Admissions Desk', href: '/contact/' },
+];
+---
+
+<PageLayout
+  title="Page Not Found (404)"
+  description="The page you are looking for does not exist or has been moved. Explore Social Baluni Public School links or search our site."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-2xl mx-auto text-center py-12 sm:py-16">
+    <div class="inline-block text-6xl sm:text-7xl font-serif font-black text-crimson-700 mb-4">
+      404
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-ink mb-4 tracking-tight">
+      Page Not Found
+    </h2>
+    <p class="text-base text-paper-700 leading-relaxed mb-8">
+      We couldn't find the page you requested. If you arrived via an old link from our previous website, it may have moved or been updated.
+    </p>
+
+    <!-- Search Form -->
+    <div class="mb-10 max-w-md mx-auto">
+      <form action="/search/" method="GET" class="relative flex items-center">
+        <input
+          type="search"
+          name="q"
+          placeholder="Search admissions, fees, notices..."
+          class="w-full px-4 py-3 pl-10 rounded-xl border border-paper-300 bg-white text-ink placeholder-paper-400 focus:border-crimson-600 focus:ring-2 focus:ring-crimson-100 outline-none text-sm"
+        />
+        <span class="absolute left-3.5 text-paper-400 text-sm pointer-events-none">🔍</span>
+        <button
+          type="submit"
+          class="absolute right-2 px-3 py-1.5 rounded-lg bg-crimson-700 text-white text-xs font-semibold hover:bg-crimson-800 transition-colors"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+
+    <!-- Quick Navigation Links -->
+    <div class="bg-paper-50 rounded-2xl p-6 sm:p-8 border border-paper-200 text-left mb-10">
+      <h2 class="text-sm font-bold text-ink uppercase tracking-wider mb-4 text-center">
+        Helpful Links to Explore
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+        {topLinks.map((item) => (
+          <a
+            href={item.href}
+            class="p-2.5 rounded-lg bg-white border border-paper-200 hover:border-crimson-300 hover:text-crimson-700 transition-colors flex items-center gap-2"
+          >
+            <span class="text-crimson-600 text-xs">→</span>
+            <span class="font-medium">{item.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex justify-center gap-4">
+      <Button href="/" variant="primary" size="md">Return to Homepage</Button>
+      <Button href="/contact/" variant="outline" size="md">Contact Campus Desk</Button>
+    </div>
+  </div>
+</PageLayout>

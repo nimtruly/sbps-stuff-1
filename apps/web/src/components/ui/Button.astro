@@ -1,7 +1,7 @@
 ---
 interface Props {
   href?: string;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'gold';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'gold' | 'white';
   size?: 'sm' | 'md' | 'lg';
   type?: 'button' | 'submit' | 'reset';
   class?: string;
@@ -32,6 +32,7 @@ const variantStyles = {
   outline: 'border border-crimson-700 text-crimson-700 bg-transparent hover:bg-crimson-50 focus-visible:outline-crimson-700',
   ghost: 'text-paper-800 hover:text-crimson-800 hover:bg-paper-200/60 focus-visible:outline-crimson-700',
   gold: 'bg-saffron-500 text-paper-900 font-semibold hover:bg-saffron-400 shadow-sm active:translate-y-px focus-visible:outline-saffron-600',
+  white: 'bg-white text-crimson-800 hover:bg-paper-100 shadow-sm active:translate-y-px focus-visible:outline-white',
 };
 
 const sizeStyles = {

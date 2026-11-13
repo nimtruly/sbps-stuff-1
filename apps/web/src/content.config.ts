@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content';
-import { glob, file } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 
 const siteSettings = defineCollection({
   loader: glob({ pattern: 'siteSettings.json', base: 'src/content' }),
@@ -82,9 +82,156 @@ const articles = defineCollection({
   }),
 });
 
+const albums = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/albums' }),
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    slug: z.string(),
+    date: z.string(),
+    cover: z.string(),
+    category: z.string(),
+    images: z.array(z.object({
+      url: z.string(),
+      alt: z.string(),
+      caption: z.string().optional(),
+    })),
+  }),
+});
+
+const disclosureDocs = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/disclosureDocs' }),
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    group: z.string(),
+    fileUrl: z.string().optional(),
+    value: z.string().optional(),
+    validFrom: z.string().optional(),
+    validTo: z.string().optional(),
+    updatedAt: z.string(),
+    expired: z.boolean().optional(),
+  }),
+});
+
+const feeItems = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/feeItems' }),
+  schema: z.object({
+    id: z.string(),
+    label: z.string(),
+    classRange: z.string(),
+    type: z.enum(['one-time', 'quarterly', 'monthly', 'refundable']),
+    refundable: z.boolean(),
+    amount: z.number(),
+    note: z.string().optional(),
+    session: z.string(),
+    verified: z.boolean(),
+  }),
+});
+
+const policies = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/policies' }),
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    slug: z.string(),
+    summary: z.string(),
+    body: z.string(),
+  }),
+});
+
+const institutions = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/institutions' }),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    type: z.string(),
+    address: z.string(),
+    phones: z.array(z.string()),
+    email: z.string(),
+    url: z.string(),
+    logo: z.string().optional(),
+  }),
+});
+
+const jobs = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/jobs' }),
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    department: z.string(),
+    type: z.string(),
+    description: z.string(),
+    open: z.boolean(),
+  }),
+});
+
+const faqs = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/faqs' }),
+  schema: z.object({
+    id: z.string(),
+    question: z.string(),
+    answer: z.string(),
+    page: z.enum(['admissions', 'home', 'fees', 'general']),
+    verified: z.boolean(),
+  }),
+});
+
+const stats = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/stats' }),
+  schema: z.object({
+    id: z.string(),
+    label: z.string(),
+    value: z.string(),
+    context: z.string(),
+    source: z.string(),
+    verified: z.boolean(),
+  }),
+});
+
+const programmes = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/programmes' }),
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    slug: z.string(),
+    duration: z.string(),
+    eligibility: z.string(),
+    summary: z.string(),
+    body: z.string(),
+    partner: z.string(),
+    features: z.array(z.string()),
+  }),
+});
+
+const houses = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: 'src/content/houses' }),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    river: z.string(),
+    colorName: z.string().optional(),
+    colorHex: z.string().optional(),
+    colour: z.string().optional(),
+    motto: z.string(),
+    values: z.array(z.string()).optional(),
+    description: z.string(),
+  }),
+});
+
 export const collections = {
   siteSettings,
   leaders,
   notices,
   articles,
+  albums,
+  disclosureDocs,
+  feeItems,
+  policies,
+  institutions,
+  jobs,
+  faqs,
+  stats,
+  programmes,
+  houses,
 };

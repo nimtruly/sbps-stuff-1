@@ -1,0 +1,99 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Parents Corner', href: '/parents/' },
+  { label: 'Transfer Certificate', href: '/parents/transfer-certificate/' },
+];
+
+const steps = [
+  {
+    step: '1',
+    title: 'Written Application',
+    desc: 'The parent/guardian must submit a formal written application or email to the Principal indicating the reason for withdrawal and student enrollment details at least 15 days in advance.',
+  },
+  {
+    step: '2',
+    title: 'No-Dues Clearance',
+    desc: 'Clearance certificates must be obtained from the Accounts Department (all tuition and bus dues settled), School Library (all borrowed books returned), and Science & Computer Labs.',
+  },
+  {
+    step: '3',
+    title: 'TC Processing & Verification',
+    desc: 'The administrative office verifies the student academic record, attendance percentage, conduct report, and CBSE registration number.',
+  },
+  {
+    step: '4',
+    title: 'Issuance & Collection',
+    desc: 'The signed Transfer Certificate (TC) is issued within 7–10 working days upon successful clearance. In compliance with CBSE norms, counter-signature by education authorities is facilitated where required.',
+  },
+];
+---
+
+<PageLayout
+  title="Transfer Certificate (TC) Procedure"
+  description="Guidelines, application procedure, and dues clearance requirements for obtaining a Transfer Certificate from Social Baluni Public School, Dehradun."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-4xl">
+    <div class="mb-10">
+      <span class="inline-block px-3 py-1 rounded-full bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-2">
+        CBSE Bye-laws Compliant
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-3 tracking-tight">
+        Transfer Certificate (TC) Guidelines
+      </h2>
+      <p class="text-base sm:text-lg text-paper-700 leading-relaxed">
+        The issuance of Transfer Certificates at Social Baluni Public School is governed strictly by the Affiliation Bye-Laws of the Central Board of Secondary Education (CBSE) and Uttarakhand state education rules.
+      </p>
+    </div>
+
+    <!-- Step by Step Process -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-serif font-bold text-ink mb-6">Procedure for Withdrawing a Student</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {steps.map((s) => (
+          <div class="p-6 rounded-2xl bg-paper-50 border border-paper-200 shadow-2xs">
+            <span class="w-8 h-8 rounded-full bg-crimson-700 text-white font-bold text-sm flex items-center justify-center mb-3">
+              {s.step}
+            </span>
+            <h3 class="text-lg font-bold text-ink mb-2">{s.title}</h3>
+            <p class="text-sm text-paper-700 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Essential Rules & Policies -->
+    <section class="bg-paper-100 rounded-2xl p-8 border border-paper-300 mb-14 space-y-4">
+      <h2 class="text-xl font-serif font-bold text-ink mb-2">Important TC Regulations</h2>
+      <ul class="list-disc list-inside space-y-2.5 text-sm text-paper-800 leading-relaxed">
+        <li><strong>Notice Period:</strong> A minimum of 15 days written notice before the end of the academic quarter is required for the issuance of a Transfer Certificate.</li>
+        <li><strong>Fee Settlement:</strong> Fees must be cleared up to the end of the running quarter in which the TC is applied for.</li>
+        <li><strong>Caution Money Refund:</strong> The refundable security deposit / caution money will be credited back via bank transfer upon submission of the original receipt and successful TC clearance.</li>
+        <li><strong>Duplicate TC:</strong> In the rare event of loss or mutilation of the original TC, a duplicate certificate may be issued upon submission of an affidavit attested by a First Class Magistrate and payment of statutory administrative charges.</li>
+      </ul>
+    </section>
+
+    <!-- Contact Administrative Office -->
+    <section class="bg-paper-50 rounded-2xl p-6 sm:p-8 border border-paper-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="text-lg font-bold text-ink mb-1">Administrative Office Helpdesk</h3>
+        <p class="text-xs sm:text-sm text-paper-700">
+          For TC status tracking or application submission, visit the admin office or email our registrar.
+        </p>
+      </div>
+      <div class="flex gap-3 shrink-0">
+        <a
+          href="mailto:info@sbpsdoon.com?subject=Transfer%20Certificate%20Application%20Inquiry"
+          class="px-5 py-2.5 rounded-lg bg-crimson-700 text-white font-semibold text-xs sm:text-sm hover:bg-crimson-800 transition-colors shadow"
+        >
+          Email Registrar Office
+        </a>
+        <Button href="/contact/" variant="outline" size="sm">Contact Campus</Button>
+      </div>
+    </section>
+  </div>
+</PageLayout>

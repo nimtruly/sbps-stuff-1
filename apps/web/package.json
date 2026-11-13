@@ -16,6 +16,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "^12.2.0",
     "@astrojs/preact": "^4.0.3",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.2.1",
     "@fontsource/eczar": "^5.1.1",
     "@fontsource/plus-jakarta-sans": "^5.1.1",

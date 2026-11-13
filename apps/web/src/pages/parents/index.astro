@@ -1,0 +1,171 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Parents Corner', href: '/parents/' },
+];
+
+const notices = await getCollection('notices');
+const recentNotices = notices.slice(0, 3);
+---
+
+<PageLayout
+  title="Parents Corner"
+  description="Hub for SBPS parents: academic calendar, online fee payments, school policies, transfer certificates, and notifications."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-4">
+      Partners in Education
+    </div>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink mb-4 tracking-tight">
+      Parents Corner & Quick Services
+    </h2>
+    <p class="text-lg text-paper-700 max-w-3xl leading-relaxed">
+      We believe that a child’s educational journey succeeds when school and home work in seamless collaboration. Access essential school portals, fee payment links, academic schedules, and institutional policies here.
+    </p>
+  </div>
+
+  <!-- Quick Action Grid -->
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+    <a
+      href="/parents/pay-fees/"
+      class="group p-6 rounded-2xl bg-paper-50 border border-paper-200 hover:border-crimson-400 hover:shadow-sm transition-all flex flex-col justify-between"
+    >
+      <div>
+        <span class="text-3xl block mb-3">💳</span>
+        <h2 class="text-xl font-serif font-bold text-ink group-hover:text-crimson-700 transition-colors mb-2">
+          Pay Fees Online
+        </h2>
+        <p class="text-xs sm:text-sm text-paper-700 leading-relaxed mb-4">
+          Instant fee payments via Razorpay (UPI, Net Banking, Credit/Debit cards) or direct NEFT bank transfer with digital receipts.
+        </p>
+      </div>
+      <span class="text-xs font-bold text-crimson-700 group-hover:text-crimson-900 inline-flex items-center gap-1">
+        Go to Payment Portal →
+      </span>
+    </a>
+
+    <a
+      href="/parents/year-planner/"
+      class="group p-6 rounded-2xl bg-paper-50 border border-paper-200 hover:border-crimson-400 hover:shadow-sm transition-all flex flex-col justify-between"
+    >
+      <div>
+        <span class="text-3xl block mb-3">📅</span>
+        <h2 class="text-xl font-serif font-bold text-ink group-hover:text-crimson-700 transition-colors mb-2">
+          Academic Year Planner
+        </h2>
+        <p class="text-xs sm:text-sm text-paper-700 leading-relaxed mb-4">
+          Term dates, examination schedules, summer & winter vacation dates, sports meets, and parent-teacher meeting (PTM) timings.
+        </p>
+      </div>
+      <span class="text-xs font-bold text-crimson-700 group-hover:text-crimson-900 inline-flex items-center gap-1">
+        View Annual Calendar →
+      </span>
+    </a>
+
+    <a
+      href="/parents/policies/"
+      class="group p-6 rounded-2xl bg-paper-50 border border-paper-200 hover:border-crimson-400 hover:shadow-sm transition-all flex flex-col justify-between"
+    >
+      <div>
+        <span class="text-3xl block mb-3">📜</span>
+        <h2 class="text-xl font-serif font-bold text-ink group-hover:text-crimson-700 transition-colors mb-2">
+          School Policies & Code of Conduct
+        </h2>
+        <p class="text-xs sm:text-sm text-paper-700 leading-relaxed mb-4">
+          Disciplinary rules, POCSO child protection, leave guidelines, anti-bullying mandates, examination & promotion criteria.
+        </p>
+      </div>
+      <span class="text-xs font-bold text-crimson-700 group-hover:text-crimson-900 inline-flex items-center gap-1">
+        Read School Policies →
+      </span>
+    </a>
+
+    <a
+      href="/parents/transfer-certificate/"
+      class="group p-6 rounded-2xl bg-paper-50 border border-paper-200 hover:border-crimson-400 hover:shadow-sm transition-all flex flex-col justify-between"
+    >
+      <div>
+        <span class="text-3xl block mb-3">📑</span>
+        <h2 class="text-xl font-serif font-bold text-ink group-hover:text-crimson-700 transition-colors mb-2">
+          Transfer Certificate (TC)
+        </h2>
+        <p class="text-xs sm:text-sm text-paper-700 leading-relaxed mb-4">
+          Official procedure, application form, dues clearance guidelines, and CBSE compliance rules for student withdrawal.
+        </p>
+      </div>
+      <span class="text-xs font-bold text-crimson-700 group-hover:text-crimson-900 inline-flex items-center gap-1">
+        TC Guidelines & Application →
+      </span>
+    </a>
+
+    <a
+      href="/notices/"
+      class="group p-6 rounded-2xl bg-paper-50 border border-paper-200 hover:border-crimson-400 hover:shadow-sm transition-all flex flex-col justify-between"
+    >
+      <div>
+        <span class="text-3xl block mb-3">📢</span>
+        <h2 class="text-xl font-serif font-bold text-ink group-hover:text-crimson-700 transition-colors mb-2">
+          Notices & Circulars
+        </h2>
+        <p class="text-xs sm:text-sm text-paper-700 leading-relaxed mb-4">
+          Recent administrative circulars, holiday notifications, syllabus breakdowns, and bus route adjustments.
+        </p>
+      </div>
+      <span class="text-xs font-bold text-crimson-700 group-hover:text-crimson-900 inline-flex items-center gap-1">
+        View Latest Circulars →
+      </span>
+    </a>
+
+    <div class="p-6 rounded-2xl bg-forest-50/60 border border-forest-200 flex flex-col justify-between">
+      <div>
+        <span class="text-3xl block mb-3">💬</span>
+        <h2 class="text-xl font-serif font-bold text-ink mb-2">
+          WhatsApp Broadcast & Helpline
+        </h2>
+        <p class="text-xs sm:text-sm text-paper-700 leading-relaxed mb-4">
+          Receive emergency alerts, morning weather advisories, and school buses updates directly on WhatsApp.
+        </p>
+      </div>
+      <a
+        href="https://wa.me/917055000000?text=Please%20add%20me%20to%20SBPS%20Parent%20Broadcast"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-forest-700 text-white text-xs font-bold hover:bg-forest-800 transition-colors"
+      >
+        <span>Join WhatsApp Broadcast</span>
+        <span class="text-xs">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Recent Notices Feed for Parents -->
+  <section class="bg-paper-100 rounded-2xl p-6 sm:p-8 border border-paper-300 mb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-serif font-bold text-ink">Recent Circulars for Parents</h2>
+      <Button href="/notices/" variant="outline" size="sm">All Notices →</Button>
+    </div>
+
+    <div class="space-y-4">
+      {recentNotices.map((n) => (
+        <div class="p-4 rounded-xl bg-paper-50 border border-paper-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs text-crimson-800 font-bold uppercase tracking-wider block mb-1">
+              {n.data.category} • {new Date(n.data.date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
+            <a href={`/notices/${n.data.id}/`} class="font-bold text-sm text-ink hover:text-crimson-700 transition-colors">
+              {n.data.title}
+            </a>
+          </div>
+          <a href={`/notices/${n.data.id}/`} class="text-xs font-semibold text-crimson-700 hover:text-crimson-900 shrink-0">
+            View Details →
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+</PageLayout>

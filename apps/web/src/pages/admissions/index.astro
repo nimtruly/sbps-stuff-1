@@ -1,0 +1,188 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/Button.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Admissions', href: '/admissions/' },
+];
+
+const timeline = [
+  {
+    step: '01',
+    title: 'Registration & Enquiry',
+    months: 'October – February',
+    desc: 'Submit an online enquiry or visit the campus admissions office to collect the prospectus and registration form.',
+  },
+  {
+    step: '02',
+    title: 'Interaction & Baseline Assessment',
+    months: 'January – March',
+    desc: 'Friendly interaction for pre-primary; basic diagnostic assessment in English, Mathematics, and Science for Class I upwards to understand the learner’s foundation.',
+  },
+  {
+    step: '03',
+    title: 'Offer of Admission',
+    months: 'Within 3 days of assessment',
+    desc: 'Shortlisted candidates receive an admission offer via email and WhatsApp with document verification instructions.',
+  },
+  {
+    step: '04',
+    title: 'Fee Payment & Enrollment',
+    months: 'Within 7 days of offer',
+    desc: 'Completion of enrollment formalities, fee payment, and issuance of student ID, uniform details, and booklist.',
+  },
+];
+
+const ageCriteria = [
+  { grade: 'Nursery', minAge: '3 Years', asOf: 'As on 31st March of academic year' },
+  { grade: 'LKG', minAge: '4 Years', asOf: 'As on 31st March of academic year' },
+  { grade: 'UKG', minAge: '5 Years', asOf: 'As on 31st March of academic year' },
+  { grade: 'Class I', minAge: '6 Years', asOf: 'As on 31st March (NEP 2020 guidelines)' },
+  { grade: 'Class II – IX', minAge: 'Corresponding age', asOf: 'Based on qualifying report card from recognized school' },
+  { grade: 'Class XI', minAge: '15+ Years', asOf: 'Based on Class X Board results / Entrance Test' },
+];
+
+const documents = [
+  'Attested copy of Birth Certificate (Municipal Corporation or Gram Panchayat)',
+  'Transfer Certificate (Original) counter-signed by Education Authority (for Class II upwards)',
+  'Previous Academic Report Card / Marksheet',
+  '4 recent passport-size colour photographs of the child',
+  '2 recent passport-size colour photographs of each parent/guardian',
+  'Copy of Aadhaar Card of child and parents',
+  'Proof of residential address (Electricity bill / Voter ID / Passport / Rent agreement)',
+  'Medical Fitness Certificate & Immunization Record',
+];
+---
+
+<PageLayout
+  title="Admissions Overview"
+  description="Admission procedure, age criteria, timeline, and document checklist for Social Baluni Public School, Dehradun (Session 2027–28)."
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Hero banner -->
+  <section class="mb-14">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-saffron-100 text-crimson-800 text-xs font-bold tracking-wide uppercase mb-4 border border-saffron-200">
+      <span>●</span> Admissions Open for Session 2027–28
+    </div>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink mb-4 tracking-tight">
+      Begin Your Child’s Journey at SBPS
+    </h2>
+    <p class="text-lg text-paper-700 max-w-3xl leading-relaxed">
+      We welcome aspiring young minds from Nursery through Class XII. Our admissions process is transparent, child-centric, and designed to understand each learner’s natural strengths.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-4">
+      <Button href="/admissions/enquire/" variant="primary" size="lg">Enquire Now</Button>
+      <Button href="/admissions/apply/" variant="secondary" size="lg">Online Admission Form</Button>
+      <Button href="/admissions/fees/" variant="outline" size="lg">Fee Structure</Button>
+    </div>
+  </section>
+
+  <!-- Admission Steps Timeline -->
+  <section class="mb-16">
+    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-ink mb-2">Step-by-Step Admission Process</h2>
+    <p class="text-paper-700 mb-8 max-w-2xl">
+      Admissions are offered on a first-come, first-served basis subject to seat availability in each grade.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {timeline.map((item) => (
+        <div class="bg-paper-50 rounded-xl p-6 border border-paper-200 relative flex flex-col justify-between hover:border-crimson-300 transition-colors shadow-xs">
+          <div>
+            <span class="text-3xl font-serif font-black text-crimson-700 block mb-2">{item.step}</span>
+            <h3 class="text-lg font-bold text-ink mb-1">{item.title}</h3>
+            <span class="text-xs font-semibold text-saffron-700 bg-saffron-50 px-2 py-0.5 rounded border border-saffron-200 inline-block mb-3">
+              {item.months}
+            </span>
+            <p class="text-sm text-paper-700 leading-relaxed">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Age Criteria Table -->
+  <section class="mb-16">
+    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-ink mb-2">Age Eligibility Guidelines</h2>
+    <p class="text-paper-700 mb-6 max-w-2xl">
+      Age criteria adhere strictly to the National Education Policy (NEP 2020) and CBSE guidelines.
+    </p>
+
+    <div class="overflow-x-auto rounded-xl border border-paper-300 bg-paper-50 shadow-xs">
+      <table class="w-full text-left border-collapse text-sm">
+        <thead>
+          <tr class="bg-paper-200/60 text-ink font-serif text-base border-b border-paper-300">
+            <th class="p-4">Grade / Class</th>
+            <th class="p-4">Minimum Age</th>
+            <th class="p-4">Reference Date / Requirement</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-paper-200">
+          {ageCriteria.map((row) => (
+            <tr class="hover:bg-paper-100/50 transition-colors">
+              <td class="p-4 font-bold text-ink">{row.grade}</td>
+              <td class="p-4 text-crimson-800 font-semibold">{row.minAge}</td>
+              <td class="p-4 text-paper-700">{row.asOf}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Required Documents Checklist -->
+  <section class="mb-16">
+    <div class="bg-paper-100/60 rounded-2xl p-8 border border-paper-300">
+      <h2 class="text-2xl font-serif font-bold text-ink mb-2">Required Documents at Enrollment</h2>
+      <p class="text-paper-700 mb-6">
+        Please ensure self-attested copies of the following documents are ready at the time of verification:
+      </p>
+
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {documents.map((doc) => (
+          <li class="flex items-start gap-3 bg-paper-50 p-3.5 rounded-lg border border-paper-200 shadow-2xs">
+            <span class="text-forest-600 font-bold">✓</span>
+            <span class="text-sm text-paper-800">{doc}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Quick FAQs Preview -->
+  <section class="mb-16">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div>
+        <h2 class="text-2xl font-serif font-bold text-ink">Frequently Asked Questions</h2>
+        <p class="text-paper-700 text-sm">Common questions from prospective parents.</p>
+      </div>
+      <Button href="/admissions/faq/" variant="outline" size="sm">View All Admissions FAQs →</Button>
+    </div>
+
+    <div class="space-y-4">
+      <div class="bg-paper-50 p-5 rounded-xl border border-paper-200">
+        <h3 class="font-bold text-ink mb-1">What is the school timing for Day Boarding students?</h3>
+        <p class="text-sm text-paper-700">Pre-Primary runs from 8:30 AM to 12:30 PM. Classes I–XII run from 7:50 AM to 1:50 PM, with day-boarding tutorials, competitive coaching, and supervised sports extending till 4:00 PM.</p>
+      </div>
+      <div class="bg-paper-50 p-5 rounded-xl border border-paper-200">
+        <h3 class="font-bold text-ink mb-1">Does the school provide transport across Dehradun?</h3>
+        <p class="text-sm text-paper-700">Yes, SBPS operates an extensive fleet of GPS-monitored buses covering major residential sectors of Dehradun, Rishikesh highway, and surrounding valleys.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section class="bg-crimson-800 text-white rounded-2xl p-8 sm:p-12 text-center shadow-lg">
+    <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-3 text-white">Ready to Visit Our Campus?</h2>
+    <p class="text-crimson-100 max-w-xl mx-auto mb-8 text-sm sm:text-base">
+      We invite you and your child to tour our smart classrooms, science labs, shooting range, and sports complex in person.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <Button href="/admissions/enquire/" variant="secondary" size="lg">Book a Campus Tour</Button>
+      <Button href="/contact/" variant="outline" size="lg" class="border-white text-white hover:bg-white hover:text-crimson-800">
+        Contact Admissions Desk
+      </Button>
+    </div>
+  </section>
+</PageLayout>

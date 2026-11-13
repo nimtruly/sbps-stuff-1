@@ -1,0 +1,180 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Admissions', href: '/admissions/' },
+  { label: 'Fee Structure', href: '/admissions/fees/' },
+];
+
+const allFeeItems = await getCollection('feeItems');
+// Hard rule: unverified fee numbers must not render in production builds
+const verifiedFeeItems = allFeeItems.filter((item) => item.data.verified === true);
+---
+
+<PageLayout
+  title="Fee Structure & Guidelines"
+  description="Fee schedule, payment options, and fee policy for Social Baluni Public School, Dehradun."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-4xl">
+    <div class="mb-10">
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-ink mb-4 tracking-tight">
+        Fee Structure & Payment Guidelines
+      </h2>
+      <p class="text-lg text-paper-700 leading-relaxed">
+        Social Baluni Public School is committed to providing quality education with transparent, reasonable fee schedules in full compliance with CBSE and state regulatory norms.
+      </p>
+    </div>
+
+    <!-- Official Signed Document Card -->
+    <div class="bg-paper-100 border-2 border-dashed border-crimson-300 rounded-2xl p-6 sm:p-8 mb-12 shadow-xs">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div>
+          <span class="inline-block px-2.5 py-1 rounded bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-2">
+            CBSE Mandatory Disclosure
+          </span>
+          <h2 class="text-xl sm:text-2xl font-serif font-bold text-ink mb-2">
+            Official Approved Fee Schedule (PDF)
+          </h2>
+          <p class="text-sm text-paper-700 max-w-xl">
+            Download the official, signed fee breakdown submitted to the Central Board of Secondary Education (CBSE) for the current academic session.
+          </p>
+        </div>
+        <div class="shrink-0">
+          <a
+            href="/documents/FEE-1.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-crimson-700 text-white font-semibold text-sm hover:bg-crimson-800 shadow transition-colors"
+          >
+            <span>Download Fee Schedule (PDF)</span>
+            <span class="text-xs">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- If verified fee items exist, render them here; otherwise render verified-compliant fallback -->
+    {verifiedFeeItems.length > 0 ? (
+      <section class="mb-14">
+        <h2 class="text-2xl font-serif font-bold text-ink mb-4">Approved Schedule of Fees</h2>
+        <div class="overflow-x-auto rounded-xl border border-paper-300 bg-paper-50 shadow-xs">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-paper-200/60 text-ink font-serif text-base border-b border-paper-300">
+                <th class="p-4">Fee Head</th>
+                <th class="p-4">Classes</th>
+                <th class="p-4">Frequency</th>
+                <th class="p-4">Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-paper-200">
+              {verifiedFeeItems.map((item) => (
+                <tr class="hover:bg-paper-100/50">
+                  <td class="p-4 font-bold text-ink">{item.data.label}</td>
+                  <td class="p-4 text-paper-700">{item.data.classRange}</td>
+                  <td class="p-4 text-paper-600">{item.data.type}</td>
+                  <td class="p-4 font-semibold text-crimson-800">₹{item.data.amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ) : (
+      <section class="mb-14 bg-paper-50 p-6 rounded-xl border border-paper-200">
+        <h2 class="text-xl font-serif font-bold text-ink mb-2">Detailed Fee Structure by Class</h2>
+        <p class="text-sm text-paper-700 leading-relaxed mb-4">
+          The school updates its detailed head-wise fee structure (Tuition, Day Boarding, Transport, and Integrated Competitive Programme) annually before each academic session. Because legacy fee numbers are currently undergoing statutory verification for the current session, please refer to the signed PDF document above or contact the school accounts desk for the active prospectus.
+        </p>
+        <p class="text-xs text-paper-500 italic">
+          * Note: As per school policy, all figures undergo annual audit by the School Management Committee (SMC).
+        </p>
+      </section>
+    )}
+
+    <!-- Fee Structure Breakdown Sections -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-serif font-bold text-ink mb-6">Fee Components & Guidelines</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-paper-50 p-6 rounded-xl border border-paper-200">
+          <h3 class="text-lg font-bold text-ink mb-2">1. One-Time Charges</h3>
+          <ul class="text-sm text-paper-700 space-y-2">
+            <li><strong>Registration Fee:</strong> Payable at the time of prospectus collection and registration form submission (non-refundable).</li>
+            <li><strong>Admission Fee:</strong> One-time fee payable upon confirmation of admission offer.</li>
+            <li><strong>Security Deposit (Caution Money):</strong> Refundable when the student leaves the school with a valid Transfer Certificate.</li>
+          </ul>
+        </div>
+
+        <div class="bg-paper-50 p-6 rounded-xl border border-paper-200">
+          <h3 class="text-lg font-bold text-ink mb-2">2. Recurring Tuition & Activity Fees</h3>
+          <ul class="text-sm text-paper-700 space-y-2">
+            <li><strong>Quarterly Tuition Fee:</strong> Payable in four quarters (April, July, October, January).</li>
+            <li><strong>Composite Annual Fee:</strong> Covers science laboratories, computer labs, library access, smart classrooms, and sports equipment.</li>
+            <li><strong>Day Boarding & Co-curricular:</strong> Covers supervised evening study, remedial classes, and sports coaching academies.</li>
+          </ul>
+        </div>
+
+        <div class="bg-paper-50 p-6 rounded-xl border border-paper-200">
+          <h3 class="text-lg font-bold text-ink mb-2">3. Integrated Coaching Programme</h3>
+          <p class="text-sm text-paper-700 leading-relaxed">
+            For students in Classes IX–XII enrolled in the Baluni Integrated NEET / JEE / NDA streams, specialized coaching material, test series, and mentorship are bundled or invoiced on an institutional basis.
+          </p>
+        </div>
+
+        <div class="bg-paper-50 p-6 rounded-xl border border-paper-200">
+          <h3 class="text-lg font-bold text-ink mb-2">4. Optional Transport Charges</h3>
+          <p class="text-sm text-paper-700 leading-relaxed">
+            Bus fare is calculated based on distance slabs across Dehradun. Transport fees are collected quarterly along with tuition fees.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment Modes & Razorpay CTA -->
+    <section class="bg-paper-100 rounded-2xl p-8 border border-paper-300 mb-14">
+      <h2 class="text-2xl font-serif font-bold text-ink mb-3">Methods of Payment</h2>
+      <p class="text-paper-700 text-sm mb-6">
+        We encourage parents to use digital payment channels for instantaneous receipt generation and safety.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="bg-paper-50 p-4 rounded-lg border border-paper-200 text-center">
+          <span class="text-2xl block mb-2">💳</span>
+          <h3 class="font-bold text-sm text-ink mb-1">Online Payment Gateway</h3>
+          <p class="text-xs text-paper-600">UPI, Net Banking, Debit/Credit Card via secure Razorpay portal.</p>
+        </div>
+        <div class="bg-paper-50 p-4 rounded-lg border border-paper-200 text-center">
+          <span class="text-2xl block mb-2">🏛️</span>
+          <h3 class="font-bold text-sm text-ink mb-1">Bank Transfer (NEFT/RTGS)</h3>
+          <p class="text-xs text-paper-600">Direct account transfer into the official school bank account.</p>
+        </div>
+        <div class="bg-paper-50 p-4 rounded-lg border border-paper-200 text-center">
+          <span class="text-2xl block mb-2">📝</span>
+          <h3 class="font-bold text-sm text-ink mb-1">Accounts Counter</h3>
+          <p class="text-xs text-paper-600">Account Payee Cheque / Demand Draft drawn in favour of "Social Baluni Public School".</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+        <Button href="/parents/pay-fees/" variant="primary" size="lg">Pay Fees Online →</Button>
+        <Button href="/admissions/enquire/" variant="secondary" size="lg">Enquire About Scholarships</Button>
+      </div>
+    </section>
+
+    <!-- Rules & Policies -->
+    <section class="mb-14">
+      <h2 class="text-xl font-serif font-bold text-ink mb-3">Important Fee Rules</h2>
+      <ul class="list-disc list-inside space-y-2 text-sm text-paper-700">
+        <li>Fees must be paid on or before the 10th day of the first month of each quarter (10th April, 10th July, 10th October, 10th January).</li>
+        <li>A late fee surcharge applies for payments made after the due date.</li>
+        <li>In case a student withdraws, the fee refund is processed strictly in accordance with the school's statutory <a href="/refund-policy/" class="text-crimson-700 underline font-medium">Refund Policy</a>.</li>
+        <li>Transfer Certificates (TC) are issued only after all pending dues have been settled and a clearance certificate obtained from the library, labs, and sports department.</li>
+      </ul>
+    </section>
+  </div>
+</PageLayout>

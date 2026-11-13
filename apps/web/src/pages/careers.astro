@@ -1,0 +1,256 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Button from '../components/Button.astro';
+import { getCollection } from 'astro:content';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Careers', href: '/careers/' },
+];
+
+const allJobs = await getCollection('jobs');
+const openJobs = allJobs.filter((j) => j.data.open);
+
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+// Structured JobPosting JSON-LD
+const jobPostingsSchema = openJobs.map((job) => ({
+  '@context': 'https://schema.org',
+  '@type': 'JobPosting',
+  title: job.data.title,
+  description: job.data.description,
+  datePosted: '2026-11-01',
+  validThrough: '2027-04-30',
+  employmentType: job.data.type === 'Full-time' ? 'FULL_TIME' : 'PART_TIME',
+  hiringOrganization: {
+    '@type': 'Organization',
+    name: 'Social Baluni Public School',
+    sameAs: 'https://www.sbpsdoon.com',
+  },
+  jobLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Haridwar Bypass Road, Brahmanwala',
+      addressLocality: 'Dehradun',
+      addressRegion: 'Uttarakhand',
+      postalCode: '248001',
+      addressCountry: 'IN',
+    },
+  },
+}));
+---
+
+<PageLayout
+  title="Careers & Teaching Opportunities"
+  description="Explore faculty and administrative career opportunities at Social Baluni Public School, Dehradun. Join our passionate community of educators."
+  breadcrumbs={breadcrumbs}
+>
+  {jobPostingsSchema.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))}
+
+  <div class="mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-4">
+      Join Our Faculty
+    </div>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink mb-4 tracking-tight">
+      Shape the Future with SBPS
+    </h2>
+    <p class="text-lg text-paper-700 max-w-3xl leading-relaxed">
+      At Social Baluni Public School, we nurture a culture of pedagogical inquiry, professional development, and mutual respect. We invite passionate educators and mentors to join our vibrant academic community in Dehradun.
+    </p>
+  </div>
+
+  <!-- Why Work at SBPS Benefits -->
+  <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+    <div class="p-6 rounded-2xl bg-paper-50 border border-paper-200 shadow-2xs">
+      <span class="text-3xl block mb-3">🌱</span>
+      <h2 class="text-lg font-serif font-bold text-ink mb-2">Continuous Professional Development</h2>
+      <p class="text-xs sm:text-sm text-paper-700 leading-relaxed">
+        Regular CBSE workshops, pedagogical mentorship from senior educators, and access to modern audio-visual teaching aids.
+      </p>
+    </div>
+
+    <div class="p-6 rounded-2xl bg-paper-50 border border-paper-200 shadow-2xs">
+      <span class="text-3xl block mb-3">🏛️</span>
+      <h2 class="text-lg font-serif font-bold text-ink mb-2">Modern Campus Infrastructure</h2>
+      <p class="text-xs sm:text-sm text-paper-700 leading-relaxed">
+        Airy smart classrooms, well-equipped science laboratories, high-speed campus internet, and scenic Doon Valley surroundings.
+      </p>
+    </div>
+
+    <div class="p-6 rounded-2xl bg-paper-50 border border-paper-200 shadow-2xs">
+      <span class="text-3xl block mb-3">💼</span>
+      <h2 class="text-lg font-serif font-bold text-ink mb-2">Competitive Compensation</h2>
+      <p class="text-xs sm:text-sm text-paper-700 leading-relaxed">
+        Remuneration commensurate with 7th Pay Commission scales for deserving candidates, statutory EPF, and medical benefits.
+      </p>
+    </div>
+  </section>
+
+  <!-- Open Roles List -->
+  <section class="mb-16">
+    <div class="mb-8">
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold text-ink mb-2">Current Openings</h2>
+      <p class="text-sm sm:text-base text-paper-700">
+        Review current faculty and coaching positions for the upcoming session.
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      {openJobs.map((job) => (
+        <div class="p-6 rounded-2xl bg-paper-50 border border-paper-200 hover:border-crimson-300 transition-colors shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider">
+                {job.data.department}
+              </span>
+              <span class="px-2.5 py-0.5 rounded bg-paper-200 text-paper-800 text-xs font-semibold">
+                {job.data.type}
+              </span>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-ink">{job.data.title}</h3>
+            <p class="text-sm text-paper-700 max-w-2xl leading-relaxed">
+              {job.data.description}
+            </p>
+          </div>
+
+          <div class="shrink-0">
+            <a
+              href="#apply-form"
+              class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-crimson-700 text-white font-semibold text-xs sm:text-sm hover:bg-crimson-800 transition-colors shadow-xs"
+            >
+              <span>Apply for Role</span>
+              <span>↓</span>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Career Application Form -->
+  <section id="apply-form" class="bg-paper-100 rounded-2xl border border-paper-300 p-6 sm:p-10 shadow-xs mb-16">
+    <div class="mb-8">
+      <h2 class="text-2xl font-serif font-bold text-ink mb-2">Online Faculty Application</h2>
+      <p class="text-sm text-paper-700">
+        Submit your credentials below or email your detailed CV directly to <a href="mailto:careers@sbpsdoon.com" class="text-crimson-700 font-semibold underline">careers@sbpsdoon.com</a>.
+      </p>
+    </div>
+
+    <form method="POST" action="/api/careers" class="space-y-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label for="fullName" class="block text-sm font-semibold text-ink mb-2">
+            Full Name <span class="text-crimson-700">*</span>
+          </label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            required
+            class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+            placeholder="Your Name"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-semibold text-ink mb-2">
+            Email Address <span class="text-crimson-700">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+            placeholder="name@example.com"
+          />
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-semibold text-ink mb-2">
+            Phone Number <span class="text-crimson-700">*</span>
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            pattern="[0-9]{10}"
+            class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+            placeholder="10-digit mobile"
+          />
+        </div>
+
+        <div>
+          <label for="position" class="block text-sm font-semibold text-ink mb-2">
+            Position Applied For <span class="text-crimson-700">*</span>
+          </label>
+          <select
+            id="position"
+            name="position"
+            required
+            class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+          >
+            <option value="">Select Position</option>
+            {openJobs.map((j) => (
+              <option value={j.data.title}>{j.data.title}</option>
+            ))}
+            <option value="General Faculty / Other">General Application / Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="experience" class="block text-sm font-semibold text-ink mb-2">
+            Total Teaching Experience (Years)
+          </label>
+          <input
+            type="text"
+            id="experience"
+            name="experience"
+            class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+            placeholder="e.g. 5 Years"
+          />
+        </div>
+
+        <div>
+          <label for="qualifications" class="block text-sm font-semibold text-ink mb-2">
+            Highest Educational Qualification
+          </label>
+          <input
+            type="text"
+            id="qualifications"
+            name="qualifications"
+            class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+            placeholder="e.g. M.Sc. Physics, B.Ed."
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="coverNote" class="block text-sm font-semibold text-ink mb-2">
+          Brief Statement of Teaching Philosophy / Cover Note
+        </label>
+        <textarea
+          id="coverNote"
+          name="coverNote"
+          rows="4"
+          class="w-full px-4 py-2.5 rounded-lg border border-paper-300 bg-white text-ink focus:border-crimson-600 focus:ring-2 focus:ring-crimson-200 outline-none text-sm"
+          placeholder="Tell us about your pedagogical approach, past student results, or why you wish to teach at SBPS..."
+        ></textarea>
+      </div>
+
+      {turnstileKey && (
+        <div class="cf-turnstile" data-sitekey={turnstileKey}></div>
+      )}
+
+      <div>
+        <Button type="submit" variant="primary" size="lg">
+          Submit Faculty Application →
+        </Button>
+      </div>
+    </form>
+  </section>
+</PageLayout>

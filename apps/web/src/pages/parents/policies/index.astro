@@ -1,0 +1,75 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Parents Corner', href: '/parents/' },
+  { label: 'School Policies', href: '/parents/policies/' },
+];
+
+const policies = await getCollection('policies');
+---
+
+<PageLayout
+  title="School Policies & Child Welfare Guidelines"
+  description="Official policies of Social Baluni Public School, Dehradun: child protection (POCSO), anti-bullying, grievance redressal, discipline, and examinations."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-4xl mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-4">
+      Safety, Equity & Compliance
+    </div>
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink mb-4 tracking-tight">
+      School Policies & Child Welfare Directives
+    </h2>
+    <p class="text-lg text-paper-700 leading-relaxed">
+      Social Baluni Public School is committed to maintaining an empathetic, equitable, and completely safe educational environment. Every child is safeguarded by institutional policies aligned with CBSE affiliation bylaws and statutory Indian laws.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+    {policies.map((policy) => (
+      <article class="p-6 rounded-2xl bg-paper-50 border border-paper-200 hover:border-crimson-400 hover:shadow-sm transition-all flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-bold text-crimson-700 uppercase tracking-wider block mb-2">
+            Institutional Policy
+          </span>
+          <h2 class="text-xl font-serif font-bold text-ink mb-2">
+            <a href={`/parents/policies/${policy.data.slug}/`} class="hover:text-crimson-700 transition-colors">
+              {policy.data.title}
+            </a>
+          </h2>
+          <p class="text-sm text-paper-700 leading-relaxed mb-4">
+            {policy.data.summary}
+          </p>
+        </div>
+
+        <div class="pt-3 border-t border-paper-200">
+          <a
+            href={`/parents/policies/${policy.data.slug}/`}
+            class="text-xs font-bold text-crimson-700 hover:text-crimson-900 inline-flex items-center gap-1"
+          >
+            Read Complete Policy →
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Child Protection Helpline & Grievance Box -->
+  <section class="bg-paper-100 rounded-2xl p-8 border border-paper-300">
+    <h2 class="text-xl font-serif font-bold text-ink mb-3">Internal Grievance & Child Protection Committee</h2>
+    <p class="text-sm text-paper-700 leading-relaxed mb-6">
+      Parents or students seeking confidential assistance or reporting any infringement of child welfare norms may reach out directly to the Chairperson of the Internal Complaints Committee (ICC).
+    </p>
+    <div class="flex flex-wrap gap-4 text-sm font-semibold">
+      <div class="px-4 py-2 rounded-lg bg-white border border-paper-200 text-ink">
+        📧 <span class="text-paper-600 font-normal">Grievance Email:</span> grievance@sbpsdoon.com
+      </div>
+      <div class="px-4 py-2 rounded-lg bg-white border border-paper-200 text-ink">
+        📞 <span class="text-paper-600 font-normal">Helpline:</span> 0135-2733333
+      </div>
+    </div>
+  </section>
+</PageLayout>

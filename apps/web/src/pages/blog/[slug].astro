@@ -1,0 +1,41 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.data.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+---
+
+<ArticleLayout
+  title={article.data.title}
+  excerpt={article.data.excerpt}
+  category={article.data.category}
+  publishedAt={article.data.publishedAt}
+  author={article.data.author}
+  coverImage={article.data.cover}
+  tags={article.data.tags}
+  slug={article.data.slug}
+>
+  {article.data.draft && (
+    <div class="mb-8 p-4 rounded-xl bg-saffron-100/80 border-2 border-saffron-400 text-saffron-950 text-sm">
+      <div class="font-bold flex items-center gap-2 mb-1">
+        <span>⚠️</span>
+        <span>Editorial Draft — Under Review</span>
+      </div>
+      <p class="text-xs text-saffron-900 leading-relaxed">
+        This article has been authored strictly from verified facts and is currently flagged as a draft (<code>draft: true</code>) awaiting human sign-off from the SBPS leadership team before public publication.
+      </p>
+    </div>
+  )}
+
+  <div class="whitespace-pre-line leading-relaxed text-base sm:text-lg text-paper-800">
+    {article.data.body}
+  </div>
+</ArticleLayout>
