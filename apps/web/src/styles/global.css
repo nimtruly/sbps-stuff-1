@@ -5,11 +5,27 @@
 @import "@fontsource-variable/anek-latin/wdth.css";
 @import "@fontsource-variable/anek-devanagari/wdth.css";
 
+/* Metric-matched fallbacks so text keeps its line breaks while Anek loads (no layout shift) */
+@font-face {
+  font-family: "Anek Fallback";
+  src: local("Arial"), local("Roboto"), local("Helvetica Neue");
+  size-adjust: 92%;
+  ascent-override: 98%;
+  descent-override: 30%;
+}
+@font-face {
+  font-family: "Anek Display Fallback";
+  src: local("Arial Narrow"), local("Roboto Condensed"), local("Arial"), local("Roboto");
+  size-adjust: 80%;
+  ascent-override: 112%;
+  descent-override: 34%;
+}
+
 @theme {
-  --font-sans: "Anek Latin Variable", "Anek Devanagari Variable", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-sans: "Anek Latin Variable", "Anek Devanagari Variable", "Anek Fallback", system-ui, sans-serif;
   /* Legacy alias: every former serif heading now renders in condensed Anek. */
-  --font-serif: "Anek Latin Variable", "Anek Devanagari Variable", system-ui, sans-serif;
-  --font-display: "Anek Latin Variable", "Anek Devanagari Variable", system-ui, sans-serif;
+  --font-serif: "Anek Latin Variable", "Anek Devanagari Variable", "Anek Display Fallback", system-ui, sans-serif;
+  --font-display: "Anek Latin Variable", "Anek Devanagari Variable", "Anek Display Fallback", system-ui, sans-serif;
 
   /* Tie crimson, taken from the logo banner */
   --color-crimson-50: #fbf1f1;
@@ -51,15 +67,15 @@
   --color-forest-950: #042111;
 
   /* Shirting white to blazer charcoal: cool neutrals tinted toward the charcoal */
-  --color-paper-50: #fbfcfb;
-  --color-paper-100: #f4f5f2;
-  --color-paper-200: #e9ebe7;
-  --color-paper-300: #d5d9d4;
-  --color-paper-400: #b4bab4;
-  --color-paper-500: #6b736e;
-  --color-paper-600: #545b57;
-  --color-paper-700: #3f4542;
-  --color-paper-800: #2b302e;
+  --color-paper-50: #fbfcfd;
+  --color-paper-100: #f3f5f6;
+  --color-paper-200: #e7eaec;
+  --color-paper-300: #d3d8db;
+  --color-paper-400: #b3b9bd;
+  --color-paper-500: #69727a;
+  --color-paper-600: #525a61;
+  --color-paper-700: #3d444a;
+  --color-paper-800: #2a3035;
   --color-paper-900: #1d2226;
   --color-ink: #1d2226;
 
@@ -213,6 +229,19 @@
   );
 }
 
+/* Selvedge: the same weave as a full-height vertical edge */
+.tie-edge {
+  background-color: var(--color-crimson-800);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 14px,
+    var(--color-saffron-500) 14px 18px,
+    transparent 18px 22px,
+    var(--color-forest-700) 22px 30px,
+    transparent 30px 40px
+  );
+}
+
 /* A narrow band of the same weave, used as a rule between regions */
 .tie-band {
   height: 14px;
@@ -268,6 +297,7 @@
 .prose-sbps > * + * {
   margin-top: 1em;
 }
+.prose-sbps h2,
 .prose-sbps h3 {
   margin-top: 1.75em;
   font-size: 1.5rem;

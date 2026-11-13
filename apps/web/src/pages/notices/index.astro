@@ -1,14 +1,14 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import { cms } from '../../lib/cms';
-import { withNoticeRefs, formatDate } from '../../lib/refs';
+import { formatDate } from '../../lib/refs';
 
-const notices = withNoticeRefs(await cms.getNotices());
+const notices = await cms.getNotices();
 ---
 
 <PageLayout
   title="Notices"
-  description="Circulars and announcements from Social Baluni Public School. Quote the reference number when you call the school about a notice."
+  description="Circulars and announcements from Social Baluni Public School."
   breadcrumbs={[{ label: 'Parents', href: '/parents/' }, { label: 'Notices', href: '/notices/' }]}
 >
   <div class="flex flex-wrap items-center justify-between gap-4">
@@ -23,7 +23,6 @@ const notices = withNoticeRefs(await cms.getNotices());
           <a href={`/notices/${n.id}/`} class="group grid gap-2 py-5 sm:grid-cols-[9rem_1fr] sm:gap-8">
             <span class="text-sm text-paper-600">
               <time datetime={n.date}>{formatDate(n.date)}</time>
-              <span class="block font-semibold text-ink" data-figure>{n.ref}</span>
             </span>
             <span>
               <span class="block text-xl font-semibold group-hover:text-crimson-700 group-hover:underline">{n.title}</span>

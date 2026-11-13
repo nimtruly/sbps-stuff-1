@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/ui/Photo.astro';
 import { cms } from '../lib/cms';
-import { withNoticeRefs, formatDate } from '../lib/refs';
+import { formatDate } from '../lib/refs';
 import { school } from '../data/nav';
 
-const notices = withNoticeRefs(await cms.getNotices()).slice(0, 4);
+const notices = (await cms.getNotices()).slice(0, 4);
+const firstSentence = (t: string) => (t.match(/^.*?[.!?](?=\s|$)/) ?? [t])[0].replace(/\.\.+$/, '.');
 const articles = (await cms.getArticles(false)).slice(0, 3);
 const principal = await cms.getLeaderById('principal');
 const houses = await cms.getHouses();
@@ -39,22 +40,26 @@ const steps = [
   description="Social Baluni Public School is a co-educational CBSE school in Dehradun, Nursery to XII, with integrated NEET, JEE, NTSE and NDA preparation on campus and a strong sports programme."
 >
   <!-- First viewport: the tie panel and the campus -->
-  <section class="grid lg:min-h-[calc(100svh-7.5rem)] lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]" aria-labelledby="hero-title">
-    <div class="tie-field relative lg:pr-5">
-      <div class="tie-field absolute inset-y-0 right-0 hidden w-5 lg:block" aria-hidden="true"></div>
-      <div class="relative flex h-full flex-col justify-center bg-crimson-700/[0.93] px-4 py-10 text-white sm:px-8 lg:px-12 lg:py-12 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
-        <h1 id="hero-title" class="max-w-[13ch] text-[2.75rem] font-extrabold sm:text-6xl xl:text-7xl">
+  <section class="grid lg:min-h-[calc(100svh-8.25rem)] lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]" aria-labelledby="hero-title">
+    <div class="relative flex flex-col bg-crimson-700 text-white lg:pr-7">
+      <div class="tie-field h-14 shrink-0 lg:h-16" aria-hidden="true"></div>
+      <div class="tie-edge absolute inset-y-0 right-0 hidden w-7 lg:block" aria-hidden="true"></div>
+      <div class="flex flex-1 flex-col justify-center px-4 py-8 sm:px-8 lg:px-12 lg:py-8 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+        <h1 id="hero-title" class="max-w-[14ch] text-[2.75rem] font-extrabold sm:text-6xl xl:text-[4rem]">
           School and NEET, JEE, NDA preparation under one roof
         </h1>
-        <p class="mt-5 text-lg font-medium text-crimson-50">
-          CBSE · Nursery to XII · Dehradun · <span class="whitespace-nowrap">Learn to grow</span>
+        <p class="mt-4 flex flex-wrap gap-x-2 text-lg font-medium text-crimson-50">
+          <span class="whitespace-nowrap">CBSE</span><span aria-hidden="true">·</span>
+          <span class="whitespace-nowrap">Nursery to XII</span><span aria-hidden="true">·</span>
+          <span class="whitespace-nowrap">Dehradun</span><span aria-hidden="true">·</span>
+          <span class="whitespace-nowrap">Learn to grow</span>
         </p>
 
-        <form method="POST" action="/api/enquiry" class="mt-8 max-w-md border-2 border-ink bg-paper-50 p-5 text-ink sm:p-6" aria-labelledby="callback-title">
+        <form method="POST" action="/api/enquiry" class="mt-6 max-w-xl border-2 border-ink bg-paper-50 p-5 text-ink" aria-labelledby="callback-title">
           <h2 id="callback-title" class="text-2xl font-bold">Ask for a call back</h2>
           <p class="mt-1 text-sm text-paper-700">The admissions office will phone you.</p>
-          <div class="mt-4 grid gap-3 sm:grid-cols-2">
-            <label class="sm:col-span-2">
+          <div class="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-[1fr_1fr_auto] xl:items-end">
+            <label class="sm:col-span-2 xl:col-span-3">
               <span class="text-sm font-semibold">Parent's name</span>
               <input name="parentName" required autocomplete="name" class="mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none" />
             </label>
@@ -69,12 +74,12 @@ const steps = [
                 {classes.map((c) => <option>{c}</option>)}
               </select>
             </label>
+            <input type="hidden" name="preferredContact" value="phone" />
+            {turnstileKey && <div class="cf-turnstile sm:col-span-2 xl:col-span-3" data-sitekey={turnstileKey}></div>}
+            <button type="submit" class="inline-flex h-12 w-full items-center justify-center bg-saffron-500 px-5 text-lg font-bold text-ink hover:bg-saffron-400 active:bg-saffron-600 sm:col-span-2 xl:col-span-1 xl:w-auto">
+              Request a call back
+            </button>
           </div>
-          <input type="hidden" name="preferredContact" value="phone" />
-          {turnstileKey && <div class="cf-turnstile mt-3" data-sitekey={turnstileKey}></div>}
-          <button type="submit" class="mt-4 inline-flex h-12 w-full items-center justify-center bg-saffron-500 text-lg font-bold text-ink hover:bg-saffron-400 active:bg-saffron-600">
-            Request a call back
-          </button>
         </form>
       </div>
     </div>
@@ -233,10 +238,9 @@ const steps = [
             <ul class="mt-8 border-t-2 border-ink" role="list">
               {notices.map((n) => (
                 <li class="border-b border-paper-300">
-                  <a href={`/notices/${n.id}/`} class="group grid gap-1 py-4 sm:grid-cols-[7rem_1fr] sm:gap-6">
+                  <a href={`/notices/${n.id}/`} class="group grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
                     <span class="text-sm text-paper-600">
                       <time datetime={n.date}>{formatDate(n.date)}</time>
-                      <span class="block font-semibold text-ink" data-figure>{n.ref}</span>
                     </span>
                     <span class="text-lg font-semibold group-hover:text-crimson-700 group-hover:underline">{n.title}</span>
                   </a>
@@ -275,7 +279,7 @@ const steps = [
       <section class="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[5fr_7fr] lg:px-8 lg:py-28 lg:pl-14" aria-labelledby="principal-title">
         <Photo name="students-uniform" sizes="(min-width: 1024px) 38vw, 100vw" class="aspect-[4/3] w-full object-cover" />
         <figure>
-          <h2 id="principal-title" class="text-sm font-semibold text-paper-600">From the Principal</h2>
+          <h2 id="principal-title" class="sr-only">From the Principal</h2>
           <blockquote class="mt-4 font-display text-2xl font-semibold leading-snug [font-stretch:88%] sm:text-3xl">
             <p>{principalQuote}</p>
           </blockquote>
@@ -295,7 +299,7 @@ const steps = [
           <a href="/campus-life/gallery/" class="font-semibold text-crimson-700 underline">Photo gallery</a>
         </div>
         <div class="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:grid-rows-2">
-          <figure class="col-span-2 row-span-2"><Photo name="cultural-programme" sizes="(min-width: 1024px) 50vw, 100vw" class="aspect-[3/2] h-full w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">A cultural programme in front of the main building</figcaption></figure>
+          <figure class="col-span-2 lg:row-span-2 lg:flex lg:flex-col"><Photo name="cultural-programme" sizes="(min-width: 1024px) 50vw, 100vw" class="aspect-[3/2] w-full object-cover lg:min-h-0 lg:flex-1" /><figcaption class="mt-2 text-sm text-paper-700">A cultural programme in front of the main building</figcaption></figure>
           <figure><Photo name="science-lab" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Science lab</figcaption></figure>
           <figure><Photo name="music-room" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Music room</figcaption></figure>
           <figure><Photo name="library-reading" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Library</figcaption></figure>
@@ -312,7 +316,7 @@ const steps = [
         {houses.map((h: any) => (
           <li class="border-b border-paper-300 py-5 sm:pr-6">
             <h3 class="text-3xl font-bold">{h.id.charAt(0).toUpperCase() + h.id.slice(1)}</h3>
-            <p class="mt-2 line-clamp-3 text-[0.9375rem] text-paper-700">{h.description}</p>
+            <p class="mt-2 text-[0.9375rem] text-paper-700">{firstSentence(h.description)}</p>
           </li>
         ))}
       </ul>
@@ -346,7 +350,7 @@ const steps = [
           <p class="measure mt-4 text-lg text-crimson-50">{school.address}.</p>
         </div>
         <div class="flex flex-col gap-3 self-end">
-          <a href="/admissions/enquire/" class="inline-flex h-14 items-center justify-center bg-saffron-500 px-6 text-lg font-bold text-ink hover:bg-saffron-400">Book a visit</a>
+          <a href="/admissions/enquire/" class="inline-flex h-14 items-center justify-center bg-white px-6 text-lg font-bold text-crimson-800 hover:bg-crimson-50">Book a visit</a>
           <a href={school.phoneHref} class="inline-flex h-14 items-center justify-center border-2 border-white px-6 text-lg font-semibold hover:bg-white hover:text-crimson-800" data-figure>Call {school.phone}</a>
         </div>
       </div>

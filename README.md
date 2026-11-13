@@ -37,7 +37,7 @@ Built under the strict engineering and design contract specified in `docs/BUILD-
 | **Bot Mitigation** | Cloudflare Turnstile |
 | **Transactional Email** | [Resend](https://resend.com/) (Enquiries, Applications, Recruitment) |
 | **Payments** | Razorpay (Static payment links + Programmatic Order & Webhook verification) |
-| **Search Engine** | Pure Node.js Static Indexer (`search-index.json`) with client-side instant filter |
+| **Search Engine** | Pagefind, built after `astro build` |
 | **Testing** | [Vitest](https://vitest.dev/) (Unit/Integration) + [Playwright](https://playwright.dev/) & [Axe Core](https://github.com/dequelabs/axe-core) (E2E & A11y) |
 
 ---

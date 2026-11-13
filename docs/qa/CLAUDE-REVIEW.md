@@ -81,3 +81,7 @@ Reviewed commits `00d94f0..ba54eb2` (13 commits, built in about 70 minutes) agai
 3. Remove or mark `verified: false` every invented item listed in P0-4, with the disclosure page first.
 4. Make the no-JS success and error pages work, and fix the `wp-content` redirect mapping.
 5. Run real Lighthouse and e2e checks, add a form-POST e2e test, and rewrite BUILD-REPORT.
+
+## Follow-up (same day)
+
+All P0 and P1 items above are fixed. P2 is mostly fixed: the `/tokens/` page is removed, the reports are corrected, and the YouTube thumbnail is no longer used. Details are in `BUILD-REPORT.md` and `DECISIONS.md`; open content questions are in `CONTENT-TODO.md`.

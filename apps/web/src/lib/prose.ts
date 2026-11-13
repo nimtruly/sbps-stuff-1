@@ -17,7 +17,7 @@ export function renderProse(text: string): string {
     .map((block) => block.trim())
     .filter(Boolean)
     .map((block) => {
-      if (block.startsWith('### ')) return `<h3>${inline(block.slice(4))}</h3>`;
+      if (block.startsWith('### ')) return `<h2>${inline(block.slice(4))}</h2>`;
       const lines = block.split('\n');
       if (lines.every((l) => l.startsWith('- '))) {
         return `<ul>${lines.map((l) => `<li>${inline(l.slice(2))}</li>`).join('')}</ul>`;

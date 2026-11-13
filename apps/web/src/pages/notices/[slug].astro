@@ -2,10 +2,10 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import Prose from '../../components/ui/Prose.astro';
 import { cms } from '../../lib/cms';
-import { withNoticeRefs, formatDate } from '../../lib/refs';
+import { formatDate } from '../../lib/refs';
 
 export async function getStaticPaths() {
-  const notices = withNoticeRefs(await cms.getNotices());
+  const notices = await cms.getNotices();
   return notices.map((n) => ({ params: { slug: n.id }, props: { notice: n } }));
 }
 
@@ -15,10 +15,9 @@ const { notice } = Astro.props;
 <PageLayout
   title={notice.title}
   description={notice.body.slice(0, 150)}
-  breadcrumbs={[{ label: 'Notices', href: '/notices/' }, { label: notice.ref, href: `/notices/${notice.id}/` }]}
+  breadcrumbs={[{ label: 'Notices', href: '/notices/' }, { label: notice.title, href: `/notices/${notice.id}/` }]}
 >
-  <dl class="measure grid grid-cols-3 border-y-2 border-ink text-base">
-    <div class="py-3"><dt class="text-sm text-paper-600">Reference</dt><dd class="font-semibold" data-figure>{notice.ref}</dd></div>
+  <dl class="measure grid grid-cols-2 border-y-2 border-ink text-base">
     <div class="py-3"><dt class="text-sm text-paper-600">Date</dt><dd class="font-semibold"><time datetime={notice.date}>{formatDate(notice.date)}</time></dd></div>
     <div class="py-3"><dt class="text-sm text-paper-600">Category</dt><dd class="font-semibold">{notice.category}</dd></div>
   </dl>
