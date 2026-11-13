@@ -1,0 +1,135 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Button from '../../../components/ui/Button.astro';
+import { cms } from '../../../lib/cms';
+
+const stats = await cms.getStats(true); // Verified only
+const breadcrumbs = [
+  { name: 'Academics', href: '/academics/' },
+  { name: 'Results & Achievers', href: '/academics/results/' },
+];
+---
+
+<PageLayout
+  title="Academic Results & Achievers Wall"
+  description="Celebrating the hard work, board examination achievements, and sports selections of Social Baluni Public School students."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="space-y-16 max-w-5xl mx-auto">
+    <!-- Verified Highlights Strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-paper-50 p-6 sm:p-8 rounded-2xl border border-paper-300 shadow-sm">
+      {stats.map((s) => (
+        <div class="text-center space-y-1">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-crimson-800 tabular-nums">
+            {s.value}
+          </div>
+          <div class="text-xs sm:text-sm font-semibold text-paper-900">{s.label}</div>
+          <div class="text-[11px] text-paper-500 leading-tight">{s.context}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Official CBSE Board Examination Results Record -->
+    <section class="bg-paper-50 p-8 sm:p-10 rounded-2xl border border-paper-300 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-paper-300 pb-4">
+        <div>
+          <h2 class="font-serif text-2xl font-bold text-crimson-900">
+            CBSE Board Examination Performance Record
+          </h2>
+          <p class="text-xs text-paper-600 mt-1">
+            Official records submitted under CBSE Mandatory Public Disclosure (Appendix-IX).
+          </p>
+        </div>
+        <a
+          href="/documents/13.-LAST-THREE-YEAR-RESULT-OF-THE-BOARD-EXAMINATION-1.pdf"
+          target="_blank"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-crimson-700 text-white rounded text-xs font-semibold hover:bg-crimson-800 shrink-0"
+        >
+          📄 Download Official CBSE Results PDF
+        </a>
+      </div>
+
+      <div class="space-y-6 text-sm text-paper-700 leading-relaxed">
+        <p>
+          Social Baluni Public School students have consistently displayed academic diligence in CBSE All India Secondary (Class X) and Senior School Certificate (Class XII) examinations. Our integrated academic framework ensures rigorous syllabus completion by December, followed by comprehensive full-length pre-board simulations.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+          <div class="p-5 rounded-xl bg-paper-100 border border-paper-200 space-y-2">
+            <div class="font-serif font-bold text-base text-paper-900">Class X (AISSE) Track Record</div>
+            <p class="text-xs text-paper-600">
+              Students excel across Science, Mathematics, Social Sciences, English, and Information Technology, recording high first-division pass percentages and strong school averages.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-paper-100 border border-paper-200 space-y-2">
+            <div class="font-serif font-bold text-base text-paper-900">Class XII (AISSCE) Track Record</div>
+            <p class="text-xs text-paper-600">
+              Senior secondary cohorts in Medical (PCB) and Non-Medical (PCM) streams achieve strong board merit while securing high national percentiles in NEET and JEE.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievers Wall: Sports & State Honours (Verified Only) -->
+    <section class="space-y-6">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
+        Student Achievers & State Selections
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 38th National Games -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 bg-forest-100 text-forest-800 text-[10px] font-bold rounded-full uppercase">
+              National Games
+            </span>
+            <span class="text-xs text-paper-500 tabular-nums">Session 2024–25</span>
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">
+            20 SBPS Athletes Selected for 38th National Games
+          </h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Twenty student champions qualified through rigorous state trials to represent Uttarakhand in Boxing, Shooting, Football, and Track & Field.
+          </p>
+          <a href="/blog/38th-national-games-sbps-students/" class="text-xs font-semibold text-crimson-700 hover:underline inline-block pt-1">
+            Read tournament report &rarr;
+          </a>
+        </div>
+
+        <!-- 2024 SFA Championship -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 bg-forest-100 text-forest-800 text-[10px] font-bold rounded-full uppercase">
+              Inter-School Sports
+            </span>
+            <span class="text-xs text-paper-500 tabular-nums">Session 2024–25</span>
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">
+            SFA Inter-School Championship Laurels
+          </h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Multi-medal victories across badminton, athletics, and martial arts at Dehradun's premier multi-sport inter-school tournament.
+          </p>
+          <a href="/blog/sfa-inter-school-competition-2024/" class="text-xs font-semibold text-crimson-700 hover:underline inline-block pt-1">
+            Read tournament report &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclosure Callout -->
+    <div class="p-6 rounded-xl bg-paper-200/50 border border-paper-300 text-center space-y-3">
+      <div class="font-serif font-bold text-paper-900">Need Audited Institutional Compliance Records?</div>
+      <p class="text-xs text-paper-600 max-w-xl mx-auto">
+        Visit our CBSE Mandatory Public Disclosure page for government affiliation letters, society certificates, RTE recognition status, and audited infrastructure details.
+      </p>
+      <div>
+        <Button href="/disclosure/" variant="primary" size="sm">
+          View Mandatory Public Disclosure
+        </Button>
+      </div>
+    </div>
+  </div>
+</PageLayout>

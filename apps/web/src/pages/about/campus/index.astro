@@ -1,0 +1,154 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Button from '../../../components/ui/Button.astro';
+
+const breadcrumbs = [
+  { name: 'About Us', href: '/about/' },
+  { name: 'Campus & Infrastructure', href: '/about/campus/' },
+];
+---
+
+<PageLayout
+  title="Campus & Infrastructure"
+  description="Explore the expansive campus of Social Baluni Public School on Haridwar Bypass Road, Dehradun: smart classrooms, modern laboratories, sports academies, and secure transport."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="space-y-16 max-w-5xl mx-auto">
+    <!-- Hero Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="space-y-4">
+        <h2 class="font-serif text-3xl font-bold text-crimson-900 leading-tight">
+          A Purpose-Built Learning Sanctuary in Dehradun
+        </h2>
+        <p class="text-sm sm:text-base text-paper-700 leading-relaxed">
+          Situated on the Haridwar Bypass Road in Brahmanwala, Social Baluni Public School is designed to provide a distraction-free, stimulating learning environment. Our spacious campus blends modern architectural standards with generous natural greenery, fresh mountain air, and ample athletic grounds.
+        </p>
+        <div class="pt-2">
+          <Button href="/contact/" variant="primary" size="md">
+            Schedule a Campus Tour
+          </Button>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-lg border border-paper-300">
+        <img
+          src="/brand/DJI_20240917155020_0011_D-scaled.jpg"
+          alt="SBPS Dehradun campus aerial view"
+          class="w-full h-full object-cover max-h-[380px]"
+        />
+      </div>
+    </div>
+
+    <!-- Infrastructure Features Grid (From legacy infrastructure.md & facility.md) -->
+    <section class="space-y-8">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
+        Key Campus Facilities
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Smart Classrooms -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-crimson-100 text-crimson-800 flex items-center justify-center font-bold text-lg">
+            🏫
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">42 Smart Classrooms</h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Spacious, ergonomically furnished classrooms with abundant natural sunlight, cross-ventilation, and multimedia projection for interactive audio-visual learning.
+          </p>
+        </div>
+
+        <!-- Science & IT Labs -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-forest-100 text-forest-800 flex items-center justify-center font-bold text-lg">
+            🔬
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">6 Specialized Labs</h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Fully equipped Physics, Chemistry, Biology, Mathematics, Composite Science, and Computer Information Technology labs meeting CBSE practical standards.
+          </p>
+        </div>
+
+        <!-- Sports Infrastructure -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-saffron-100 text-saffron-900 flex items-center justify-center font-bold text-lg">
+            🎯
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">Sports Academies</h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Indoor 10m shooting range, regulation boxing ring, football grounds, cricket practice nets, table tennis hall, volleyball court, and yoga meditation room.
+          </p>
+        </div>
+
+        <!-- Library -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-paper-200 text-paper-800 flex items-center justify-center font-bold text-lg">
+            📚
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">Resource Library</h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Thousands of titles spanning fiction, world literature, reference encyclopedias, competitive exam archives, and periodicals encouraging daily reading habits.
+          </p>
+        </div>
+
+        <!-- Day Boarding Dining -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-crimson-100 text-crimson-800 flex items-center justify-center font-bold text-lg">
+            🍲
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">Dining & Nutrition</h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Hygienic institutional kitchen and dining hall serving wholesome vegetarian meals and evening refreshments under professional culinary supervision.
+          </p>
+        </div>
+
+        <!-- Safe Transport Fleet -->
+        <div class="p-6 rounded-xl bg-paper-50 border border-paper-300 shadow-sm space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-forest-100 text-forest-800 flex items-center justify-center font-bold text-lg">
+            🚌
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900">GPS School Transport</h3>
+          <p class="text-xs text-paper-600 leading-relaxed">
+            Fleet of school buses traversing major Dehradun residential routes, fitted with GPS vehicle tracking, speed governors, first aid kits, and female attendants.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Health, Safety & Sanitation -->
+    <section class="bg-paper-50 p-8 sm:p-10 rounded-2xl border border-paper-300 space-y-6">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900">
+        Safety, Security & Wellness Standards
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-paper-700 leading-relaxed">
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2">
+            <span class="text-forest-700 font-bold">✓</span>
+            <span><strong>24/7 CCTV Surveillance:</strong> High-definition cameras covering all perimeter entry gates, corridors, playgrounds, and common spaces.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-forest-700 font-bold">✓</span>
+            <span><strong>Purified RO Drinking Water:</strong> Commercial RO filtration plants with regular municipal water-quality testing certifications.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-forest-700 font-bold">✓</span>
+            <span><strong>Fire Safety Compliance:</strong> Advanced hydrants, smoke alarms, and certified fire extinguisher points audited annually.</span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2">
+            <span class="text-forest-700 font-bold">✓</span>
+            <span><strong>Campus Infirmary & Medical Care:</strong> First-aid clinic with on-duty nurse and direct tie-ups with nearby multi-specialty hospitals.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-forest-700 font-bold">✓</span>
+            <span><strong>Strict Visitor Entry Protocols:</strong> Manned security booths, electronic gate passes, and mandatory ID verification for all visitors.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-forest-700 font-bold">✓</span>
+            <span><strong>Hygienic Sanitation Blocks:</strong> Dedicated separate restroom facilities for boys, girls, and staff on each floor with disabled accessibility.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</PageLayout>

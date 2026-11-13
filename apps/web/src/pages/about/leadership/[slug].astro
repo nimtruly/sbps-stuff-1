@@ -1,0 +1,78 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Button from '../../../components/ui/Button.astro';
+import { cms } from '../../../lib/cms';
+
+export async function getStaticPaths() {
+  const leaders = await cms.getLeaders();
+  return leaders.map((l) => ({
+    params: { slug: l.id },
+    props: { leader: l },
+  }));
+}
+
+const { leader } = Astro.props;
+
+const breadcrumbs = [
+  { name: 'About Us', href: '/about/' },
+  { name: 'Leadership Messages', href: '/about/leadership/' },
+  { name: leader.name, href: `/about/leadership/${leader.id}/` },
+];
+---
+
+<PageLayout
+  title={`Message from ${leader.name}`}
+  description={`${leader.role}, ${leader.org} shares words of guidance and vision for students and parents at Social Baluni Public School.`}
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-4xl mx-auto space-y-12">
+    <!-- Header Card -->
+    <div class="p-6 sm:p-10 rounded-2xl bg-paper-50 border border-paper-300 shadow-sm flex flex-col sm:flex-row items-center gap-8">
+      <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden bg-paper-200 border-4 border-crimson-700 shadow-md shrink-0">
+        <img
+          src={leader.photo}
+          alt={leader.name}
+          class="w-full h-full object-cover"
+          onerror="this.src='/favicon.svg'"
+        />
+      </div>
+
+      <div class="space-y-2 text-center sm:text-left">
+        <h2 class="font-serif text-3xl font-bold text-crimson-950">
+          {leader.name}
+        </h2>
+        <div class="text-sm font-bold text-crimson-700">
+          {leader.role}, {leader.org}
+        </div>
+        {leader.credentials && (
+          <div class="text-xs text-paper-600 font-medium">{leader.credentials}</div>
+        )}
+      </div>
+    </div>
+
+    <!-- Message Content -->
+    <div class="bg-paper-50 p-8 sm:p-12 rounded-2xl border border-paper-300 text-paper-800 space-y-6 leading-relaxed text-base sm:text-lg">
+      <div class="text-xs uppercase tracking-wider font-bold text-crimson-800 border-b border-paper-200 pb-2">
+        Official Address
+      </div>
+
+      <p class="italic text-paper-900 border-l-4 border-crimson-700 pl-4 py-2 font-serif text-xl sm:text-2xl leading-snug">
+        "{leader.message.slice(0, 180)}..."
+      </p>
+
+      <div class="space-y-4 text-sm sm:text-base text-paper-700 whitespace-pre-line">
+        {leader.message}
+      </div>
+
+      <div class="pt-6 border-t border-paper-200 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="font-serif font-bold text-paper-900">{leader.name}</div>
+          <div class="text-xs text-paper-600">{leader.role}, {leader.org}</div>
+        </div>
+        <Button href="/about/leadership/" variant="outline" size="sm">
+          &larr; Back to All Leadership Messages
+        </Button>
+      </div>
+    </div>
+  </div>
+</PageLayout>

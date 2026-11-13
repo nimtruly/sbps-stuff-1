@@ -1,0 +1,156 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/ui/Button.astro';
+
+const breadcrumbs = [{ name: 'About Us', href: '/about/' }];
+---
+
+<PageLayout
+  title="Our Story, Vision & Ethos"
+  description="Founded in 2014 under Mandakini Seva Samiti, Social Baluni Public School is backed by Social Group (1978), Polygon Group (1999), and Dr. Baluni Group of Education."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="space-y-16 max-w-5xl mx-auto">
+    <!-- Story & Heritage Section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <h2 class="font-serif text-3xl font-bold text-crimson-900 leading-tight">
+          A Decade of Educational Excellence in the Doon Valley
+        </h2>
+        <div class="text-paper-700 leading-relaxed space-y-4 text-sm sm:text-base">
+          <p>
+            The foundation of <strong>Social Baluni Public School (SBPS)</strong> was laid on <strong>30 March 2014</strong>, welcoming its inaugural cohort of approximately 400 students for the 2014–15 academic session from Nursery to Class VIII. Class IX was introduced in 2015, and the school presented its first batch of Class XII CBSE board candidates in 2018.
+          </p>
+          <p>
+            Operating as a constituent unit of the renowned <strong>Mandakini Seva Samiti Education Society</strong>, the school brings together three pillars of institutional trust in Uttarakhand:
+          </p>
+          <ul class="space-y-2 text-xs sm:text-sm pl-2">
+            <li class="flex items-start gap-2">
+              <span class="text-crimson-700 font-bold">•</span>
+              <span><strong>Social Group (Est. 1978):</strong> Serving Uttarakhand's financial, publication, and social welfare landscape for over four decades.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-crimson-700 font-bold">•</span>
+              <span><strong>Polygon Group (Est. 1999):</strong> Founded by Dr. K.S. Panwar, spanning enterprise, technologies, infrastructure, and healthcare.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-crimson-700 font-bold">•</span>
+              <span><strong>Dr. Baluni Group of Education:</strong> Over 20 years of academic distinction in mentoring medical (NEET) and engineering (IIT-JEE) aspirants across North India.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-xl border border-paper-300">
+        <img
+          src="/brand/DJI_20240917155020_0011_D-scaled.jpg"
+          alt="SBPS Dehradun aerial campus view"
+          class="w-full h-full object-cover max-h-[440px]"
+        />
+      </div>
+    </section>
+
+    <!-- Vision & Mission Bullets (From about-us.md) -->
+    <section class="bg-paper-50 rounded-2xl border border-paper-300 p-8 sm:p-12 space-y-8">
+      <div class="max-w-3xl">
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-900">
+          Our Educational Aims & Commitments
+        </h2>
+        <p class="mt-2 text-sm text-paper-700">
+          As documented in the founding charter of Social Baluni Public School:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-paper-800">
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-full bg-crimson-100 text-crimson-800 font-bold flex items-center justify-center shrink-0 text-xs">
+            1
+          </div>
+          <p>
+            To build a firm foundation of learning and conceptual knowledge, essential to enable every student to handle the demands of higher education and competitive careers successfully.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-full bg-crimson-100 text-crimson-800 font-bold flex items-center justify-center shrink-0 text-xs">
+            2
+          </div>
+          <p>
+            To cultivate self-confidence, emotional maturity, and leadership ethics through genuine responsibility in every facet of school life.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-full bg-crimson-100 text-crimson-800 font-bold flex items-center justify-center shrink-0 text-xs">
+            3
+          </div>
+          <p>
+            To nurture well-rounded citizens and ambassadors of goodwill who respect human values, diversity, and social responsibility.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-full bg-crimson-100 text-crimson-800 font-bold flex items-center justify-center shrink-0 text-xs">
+            4
+          </div>
+          <p>
+            To inspire scientific curiosity, innovation, and active environmental conservation grounded in the delicate ecology of the Himalayas.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-full bg-crimson-100 text-crimson-800 font-bold flex items-center justify-center shrink-0 text-xs">
+            5
+          </div>
+          <p>
+            To maintain high academic standards while providing extensive co-curricular, artistic, musical, and physical education opportunities.
+          </p>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-full bg-crimson-100 text-crimson-800 font-bold flex items-center justify-center shrink-0 text-xs">
+            6
+          </div>
+          <p>
+            To foster a warm partnership where parents, teachers, and students collaborate towards the common goal of personal and collective excellence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Hub to Sub-Sections -->
+    <section class="space-y-6">
+      <h2 class="font-serif text-2xl font-bold text-crimson-900 border-b border-paper-300 pb-2">
+        Explore About Social Baluni
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="/about/leadership/" class="group p-5 bg-paper-50 rounded-xl border border-paper-300 hover:border-crimson-700 transition-colors">
+          <h3 class="font-serif font-bold text-paper-900 group-hover:text-crimson-800">Leadership Messages &rarr;</h3>
+          <p class="mt-2 text-xs text-paper-600">Inspiring guidance from Chairmen, Managing Directors, and the Principal.</p>
+        </a>
+
+        <a href="/about/campus/" class="group p-5 bg-paper-50 rounded-xl border border-paper-300 hover:border-crimson-700 transition-colors">
+          <h3 class="font-serif font-bold text-paper-900 group-hover:text-crimson-800">Campus & Infrastructure &rarr;</h3>
+          <p class="mt-2 text-xs text-paper-600">Modern smart classrooms, composite laboratories, sports academies, and transport.</p>
+        </a>
+
+        <a href="/about/house-system/" class="group p-5 bg-paper-50 rounded-xl border border-paper-300 hover:border-crimson-700 transition-colors">
+          <h3 class="font-serif font-bold text-paper-900 group-hover:text-crimson-800">River House System &rarr;</h3>
+          <p class="mt-2 text-xs text-paper-600">Alaknanda, Bhilangna, Bhagirathi, and Mandakini houses.</p>
+        </a>
+
+        <a href="/baluni-group/" class="group p-5 bg-paper-50 rounded-xl border border-paper-300 hover:border-crimson-700 transition-colors">
+          <h3 class="font-serif font-bold text-paper-900 group-hover:text-crimson-800">Baluni Group Institutions &rarr;</h3>
+          <p class="mt-2 text-xs text-paper-600">Sister campuses in Kotdwar, Agra, and Doon Baluni Defence Academy.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="text-center pt-6">
+      <Button href="/admissions/enquire/" variant="primary" size="lg">
+        Enquire About Admissions
+      </Button>
+    </div>
+  </div>
+</PageLayout>

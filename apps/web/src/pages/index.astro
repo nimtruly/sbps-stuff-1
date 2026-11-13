@@ -1,16 +1,574 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import YouTubeFacade from '../components/ui/YouTubeFacade.astro';
+import { cms } from '../lib/cms';
+
+const siteSettings = await cms.getSiteSettings();
+const stats = await cms.getStats(true); // Verified only!
+const notices = (await cms.getNotices()).slice(0, 3);
+const articles = (await cms.getArticles(false)).slice(0, 3);
+const faqs = await cms.getFAQs('home');
+const principal = await cms.getLeaderById('principal');
+
+// FAQPage JSON-LD
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.answer,
+    },
+  })),
+};
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Social Baluni Public School, Dehradun</title>
-  </head>
-  <body>
-    <h1>Social Baluni Public School</h1>
-    <p>CBSE School in Dehradun with Integrated NEET, JEE & NDA Preparation</p>
-  </body>
-</html>
+<BaseLayout
+  title="Social Baluni Public School | CBSE School in Dehradun with Integrated Coaching"
+  description="Social Baluni Public School (SBPS) Dehradun is a premier CBSE school (Nursery–XII) offering day boarding and integrated coaching with Baluni Classes for NEET, JEE & NDA."
+  schema={faqSchema}
+>
+  <!-- 1. Hero Section (No sliders, real campus photography) -->
+  <section class="relative bg-paper-900 text-white overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/brand/DJI_20240917155020_0011_D-scaled.jpg"
+        alt="Aerial view of Social Baluni Public School campus in Dehradun"
+        class="w-full h-full object-cover opacity-35 object-center"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/75 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-28 sm:pb-36">
+      <div class="max-w-3xl space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-800/80 border border-crimson-600/50 text-saffron-300 text-xs font-semibold tracking-wide">
+          <span>CBSE Affiliated 3530479</span>
+          <span class="text-paper-400">•</span>
+          <span>Nursery to Class XII</span>
+          <span class="text-paper-400">•</span>
+          <span>Day Boarding</span>
+        </div>
+
+        <!-- Single H1 on Homepage -->
+        <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15]">
+          CBSE School in Dehradun with <span class="text-saffron-400">Integrated NEET, JEE & NDA</span> Preparation
+        </h1>
+
+        <p class="text-base sm:text-xl text-paper-200 leading-relaxed font-normal">
+          Learn to grow with academic rigour. We combine CBSE education with integrated competitive coaching by Baluni Classes and Doon Baluni Defence Academy under one roof.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <Button href="/admissions/enquire/" variant="gold" size="lg">
+            Enquire for Admission
+          </Button>
+          <Button href="/contact/" variant="outline" size="lg" class="text-white border-white hover:bg-white/10">
+            Book a Campus Visit
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Proof Strip (Overlapping card with verified stats) -->
+  <section class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20">
+    <div class="bg-paper-50 rounded-2xl shadow-xl border border-paper-300 p-6 sm:p-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-paper-200">
+        {stats.slice(0, 4).map((s, idx) => (
+          <div class={`text-center space-y-1 ${idx > 0 ? 'pt-4 sm:pt-0 sm:pl-4' : ''}`}>
+            <div class="font-serif text-2xl sm:text-3xl font-bold text-crimson-800 tabular-nums">
+              {s.value}
+            </div>
+            <div class="text-sm font-semibold text-paper-900">{s.label}</div>
+            <div class="text-xs text-paper-600 leading-tight">{s.context}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Persona Chooser ("Find the right path") -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
+        Find the Right Path for Your Child
+      </h2>
+      <p class="mt-3 text-base text-paper-700">
+        Personalised learning pathways tailored to each developmental milestone.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <a href="/academics/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-lg bg-crimson-50 text-crimson-800 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
+            N–V
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
+            Early Years & Primary
+          </h3>
+          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
+            Nursery to Class V powered by the XSEED experiential learning pedagogy, fostering curiosity, language, and foundational numeracy.
+          </p>
+        </div>
+        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
+          Explore Primary &rarr;
+        </span>
+      </a>
+
+      <a href="/academics/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-lg bg-forest-50 text-forest-800 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
+            VI–VIII
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
+            Middle School
+          </h3>
+          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
+            Class VI to VIII with disciplined conceptual grounding in Science, Mathematics, and competitive foundation Olympiad aptitude.
+          </p>
+        </div>
+        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
+          Explore Middle School &rarr;
+        </span>
+      </a>
+
+      <a href="/academics/integrated-programme/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-lg bg-saffron-50 text-paper-900 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
+            IX–XII
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
+            NEET & JEE Integrated
+          </h3>
+          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
+            Class IX to XII with synchronised CBSE board syllabus and rigorous entrance exam coaching by Baluni Classes faculty.
+          </p>
+        </div>
+        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
+          Explore Medical & Engg &rarr;
+        </span>
+      </a>
+
+      <a href="/academics/integrated-programme/nda/" class="group p-6 rounded-xl bg-paper-50 border border-paper-300 hover:border-crimson-600 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-lg bg-crimson-100 text-crimson-900 flex items-center justify-center font-bold mb-4 group-hover:scale-105 transition-transform">
+            NDA
+          </div>
+          <h3 class="font-serif text-lg font-bold text-paper-900 group-hover:text-crimson-800">
+            Defence Services Wing
+          </h3>
+          <p class="mt-2 text-xs text-paper-600 leading-relaxed">
+            Dedicated officer preparation with Doon Baluni Defence Academy, obstacle course training, shooting academy, and SSB mentoring.
+          </p>
+        </div>
+        <span class="mt-6 text-xs font-semibold text-crimson-700 inline-flex items-center gap-1">
+          Explore Defence Pathway &rarr;
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 4. Five Core Pillars (Real photo cards) -->
+  <section class="bg-paper-200/50 py-16 sm:py-24 border-y border-paper-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
+          The Five Pillars of Social Baluni
+        </h2>
+        <p class="mt-3 text-base text-paper-700">
+          A balanced education delivering intellectual rigour, physical grit, and moral grounding.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <!-- Pillar 1 -->
+        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
+          <div class="h-44 overflow-hidden">
+            <img src="/brand/IMG_0930-scaled.jpg" alt="Academics classroom learning" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-base font-bold text-paper-900">Academic Rigour</h3>
+              <p class="mt-1 text-xs text-paper-600">CBSE curriculum enriched by experiential discovery and continuous evaluation.</p>
+            </div>
+            <a href="/academics/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
+          <div class="h-44 overflow-hidden">
+            <img src="/brand/IMG_7698-scaled.jpg" alt="Integrated science laboratory coaching" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-base font-bold text-paper-900">Integrated Coaching</h3>
+              <p class="mt-1 text-xs text-paper-600">NEET & JEE preparation by Baluni Classes within regular school hours.</p>
+            </div>
+            <a href="/academics/integrated-programme/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
+          <div class="h-44 overflow-hidden">
+            <img src="/brand/DSC04141-scaled.jpg" alt="Defence academy training and march past" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-base font-bold text-paper-900">Defence Pathway</h3>
+              <p class="mt-1 text-xs text-paper-600">Officer grooming, SSB mentorship, and daily endurance drills.</p>
+            </div>
+            <a href="/academics/integrated-programme/nda/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
+          <div class="h-44 overflow-hidden">
+            <img src="/brand/DSC09324-scaled.jpg" alt="Sports and athletic competitions" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-base font-bold text-paper-900">Sports Academies</h3>
+              <p class="mt-1 text-xs text-paper-600">Shooting range, boxing academy, cricket, football, and martial arts.</p>
+            </div>
+            <a href="/campus-life/sports/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Pillar 5 -->
+        <div class="bg-paper-50 rounded-xl overflow-hidden border border-paper-300 shadow-sm flex flex-col">
+          <div class="h-44 overflow-hidden">
+            <img src="/brand/IMG_9867-scaled.jpg" alt="Co-curricular house celebrations" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-base font-bold text-paper-900">Himalayan Houses</h3>
+              <p class="mt-1 text-xs text-paper-600">Alaknanda, Bhilangna, Bhagirathi, and Mandakini river house traditions.</p>
+            </div>
+            <a href="/about/house-system/" class="mt-4 text-xs font-semibold text-crimson-700 hover:underline">Learn more &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Integrated Programme Explainer (Split Layout) -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <div class="inline-block px-3 py-1 bg-crimson-100 text-crimson-800 rounded-full text-xs font-semibold">
+          School + Coaching Under One Roof
+        </div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950 leading-tight">
+          Eliminate Evening Travel Fatigue. Master Boards and Entrances Together.
+        </h2>
+        <p class="text-base text-paper-700 leading-relaxed">
+          At Social Baluni Public School, senior students do not waste valuable evening hours in traffic shuttling between school and distant coaching centres. Our integrated model synchronises CBSE school requirements with Baluni Classes' intensive competitive entrance modules.
+        </p>
+
+        <div class="space-y-3 pt-2">
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <strong class="text-sm font-semibold text-paper-900">Unified Timetable:</strong>
+              <span class="text-xs text-paper-600 ml-1">Theory in morning sessions followed by entrance problem-solving drills.</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <strong class="text-sm font-semibold text-paper-900">Supervised Day Boarding:</strong>
+              <span class="text-xs text-paper-600 ml-1">Doubt removal, assignment completion, and laboratory practicals on campus.</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <strong class="text-sm font-semibold text-paper-900">Baluni Classes Pedagogy:</strong>
+              <span class="text-xs text-paper-600 ml-1">Experienced senior medical and engineering mentors with proven rank records.</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <strong class="text-sm font-semibold text-paper-900">Restored Family Evenings:</strong>
+              <span class="text-xs text-paper-600 ml-1">Students return home with schoolwork done, ready for sound sleep and recovery.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 flex flex-wrap gap-4">
+          <Button href="/academics/integrated-programme/" variant="primary" size="md">
+            Explore Integrated Programmes
+          </Button>
+          <Button href="/admissions/enquire/" variant="outline" size="md">
+            Schedule Academic Counselling
+          </Button>
+        </div>
+      </div>
+
+      <!-- Campus Life Visual -->
+      <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-paper-300">
+        <img
+          src="/brand/DSC09324-scaled.jpg"
+          alt="SBPS campus sports meet and student teamwork"
+          class="w-full h-auto object-cover max-h-[500px]"
+        />
+        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-ink/90 via-ink/60 to-transparent p-6 text-white">
+          <div class="font-serif font-bold text-lg">Integrated Excellence</div>
+          <div class="text-xs text-paper-300 mt-1">Classroom instruction backed by 20+ years of Baluni Group coaching legacy.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Notices and Latest News -->
+  <section class="bg-paper-50 py-16 sm:py-24 border-t border-paper-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Notices Column -->
+        <div class="space-y-6">
+          <div class="flex items-center justify-between border-b border-paper-300 pb-3">
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-900">
+              Notices & Circulars
+            </h2>
+            <a href="/notices/" class="text-xs font-semibold text-crimson-700 hover:underline">
+              View All Notices &rarr;
+            </a>
+          </div>
+
+          <div class="space-y-4">
+            {notices.map((n) => (
+              <div class="p-4 rounded-xl bg-paper-100 border border-paper-300/80 hover:border-crimson-600 transition-colors">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-crimson-100 text-crimson-800">
+                    {n.category}
+                  </span>
+                  <span class="text-xs text-paper-500 tabular-nums">{n.date}</span>
+                  {n.pinned && (
+                    <span class="text-[10px] font-semibold text-saffron-600 bg-saffron-100 px-1.5 py-0.5 rounded">
+                      Pinned
+                    </span>
+                  )}
+                </div>
+                <h3 class="font-serif text-base font-bold text-paper-900">
+                  {n.title}
+                </h3>
+                <p class="mt-1 text-xs text-paper-700 line-clamp-2 leading-relaxed">
+                  {n.body}
+                </p>
+                {n.attachments && n.attachments.length > 0 && (
+                  <div class="mt-2 flex gap-2">
+                    {n.attachments.map((att) => (
+                      <a href={att.url} target="_blank" class="text-xs text-crimson-700 font-semibold hover:underline inline-flex items-center gap-1">
+                        📄 {att.title}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Latest Articles / News Column -->
+        <div class="space-y-6">
+          <div class="flex items-center justify-between border-b border-paper-300 pb-3">
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-900">
+              Latest Happenings & News
+            </h2>
+            <a href="/blog/" class="text-xs font-semibold text-crimson-700 hover:underline">
+              View All Articles &rarr;
+            </a>
+          </div>
+
+          <div class="space-y-4">
+            {articles.map((art) => (
+              <a href={`/blog/${art.slug}/`} class="group block p-4 rounded-xl bg-paper-100 border border-paper-300/80 hover:border-crimson-600 transition-colors">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-forest-100 text-forest-800">
+                    {art.category}
+                  </span>
+                  <span class="text-xs text-paper-500 tabular-nums">{art.publishedAt}</span>
+                </div>
+                <h3 class="font-serif text-base font-bold text-paper-900 group-hover:text-crimson-800">
+                  {art.title}
+                </h3>
+                <p class="mt-1 text-xs text-paper-700 line-clamp-2 leading-relaxed">
+                  {art.excerpt}
+                </p>
+                <span class="mt-2 text-xs font-semibold text-crimson-700 inline-block group-hover:underline">
+                  Read article &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Principal's Message Section -->
+  {principal && (
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div class="bg-paper-50 rounded-2xl border border-paper-300 p-8 sm:p-12 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+          <div class="text-center md:text-left space-y-2">
+            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto md:mx-0 overflow-hidden bg-paper-200 border-4 border-crimson-700 shadow">
+              <img
+                src={principal.photo}
+                alt={principal.name}
+                class="w-full h-full object-cover"
+                onerror="this.src='/favicon.svg'"
+              />
+            </div>
+            <div class="font-serif text-lg font-bold text-paper-900">{principal.name}</div>
+            <div class="text-xs text-crimson-700 font-semibold">{principal.role}</div>
+            <div class="text-[11px] text-paper-500">{principal.credentials}</div>
+          </div>
+
+          <div class="md:col-span-3 space-y-4">
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-crimson-950">
+              "Learn to Grow: Nurturing Leaders for Tomorrow"
+            </h2>
+            <p class="text-sm sm:text-base text-paper-700 leading-relaxed italic border-l-4 border-crimson-700 pl-4 bg-paper-100/50 py-2">
+              "{principal.message}"
+            </p>
+            <div class="pt-2">
+              <a href="/about/leadership/principal/" class="text-xs font-semibold text-crimson-700 hover:underline inline-flex items-center gap-1">
+                Read Principal's Complete Address &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 8. Campus Video & Inspection -->
+  <section class="bg-paper-900 text-white py-16 sm:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
+      <div class="max-w-2xl mx-auto space-y-3">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">
+          Experience Life at Social Baluni Public School
+        </h2>
+        <p class="text-sm sm:text-base text-paper-300">
+          Take a digital walk through our smart classrooms, sports fields, shooting academy, and laboratory facilities.
+        </p>
+      </div>
+
+      <!-- lite-youtube facade (no heavy iframe on page load) -->
+      <YouTubeFacade videoId="4ygbcVKNL9Q" title="Social Baluni Public School Dehradun Campus Walkthrough" />
+    </div>
+  </section>
+
+  <!-- 9. Campus Life Gallery Mosaic -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+      <div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
+          Moments on Campus
+        </h2>
+        <p class="mt-2 text-sm text-paper-700">
+          Sports championships, house activities, and interactive classroom learning.
+        </p>
+      </div>
+      <a href="/campus-life/gallery/" class="text-xs font-semibold text-crimson-700 hover:underline">
+        Explore Full Photo Gallery &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="col-span-2 row-span-2 rounded-xl overflow-hidden shadow-sm group">
+        <img src="/brand/DJI_20240917155020_0011_D-scaled.jpg" alt="Aerial view of SBPS campus" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
+        <img src="/brand/DSC09324-scaled.jpg" alt="Athletic track sports meet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
+        <img src="/brand/IMG_7698-scaled.jpg" alt="Science laboratory students" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
+        <img src="/brand/DSC04141-scaled.jpg" alt="March past ceremony" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-sm group h-48">
+        <img src="/brand/IMG_0930-scaled.jpg" alt="Smart digital classroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Frequently Asked Questions (FAQPage) -->
+  <section class="bg-paper-50 py-16 sm:py-24 border-t border-paper-300">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-crimson-950">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-sm text-paper-700">
+          Everything parents need to know about admissions, day boarding, and integrated coaching.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((f) => (
+          <details class="group p-5 rounded-xl bg-paper-100 border border-paper-300 open:bg-paper-50 transition-colors">
+            <summary class="font-serif font-bold text-paper-900 cursor-pointer list-none flex items-center justify-between gap-4">
+              <span>{f.question}</span>
+              <span class="text-crimson-700 font-bold group-open:rotate-180 transition-transform">
+                ↓
+              </span>
+            </summary>
+            <p class="mt-3 text-xs sm:text-sm text-paper-700 leading-relaxed border-t border-paper-200 pt-3">
+              {f.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+
+      <div class="text-center pt-4">
+        <a href="/admissions/faq/" class="text-xs font-semibold text-crimson-700 hover:underline">
+          View all Admissions & Fee FAQs &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Final Action CTA Band -->
+  <section class="bg-gradient-to-r from-crimson-800 to-crimson-900 text-white py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">
+        Begin Your Journey at Social Baluni Public School
+      </h2>
+      <p class="text-sm sm:text-base text-paper-200 max-w-2xl mx-auto">
+        Registrations open for Session 2027–28. Connect with our admissions counselling team today or visit our Dehradun campus.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <Button href="/admissions/enquire/" variant="gold" size="lg">
+          Submit Admission Enquiry
+        </Button>
+        <Button href="tel:+919690000890" variant="outline" size="lg" class="text-white border-white hover:bg-white/10">
+          Call: +91 96900 00890
+        </Button>
+        <Button href="https://wa.me/919690000890" target="_blank" variant="secondary" size="lg">
+          WhatsApp Admissions
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
