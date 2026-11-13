@@ -3,21 +3,21 @@
   "title": "5th Annual Sports Meet Highlights",
   "slug": "sports-meet-highlights",
   "date": "2024-11-20",
-  "cover": "/brand/DSC09324-scaled.jpg",
+  "cover": "/images/sports-balance-1280.webp",
   "category": "Sports",
   "images": [
     {
-      "url": "/brand/DSC09324-scaled.jpg",
+      "url": "/images/sports-balance-1280.webp",
       "alt": "Annual Sports Meet track events and student athletes",
       "caption": "Athletics track competitions"
     },
     {
-      "url": "/brand/DSC04141-scaled.jpg",
+      "url": "/images/sports-cycling-1280.webp",
       "alt": "House march past ceremony",
       "caption": "River houses marching contingent"
     },
     {
-      "url": "/brand/IMG_9867-scaled.jpg",
+      "url": "/images/assembly-performance-1280.webp",
       "alt": "Medal ceremony and trophy presentation",
       "caption": "Medal distribution by leadership"
     }

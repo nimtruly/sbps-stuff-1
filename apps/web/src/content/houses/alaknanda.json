@@ -1,9 +1,8 @@
 {
   "id": "alaknanda",
   "name": "Alaknanda House",
-  "river": "Alaknanda River",
-  "colorName": "Azure Blue",
+  "river": "Alaknanda river",
   "colorHex": "#0284c7",
-  "motto": "Purity, Resilience and Flow",
-  "description": "Named after the mighty Alaknanda, the major source stream of the Ganges originating from Satopanth Glacier. Alaknanda house symbolises steady determination, calm wisdom, and relentless progress."
+  "description": "Alaknanda river is considered the source stream of the Ganges. It rises at the confluence and foot of the Satopanth and Bhagirath Kharak glaciers in Uttarakhand. It flows past the Hindu pilgrimage centre of Badrinath and meets the Bhagirathi river at Devprayag after flowing for approximately 190 km. Its main tributaries are the Mandakini, Nandakini and Pindar rivers.",
+  "source": "https://www.sbpsdoon.com/house-system/"
 }

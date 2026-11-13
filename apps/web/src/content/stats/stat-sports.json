@@ -1,8 +1,9 @@
 {
   "id": "stat-sports",
-  "label": "Sports & Academies",
-  "value": "15+ Sports",
-  "context": "Shooting, Boxing, Cricket & Football Academies",
-  "source": "Sports Curriculum",
-  "verified": true
+  "label": "Sports offered",
+  "value": "15",
+  "context": "Including boxing, shooting, fencing, archery and cricket",
+  "source": "sports page",
+  "verified": true,
+  "order": 5
 }

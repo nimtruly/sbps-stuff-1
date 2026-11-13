@@ -2,6 +2,7 @@
   "id": "staff-special-educator",
   "title": "Details of Special Educator",
   "group": "Staff (Teaching)",
-  "value": "Qualified Special Educator on rolls",
-  "updatedAt": "2026-01-28"
+  "value": "To be confirmed by the school office",
+  "updatedAt": "2026-01-28",
+  "verified": false
 }

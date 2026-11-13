@@ -1,9 +1,8 @@
 {
   "id": "mandakini",
   "name": "Mandakini House",
-  "river": "Mandakini River",
-  "colorName": "Ruby Crimson",
+  "river": "Mandakini river",
   "colorHex": "#b91c1c",
-  "motto": "Passion, Service and Honor",
-  "description": "Named after the swift Mandakini descending from Chorabari Glacier near Kedarnath, reflecting the school’s parent Mandakini Seva Samiti. Mandakini house embodies heartfelt service, passionate pursuit of excellence, and nobility of character."
+  "description": "Mandakini river emerges from Chorabari Glacier near Kedarnath in Uttarakhand. The river merges with Kaliganga near Kalimath temple and with Madhyamaheshwar Ganga near Ukhimath. The Mandakini is mentioned as one of the transcendental rivers in the holy religious work Srimad Bhagavatam.",
+  "source": "https://www.sbpsdoon.com/house-system/"
 }

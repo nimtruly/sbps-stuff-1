@@ -1,7 +1,9 @@
 {
   "id": "faq-admission-process",
-  "question": "What is the admission procedure at Social Baluni Public School?",
-  "answer": "Admissions commence with registration (online or offline), followed by an age-appropriate written interaction test and informal student-parent dialogue. Provisional admissions are finalized upon document verification and fee deposit.",
+  "question": "How is admission decided?",
+  "answer": "After registration you receive a letter with the date and time of the admission test. Qualified candidates are called for an interview. Admission depends on the test, the interview and seat availability, and stays provisional until the documents are submitted and the fee is paid.",
   "page": "admissions",
-  "verified": true
+  "order": 2,
+  "verified": true,
+  "source": "https://www.sbpsdoon.com/admission-criteria/"
 }

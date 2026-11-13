@@ -1,17 +1,16 @@
 {
   "id": "5th-annual-sports-meet",
-  "title": "Celebrating Athletic Spirit: Highlights from the 5th Annual Sports Meet",
   "slug": "5th-annual-sports-meet",
-  "excerpt": "March past, river house competitions, and athletic track events bring colour and energy to the 5th SBPS Annual Sports Meet.",
+  "title": "5th Annual Sports Meet",
+  "excerpt": "Photographs from the 5th Annual Sports Meet at Social Baluni Public School.",
   "category": "News",
-  "author": "Principal Office",
-  "publishedAt": "2024-11-20",
+  "author": "Social Baluni Public School",
+  "publishedAt": "2025-12-03",
   "tags": [
-    "Annual Sports Meet",
-    "Houses",
-    "Athletics",
-    "Campus Life"
+    "Sports"
   ],
   "draft": false,
-  "body": "The 5th Annual Sports Meet of Social Baluni Public School concluded amidst tremendous enthusiasm and spirited competition among the four river houses: Alaknanda, Bhilangna, Bhagirathi, and Mandakini.\n\nThe event commenced with a disciplined march past led by the school head boy and head girl, followed by the lighting of the ceremonial torch and the athlete's oath. \n\nStudents from pre-primary to senior secondary demonstrated stamina, sportsmanship, and teamwork across sprints, relays, high jump, and martial arts displays. The coveted Best House Trophy was awarded to the house exhibiting highest aggregate points and camaraderie."
+  "cover": "/images/sports-balance-1280.webp",
+  "body": "The school held its 5th Annual Sports Meet. See the photographs in the [sports meet album](/campus-life/gallery/sports-meet-highlights/).",
+  "source": "https://www.sbpsdoon.com/5th-annual-sports-meet/"
 }
