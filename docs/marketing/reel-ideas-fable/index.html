@@ -83,19 +83,19 @@ section.cat{padding-block:clamp(3rem,7vw,5.5rem) 0}
 /* idea rows */
 .ideas>li{border-bottom:1px solid var(--rule)}
 .ideas>li[hidden]{display:none}
-details>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:3.25rem minmax(0,1fr) auto;gap:.25rem 1rem;align-items:start;padding:1.25rem .5rem 1.25rem 0;border-radius:4px}
+details>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:3.25rem minmax(0,1fr) auto;gap:.25rem 1rem;align-items:start;padding:1.25rem .75rem;margin-inline:-.75rem;border-radius:6px}
 details>summary::-webkit-details-marker{display:none}
-details>summary:hover{background:linear-gradient(90deg,transparent,var(--cool) 12%,var(--cool))}
+details>summary:hover{background:var(--cool)}
 .code{font-weight:800;font-stretch:78%;font-size:1.5rem;line-height:1.15;color:var(--c);font-variant-numeric:tabular-nums lining-nums}
 .title{font-size:clamp(1.25rem,2.4vw,1.5rem);line-height:1.2;font-weight:700;font-stretch:88%;color:var(--ink);text-wrap:balance}
 .line{margin-top:.3rem;max-width:62ch}
 .meta{margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;font-size:.8125rem}
-.tag{padding:.12rem .55rem;border-radius:4px;font-weight:700;letter-spacing:.01em}
+.tag{padding:.3rem .65rem;line-height:1.2;border-radius:4px;font-weight:700;letter-spacing:.01em}
 .tag.robotics{background:var(--green-wash);color:var(--green)}
 .tag.nda{background:var(--crimson-wash);color:var(--crimson-deep)}
 .tag.both{background:#fbf5d9;color:#5e4a05}
 .len,.ref{color:var(--quiet);font-variant-numeric:tabular-nums}
-.first{padding:.12rem .55rem;border-radius:4px;background:var(--ink);color:#fff;font-weight:700}
+.first{padding:.3rem .65rem;line-height:1.2;border-radius:4px;background:var(--ink);color:#fff;font-weight:700}
 .chev{width:2.25rem;height:2.25rem;display:grid;place-items:center;border:1px solid var(--rule);border-radius:999px;color:var(--ink);background:var(--paper);transition:transform .35s var(--ease),background .2s,color .2s,border-color .2s;margin-top:.1rem}
 summary:hover .chev{border-color:var(--ink)}
 details[open] .chev{transform:rotate(45deg);background:var(--ink);color:#fff;border-color:var(--ink)}
