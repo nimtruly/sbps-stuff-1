@@ -1,0 +1,493 @@
+{
+  "updated": "16 Nov 2026",
+  "account": { "handle": "@sbpsdehradun", "followers": "1,308", "median": "about 8,500 views per reel" },
+  "categories": [
+    {
+      "id": "phone-a",
+      "name": "Phone-shot · Set A",
+      "short": "Phone A",
+      "kind": "Phone-shot",
+      "summary": "Kid-led reels anyone can shoot on a phone in one period. Built from outliers that hit 700K+ views at 5x+ their followers.",
+      "source": "docs/marketing/reels-robotics-nda.md",
+      "finding": "Every winner opens on a child already mid-action. No intro voiceover. The payoff is visual. 'Girls vs Boys' and 'can you name them' drive shares."
+    },
+    {
+      "id": "phone-b",
+      "name": "Phone-shot · Set B",
+      "short": "Phone B",
+      "kind": "Phone-shot",
+      "summary": "A second phone-shot set from a wider sweep: 1,035 reels catalogued, 24 watched. Challenge, suspense and one-take formats.",
+      "source": "docs/marketing/reels-robotics-nda-outlier-scripts.md",
+      "finding": "Lab tours and 'state-of-the-art STEM lab' montages sat at 4K to 20K views. One student, one working model, payoff on camera is what travels."
+    },
+    {
+      "id": "cine-a",
+      "name": "Cinematic · Ad films",
+      "short": "Cinematic A",
+      "kind": "Cinematic",
+      "summary": "Ad-film concepts for the in-house crew: lens, depth of field, rack focus, high frame rate and grade planned shot by shot.",
+      "source": "docs/marketing/cinematic-films/",
+      "finding": "The cinematic reels that travelled are about one small true moment, not the school. Empty spaces with remembered voices hit 8,787x followers."
+    },
+    {
+      "id": "cine-b",
+      "name": "Cinematic · Close-up films",
+      "short": "Cinematic B",
+      "kind": "Cinematic",
+      "summary": "Five more cinematic concepts built on macro detail, match cuts and stillness. One joins both programmes in a single student.",
+      "source": "docs/marketing/cinematic/",
+      "finding": "Details before faces. Sound carries half of it. 15 to 25 seconds. A presenter campus tour got 2M views and 9 shares: paid, not earned."
+    },
+    {
+      "id": "viral",
+      "name": "Viral entertainment · Tanmay Bhat & Vir Saini formats",
+      "short": "Tanmay-inspired",
+      "kind": "Entertainment",
+      "summary": "Comedy and parody films that copy the mechanism of earned viral reels: swaps, deadpan, heist, mockumentary, loop gags.",
+      "source": "docs/marketing/viral-entertainment-ideas.md",
+      "finding": "Tanmay Bhat's two biggest reels (137.9M, 56.1M) are paid brand collabs with almost no shares. The earned ones, like Vir Saini's 23.4M swap film, are the models here."
+    }
+  ],
+  "ideas": [
+    {
+      "id": "A-R1", "cat": "phone-a", "topic": "robotics", "title": "Jarvis for the classroom", "gloss": "A student's box runs the room by voice",
+      "length": "30s", "hook": "Tumhara phone ye nahi kar sakta jo humara box karta hai.",
+      "logline": "A Class 8 student says 'Jarvis, lights off' and the classroom goes dark. Fan on. The teacher walks in confused and the box says good morning.",
+      "ref": { "label": "@the_coder_16 Jarvis", "url": "https://www.instagram.com/reel/DffF644J0vD/", "views": "32.6M", "x": "343x" },
+      "beats": [["0-2s","Close-up of the student, box on the wall behind. Hook line."],["2-8s","'Jarvis, lights off.' Room goes dark. 'Fan on.' Fan starts."],["8-11s","Teacher walks in. 'Ma'am, good morning bolo.' Box answers her."],["11-18s","Soldering, code, three kids arguing over a wire."],["18-28s","Lab wide. Kid: 'Agla project kya banaye? Comment karo.'"],["28-30s","'Jarvis, lights on.' Loops to frame one."]],
+      "onscreen": ["CLASS 8 NE BANAYA","LIGHTS OFF","FAN ON","AGLA PROJECT? COMMENT KARO"],
+      "confirm": ["Lab can build a voice or clap relay switch","The real build story for the voiceover"]
+    },
+    {
+      "id": "A-R2", "cat": "phone-a", "topic": "robotics", "title": "Junk to car", "gloss": "Old CDs and bottles become a car",
+      "length": "35s", "hook": "Ye kachra nahi hai.",
+      "logline": "A pile of old CDs and bottle caps becomes a moving car. Each kid says one line, name on screen, teacher at the end.",
+      "ref": { "label": "RBPS Kulpahar Hydrocar", "url": "https://www.instagram.com/reel/DWyMAY7kcTt/", "views": "15.8M", "x": "1,131x" },
+      "beats": [["0-2s","Hands sweep a pile of junk on the lab table."],["2-4s","Same pile, now a car rolling off the edge. A kid catches it."],["4-14s","Build montage, 1.5s a shot. First test spins in circles."],["14-24s","Each kid, one line to camera, name on screen."],["24-30s","Corridor race, juniors chasing."],["30-35s","Robotics teacher, one line in their own words."]],
+      "onscreen": ["CLASS ___ NE PURANI CDs SE GAADI BANA DI","Names and class on every kid"],
+      "confirm": ["Kids' and teacher's own lines","Parental consent for names on screen"]
+    },
+    {
+      "id": "A-R3", "cat": "phone-a", "topic": "robotics", "title": "Girls vs Boys robot race", "gloss": "Two line-followers, two teams",
+      "length": "25s", "hook": "Girls vs Boys. Jiska robot pehle, wo jeetega.",
+      "logline": "Two line-follower robots race on a taped track. One goes off the line, the team fixes it live, the loser demands a rematch.",
+      "ref": { "label": "@s2sdefenceacademyjaipur Girls vs Boys quiz", "url": "https://www.instagram.com/reel/DfpYnqdqmo6/", "views": "3.96M", "x": "16,295 shares" },
+      "beats": [["0-2s","Two robots, a team behind each. Teacher says the line."],["2-4s","Kids count down: 'Teen, do, ek!'"],["4-12s","Race. Cut between faces and robots. One drifts off the line."],["12-16s","Losing team fixes a wire, puts it back."],["16-21s","Finish. Winners scream."],["21-25s","Loser: 'Rematch Monday. Comment karo kaun jeetega.'"]],
+      "onscreen": ["GIRLS vs BOYS","KAUN JEETEGA?","TEAM GIRLS ya TEAM BOYS?"],
+      "confirm": ["Two working line-follower robots"]
+    },
+    {
+      "id": "A-R4", "cat": "phone-a", "topic": "robotics", "title": "The fan that switches itself off", "gloss": "A sensor fix for an everyday waste",
+      "length": "30s", "hook": "Har din yahi hota tha.",
+      "logline": "An empty classroom with the fan running. A student's sensor box turns it off when the room empties, and the teacher's phone pings.",
+      "ref": { "label": "@steminfiniteinnovation Smart IoT Classroom", "url": "https://www.instagram.com/reel/DfW83E6OE-6/", "views": "1.88M", "x": "379x" },
+      "beats": [["0-3s","Empty room, fan running. Kid points at camera: hook line."],["3-6s","Kid clicks the box. Room empties, fan stops by itself."],["6-18s","Two students explain at their table, three lines max."],["18-24s","Teacher's phone: 'Class 7B empty, fan OFF'."],["24-30s","'Ab poore school me lagana hai. Principal ma'am, haan bolo?'"]],
+      "onscreen": [],
+      "confirm": ["An occupancy or temperature sensor build exists or can be built"]
+    },
+    {
+      "id": "A-R5", "cat": "phone-a", "topic": "robotics", "title": "The 7-year-old robotics interview", "gloss": "A tiny engineer faces the principal",
+      "length": "30s", "hook": "ROBOTICS ENGINEER KA INTERVIEW",
+      "logline": "A primary kid in an oversized lab coat 'interviews' for robotics engineer. Experience: two years. His robot car bumps the principal's tea cup.",
+      "ref": { "label": "@pooravsainikschool uniform interview", "url": "https://www.instagram.com/reel/DJLseALp1wV/", "views": "5.17M", "x": "304x" },
+      "beats": [["0-2s","Kid at the principal's desk holding a small robot car."],["2-12s","'Naam?' 'Robotics engineer.' 'Experience?' 'Do saal, sir.'"],["12-20s","Robot drives across the desk, bumps the tea cup, stops on its sensor."],["20-26s","Principal tries not to laugh. 'Selected.'"],["26-30s","Kid at the door: 'Salary me LEGO chahiye.'"]],
+      "onscreen": ["ROBOTICS ENGINEER KA INTERVIEW"],
+      "confirm": ["The kid's name","Let the kid improvise the last line"]
+    },
+    {
+      "id": "A-N1", "cat": "phone-a", "topic": "nda", "title": "Sir, NDA kyun?", "gloss": "A Class IX mock SSB interview",
+      "length": "35s", "hook": "May I come in, sir?",
+      "logline": "A Class IX student faces a mock SSB officer. 'Army kyun?' 'Agar fail ho gaye toh?' The answers are his own, unscripted.",
+      "ref": { "label": "@pooravsainikschool uniform interview", "url": "https://www.instagram.com/reel/DJLseALp1wV/", "views": "5.17M", "x": "304x" },
+      "beats": [["0-2s","Knock. 'May I come in, sir?'"],["2-5s","Officer: 'Baitho. Army kyun?'"],["5-15s","His own answer. One take, pauses kept."],["15-22s","'Agar fail ho gaye toh?' Real answer."],["22-28s","Cut to him at 6 AM drill, then in class with a maths sheet."],["28-35s","'Milte hain SSB pe.' Salute, walks out."]],
+      "onscreen": ["CLASS 9 · MOCK SSB INTERVIEW","NDA PREP · CLASS IX SE"],
+      "confirm": ["Faculty with a defence background to play the officer"]
+    },
+    {
+      "id": "A-N2", "cat": "phone-a", "topic": "nda", "title": "Girls vs Boys defence quiz", "gloss": "Full forms, two seconds each",
+      "length": "35s", "hook": "Koi ladki batayegi, NDA ki full form?",
+      "logline": "The class splits by row. NDA, SSB, IMA, GTO, RIMC, OLQ: two seconds per question, one wrong answer kept in, tiebreaker in the comments.",
+      "ref": { "label": "@s2sdefenceacademyjaipur", "url": "https://www.instagram.com/reel/DfpYnqdqmo6/", "views": "3.96M", "x": "16,295 shares" },
+      "beats": [["0-4s","Girl answers NDA instantly, green text."],["4-6s","'Boys. SSB?' 'Services Selection Board.'"],["6-30s","IMA, GTO, RIMC, INS, AFCAT, OLQ, PIQ, CDS, DRDO, NCC. Keep one wrong answer."],["30-35s","'Score barabar. Tiebreaker comments me. OLQ me kitne qualities hoti hain?'"]],
+      "onscreen": ["GIRLS vs BOYS","Each answer in green","TIEBREAKER: COMMENT KARO"],
+      "confirm": ["Check every full form before posting (OLQ = Officer Like Qualities, 15)"]
+    },
+    {
+      "id": "A-N3", "cat": "phone-a", "topic": "nda", "title": "One whistle", "gloss": "The whole ground drops at once",
+      "length": "15s", "hook": "Sir ki entry...",
+      "logline": "Students chatting on the ground. The instructor walks in, one whistle, everyone drops to push-ups in under two seconds.",
+      "ref": { "label": "@bhilai_defence_academy 'Discipline'", "url": "https://www.instagram.com/reel/Dcz8z4qT5IK/", "views": "5.73M", "x": "814x" },
+      "beats": [["0-4s","Students chatting. Instructor walks in from behind camera."],["4-6s","He stops. One whistle."],["6-12s","Everyone drops. Slow-mo on the drop, then push-ups in sync."],["12-15s","Instructor turns to camera, the smallest smile."]],
+      "onscreen": ["Sir ki entry...","DISCIPLINE"],
+      "confirm": ["Head count before putting any number on screen"]
+    },
+    {
+      "id": "A-N4", "cat": "phone-a", "topic": "nda", "title": "Four kids, three poles, one rope", "gloss": "A GTO-style group task",
+      "length": "35s", "hook": "4 BACHCHE · 3 BALLIYAN · 1 RASSI",
+      "logline": "Four Class IX students attempt a no-touch obstacle. The first attempt fails. A quiet kid suggests the plan. They cross.",
+      "ref": { "label": "@forcedefenceacademyssb GTO", "url": "https://www.instagram.com/reel/DLjAxswCUO2/", "views": "298K", "x": "GTO format" },
+      "beats": [["0-2s","Four students at the obstacle. Text card."],["2-4s","'Laal zameen chhui toh shuru se. Time shuru.'"],["4-12s","First attempt fails. Groans."],["12-25s","They argue. The quiet kid has the plan. Step by step."],["25-31s","Last kid crosses. Team erupts."],["31-35s","'Isi ko leadership kehte hain.'"]],
+      "onscreen": ["AAP HOTE TOH KAISE KARTE? COMMENT KARO"],
+      "confirm": ["Keep the failed first attempt in the edit"]
+    },
+    {
+      "id": "A-N5", "cat": "phone-a", "topic": "nda", "title": "Inhe pehchante ho?", "gloss": "Uttarakhand's army legends",
+      "length": "12-15s", "hook": "ZYADATAR LOG INHE NAHI PEHCHAANTE. AAPKA BACHCHA?",
+      "logline": "Eight students in uniform, 1.2 seconds each, each holding a framed photo and saying the name and regiment. Salute on the song's last beat so it loops.",
+      "ref": { "label": "@doon_balunidefenceacademy Army Legends", "url": "https://www.instagram.com/reel/Dea8z_lug0a/", "views": "3.87M", "x": "11,713x" },
+      "beats": [["0-2s","Hook card."],["2-12s","8 students, one by one, name and unit."],["12-14s","All 8 together. Salute lands on the song's end."]],
+      "onscreen": ["ZYADATAR LOG INHE NAHI PEHCHAANTE"],
+      "confirm": ["Verify every name and regiment against an official source"]
+    },
+
+    {
+      "id": "B-R1", "cat": "phone-b", "topic": "robotics", "title": "Chura ke dikhao", "gloss": "Steal the chocolate if you can",
+      "length": "25-30s", "hook": "Yeh chocolate aaj tak koi nahi chura paaya.",
+      "logline": "A student-built sensor box guards a chocolate. Four kids try, then a teacher. The buzzer gets everyone. The builder eats it.",
+      "ref": { "label": "Try to steal the diamond", "url": "https://www.instagram.com/reel/DHtLwb1y9zi/", "views": "11.3M", "x": "on a 6.8K account" },
+      "beats": [["0-2s","A hand creeps toward the chocolate. Buzzer. Hand jerks back."],["2-5s","Builder, arms folded: hook line."],["5-16s","Four attempts: slow, fast, from behind, with a ruler. Buzzer every time."],["16-21s","A teacher tries. Buzzer. Class erupts."],["21-27s","Builder shows the sensor. 'Humne banaya hai, Class {{class}} mein.'"],["27-30s","'Chocolate meri.'"]],
+      "onscreen": ["Chura ke dikhao","Attempt 1 to 4","Ma'am bhi"],
+      "confirm": ["Kit has an IR or ultrasonic sensor and a buzzer","Class number"]
+    },
+    {
+      "id": "B-R2", "cat": "phone-b", "topic": "robotics", "title": "Giregi ya rukegi?", "gloss": "Will it fall or stop?",
+      "length": "15-20s", "hook": "Giregi ya rukegi?",
+      "logline": "A robot car drives at the table edge. Three kids wince. It stops dead. The builder sets it down again and the reel cuts before the result.",
+      "ref": { "label": "Clothes-folding machine", "url": "https://www.instagram.com/reel/DWY-F35D4KJ/", "views": "35.9M", "x": "on a 6.8K account" },
+      "beats": [["0-2s","Low angle: car heading for the edge. Off-camera: hook."],["2-8s","Three faces wincing. Slow motion for the last half second."],["8-11s","It stops. 'Ruk gayi!'"],["11-17s","Builder shows the sensor. 'Code humne khud likha hai.'"],["17-20s","Set down again. 'Ek baar aur?' Cut before the result."]],
+      "onscreen": ["Giregi ya rukegi?","Ruk gayi","Code: Class {{class}}"],
+      "confirm": ["Car can detect a table edge, or swap for a wall or a glass"]
+    },
+    {
+      "id": "B-R3", "cat": "phone-b", "topic": "robotics", "title": "Bina haath lagaye", "gloss": "One student, one take",
+      "length": "20-25s", "hook": "Bina haath lagaye yeh dustbin khol ke dikhaun?",
+      "logline": "A young student, already mid-demo outdoors, opens a dustbin without touching it, explains sensor to motor to lid, and says their name.",
+      "ref": { "label": "D.N. Public School water model", "url": "https://www.instagram.com/reel/DGkLsJAzEtI/", "views": "7.4M", "x": "27x" },
+      "beats": [["0-3s","Student mid-action, project on the desk. Hook line."],["3-8s","Waves hand. Lid opens. Twice."],["8-18s","Push in as they point: sensor, motor, lid."],["18-23s","'Mera naam {{first name}} hai, Class {{class}}, aur yeh maine banaya hai.'"]],
+      "onscreen": ["Bina chhue khulega?","Sensor → Motor → Dhakkan"],
+      "confirm": ["Any working hands-free project","Junior student's name and class"]
+    },
+    {
+      "id": "B-R4", "cat": "phone-b", "topic": "robotics", "title": "9 baar fail", "gloss": "Count every failure, then the run that works",
+      "length": "25-30s", "hook": "{{N}} baar FAIL",
+      "logline": "Real footage of a robot failing again and again, a counter ticking up, two kids arguing over code, then one uncut run that works.",
+      "ref": { "label": "'Wait for the end' reels", "url": "https://www.instagram.com/reel/DWY-F35D4KJ/", "views": "35.9M", "x": "payoff format" },
+      "beats": [["0-2s","Robot drives off the track and falls."],["2-12s","Fast cuts of real failures. Counter ticks."],["12-16s","Two kids at the laptop: 'Left sensor ulta laga hai!'"],["16-24s","The run that works, no cuts."],["24-28s","'{{N}} baar fail hua. Tab jaake chala.'"]],
+      "onscreen": ["Fail 1, 2, 3 ...","Attempt {{N+1}}"],
+      "confirm": ["Film every real attempt in a normal period. Use the true count"]
+    },
+    {
+      "id": "B-R5", "cat": "phone-b", "topic": "both", "title": "Ek cadet insaan nahi hai", "gloss": "A robot in the marching squad",
+      "length": "15-20s", "hook": "Ek cadet insaan nahi hai",
+      "logline": "Boots marching in step. Last in line: a small robot rolling in time. 'Squad, tham!' It halts a beat late. The builder runs in and salutes it.",
+      "ref": { "label": "Original: both programmes in one frame", "url": "", "views": "", "x": "" },
+      "beats": [["0-3s","Low shot of boots in step. Pan down the line."],["3-8s","Last in line: the robot."],["8-12s","'Squad, tham!' Robot halts a beat late."],["12-17s","Straight faces crack. Builder salutes: 'Class {{class}} ka banaya hua cadet.'"]],
+      "onscreen": ["Ek cadet insaan nahi hai","Banaya: Class {{class}}"],
+      "confirm": ["Line-follower or remote robot","NDA-wing squad"]
+    },
+    {
+      "id": "B-N1", "cat": "phone-b", "topic": "nda", "title": "Normal school vs hamara school", "gloss": "Same kids, two versions",
+      "length": "20-25s", "hook": "Normal school vs Hamara school",
+      "logline": "Split screen. Slouching 'Good moooorning ma'am' against 'Jai Hind, sir!'. The bell, the late-comer, PT period. Ends with both versions of the same boy.",
+      "ref": { "label": "Average school bus vs army school bus", "url": "https://www.instagram.com/reel/DZ-DjirBFl6/", "views": "2.4M", "x": "13,000x+" },
+      "beats": [["0-4s","Left slouches. Right snaps to attention."],["4-9s","Bell: strolling out / falling in in threes."],["9-14s","Late-comer: excuse / drops for push-ups."],["14-19s","PT: hiding behind a tree / running in step."],["19-23s","Both boys side by side: 'Yeh bhi main hi hoon.'"]],
+      "onscreen": ["Chhutti ki bell","Late aaye toh","NDA prep, Class 9 se"],
+      "confirm": ["Every 'hamara school' moment really happens at SBPS"]
+    },
+    {
+      "id": "B-N2", "cat": "phone-b", "topic": "nda", "title": "Class 9. NDA interview.", "gloss": "Two hard questions, real answers",
+      "length": "40-45s", "hook": "Class 9. NDA interview.",
+      "logline": "The instructor asks 'Fauj mein kyun jaana hai? Salary ke liye?' and 'Agar selection nahi hua toh?' Tight on the student's face. The pause runs.",
+      "ref": { "label": "11-year-old's military school interview", "url": "https://www.instagram.com/reel/DYt0CfwtqJL/", "views": "14M", "x": "4 minutes long" },
+      "beats": [["0-3s","Knocks, enters, attention at the chair."],["3-8s","'Baitho. Fauj mein kyun jaana hai? Salary ke liye?'"],["8-20s","Real answer. Let the pause run."],["20-32s","'Agar selection nahi hua toh?'"],["32-44s","Answer. Nod. 'Jai Hind, sir.'"]],
+      "onscreen": ["Pehla sawaal","Doosra sawaal","Aap kya jawab dete?"],
+      "confirm": ["Two cameras, or reshoot questions for cutaways"]
+    },
+    {
+      "id": "B-N3", "cat": "phone-b", "topic": "nda", "title": "Fauji", "gloss": "One answer silences the room",
+      "length": "15s", "hook": "Bade hoke kya banoge?",
+      "logline": "Doctor. Engineer. YouTuber. Laughter. One student stands up straight: 'Fauji, ma'am.' Hard cut to the same student at dawn drill, black and white.",
+      "ref": { "label": "'फौजी' school reel", "url": "https://www.instagram.com/reel/DT1mwbAkq0E/", "views": "13M", "x": "on a 5.8K account" },
+      "beats": [["0-3s","Teacher: 'Bade hoke kya banoge?'"],["3-8s","Quick answers from seats."],["8-11s","One stands. Room goes quiet. 'Fauji, ma'am.'"],["11-15s","Hard cut to dawn drill. Fade to black and white."]],
+      "onscreen": ["फौजी","Taiyari Class 9 se"],
+      "confirm": ["The line must be true for the child who says it"]
+    },
+    {
+      "id": "B-N4", "cat": "phone-b", "topic": "nda", "title": "Aise chalte hain", "gloss": "A 7-second boots loop",
+      "length": "7-9s", "hook": "Normal walk ❌",
+      "logline": "Top-down on boots toe to toe. 'Tez chal!' Heel strikes land on the beat. 'Tham!' The last frame matches the first.",
+      "ref": { "label": "NCC girls walk", "url": "https://www.instagram.com/reel/DUDjdlxiCLI/", "views": "3.1M", "x": "7 seconds" },
+      "beats": [["0-2s","Top-down: boots still. 'Squad!'"],["2-7s","'Tez chal!' Camera follows the feet."],["7-8s","'Tham!' Same framing as frame one."]],
+      "onscreen": ["Normal walk","NDA wing walk"],
+      "confirm": ["Post it exactly this short"]
+    },
+    {
+      "id": "B-N5", "cat": "phone-b", "topic": "nda", "title": "Rank pehchano", "gloss": "A five-second rank quiz",
+      "length": "25-30s", "hook": "Yeh kaun si rank hai? 5 second.",
+      "logline": "Rank insignia cards, a countdown, a score. One honest wrong answer. The hardest card cuts before the answer and the full chart closes it out.",
+      "ref": { "label": "Army legends poster (save-able)", "url": "https://www.instagram.com/reel/Dea8z_lug0a/", "views": "3.9M", "x": "11,713x" },
+      "beats": [["0-3s","Card up, student squints. Countdown starts."],["3-8s","'Captain!' 'Sahi.'"],["8-20s","Three more, faster. Keep the wrong one."],["20-25s","Hardest card. 'Yeh wali...' Cut."],["25-30s","Full rank chart. 'Jawab comments mein.'"]],
+      "onscreen": ["Rank pehchano. 5 second.","Score: 1/1, 2/2, 2/3","Save kar lo"],
+      "confirm": ["Check every card against the official Indian Army rank chart"]
+    },
+
+    {
+      "id": "C-R1", "cat": "cine-a", "topic": "robotics", "title": "Pehli Harkat", "gloss": "The First Move",
+      "length": "45s", "hook": "Bas... ek baar.", "top": 4,
+      "logline": "Three weeks of a student's robot in 45 seconds: pencil, paper, wires, failure, failure, and then the arm moves for the first time.",
+      "ref": { "label": "@jeskoo_0 robot arm", "url": "https://www.instagram.com/reel/DaaeW_DKnTF/", "views": "7.85M", "x": "17,785 shares" },
+      "look": ["100mm macro for hands and wires, 85mm f/1.4 for faces","Night interior, monitor and desk lamp as key","Silence for 30s, music on the first move","Teal shadows, warm highlight on the robot"],
+      "beats": [["0-2s","ECU: pencil tip snaps on graph paper."],["2-8s","Eyes lit by the monitor. Overhead sketches in time-lapse."],["8-15s","Macro solder smoke at 96fps. Wide of the lab at night."],["15-22s","The arm twitches and collapses. Match cut to daylight, friends arguing."],["22-30s","One line of code changes. Three faces lean in. 'Bas... ek baar.'"],["30-38s","The first move. Arm turns to camera. Reverse through its claw."],["38-45s","It picks up the snapped pencil. Lab lights on."]],
+      "onscreen": ["21 DIN.","SBPS AI & Robotics Lab · Dehradun"],
+      "confirm": ["Hero student robot with a visible moving arm","Real build duration for '21 DIN'"]
+    },
+    {
+      "id": "C-R2", "cat": "cine-a", "topic": "robotics", "title": "Chhotu", "gloss": "The Robot That Became a Friend",
+      "length": "30s", "hook": "Mil liya Chhotu se?",
+      "logline": "A small robot wakes in an empty classroom after school, finds a Class 3 girl who forgot her bag, and they play. Shot from the robot's height.",
+      "ref": { "label": "@nikolay_tyulkin Watti lamp", "url": "https://www.instagram.com/reel/DcDTG61sJ1K/", "views": "1.34M", "x": "283x" },
+      "look": ["Camera 15-25cm off the floor throughout","24mm and 35mm at floor level, 85mm for the robot's face","Late-afternoon sun, haze in the beams","Servo-and-beep robot voice, no words"],
+      "beats": [["0-5s","Eye LED blinks on. It looks left, right."],["5-9s","Slider at floor height between desk legs."],["9-14s","Robot POV: small shoes, tilt up to a surprised girl. It backs away."],["14-21s","She rolls a ball. It nudges it back. They play."],["21-25s","Wide silhouettes against the window. Crane up."],["25-30s","Class 9 builder at the door: 'Mil liya Chhotu se? Isse maine banaya hai.'"]],
+      "onscreen": ["Class 9 ne banaya. Class 3 ka dost ban gaya.","SBPS AI & Robotics Lab"],
+      "confirm": ["A wheeled robot that can be remote-driven","Never claim it is autonomous unless it is"]
+    },
+    {
+      "id": "C-R3", "cat": "cine-a", "topic": "robotics", "title": "Khaali Lab", "gloss": "The Empty Lab",
+      "length": "25s", "hook": "Raat 9 baje. SBPS AI & Robotics Lab.", "top": 2,
+      "logline": "The lab at night, empty. As the camera drifts through, we hear the day that happened there. One robot on a desk still has its light on.",
+      "ref": { "label": "@mihir_photoart_17 Time Travel", "url": "https://www.instagram.com/reel/DUZ5FAxCIY4/", "views": "2.82M", "x": "8,787x" },
+      "look": ["Gimbal drift with hidden cuts through dark objects","Practicals only: standby LEDs, printer light, moonlight","Foreground objects pass soft as wipes","Real voices recorded in the lab over a week"],
+      "beats": [["0-3s","Push through the lab door glass. 'Sir! Sir! Chal gaya!'"],["3-7s","Past laptops, one monitor wakes. 'Ye code kisne likha?'"],["7-13s","3D printer nozzle. An upturned car, wheel still spinning."],["13-17s","Half-erased whiteboard. Teacher's own line about mistakes."],["17-25s","One robot's LED glowing warm. It blinks twice. Black."]],
+      "onscreen": ["Raat 9 baje. SBPS AI & Robotics Lab.","Kal subah phir se."],
+      "confirm": ["Night access to the lab","Consent covers recorded voices"]
+    },
+    {
+      "id": "C-R4", "cat": "cine-a", "topic": "robotics", "title": "Kya Banaoge?", "gloss": "What Will You Build?",
+      "length": "40s", "hook": "Ek robot jo mera homework kare.",
+      "logline": "Six kids, aged 6 to 15, answer one question straight into a wide lens: 'Agar kuch bhi bana sakte, toh kya banaoge?' Cut against them building.",
+      "ref": { "label": "Dior 'Back to School'", "url": "https://www.instagram.com/reel/DNnLNKcz0Ws/", "views": "1.93M", "x": "5,041 shares" },
+      "look": ["24-28mm at 50cm, Interrotron so kids look into the lens","f/2, a colour block behind each kid","Whip pans between kids","Score stops for the funniest answer"],
+      "beats": [["0-3s","Age 6, deadpan: 'Ek robot jo mera homework kare.'"],["3-9s","'Jo mummy ke liye chai bana de.' Macro insert of her wiring."],["9-17s","'Ek drone, jo pahaadon me dawai pahunchaye.' Drone test insert."],["17-26s","'Sach bataun? Abhi pata nahi. Par main seekh raha hoon.' Macro montage."],["26-36s","'Dadi ki dawai yaad dila de.' Then the 6-year-old: 'Aur ek jo meri didi ko chup kara de.'"],["36-40s","All six against navy, group portrait."]],
+      "onscreen": ["Agar kuch bhi bana sakte...","SBPS AI & Robotics Lab · Dehradun"],
+      "confirm": ["Do not script the answers. Roll 10 minutes per kid"]
+    },
+    {
+      "id": "C-R5", "cat": "cine-a", "topic": "robotics", "title": "Agar Ud Gaya Toh?", "gloss": "What If It Flies?",
+      "length": "20s", "hook": "Gir bhi sakta hai. Par agar ud gaya toh?",
+      "logline": "Golden hour on the school ground. A 12-year-old sets a student-built drone on the grass. One line of voiceover. It lifts off.",
+      "ref": { "label": "@neilchh Nike spec ad", "url": "https://www.instagram.com/reel/DRUSpjxEuYn/", "views": "844K", "x": "101x" },
+      "look": ["24mm with the lens on the grass, 135mm across the field","Backlit golden hour, flare on purpose","120fps for lift-off and reaction","Doon hills in the distance if the angle allows"],
+      "beats": [["0-3s","Small shoes walk in, set the drone down."],["3-8s","135mm: kid kneeling, friends behind. Thumb on the stick."],["8-10s","Friends' faces, drone soft in front. Breath held."],["10-16s","Lift-off at 120fps into the sun. The kid's smile."],["16-20s","From height: four kids on the green, school and hills behind."]],
+      "onscreen": ["Ud gaya.","SBPS AI & Robotics Lab"],
+      "confirm": ["A student-built drone, or swap for a rover on a ramp","DGCA rules for any drone over 250g"]
+    },
+    {
+      "id": "C-N1", "cat": "cine-a", "topic": "nda", "title": "Baarish Mein Drill", "gloss": "Drill in the Rain",
+      "length": "25s", "hook": "Baarish rukne ka intezaar nahi karta.", "top": 3,
+      "logline": "Monsoon morning. Everyone else runs for cover. One Class IX aspirant keeps marching, alone, in the rain.",
+      "ref": { "label": "@cadetunplugged20 and @kr_praveen27", "url": "https://www.instagram.com/reel/DfCxdVbyVlY/", "views": "1.97M + 2.62M", "x": "same image, hit twice" },
+      "look": ["200mm telephoto compressing rain and the school behind","Backlit rain, rain towers as backup","96fps for boots and the salute","Cool desaturated grade, the flag the only warm note"],
+      "beats": [["0-3s","Students run off with bags over their heads. One does not."],["3-9s","Telephoto: him alone. 96fps boot into a puddle."],["9-14s","Rain off his cap. Friends under the roof, rack to him."],["14-22s","About-turn, water flying. He salutes the flag."],["22-25s","Super over the wide."]],
+      "onscreen": ["NDA ki tayyari. Class IX se.","SBPS · Dehradun"],
+      "confirm": ["No lightning days, short takes, dry clothes","His own words for the voiceover"]
+    },
+    {
+      "id": "C-N2", "cat": "cine-a", "topic": "nda", "title": "Front Row", "gloss": "Maa Ki Nazar",
+      "length": "35s", "hook": "Aaj school ka ground. Kal IMA ki front row.", "top": 1,
+      "logline": "A mother watches her son's drill from the stands. He stays out of focus until one rack focus at the end.",
+      "ref": { "label": "@the_cadet_diariess and @avi_balo_99 IMA", "url": "https://www.instagram.com/reel/Daj6pihBIvP/", "views": "1.11M + 1.06M", "x": "4,163x and 4,107x" },
+      "look": ["85mm and 135mm at f/1.4-2 on her","Shoot through shoulders and poles for layers","Winter morning sun, mist, Dehradun pines","No music until the rack focus"],
+      "beats": [["0-7s","Her hands gripping a phone. Her face, contingent streaking behind."],["7-13s","Through the crowd. She finds him: lips press."],["13-17s","Memory insert: him at 8 in a toy cap, saluting her."],["17-25s","Tear held. His POV: only her face sharp."],["25-30s","Rack focus from her to him, sharp for the first time."],["30-35s","Wide of the ground in mist."]],
+      "onscreen": ["Aaj school ka ground.","Kal IMA ki front row.","NDA ki tayyari, Class IX se."],
+      "confirm": ["A real mother and son, both consenting","Keep the IMA line as a hope, not a claim"]
+    },
+    {
+      "id": "C-N3", "cat": "cine-a", "topic": "nda", "title": "Subah 5 Baje", "gloss": "5 AM",
+      "length": "25s", "hook": "Savdhaan!",
+      "logline": "The parade ground before dawn, empty, in fog. Commands echo with nobody there. Then one pair of boots steps in, then all of them.",
+      "ref": { "label": "@mihir_photoart_17 Time Travel", "url": "https://www.instagram.com/reel/DUZ5FAxCIY4/", "views": "2.82M", "x": "8,787x" },
+      "look": ["Locked frames, one slow push at the end","Deep focus on empty wides, macro on details","Blue hour into first light, natural fog","Echoing commands, then dry real boots"],
+      "beats": [["0-6s","Fog over the empty ground. Whistle on a hook. Echo: 'Savdhaan!'"],["6-12s","Dew on the flag rope. Wet grass at ground level."],["12-15s","One pair of boots steps in. Dry, close."],["15-23s","The contingent walks out of the fog. First sun. Push to a Class IX face."],["23-25s","Flag goes up."]],
+      "onscreen": ["Subah 5:30.","Jab sab so rahe hote hain."],
+      "confirm": ["Real drill time for the card","Shoot Dec-Jan for fog"]
+    },
+    {
+      "id": "C-N4", "cat": "cine-a", "topic": "nda", "title": "Ek Hi Sapna", "gloss": "One Dream, Three Ages",
+      "length": "35s", "hook": "6 saal: sapna.",
+      "logline": "A 6-year-old salutes a passing army truck. Match cut to a Class IX boy on the SBPS ground. Match cut to a Class XII student at the flag.",
+      "ref": { "label": "@avi_balo_99 IMA Dehradun", "url": "https://www.instagram.com/reel/DYrZjf8S8SV/", "views": "1.06M", "x": "4,107x" },
+      "look": ["Same 50mm and camera height for every matched pair","Onion-skin overlay on the monitor","Dawn, morning, golden hour as he grows","A natural sound on every match cut"],
+      "beats": [["0-4s","Age 6 at the gate, truck soft in the foreground. Salute."],["4-14s","Match cut to Class IX. Rope climb, chalk board, running."],["14-16s","Lacing shoes. Match cut to older hands."],["16-24s","Class XII: leading a group task, interview practice."],["24-35s","Salute at the flag, flash back to age 6, wide against the hills."]],
+      "onscreen": ["6 saal: sapna.","Class IX: tayyari.","Class XII: imtihaan.","Ek hi sapna."],
+      "confirm": ["Three students who read as one person over time","No staged military assets without permission"]
+    },
+    {
+      "id": "C-N5", "cat": "cine-a", "topic": "nda", "title": "Unki Virasat", "gloss": "Their Legacy",
+      "length": "30s", "hook": "Uttarakhand ne desh ko kya diya?", "top": 5,
+      "logline": "A projector throws an Uttarakhand army legend's portrait onto a student's face. Name and regiment. Eight legends, eight students, one beam.",
+      "ref": { "label": "@doon_balunidefenceacademy Army Legends", "url": "https://www.instagram.com/reel/Dea8z_lug0a/", "views": "3.87M", "x": "11,713x" },
+      "look": ["One projector beam as the only key, haze in the room","85mm f/1.4, eyes sharp through the projection","Slider through the beam for transitions","Projector fan, one sustained note, drum on the salute"],
+      "beats": [["0-3s","Dark classroom. Projector clicks on."],["3-8s","Student steps into the beam. 'Rifleman Jaswant Singh Rawat. 4 Garhwal Rifles.'"],["8-24s","Seven more students and legends, 2s each."],["24-27s","All eight in the beam. Salute together."],["27-30s","Projector off. Black."]],
+      "onscreen": ["Uttarakhand ne desh ko kya diya?","Agli peedhi taiyaar ho rahi hai."],
+      "confirm": ["Image rights for every portrait","Verify rank, unit and spelling for each legend"]
+    },
+
+    {
+      "id": "D-01", "cat": "cine-b", "topic": "robotics", "title": "Pehli Baar Chala", "gloss": "It Moved for the First Time",
+      "length": "30s", "hook": "Chal gaya.",
+      "logline": "The thirty seconds before a child's robot moves for the first time, told almost entirely in close-up.",
+      "ref": { "label": "@shotbypriyansh school nostalgia", "url": "https://www.instagram.com/reel/C_hxpnny8YZ/", "views": "49.5M", "x": "204x" },
+      "look": ["100mm macro, nothing wider than 35mm until the end","f/1.8-2.8, one screw or LED sharp","Room dark, LEDs and laptop as practicals","Two full seconds of nothing before it moves"],
+      "beats": [["0-2s","Macro: a child's eye, a green LED reflected."],["2-8s","Last turn of a screw. Code typed, a pause over Enter. Wire seats."],["8-13s","Friends lean in from the dark. Finger hovers over the switch."],["13-18s","Click. Music cuts. Robot still for two seconds."],["18-26s","Wheels turn in slow motion. Builder's face: disbelief, then a grin."],["26-30s","Wide from behind: 'Chal gaya.'"]],
+      "onscreen": ["Class {{class}} ne banaya."],
+      "confirm": ["Robot that drives forward on a switch","Film a real first run if possible"]
+    },
+    {
+      "id": "D-02", "cat": "cine-b", "topic": "nda", "title": "Paanch Baje", "gloss": "Five O'Clock",
+      "length": "30s", "hook": "Alarm bajta hai toh do raaste hote hain.",
+      "logline": "One student, the hour before sunrise, and a few lines in their own voice about why they get up.",
+      "ref": { "label": "@__adhyan.__ cadet in rain", "url": "https://www.instagram.com/reel/DaFCy-ePeDp/", "views": "12.5M", "x": "3,947x" },
+      "look": ["Blue hour, a 50-minute window","85mm and 135mm wide open","Cold blue outside, one warm practical inside","Shoot into natural mist only"],
+      "beats": [["0-6s","Alarm reads {{wake-up time}}. A hand stops it. Feet on the cold floor."],["6-12s","Laces double-knotted. 135mm: alone on the ground, breath showing."],["12-19s","Side track, slow motion: others join from out of focus. Boots in step."],["19-27s","Close on the face mid-run. First sun: 'Savdhan!'"],["27-30s","The sunlit face, still."]],
+      "onscreen": ["NDA ki taiyari. Class 9 se."],
+      "confirm": ["A student who really trains at dawn and the real time","What students actually wear for PT"]
+    },
+    {
+      "id": "D-03", "cat": "cine-b", "topic": "both", "title": "Ek Hi Bachcha", "gloss": "The Same Child",
+      "length": "25s", "hook": "Dono main hi hoon.",
+      "logline": "A drill film and a robotics film cut together shot for shot, until the last frame shows they are the same student.",
+      "ref": { "label": "@sciencemulmed first day / last day", "url": "https://www.instagram.com/reel/DW8H7vtkXA1/", "views": "22.1M", "x": "3,484x" },
+      "look": ["Drill cold blue-grey, lab warm amber","Same lens and distance for both halves of each pair","50fps throughout","Each cut lands on a sound"],
+      "beats": [["0-3s","Boot lace pulled tight / cable tie pulled tight."],["3-9s","Boot stamps / wheel drops. Boots in a row / components in a row."],["9-15s","Eyes front / eyes on a circuit. Squad turns / servo turns."],["15-21s","Salute rises / safety glasses lower. Squad into mist / robot down a corridor."],["21-25s","Half cold, half warm face resolves into one portrait."]],
+      "onscreen": ["Subah drill. Dopahar robotics."],
+      "confirm": ["One student genuinely in both programmes, or end with two and 'Ek hi school'","Real timetable for the card"]
+    },
+    {
+      "id": "D-04", "cat": "cine-b", "topic": "both", "title": "Shot Ke Peeche", "gloss": "Behind the Shot",
+      "length": "20s", "hook": "Yeh log kar kya rahe hain?",
+      "logline": "A scrappy phone clip of the crew doing something ridiculous, then a hard cut to the cinematic shot it produced.",
+      "ref": { "label": "@secondyear.ajas BTS then graded shot", "url": "https://www.instagram.com/reel/DajqRCJJXOM/", "views": "18.2M", "x": "4,043x" },
+      "look": ["Phone half: vertical, handheld, ungraded, real sound","Film half: letterboxed, graded, slow motion","One hard cut, no transition effect","Made from footage of the other shoots"],
+      "beats": [["0-9s","Phone: operator flat on the floor, kids holding a torch and paper reflector, nudging the robot with a ruler."],["9-10s","One beat of black."],["10-18s","The finished frame: low-angle slow-motion robot, LEDs glowing."],["18-20s","Phone: everyone crowding the monitor."]],
+      "onscreen": ["Yeh log kar kya rahe hain?","Yeh.","Shot: Class {{class}} ke saath."],
+      "confirm": ["Assign someone to film the crew on every shoot"]
+    },
+    {
+      "id": "D-05", "cat": "cine-b", "topic": "nda", "title": "Taiyari", "gloss": "Getting Ready",
+      "length": "25s", "hook": "Parade 10 minute ki hoti hai. Taiyari roz ki.",
+      "logline": "A student getting ready for parade, shown only through the objects: polish, brush, belt, lace, cap. The face comes last.",
+      "ref": { "label": "@shotbypriyansh school nostalgia", "url": "https://www.instagram.com/reel/C_hxpnny8YZ/", "views": "49.5M", "x": "204x" },
+      "look": ["100mm macro at f/2.8, focus pulled through each object","One early window, hard backlight on the brush","50fps at half speed for cloth and brush","Warm, low contrast, deep black leather"],
+      "beats": [["0-5s","Polish tin twisted open. Brush across a toe-cap, three strokes."],["5-9s","A face reflected in the shine. Buckle rubbed with a cloth."],["9-15s","Crease smoothed. Lace pulled. Badge pinned."],["15-21s","Cap set, from behind. Then the face, for the first time."],["21-25s","Steps out of a dark doorway into a line of silhouettes."]],
+      "onscreen": ["Parade 10 minute ki hoti hai. Taiyari roz ki."],
+      "confirm": ["Only the student's real kit. No borrowed army items","Real parade length"]
+    },
+
+    {
+      "id": "V-01", "cat": "viral", "topic": "robotics", "title": "Agar Robotics Cricket Hota", "gloss": "If Robotics Were Cricket",
+      "length": "60-75s", "hook": "Agar robotics... cricket hota.", "mech": "Swap two things, play it straight",
+      "logline": "A world where India treats school robotics exactly the way it treats cricket: chai-stall selectors, a frozen family at the TV, a wedding brag.",
+      "ref": { "label": "Vir Saini 'If baniyans...'", "url": "https://www.instagram.com/reel/DZM9Z6NM0XA/", "views": "23.4M", "x": "134x, 62K shares" },
+      "beats": [["0-4s","Slow-motion screw tightened. Crowd roar. Title card."],["Chai stall","'Sharma ji ke bete ka sensor form mein nahi hai.'"],["Gully","Wire ball through a window. 'Yahan robot mat banao! Park mein jao!'"],["Living room","Family frozen at the TV. 'Bas ek semicolon. Bas ek.'"],["Commentary","'Kya khoobsurat soldering. Classical.'"],["Wedding","'Under-12 state robotics khelta hai.' Rishta aunty takes notes."],["Final","SBPS lab. A child looks up at the lens. 'Kuch schools mein yeh duniya already hai.'"]],
+      "onscreen": ["Kuch schools mein yeh duniya already hai."],
+      "confirm": ["6 to 8 adult actors (staff and parents)","Three locations beyond the school"]
+    },
+    {
+      "id": "V-02", "cat": "viral", "topic": "robotics", "title": "Robot Bachao", "gloss": "Save the Robots",
+      "length": "45-60s", "hook": "Is waqt, kahin na kahin, ek robot almari mein band hai.", "mech": "Serious format, silly subject",
+      "logline": "A solemn black-and-white charity appeal on behalf of robotics kits locked in school cupboards. Colour floods in at SBPS.",
+      "ref": { "label": "'Save Bosses' charity parody", "url": "https://www.instagram.com/reel/DPEhNaLkrC_/", "views": "10.8M", "x": "16.6K shares" },
+      "beats": [["0-5s","B&W dusty cupboard, one LED blinking through the gap."],["5-15s","Robot at a rainy window watching kids play."],["15-25s","Register: 'Robotics kit: issued 0 times'. 'Sirf inspection ke din.'"],["25-35s","A child reaches. A teacher closes the cupboard."],["35-55s","Colour floods in. Kit out, wheels spinning, into sunlight. 'Robot bachao. Robot chalao.'"]],
+      "onscreen": ["Robot Helpline: apne school se poochiye","SBPS mein robot almari mein nahi rehte."],
+      "confirm": ["Never name another school"]
+    },
+    {
+      "id": "V-03", "cat": "viral", "topic": "robotics", "title": "Honest Parent-Teacher Meeting", "gloss": "Everyone says the quiet part",
+      "length": "45-60s", "hook": "Main chahti hoon aap usse theek kar dein, taaki mujhe na karna pade.", "mech": "Say the quiet part out loud",
+      "logline": "A PTM shot like prestige drama where everyone says what they really think. The robotics teacher turns 'screen time' into a robot.",
+      "ref": { "label": "Tanmay Bhat x Noice Diwali", "url": "https://www.instagram.com/reel/DPtTQzVDKJ1/", "views": "26.9M", "x": "earned + paid" },
+      "beats": [["Parent 1","'Mera beta ghar pe kuch nahi karta...' Teacher says the same back."],["Parent 2","'Mujhe marks se farak nahi padta.' Beat. 'Bas Sharma ji ke bete se zyada.'"],["Father","On his phone: 'Main sirf isliye aaya hoon ki wife ne bola.'"],["Child","To camera: 'Mujhe laga tha meri baat hogi.'"],["Robotics desk","'Ab woh screen pe code likh raha hai.' '...toh ab main kya complain karoon?'"]],
+      "onscreen": ["Kuch complaints hum solve kar dete hain."],
+      "confirm": ["Real teachers playing themselves"]
+    },
+    {
+      "id": "V-04", "cat": "viral", "topic": "robotics", "title": "Papa: 0, Class 7: 1", "gloss": "The engineer dad loses",
+      "length": "30-40s", "hook": "Beta, main engineer hoon. Hamare zamane mein toh...", "mech": "The child outsmarts the adult",
+      "logline": "An engineer father cannot get the robot to work. His daughter flips one switch without looking up from her food.",
+      "ref": { "label": "Virgin Mobile ad re-post", "url": "https://www.instagram.com/reel/DQdp5YwDDQ8/", "views": "38.2M", "x": "11.1K shares" },
+      "beats": [["0-4s","Dad, sleeves rolled: hook line."],["4-14s","Manual upside down, blowing on a wire, calling a friend."],["14-20s","Daughter eating: 'Papa.' 'Ek minute beta.'"],["20-26s","One switch. Robot drives off the table into his lap."],["26-32s","'...yeh toh main bhi kar raha tha.' Scoreline."]],
+      "onscreen": ["Papa: 0   Class {{class}}: 1","School mein seekha."],
+      "confirm": ["Series: Mummy, Dadaji, Tuition wale sir"]
+    },
+    {
+      "id": "V-05", "cat": "viral", "topic": "robotics", "title": "Homework Heist", "gloss": "Ocean's Eleven for one samosa",
+      "length": "60s", "hook": "Target: ek samosa. Staff room. Chaar minute.", "mech": "Blockbuster treatment of a small thing",
+      "logline": "A crew of students uses a robot to steal one samosa from the staff room. The principal is waiting behind them.",
+      "ref": { "label": "'The Potato Heist'", "url": "https://www.instagram.com/reel/Dc8u5q5qCH5/", "views": "57.9M", "x": "129.6K shares" },
+      "beats": [["0-15s","Chalk blueprint. Team freeze-frames: Dimaag, Driver, Lookout, Naya ladka."],["15-22s","Slow-motion corridor walk, bags like duffels."],["22-45s","Robot under the door. Robot's-eye: sandals, a dropped pen. Freeze by the dustbin. Samosa lands."],["45-52s","Robot reverses out. Silent fist bumps."],["52-60s","Principal with a plate: 'Robotics practical. Full marks.' Beat. 'Samosa wapas rakho.'"]],
+      "onscreen": ["Robotics. Seriously sikhaate hain."],
+      "confirm": ["Robot that fits under a door gap","The principal's cameo"]
+    },
+    {
+      "id": "V-06", "cat": "viral", "topic": "robotics", "title": "Robot Ka Pehla Din", "gloss": "A robot's first day at school",
+      "length": "60s, series", "hook": "Bachcha achha hai. Bas sunta nahi hai.", "mech": "A robot with a human flaw",
+      "logline": "A mockumentary crew follows a new student who is a robot. Late for assembly, silent at roll call, alone at lunch until a girl sits beside it.",
+      "ref": { "label": "'AI will replace humans'", "url": "https://www.instagram.com/reel/DHRD_PfTpd9/", "views": "69.8M", "x": "robot comedy" },
+      "beats": [["Assembly","Arrives late, stops in the wrong line, rolls back."],["Teacher","'Bas sunta nahi hai. Literally. Mic nahi laga hai usme.'"],["Roll call","'Roll number 34?' Beep. 'Present bolo beta.' Beep."],["Punishment","Facing the wall next to a boy doing the same."],["Lunch","Plugged into a socket alone. A girl slides her chair over."],["Gate","Rolling out in line, tiny school bag taped on."]],
+      "onscreen": ["Naye admission. Sabke liye."],
+      "confirm": ["Series: exam day, sports day, diary complaint, NDA drill"]
+    },
+    {
+      "id": "V-07", "cat": "viral", "topic": "robotics", "title": "Hero Ki Entry", "gloss": "A Bollywood entrance for a tiny robot",
+      "length": "20-25s", "hook": "Dhol starts.", "mech": "Blockbuster treatment of a small thing",
+      "logline": "The gate opens in slow motion, dust, wind, petals. The hero is a lunchbox-sized robot in sunglasses. It tips over on a bump.",
+      "ref": { "label": "Bollywood spoofs", "url": "https://www.instagram.com/reel/DfR1Q0NogHX/", "views": "31.4M", "x": "12.6K shares" },
+      "beats": [["0-3s","Gate opens in slow motion. Crowd turns. Dhol."],["3-9s","Backlit silhouette. Someone drops their books."],["9-14s","Reveal: tiny robot, tiny sunglasses. Petals."],["14-19s","A bump. It stops. Tips over. Dhol stops."],["19-23s","A child sets it upright. Dhol restarts, quieter."]],
+      "onscreen": ["Hero abhi training mein hai."],
+      "confirm": ["Original dhol-and-brass track so it can be boosted"]
+    },
+    {
+      "id": "V-08", "cat": "viral", "topic": "robotics", "title": "Expectation vs Class 6", "gloss": "Glossy ad robot vs cardboard robot",
+      "length": "20-30s", "hook": "The future. Is here.", "mech": "Big budget next to no budget",
+      "logline": "Split screen: a parody tech ad's sleek robot on top, a Class 6 cardboard robot below. Only one actually moves.",
+      "ref": { "label": "Movie scene three ways", "url": "https://www.instagram.com/reel/DOdd6rdDNhy/", "views": "68M", "x": "comparison" },
+      "beats": [["Rotate","Top: turntable spins. Bottom: actually turns."],["See","Top: a red light. Bottom: stops before a wall."],["Walk","Top: a visible hand slides it. Bottom: drives."],["Turn","Top robot lifted: hollow. Bottom robot rolls up and bumps it over."]],
+      "onscreen": ["Ad wala robot","Class 6 wala robot","Dikhne mein nahi. Chalne mein."],
+      "confirm": ["Shoot both halves. No real company footage"]
+    },
+    {
+      "id": "V-09", "cat": "viral", "topic": "both", "title": "Ustaad vs Robot", "gloss": "The drill instructor meets his match",
+      "length": "30-40s", "hook": "Savdhan!", "mech": "Calm people, absurd event",
+      "logline": "A drill instructor tries to command a robot in his squad. It drives into his boot. A small student fixes it with four keystrokes.",
+      "ref": { "label": "Noice 'broken window'", "url": "https://www.instagram.com/reel/Dba2B7BMXwv/", "views": "16.1M", "x": "10.2K shares" },
+      "beats": [["0-5s","Dawn inspection. A robot is in the line."],["5-12s","'Savdhan!' It rolls forward into his boot."],["12-18s","Louder, softer, English, whistle. Squad not laughing."],["18-25s","'Sir, yeh awaaz nahi samajhta.' Four keys. Perfect halt."],["25-32s","'Kal se tum sab ko bhi likh ke bolunga.'"]],
+      "onscreen": ["Discipline bhi. Robotics bhi."],
+      "confirm": ["The real instructor playing himself, or a PT teacher"]
+    },
+    {
+      "id": "V-10", "cat": "viral", "topic": "robotics", "title": "Chalk", "gloss": "A 10-second loop gag",
+      "length": "9-12s", "hook": "Dubara dekho.", "mech": "One visual gag that loops",
+      "logline": "A robot brings the teacher her chalk. Every time she reaches, it reverses. Last frame matches the first.",
+      "ref": { "label": "Barbershop gag", "url": "https://www.instagram.com/reel/DQk6deIkjKZ/", "views": "604M", "x": "297K shares" },
+      "beats": [["0-3s","Her hand out. Robot rolls up with chalk."],["3-7s","She reaches. It reverses. She leans. Again."],["7-10s","She looks at it. It rolls forward, innocent. Reverses. Class loses it."],["10-12s","Hand out again, exactly frame one."]],
+      "onscreen": [],
+      "confirm": ["A remote robot driven from under a desk","Ten takes for real laughter"]
+    }
+  ],
+  "picks": [
+    { "id": "V-10", "why": "Cheapest and shortest. Loop gags hold the biggest numbers in the whole sample. One hour to shoot." },
+    { "id": "C-N2", "why": "Built on the two highest-multiple NDA reels. Speaks to parents, and IMA is in Dehradun." },
+    { "id": "C-R3", "why": "The highest-multiple cinematic technique found (8,787x). No cast on screen." },
+    { "id": "A-N3", "why": "One morning to shoot, a 5.73M reference, and the payoff reads with sound off." },
+    { "id": "V-06", "why": "A recurring character gives people a reason to follow, not just watch." }
+  ],
+  "rules": [
+    "Open on a child already mid-action. No logo, no school name before the last three seconds.",
+    "Never invent a fact. Anything marked To confirm needs the school's sign-off before the shoot.",
+    "Written parental consent for every child on camera, including recorded voices.",
+    "Burn in Hinglish subtitles. Keep text out of the top 230px, bottom 480px and right 230px of a 1080x1920 frame.",
+    "Original or licensed music only, so the same cut can be boosted.",
+    "No AI-generated kids. Two high-view school reels in the research were rendered; every SBPS film is real footage.",
+    "Boost only reels that pass about 25,000 views in 72 hours (3x the account median)."
+  ]
+}
