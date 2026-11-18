@@ -1,0 +1,39 @@
+/* Background video layer: covers its container like object-fit: cover. */
+.yt-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.yt-bg.is-on { opacity: 1; }
+.yt-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* 16:9 frame scaled to cover; the extra 1.2 hides YouTube's edge chrome */
+  width: max(100cqw, 177.78cqh);
+  height: max(100cqh, 56.25cqw);
+  transform: translate(-50%, -50%) scale(1.2);
+  border: 0;
+}
+.yt-toggle {
+  position: absolute;
+  z-index: 3;
+  top: 20px;
+  right: 20px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20, 14, 16, 0.55);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.yt-toggle:hover { background: rgba(20, 14, 16, 0.8); }
+.yt-toggle:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
