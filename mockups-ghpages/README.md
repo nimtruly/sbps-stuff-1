@@ -45,7 +45,7 @@ The ID is the part after `watch?v=` in a YouTube link. The videos play in order 
 
 ## Viewing
 
-The option pages are laid out for a desktop screen (1440px wide). On a phone they show the desktop layout scaled down.
+The option pages are responsive: desktop, tablet and phone layouts, with a menu button on smaller screens.
 
 To preview locally:
 

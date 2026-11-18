@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Option A: Campus first</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -93,11 +93,68 @@ footer{background:#1d1416;color:#cfc4c5;padding:64px 0 40px;font-size:15px}
 footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
 footer b{color:#fff;display:block;margin-bottom:12px;font-size:16px}
 footer li{list-style:none;margin:6px 0}
-</style><link rel="stylesheet" href="assets/hero-video.css"><script src="assets/hero-video.js" defer></script>
+
+/* Tablet and phone */
+@media (max-width:1100px){
+header .wrap{gap:16px}
+.util span{display:none}
+.util nav{margin-left:auto}
+}
+@media (max-width:900px){
+h2{font-size:34px}
+section{padding:72px 0}
+.hero{height:auto;min-height:560px}
+.hero .wrap{padding-top:72px;padding-bottom:112px}
+.hero h1{font-size:46px}
+.hero:after{background:linear-gradient(180deg,rgba(20,10,12,.5) 0%,rgba(20,10,12,.82) 100%)}
+.quick .bar{grid-template-columns:1fr 1fr}
+.quick a:nth-child(2){border-right:0}
+.quick a:nth-child(-n+2){border-bottom:1px solid var(--line)}
+.two,.quote,.notes{grid-template-columns:1fr;gap:40px}
+.ph{height:auto!important;min-height:0!important;aspect-ratio:4/3}
+.steps{grid-template-columns:1fr 1fr;gap:32px 24px}
+.houses{grid-template-columns:1fr 1fr}
+.news{grid-template-columns:1fr 1fr}
+.mosaic{grid-template-columns:1fr 1fr;grid-template-rows:none}
+.mosaic img{aspect-ratio:4/3}
+.mosaic img:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:16/9}
+.visit .wrap{flex-direction:column;align-items:flex-start;gap:24px}
+footer .cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+body{font-size:17px}
+.wrap{padding:0 20px}
+.util nav a:not(:last-child){display:none}
+header .wrap{height:72px}
+header .btn.red{display:none}
+.brand img{width:44px;height:44px}
+.brand b{font-size:17px}
+.brand small{font-size:13px}
+.hero h1{font-size:36px}
+.hero p{font-size:18px}
+.hero .acts{flex-direction:column;align-items:stretch}
+.btn{justify-content:center}
+.quick .bar{grid-template-columns:1fr}
+.quick a{border-right:0!important;border-bottom:1px solid var(--line);padding:18px 20px}
+.quick a:last-child{border-bottom:0}
+h2{font-size:30px}
+.lead{font-size:18px}
+.head{flex-direction:column;align-items:flex-start;gap:6px}
+.games div{grid-template-columns:104px 1fr 28px;gap:12px;font-size:16px}
+.steps,.houses,.news{grid-template-columns:1fr}
+p[style*="display:flex"]{flex-wrap:wrap}
+.notice{padding:22px;gap:18px}
+.date{padding-right:16px;min-width:56px}
+.quote blockquote{font-size:23px}
+.prog div{flex-direction:column;gap:2px}
+.mosaic{gap:10px}
+footer .cols{gap:28px}
+}
+</style><link rel="stylesheet" href="assets/hero-video.css"><script src="assets/hero-video.js" defer></script><link rel="stylesheet" href="assets/nav.css"><script src="assets/nav.js" defer></script>
 </head><body>
 <div class="util"><div class="wrap"><span>Affiliated to CBSE, New Delhi · No. 3530479 · School code 81702</span><nav><a>CBSE disclosure</a><a>Careers</a><a>Contact</a><a>+91 96900 00890</a></nav></div></div>
 <header><div class="wrap"><a class="brand"><img src="assets/brand/crest-patch.webp" alt=""><span><b>Social Baluni Public School</b><small>Dehradun · Nursery to XII</small></span></a>
-<nav class="menu"><a>About</a><a>Academics</a><a>Admissions</a><a>Campus life</a><a>Parents</a></nav><a class="btn red">Enquire</a></div></header>
+<nav class="menu" id="menu"><a>About</a><a>Academics</a><a>Admissions</a><a>Campus life</a><a>Parents</a></nav><a class="btn red">Enquire</a><button class="navbtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div></header>
 
 <div class="hero" data-yt-bg><img src="assets/images/campus-aerial-1600.webp" alt=""><div class="wrap">
 <h1>A CBSE school with NEET, JEE and NDA preparation on campus</h1>
@@ -164,5 +221,5 @@ footer li{list-style:none;margin:6px 0}
 
 <div class="visit"><div class="wrap"><div><h2>Come and see the school</h2><p>Call +91 96900 00890 to book a visit.</p></div><a class="btn" style="background:#fff;color:var(--crimson)">Book a visit →</a></div></div>
 <footer><div class="wrap cols"><div><b>Social Baluni Public School</b><p>Haridwar Bypass Road, Dehradun, Uttarakhand<br>info@sbpsdoon.com · +91 96900 00890</p></div><div><b>Admissions</b><ul><li>How admission works</li><li>Fees</li><li>Apply online</li></ul></div><div><b>Parents</b><ul><li>Notices</li><li>Calendar</li><li>Policies</li></ul></div><div><b>School</b><ul><li>CBSE disclosure</li><li>Careers</li><li>Contact</li></ul></div></div></footer>
-<a href="./" style="position:fixed;left:20px;bottom:20px;z-index:50;background:rgba(23,25,28,.88);color:#fff;font:600 15px/1 system-ui,sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)">← All options</a>
+<a class="back-pill" href="./" style="position:fixed;left:20px;bottom:20px;z-index:50;background:rgba(23,25,28,.88);color:#fff;font:600 15px/1 system-ui,sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)">← All options</a>
 </body></html>

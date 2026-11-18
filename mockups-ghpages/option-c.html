@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Option C: Crimson house</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -83,10 +83,84 @@ section{padding:120px 0}
 footer{background:var(--crimson-d);color:#e7c9cb;padding:56px 0;font-size:15px}
 footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
 footer b{color:#fff;display:block;margin-bottom:10px}
-</style><link rel="stylesheet" href="assets/hero-video.css"><script src="assets/hero-video.js" defer></script>
+
+/* Tablet and phone */
+header{--menu-bg:var(--crimson-d)}
+@media (max-width:1100px){
+header .wrap{gap:14px}
+.navbtn{border-color:rgba(255,255,255,.4)}
+.intro{gap:48px}
+.parents .wrap,.quote .wrap{gap:48px}
+}
+@media (max-width:900px){
+h2{font-size:40px}
+section{padding:80px 0}
+.hero{height:auto}
+.hero>img{position:relative;display:block;height:340px}
+.hero .yt-bg{bottom:auto;height:340px}
+.hero .panel{position:relative;left:auto;bottom:auto;width:auto;padding:36px 40px 40px}
+.under .wrap{grid-template-columns:1fr 1fr;column-gap:28px}
+.under a{margin-right:0;padding:18px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}
+.intro{grid-template-columns:1fr;gap:40px}
+.wide{grid-template-columns:1fr 1fr;margin-top:48px}
+.wide img{height:260px}
+.wide img:first-child{grid-column:span 2}
+.sports .top{flex-direction:column;align-items:flex-start;gap:12px}
+.nums{grid-template-columns:repeat(3,1fr)}
+.nums div{border-bottom:1px solid var(--line)}
+.nums b{font-size:60px}
+.sfa{grid-template-columns:1fr}
+.sfa img{height:300px}
+.sfa div{padding:36px}
+.adm{grid-template-columns:1fr;gap:40px}
+.adm p[style*="flex-direction:column"]{flex-direction:row!important;flex-wrap:wrap}
+.parents .wrap{grid-template-columns:1fr;gap:40px}
+.quote .wrap{grid-template-columns:1fr;gap:40px}
+.quote img{aspect-ratio:4/3}
+.close .wrap{flex-direction:column;align-items:flex-start;gap:24px}
+footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+body{font-size:17px}
+.wrap{padding:0 20px}
+header .wrap{height:76px}
+header .btn.gold{display:none}
+.brand img{width:46px;height:46px}
+.brand b{font-size:17px}
+.brand small{font-size:12.5px}
+.hero>img,.hero .yt-bg{height:260px}
+.hero .panel{padding:28px 20px}
+.hero h1{font-size:36px}
+.cb{grid-template-columns:1fr}
+.cb .btn{grid-column:auto}
+.under .wrap{grid-template-columns:1fr}
+h2{font-size:32px}
+.intro .lead{font-size:19px}
+.list div{font-size:18px;grid-template-columns:1fr;gap:2px}
+.wide{grid-template-columns:1fr}
+.wide img{height:220px}
+.wide img:first-child{grid-column:auto}
+.nums{grid-template-columns:1fr 1fr}
+.nums div{padding:22px 20px}
+.nums div:nth-child(2n){border-right:0}
+.nums div:nth-child(3){border-right:1px solid var(--line)}
+.nums div:last-child{grid-column:span 2;border-bottom:0}
+.nums b{font-size:52px}
+.sfa h3{font-size:28px}
+.sfa div{padding:28px 24px}
+.steps>div{grid-template-columns:52px 1fr}
+.steps em{font-size:32px}
+.steps b{font-size:20px}
+.parents .ln a{font-size:18px}
+.quote blockquote{font-size:26px}
+.houses{grid-template-columns:1fr 1fr}
+.houses div{padding:18px 12px 0 0}
+.close{padding:64px 0}
+}
+</style><link rel="stylesheet" href="assets/hero-video.css"><script src="assets/hero-video.js" defer></script><link rel="stylesheet" href="assets/nav.css"><script src="assets/nav.js" defer></script>
 </head><body>
 <header><div class="wrap"><a class="brand"><img src="assets/brand/crest-patch.webp" alt=""><span><b>Social Baluni Public School</b><small>Affiliated to CBSE · 3530479</small></span></a>
-<nav class="menu"><a>About</a><a>Academics</a><a>Admissions</a><a>Campus life</a><a>Parents</a></nav><a class="btn gold">Enquire</a></div></header>
+<nav class="menu" id="menu"><a>About</a><a>Academics</a><a>Admissions</a><a>Campus life</a><a>Parents</a></nav><a class="btn gold">Enquire</a><button class="navbtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div></header>
 
 <div class="hero" data-yt-bg><img src="assets/images/campus-aerial-1600.webp" alt="">
 <div class="panel"><h1>School, NEET, JEE and NDA preparation under one roof</h1><p>CBSE · Nursery to XII · Dehradun · Learn to grow</p>
@@ -123,5 +197,5 @@ footer b{color:#fff;display:block;margin-bottom:10px}
 
 <div class="close"><div class="wrap"><div><h2>Come and see the school</h2><p>Call +91 96900 00890 to book a visit.</p></div><a class="btn" style="background:#fff;color:var(--crimson)">Book a visit →</a></div></div>
 <footer><div class="wrap"><div><b>Social Baluni Public School</b>Haridwar Bypass Road, Dehradun<br>info@sbpsdoon.com</div><div><b>Admissions</b>Process<br>Fees<br>Apply</div><div><b>Parents</b>Notices<br>Calendar<br>Policies</div><div><b>School</b>Disclosure<br>Careers<br>Contact</div></div></footer>
-<a href="./" style="position:fixed;left:20px;bottom:20px;z-index:50;background:rgba(23,25,28,.88);color:#fff;font:600 15px/1 system-ui,sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)">← All options</a>
+<a class="back-pill" href="./" style="position:fixed;left:20px;bottom:20px;z-index:50;background:rgba(23,25,28,.88);color:#fff;font:600 15px/1 system-ui,sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)">← All options</a>
 </body></html>

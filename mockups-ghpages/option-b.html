@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Option B: Open split</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -91,10 +91,77 @@ section{padding:110px 0}
 .close p{color:#b7bcc2;margin-top:8px}
 footer{padding:20px 0 60px;font-size:15px;color:var(--mute)}
 footer .wrap{display:flex;justify-content:space-between}
-</style><link rel="stylesheet" href="assets/hero-video.css"><script src="assets/hero-video.js" defer></script>
+
+/* Tablet and phone */
+@media (max-width:1100px){
+header .wrap{gap:14px}
+.hero>.wrap:first-child{grid-template-columns:1fr;gap:32px}
+.hero h1{font-size:54px;margin-top:24px}
+.pic{height:460px}
+.prep{grid-template-columns:1fr;gap:48px}
+.prep .imgs{order:2}
+.quote .wrap{gap:48px}
+}
+@media (max-width:900px){
+h2{font-size:38px}
+section{padding:80px 0}
+.form .row{grid-template-columns:1fr 1fr}
+.form .btn{grid-column:span 2;justify-content:center}
+.facts{grid-template-columns:1fr 1fr}
+.facts div:nth-child(2){border-right:0}
+.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+.sport{height:auto;margin:0 20px}
+.sport img{position:relative;height:340px}
+.sport .card{position:relative;inset:auto;width:auto;margin:-72px 16px 16px;box-shadow:0 18px 36px -20px rgba(20,20,30,.35)}
+.steps{grid-template-columns:1fr 1fr}
+.split{grid-template-columns:1fr}
+.quote .wrap{grid-template-columns:1fr}
+.quote img{aspect-ratio:4/3;max-height:440px;order:-1}
+.gal{grid-template-columns:1fr 1fr}
+.gal img:nth-child(2n){margin-top:32px}
+.close{margin:0 20px 20px;padding:48px 32px;flex-direction:column;align-items:flex-start;gap:24px}
+footer .wrap{flex-direction:column;gap:8px}
+}
+@media (max-width:600px){
+body{font-size:16px}
+.wrap{padding:0 20px}
+header .wrap{height:72px}
+header .btn{display:none}
+.brand img{width:42px;height:42px}
+.brand b{font-size:16.5px}
+.hero{padding-top:8px}
+.hero h1{font-size:40px}
+.hero .sub{font-size:18px}
+.form{padding:20px}
+.form .row{grid-template-columns:1fr}
+.form .btn{grid-column:auto}
+.pic{height:300px;border-radius:18px}
+.doors{grid-template-columns:1fr;gap:12px;margin-top:20px}
+.door{padding:22px 24px}
+.door b{font-size:22px}
+.prep .imgs img{height:180px}
+.prep .imgs img:first-child{height:376px}
+h2{font-size:32px}
+.facts{grid-template-columns:1fr}
+.facts div{border-right:0!important;border-bottom:1px solid var(--line)}
+.facts div:last-child{border-bottom:0}
+.sport{margin:0 12px;border-radius:20px}
+.sport img{height:260px}
+.sport .card{padding:26px;margin:-56px 10px 10px}
+.sport h2{font-size:28px}
+.steps{grid-template-columns:1fr}
+.panel{padding:24px}
+.nrow{flex-direction:column;gap:4px}
+.quote blockquote{font-size:25px}
+.gal{gap:10px}
+.close{padding:36px 24px}
+.close h2{font-size:30px!important}
+p[style*="justify-content:center"]{flex-wrap:wrap}
+}
+</style><link rel="stylesheet" href="assets/hero-video.css"><script src="assets/hero-video.js" defer></script><link rel="stylesheet" href="assets/nav.css"><script src="assets/nav.js" defer></script>
 </head><body>
 <header><div class="wrap"><a class="brand"><img src="assets/brand/crest-patch.webp" alt=""><span><b>Social Baluni Public School</b><small>CBSE · Dehradun</small></span></a>
-<nav class="menu"><a>About</a><a>Academics</a><a>Admissions</a><a>Campus life</a><a>Parents</a></nav><a class="btn line">Pay fees</a><a class="btn red">Enquire</a></div></header>
+<nav class="menu" id="menu"><a>About</a><a>Academics</a><a>Admissions</a><a>Campus life</a><a>Parents</a></nav><a class="btn line">Pay fees</a><a class="btn red">Enquire</a><button class="navbtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div></header>
 
 <div class="hero"><div class="wrap">
 <div><h1>School and <span>NEET, JEE, NDA</span> preparation, on one campus</h1>
@@ -138,5 +205,5 @@ footer .wrap{display:flex;justify-content:space-between}
 
 <div class="close"><div><h2 style="font-size:40px">Come and see the school</h2><p>Call +91 96900 00890 to book a visit.</p></div><a class="btn" style="background:#fff;color:var(--ink)">Book a visit →</a></div>
 <footer><div class="wrap"><span>Social Baluni Public School · Haridwar Bypass Road, Dehradun · info@sbpsdoon.com</span><span>CBSE disclosure · Careers · Privacy</span></div></footer>
-<a href="./" style="position:fixed;left:20px;bottom:20px;z-index:50;background:rgba(23,25,28,.88);color:#fff;font:600 15px/1 system-ui,sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)">← All options</a>
+<a class="back-pill" href="./" style="position:fixed;left:20px;bottom:20px;z-index:50;background:rgba(23,25,28,.88);color:#fff;font:600 15px/1 system-ui,sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)">← All options</a>
 </body></html>
