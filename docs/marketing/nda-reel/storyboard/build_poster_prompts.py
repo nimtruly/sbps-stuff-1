@@ -85,6 +85,16 @@ PRINT = [
   "holding books in a bright school corridor. Below the photo: three icons in a row, navy line icons with crimson accents (a teacher at a "
   "whiteboard, a clipboard with ticks, a running figure), each with a navy label underneath: \"Expert Faculty\", \"Daily Tests\", \"Physical "
   "Training\". A thin navy rule, then a footer with \"Dehradun\" on the left and \"Call: 98XXX XXXXX\" on the right in bold navy. Nothing else."),
+ ("PF5", "Print file: A2 hero poster, cinematic photo", "3:4", "PL0", "A2 · 420 × 594 mm",
+  "Premium Indian defence-academy admission poster. Top 55%: a full-bleed cinematic hero photograph at sunrise of a squad of Indian teenage "
+  "cadets, boys and girls, in white polo shirts, navy track pants and teal numbered mesh bibs, sprinting towards the camera across a dusty "
+  "training ground past white steel obstacles and a rope cargo net, dust in the air, golden backlight, hazy hills behind, sharp and detailed. "
+  "The photo fades smoothly into a deep navy #0B2545 lower half. Over the top of the photo: the logo and the name \"RANNVEER DEFENCE CLASSES\" in "
+  "white, centred. Across the fade, a huge bold white headline \"BECOME AN OFFICER\" with a thin gold underline, and under it in gold capitals "
+  "\"NDA · CDS · AFCAT · SSB\". Lower half: a neat 3 x 2 grid of six features, each a gold line icon with a white label: \"Written Exam Coaching\", "
+  "\"SSB Interview & GTO\", \"Psychological Tests\", \"Physical Training\", \"Weekly Mock Tests\", \"Hostel & Mess\". Below the grid, a crimson "
+  "#C8102E rounded banner reading \"ADMISSION OPEN 2027 · LIMITED SEATS\". Footer strip in gold: \"Dehradun\" on the left, \"Call: 98XXX XXXXX\" on "
+  "the right, and a plain square QR-code placeholder in the corner. Bold modern sans-serif type, generous spacing, strong visual hierarchy. Nothing else."),
 ]
 
 
