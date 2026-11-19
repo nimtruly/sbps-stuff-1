@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "SBPS believes in a complete education, not only academic growth. Co-curricular activities are part of the curriculum, to help students develop every side of their personality.\n\n### Clubs\n\nEach student can join one of these clubs:\n\n- Shooting\n- Archery\n- Fencing\n- Martial arts\n- Athletics\n- Cricket\n- Football\n- Basketball\n- Table tennis\n- Yoga\n- Chess and carrom\n- Arts and craft\n- Photography\n- Cookery\n\n### Music, art and performance\n\nThe school has a music room, dance room, drama room and art studio. Students take part in cultural programmes and house competitions through the year.";
+---
+
+<InfoPage
+  title="Co-curricular activities"
+  description="Clubs and activities at SBPS, from shooting and fencing to photography, cookery and chess."
+  breadcrumbs={[{"label": "Campus life", "href": "/campus-life/"}, {"label": "Co-curricular", "href": "/campus-life/co-curricular/"}]}
+  body={body}
+  photo="music-room"
+  related={[["Sports", "/campus-life/sports/"], ["House system", "/about/house-system/"], ["Photo gallery", "/campus-life/gallery/"]]}
+></InfoPage>

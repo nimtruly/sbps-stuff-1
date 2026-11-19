@@ -1,0 +1,71 @@
+{
+  "name": "Social Baluni Public School",
+  "shortName": "SBPS Dehradun",
+  "affiliationNo": "3530479",
+  "schoolCode": "81702",
+  "address": "Haridwar Bypass Road, Brahmanwala, near Radhaswami Satsang Bhawan, Dehradun, Uttarakhand",
+  "geo": {
+    "lat": 30.2863,
+    "lng": 78.0264,
+    "verified": false
+  },
+  "phones": [
+    "+91 96900 00890",
+    "+91 96900 00895",
+    "+91 90847 17836"
+  ],
+  "emails": [
+    "info@sbpsdoon.com"
+  ],
+  "socials": [
+    {
+      "platform": "Facebook",
+      "url": "https://www.facebook.com/SBPSDOON"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/channel/UChjGT-I6ev3a95G11FlZ6cw"
+    }
+  ],
+  "whatsappChannelUrl": "https://wa.me/919690000890",
+  "admissionsOpen": true,
+  "admissionsSession": "2027–28",
+  "tickerItems": [
+    "Admissions Open for Session 2027–28: Nursery to Class XII",
+    "Integrated Coaching with Baluni Classes for NEET & JEE Main/Advanced",
+    "Doon Baluni Defence Academy NDA & SSB Preparation Wing",
+    "CBSE Affiliated • Day School & Day Boarding Facility"
+  ],
+  "paymentLinks": [
+    {
+      "label": "Registration Fee (₹1,000)",
+      "url": "https://pages.razorpay.com/sbps-registration-fee",
+      "amount": 1000,
+      "description": "One-time non-refundable admission registration fee"
+    },
+    {
+      "label": "Nursery to Class V Tuition Fee",
+      "url": "https://pages.razorpay.com/sbps-fee-nur-v",
+      "amount": 7800,
+      "description": "Quarterly tuition fee for Nursery to Class V"
+    },
+    {
+      "label": "Class VI to VIII Tuition Fee",
+      "url": "https://pages.razorpay.com/sbps-fee-vi-viii",
+      "amount": 8550,
+      "description": "Quarterly tuition fee for Class VI to VIII"
+    },
+    {
+      "label": "Class IX to X Tuition Fee",
+      "url": "https://pages.razorpay.com/sbps-fee-ix-x",
+      "amount": 9150,
+      "description": "Quarterly tuition fee for Class IX to X"
+    },
+    {
+      "label": "Class XI to XII Tuition Fee",
+      "url": "https://pages.razorpay.com/sbps-fee-xi-xii",
+      "amount": 10050,
+      "description": "Quarterly tuition fee for Class XI to XII"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "fee-tuition-nur-v",
+  "label": "Tuition Fee (Monthly / Quarterly)",
+  "classRange": "Nursery to V",
+  "type": "quarterly",
+  "refundable": false,
+  "amount": 7800,
+  "note": "₹2,600/month payable quarterly in 4 instalments",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}

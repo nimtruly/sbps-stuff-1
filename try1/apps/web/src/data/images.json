@@ -1,0 +1,130 @@
+{
+  "campus-aerial": {
+    "alt": "Aerial view of the Social Baluni Public School campus on Haridwar Bypass Road, Dehradun",
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "campus-entrance": {
+    "alt": "Front of the main school building with the Saraswati statue at the entrance",
+    "width": 532,
+    "height": 580,
+    "widths": [
+      532
+    ]
+  },
+  "sports-cycling": {
+    "alt": "A cyclist rides through the school courtyard during a sports event",
+    "width": 1600,
+    "height": 1065,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "science-lab": {
+    "alt": "Senior students working on an experiment with their teacher in the science lab",
+    "width": 900,
+    "height": 600,
+    "widths": [
+      640
+    ]
+  },
+  "classroom": {
+    "alt": "Students in a classroom listening to a lesson at the board",
+    "width": 900,
+    "height": 600,
+    "widths": [
+      640
+    ]
+  },
+  "library-shelves": {
+    "alt": "Students choosing books from the library shelves",
+    "width": 900,
+    "height": 600,
+    "widths": [
+      640
+    ]
+  },
+  "library-reading": {
+    "alt": "Younger students reading together at the library tables",
+    "width": 900,
+    "height": 600,
+    "widths": [
+      640
+    ]
+  },
+  "sports-balance": {
+    "alt": "A student crosses a balance obstacle at the sports meet",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "students-uniform": {
+    "alt": "Primary students in school uniform with their teacher outside the school",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "yoga": {
+    "alt": "Students practising yoga on mats in the school courtyard",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "cultural-programme": {
+    "alt": "Students perform a traditional cultural programme in front of the school building",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "student-presentation": {
+    "alt": "Students present a project in the school corridor",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "assembly-performance": {
+    "alt": "Young students hold up letters spelling MOTHER during a school programme",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      640,
+      1280,
+      1600
+    ]
+  },
+  "music-room": {
+    "alt": "Students playing harmonium and tabla in the music room",
+    "width": 400,
+    "height": 212,
+    "widths": [
+      400
+    ]
+  }
+}

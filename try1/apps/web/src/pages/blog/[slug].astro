@@ -1,0 +1,26 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import Prose from '../../components/ui/Prose.astro';
+import { cms } from '../../lib/cms';
+
+export async function getStaticPaths() {
+  // Drafts are only built in development, never in production.
+  const articles = await cms.getArticles(import.meta.env.DEV);
+  return articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+---
+
+<ArticleLayout
+  title={article.title}
+  excerpt={article.excerpt}
+  category={article.category}
+  publishedAt={article.publishedAt}
+  author={article.author}
+  coverImage={article.cover}
+  tags={article.tags}
+  slug={article.slug}
+>
+  <Prose text={article.body} />
+</ArticleLayout>

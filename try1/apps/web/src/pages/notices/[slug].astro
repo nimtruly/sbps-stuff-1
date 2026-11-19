@@ -1,0 +1,39 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Prose from '../../components/ui/Prose.astro';
+import { cms } from '../../lib/cms';
+import { formatDate } from '../../lib/refs';
+
+export async function getStaticPaths() {
+  const notices = await cms.getNotices();
+  return notices.map((n) => ({ params: { slug: n.id }, props: { notice: n } }));
+}
+
+const { notice } = Astro.props;
+---
+
+<PageLayout
+  title={notice.title}
+  description={notice.body.slice(0, 150)}
+  breadcrumbs={[{ label: 'Notices', href: '/notices/' }, { label: notice.title, href: `/notices/${notice.id}/` }]}
+>
+  <dl class="measure grid grid-cols-2 border-y-2 border-ink text-base">
+    <div class="py-3"><dt class="text-sm text-paper-600">Date</dt><dd class="font-semibold"><time datetime={notice.date}>{formatDate(notice.date)}</time></dd></div>
+    <div class="py-3"><dt class="text-sm text-paper-600">Category</dt><dd class="font-semibold">{notice.category}</dd></div>
+  </dl>
+
+  <Prose text={notice.body} class="mt-8" />
+
+  {notice.attachments && notice.attachments.length > 0 && (
+    <section class="measure mt-10" aria-labelledby="att-title">
+      <h2 id="att-title" class="text-xl font-bold">Attachments</h2>
+      <ul class="mt-3 border-t-2 border-ink" role="list">
+        {notice.attachments.map((a) => (
+          <li class="border-b border-paper-300"><a href={a.url} class="block py-3 font-semibold text-crimson-700 underline">{a.title}</a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <a href="/notices/" class="mt-10 inline-block font-semibold underline">All notices</a>
+</PageLayout>

@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "The current fee structure is published by the school as a PDF:\n\n- [Fee structure (PDF)](/documents/2026/01/FEE-1.pdf)\n- [Fee structure in the CBSE mandatory disclosure (PDF)](/documents/2025/06/9.-FEE-STRUCTURE-OF-THE-SCHOOL-1.pdf)\n\n### What you pay\n\n- **Registration form:** one time, non-refundable, paid when you buy the registration form.\n- **Admission fee:** one time, non-refundable. Different amounts apply for Nursery to IX and for XI and XII.\n- **Caution (security) money:** one time, refundable.\n- **Monthly fee:** set by class band (Nursery–V, VI–VIII, IX–X, XI–XII), paid in four quarterly instalments from the beginning of the session.\n\n### What the monthly fee covers\n\nTuition, examinations, computers, medical check-ups, labs, the identity card, sports and activities during school hours, educational visits within the city, and parent and child interaction.\n\n### How to pay\n\nFees are accepted by crossed cheque, demand draft or cash at the **City Office** only. Cheques and demand drafts are drawn in favour of **\"Social Baluni Public School, Dehradun\"**, payable at Dehradun.\n\n### Rules\n\n- Registration and admission fees for one year cannot be refunded or carried over to another year.\n- The school may revise fees in line with the price index and other costs, but not during the academic year except in exceptional circumstances.\n- Summer camp is optional; charges for camp activities are announced separately.";
+---
+
+<InfoPage
+  title="Fees"
+  description="The SBPS fee structure, what the monthly fee covers, and how fees are paid."
+  breadcrumbs={[{"label": "Admissions", "href": "/admissions/"}, {"label": "Fees", "href": "/admissions/fees/"}]}
+  body={body}
+  
+  related={[["Pay fees", "/parents/pay-fees/"], ["Refund policy", "/refund-policy/"], ["How admission works", "/admissions/"], ["Enquire", "/admissions/enquire/"]]}
+></InfoPage>

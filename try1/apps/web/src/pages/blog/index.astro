@@ -1,0 +1,43 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { cms } from '../../lib/cms';
+import { formatDate } from '../../lib/refs';
+
+const articles = await cms.getArticles(false);
+const categories = [...new Set(articles.map((a) => a.category))];
+const catSlug = (c: string) => c.toLowerCase().replace(/\s+/g, '-');
+---
+
+<PageLayout
+  title="News"
+  description="News, achievements and events from Social Baluni Public School, Dehradun."
+  breadcrumbs={[{ label: 'News', href: '/blog/' }]}
+>
+  <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+    {categories.map((c) => <a href={`/blog/category/${catSlug(c)}/`} class="font-semibold underline">{c}</a>)}
+    <a href="/blog/rss.xml" class="ml-auto font-semibold underline">RSS feed</a>
+  </div>
+
+  {articles.length > 0 ? (
+    <ul class="mt-6 border-t-2 border-ink" role="list">
+      {articles.map((a) => (
+        <li class="border-b border-paper-300">
+          <a href={`/blog/${a.slug}/`} class="group grid gap-4 py-6 md:grid-cols-[14rem_1fr] md:gap-8">
+            {a.cover ? (
+              <img src={a.cover} alt="" width="1280" height="853" loading="lazy" class="aspect-[3/2] w-full object-cover" />
+            ) : (
+              <span class="tie-field hidden aspect-[3/2] w-full md:block" aria-hidden="true"></span>
+            )}
+            <span>
+              <span class="text-sm text-paper-600"><time datetime={a.publishedAt}>{formatDate(a.publishedAt)}</time> · {a.category}</span>
+              <span class="mt-1 block text-2xl font-bold group-hover:text-crimson-700 group-hover:underline [font-stretch:85%]">{a.title}</span>
+              <span class="measure mt-2 block text-paper-700">{a.excerpt}</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="mt-8 text-lg text-paper-700">No news yet.</p>
+  )}
+</PageLayout>

@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "The foundation of Social Baluni Public School was laid on 30 March 2014. The school opened for its first session in 2014–15 with classes Nursery to VIII and around 400 students. Class IX started in 2015, and that batch sat the CBSE Class XII board examination in 2018.\n\nThe school is a unit of **Mandakini Seva Samiti Education Society**. Its motto is **\"Learn to grow\"**.\n\n### Who runs the school\n\nSBPS is a joint initiative of three groups:\n\n- **Social Group**, founded in 1978, with businesses in finance, engineering, solar energy, newspaper publishing and hotels.\n- **Polygon Group**, founded in February 1999 by Dr. K.S. Panwar, with businesses in speciality chemicals, construction, food processing, packaged drinking water, medicines and hotels.\n- **Dr. Baluni Group of Education**, which has prepared students for IIT-JEE, medical and other competitive exams for two decades, and runs Baluni Public Schools in Dehradun, Kotdwar and Agra.\n\n### Our aims\n\n- Build a firm foundation of learning, so students can handle higher education successfully.\n- Develop self-confidence through responsibility and leadership.\n- Develop the whole personality of each student, and encourage them to look beyond the obvious.\n- Help young people become mature, responsible, well-rounded citizens and future leaders.\n- Work with parents towards the common goal of each child's success.\n- Keep high standards across the curriculum, so every pupil reaches their full potential.\n- Offer a friendly, co-operative environment that builds care and human values.\n- Support teachers with opportunities for professional growth.\n- Encourage art, music and physical education alongside academics.";
+---
+
+<InfoPage
+  title="About the school"
+  description="Social Baluni Public School is a co-educational CBSE school in Dehradun, Nursery to XII, founded in 2014."
+  breadcrumbs={[{"label": "About", "href": "/about/"}]}
+  body={body}
+  photo="campus-entrance"
+  related={[["Leadership", "/about/leadership/"], ["Campus", "/about/campus/"], ["House system", "/about/house-system/"], ["Baluni Group", "/baluni-group/"], ["CBSE disclosure", "/disclosure/"]]}
+></InfoPage>

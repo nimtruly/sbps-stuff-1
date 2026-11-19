@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Option A: Campus first</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--crimson:#9e1f27;--crimson-d:#6d1218;--gold:#e8b511;--green:#0f5a32;--ink:#1c1f22;--mute:#5a6066;--line:#e3e5e8;--soft:#f4f5f6;--I:assets/images}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Mukta,system-ui,sans-serif;color:var(--ink);background:#fff;font-size:18px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+h1,h2,h3{line-height:1.12;letter-spacing:-.015em}
+h2{font-size:42px;font-weight:700}
+.util{background:var(--crimson-d);color:#f6dfe0;font-size:14px}
+.util .wrap{display:flex;justify-content:space-between;height:38px;align-items:center}
+.util nav{display:flex;gap:24px}
+header{border-bottom:1px solid var(--line);background:#fff}
+header .wrap{display:flex;align-items:center;height:84px;gap:40px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:52px;height:52px;border-radius:6px}
+.brand b{display:block;font-size:20px;font-weight:700;line-height:1.1}
+.brand small{font-size:14px;color:var(--mute)}
+.menu{display:flex;gap:28px;margin-left:auto;font-weight:600;font-size:16px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:6px;font-weight:700;font-size:17px}
+.btn.gold{background:var(--gold);color:#1c1300}
+.btn.red{background:var(--crimson);color:#fff}
+.btn.ghost{border:1.5px solid rgba(255,255,255,.75);color:#fff}
+.btn.line{border:1.5px solid var(--ink)}
+.hero{position:relative;height:640px;color:#fff;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,10,12,.86) 0%,rgba(20,10,12,.6) 42%,rgba(20,10,12,.05) 75%)}
+.hero .wrap{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:64px;font-weight:800;max-width:15ch}
+.hero p{font-size:21px;max-width:40ch;margin-top:18px;color:#f1e9e9}
+.hero .acts{display:flex;gap:14px;margin-top:32px}
+.quick{position:relative;z-index:2;margin-top:-56px}
+.quick .bar{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-radius:10px;box-shadow:0 18px 40px -18px rgba(20,20,30,.35),0 2px 6px rgba(20,20,30,.06)}
+.quick a{padding:24px 26px;border-right:1px solid var(--line)}
+.quick a:last-child{border:0}
+.quick b{display:flex;justify-content:space-between;font-size:19px}
+.quick span{font-size:15px;color:var(--mute)}
+section{padding:104px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.lead{font-size:20px;color:#3b4045;margin-top:18px;max-width:52ch}
+.prog{margin-top:30px;border-top:1px solid var(--line)}
+.prog div{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:18px}
+.prog div span{color:var(--mute)}
+.ph{border-radius:10px;width:100%;object-fit:cover}
+.sports{background:var(--green);color:#fff}
+.sports .two{align-items:stretch}
+.sports h2{color:#fff}
+.sports .lead{color:#d6e8dc}
+.games{margin-top:34px}
+.games div{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:16px;padding:10px 0;font-size:18px}
+.games i{display:block;height:12px;background:var(--gold);border-radius:6px}
+.games em{font-style:normal;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.award{margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.25)}
+.award b{font-size:22px}
+.award p{color:#d6e8dc;font-size:17px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px;counter-reset:s}
+.steps div{border-top:3px solid var(--crimson);padding-top:20px}
+.steps b{font-size:22px;display:block;margin:6px 0 8px}
+.steps small{font-weight:700;color:var(--crimson);font-size:15px}
+.steps p{font-size:16px;color:#454b50}
+.head{display:flex;justify-content:space-between;align-items:end}
+.head a{font-weight:700;color:var(--crimson)}
+.soft{background:var(--soft)}
+.notes{display:grid;grid-template-columns:2fr 1fr;gap:48px}
+.notice{background:#fff;border-radius:10px;padding:28px 30px;display:flex;gap:26px;align-items:start}
+.date{text-align:center;min-width:64px;border-right:1px solid var(--line);padding-right:24px}
+.date b{display:block;font-size:34px;line-height:1;color:var(--crimson)}
+.date span{font-size:14px;color:var(--mute)}
+.plinks a{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid #d9dce0;font-weight:600}
+.quote{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:center}
+.quote blockquote{font-size:30px;line-height:1.35;font-weight:500}
+.quote figcaption{margin-top:22px;font-size:17px;color:var(--mute)}
+.quote figcaption b{color:var(--ink)}
+.mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:14px;margin-top:40px}
+.mosaic img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.mosaic img:first-child{grid-row:span 2}
+.houses{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.houses div{padding:22px;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.houses b{font-size:21px}
+.houses p{font-size:15px;color:var(--mute)}
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.news img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px}
+.news time{display:block;font-size:14px;color:var(--mute);margin-top:14px}
+.news b{font-size:21px;line-height:1.25;display:block;margin-top:4px}
+.visit{background:var(--crimson);color:#fff;padding:80px 0}
+.visit .wrap{display:flex;justify-content:space-between;align-items:center}
+.visit h2{color:#fff}
+.visit p{color:#f3d6d8;margin-top:8px}
+footer{background:#1d1416;color:#cfc4c5;padding:64px 0 40px;font-size:15px}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+footer b{color:#fff;display:block;margin-bottom:12px;font-size:16px}
+footer li{list-style:none;margin:6px 0}
+
+/* Tablet and phone */
+@media (max-width:1100px){
+header .wrap{gap:16px}
+.util span{display:none}
+.util nav{margin-left:auto}
+}
+@media (max-width:900px){
+h2{font-size:34px}
+section{padding:72px 0}
+.hero{height:auto;min-height:560px}
+.hero .wrap{padding-top:72px;padding-bottom:112px}
+.hero h1{font-size:46px}
+.hero:after{background:linear-gradient(180deg,rgba(20,10,12,.5) 0%,rgba(20,10,12,.82) 100%)}
+.quick .bar{grid-template-columns:1fr 1fr}
+.quick a:nth-child(2){border-right:0}
+.quick a:nth-child(-n+2){border-bottom:1px solid var(--line)}
+.two,.quote,.notes{grid-template-columns:1fr;gap:40px}
+.ph{height:auto!important;min-height:0!important;aspect-ratio:4/3}
+.steps{grid-template-columns:1fr 1fr;gap:32px 24px}
+.houses{grid-template-columns:1fr 1fr}
+.news{grid-template-columns:1fr 1fr}
+.mosaic{grid-template-columns:1fr 1fr;grid-template-rows:none}
+.mosaic img{aspect-ratio:4/3}
+.mosaic img:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:16/9}
+.visit .wrap{flex-direction:column;align-items:flex-start;gap:24px}
+footer .cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+body{font-size:17px}
+.wrap{padding:0 20px}
+.util nav a:not(:last-child){display:none}
+header .wrap{height:72px}
+header .btn.red{display:none}
+.brand img{width:44px;height:44px}
+.brand b{font-size:17px}
+.brand small{font-size:13px}
+.hero h1{font-size:36px}
+.hero p{font-size:18px}
+.hero .acts{flex-direction:column;align-items:stretch}
+.btn{justify-content:center}
+.quick .bar{grid-template-columns:1fr}
+.quick a{border-right:0!important;border-bottom:1px solid var(--line);padding:18px 20px}
+.quick a:last-child{border-bottom:0}
+h2{font-size:30px}
+.lead{font-size:18px}
+.head{flex-direction:column;align-items:flex-start;gap:6px}
+.games div{grid-template-columns:104px 1fr 28px;gap:12px;font-size:16px}
+.steps,.houses,.news{grid-template-columns:1fr}
+p[style*="display:flex"]{flex-wrap:wrap}
+.notice{padding:22px;gap:18px}
+.date{padding-right:16px;min-width:56px}
+.quote blockquote{font-size:23px}
+.prog div{flex-direction:column;gap:2px}
+.mosaic{gap:10px}
+footer .cols{gap:28px}
+}
+</style><link rel="stylesheet" href="assets/hero-video.css"><script src="assets/hero-video.js" defer></script><link rel="stylesheet" href="assets/nav.css"><script src="assets/nav.js" defer></script>
+</head><body>
+<div class="util"><div class="wrap"><span>Affiliated to CBSE, New Delhi · No. 3530479 · School code 81702</span><nav><a>CBSE disclosure</a><a>Careers</a><a>Contact</a><a>+91 96900 00890</a></nav></div></div>
+<header><div class="wrap"><a class="brand"><img src="assets/brand/crest-patch.webp" alt=""><span><b>Social Baluni Public School</b><small>Dehradun · Nursery to XII</small></span></a>
+<nav class="menu" id="menu"><a>About</a><a>Academics</a><a>Admissions</a><a>Campus life</a><a>Parents</a></nav><a class="btn red">Enquire</a><button class="navbtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div></header>
+
+<div class="hero" data-yt-bg><img src="assets/images/campus-aerial-1600.webp" alt=""><div class="wrap">
+<h1>A CBSE school with NEET, JEE and NDA preparation on campus</h1>
+<p>Nursery to XII, co-educational, on Haridwar Bypass Road, Dehradun. Learn to grow.</p>
+<div class="acts"><a class="btn gold">Enquire about admission →</a><a class="btn ghost">Book a visit</a></div></div></div>
+
+<div class="quick"><div class="wrap"><div class="bar">
+<a><b>Notices <span>→</span></b><span>Circulars from the office</span></a>
+<a><b>Pay fees <span>→</span></b><span>How and where to pay</span></a>
+<a><b>Academic calendar <span>→</span></b><span>Year planner</span></a>
+<a><b>CBSE disclosure <span>→</span></b><span>Mandatory public documents</span></a>
+</div></div></div>
+
+<section><div class="wrap two">
+<div><h2>One campus for school and entrance preparation</h2>
+<p class="lead">Students follow the CBSE curriculum and prepare for competitive exams with Baluni Classes and Doon Baluni Defence Academy, on the school premises.</p>
+<div class="prog"><div><b>NEET and JEE</b><span>Baluni Classes</span></div><div><b>NDA and defence</b><span>Doon Baluni Defence Academy</span></div><div><b>NTSE and Olympiads</b><span>Baluni Classes</span></div><div><b>Integrated programmes</b><span>2, 4 and 5 years</span></div></div>
+<p style="margin-top:26px"><a class="btn line">See the integrated programmes</a></p></div>
+<img class="ph" style="height:560px" src="assets/images/science-lab-640.webp" alt=""></div></section>
+
+<section class="sports"><div class="wrap two">
+<img class="ph" style="height:100%;min-height:560px" src="assets/images/sports-cycling-1280.webp" alt="">
+<div><h2>Selected for the 38th National Games</h2>
+<p class="lead">SBPS students were selected for the 38th National Games, Uttarakhand, in five sports.</p>
+<div class="games">
+<div><span>Fencing</span><i style="width:100%"></i><em>10</em></div>
+<div><span>Badminton</span><i style="width:50%"></i><em>5</em></div>
+<div><span>Archery</span><i style="width:30%"></i><em>3</em></div>
+<div><span>Kalaripayattu</span><i style="width:30%"></i><em>3</em></div>
+<div><span>Shooting</span><i style="width:20%"></i><em>2</em></div></div>
+<div class="award"><b>Runner-up, 2024 SFA Inter-School Competition</b><p>Also named best school in fencing, shooting and boxing, and rising school in sports.</p></div>
+</div></div></section>
+
+<section><div class="wrap">
+<div class="head"><h2>How admission works</h2><a>Fees and the fee PDF →</a></div>
+<div class="steps">
+<div><small>Step 1 · Dec–Feb</small><b>Register</b><p>Fill in the form from the registration booklet and hand it to the school office.</p></div>
+<div><small>Step 2</small><b>Admission test</b><p>The office gives you a letter with your roll number, date and time of the test.</p></div>
+<div><small>Step 3</small><b>Interview</b><p>Students who qualify in the test are called for an interview.</p></div>
+<div><small>Step 4</small><b>Admission</b><p>Provisional until documents are submitted and the fee is paid.</p></div></div>
+<p style="margin-top:40px;display:flex;gap:14px"><a class="btn red">Apply online</a><a class="btn line">Ask for a call back</a></p>
+</div></section>
+
+<section class="soft"><div class="wrap notes">
+<div><div class="head"><h2>Notices</h2><a>All notices →</a></div>
+<div class="notice" style="margin-top:32px"><div class="date"><b>18</b><span>Jan 2025</span></div><div><b style="font-size:21px">Students selected for the 38th National Games</b><p style="color:var(--mute);font-size:16px;margin-top:6px">List of SBPS students selected in fencing, badminton, archery, kalaripayattu and shooting.</p></div></div></div>
+<div><h2 style="font-size:28px">For current parents</h2><div class="plinks" style="margin-top:26px"><a>Rules and policies <span>→</span></a><a>Transfer certificate <span>→</span></a><a>Academic calendar <span>→</span></a><a>Pay fees <span>→</span></a></div></div>
+</div></section>
+
+<section><div class="wrap quote">
+<img class="ph" style="aspect-ratio:4/3" src="assets/images/students-uniform-1280.webp" alt="">
+<figure><blockquote>“At SBPS, we leave no stone unturned to offer multitudes of opportunities to our children; it is for them to make the most of it.”</blockquote>
+<figcaption><b>Mr. Pankaj Nautiyal</b>, Principal · <a style="color:var(--crimson);font-weight:700">Read the full message</a></figcaption></figure></div></section>
+
+<section class="soft"><div class="wrap">
+<div class="head"><h2>Life on campus</h2><a>Photo gallery →</a></div>
+<div class="mosaic"><img src="assets/images/cultural-programme-1280.webp"><img src="assets/images/yoga-640.webp"><img src="assets/images/library-reading-640.webp"><img src="assets/images/assembly-performance-640.webp"><img src="assets/images/sports-balance-640.webp"></div>
+<h3 style="font-size:28px;margin-top:72px">Four houses, four Himalayan rivers</h3>
+<div class="houses"><div><b>Alaknanda</b><p>House points for academics, culture, sport and discipline.</p></div><div><b>Bhilangna</b><p>House points for academics, culture, sport and discipline.</p></div><div><b>Bhagirathi</b><p>House points for academics, culture, sport and discipline.</p></div><div><b>Mandakini</b><p>House points for academics, culture, sport and discipline.</p></div></div>
+</div></section>
+
+<section><div class="wrap"><div class="head"><h2>News</h2><a>All news →</a></div>
+<div class="news"><a><img src="assets/images/sports-balance-640.webp"><time>January 2025</time><b>SBPS students selected for the 38th National Games</b></a><a><img src="assets/images/sports-cycling-640.webp"><time>2024</time><b>Runner-up at the SFA Inter-School Competition 2024</b></a><a><img src="assets/images/assembly-performance-640.webp"><time>2024</time><b>Indian Air Force visit to SBPS</b></a></div></div></section>
+
+<div class="visit"><div class="wrap"><div><h2>Come and see the school</h2><p>Call +91 96900 00890 to book a visit.</p></div><a class="btn" style="background:#fff;color:var(--crimson)">Book a visit →</a></div></div>
+<footer><div class="wrap cols"><div><b>Social Baluni Public School</b><p>Haridwar Bypass Road, Dehradun, Uttarakhand<br>info@sbpsdoon.com · +91 96900 00890</p></div><div><b>Admissions</b><ul><li>How admission works</li><li>Fees</li><li>Apply online</li></ul></div><div><b>Parents</b><ul><li>Notices</li><li>Calendar</li><li>Policies</li></ul></div><div><b>School</b><ul><li>CBSE disclosure</li><li>Careers</li><li>Contact</li></ul></div></div></footer>
+<a class="back-pill" href="./" style="position:fixed;left:20px;bottom:20px;z-index:50;background:rgba(23,25,28,.88);color:#fff;font:600 15px/1 system-ui,sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)">← All options</a>
+</body></html>

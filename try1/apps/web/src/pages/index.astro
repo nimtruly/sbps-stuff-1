@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Photo from '../components/ui/Photo.astro';
+import { cms } from '../lib/cms';
+import { formatDate } from '../lib/refs';
+import { school } from '../data/nav';
+
+const notices = (await cms.getNotices()).slice(0, 4);
+const firstSentence = (t: string) => (t.match(/^.*?[.!?](?=\s|$)/) ?? [t])[0].replace(/\.\.+$/, '.');
+const articles = (await cms.getArticles(false)).slice(0, 3);
+const principal = await cms.getLeaderById('principal');
+const houses = await cms.getHouses();
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+const principalPara = principal?.message.split('\n\n').find((p) => p.length > 120 && !p.includes('Greg Reid')) ?? '';
+// First two sentences of the Principal's own message (spacing tidied only)
+const principalQuote = (principalPara.replace(/\s+,/g, ',').match(/[^.!?]+[.!?]+/g) ?? []).slice(0, 2).join(' ').trim();
+
+const classes = ['Nursery', 'LKG', 'UKG', 'Class I', 'Class II', 'Class III', 'Class IV', 'Class V', 'Class VI', 'Class VII', 'Class VIII', 'Class IX', 'Class X', 'Class XI', 'Class XII'];
+
+// 38th National Games, Uttarakhand: selections by sport (legacy list page)
+const nationalGames = [
+  { sport: 'Fencing', students: 10 },
+  { sport: 'Badminton', students: 5 },
+  { sport: 'Archery', students: 3 },
+  { sport: 'Kalaripayattu', students: 3 },
+  { sport: 'Shooting', students: 2 },
+];
+
+const steps = [
+  { letter: 'A', title: 'Register', text: 'Registration runs from the last week of December to the last week of February. Fill in the form from the registration booklet and hand it to the school office.' },
+  { letter: 'B', title: 'Admission test', text: 'The office gives you a letter with the registration number, roll number, date and time of the test.' },
+  { letter: 'C', title: 'Interview', text: 'Students who qualify in the test are called for an interview.' },
+  { letter: 'D', title: 'Admission', text: 'Admission depends on the test, the interview and the seats available. It stays provisional until documents are submitted and the fee is paid.' },
+];
+---
+
+<BaseLayout
+  title="Social Baluni Public School, Dehradun | CBSE school with NEET, JEE and NDA preparation"
+  description="Social Baluni Public School is a co-educational CBSE school in Dehradun, Nursery to XII, with integrated NEET, JEE, NTSE and NDA preparation on campus and a strong sports programme."
+>
+  <!-- First viewport: the tie panel and the campus -->
+  <section class="grid lg:min-h-[calc(100svh-8.25rem)] lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]" aria-labelledby="hero-title">
+    <div class="relative flex flex-col bg-crimson-700 text-white lg:pr-7">
+      <div class="tie-field h-14 shrink-0 lg:h-16" aria-hidden="true"></div>
+      <div class="tie-edge absolute inset-y-0 right-0 hidden w-7 lg:block" aria-hidden="true"></div>
+      <div class="flex flex-1 flex-col justify-center px-4 py-8 sm:px-8 lg:px-12 lg:py-8 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+        <h1 id="hero-title" class="max-w-[14ch] text-[2.75rem] font-extrabold sm:text-6xl xl:text-[4rem]">
+          School and NEET, JEE, NDA preparation under one roof
+        </h1>
+        <p class="mt-4 flex flex-wrap gap-x-2 text-lg font-medium text-crimson-50">
+          <span class="whitespace-nowrap">CBSE</span><span aria-hidden="true">·</span>
+          <span class="whitespace-nowrap">Nursery to XII</span><span aria-hidden="true">·</span>
+          <span class="whitespace-nowrap">Dehradun</span><span aria-hidden="true">·</span>
+          <span class="whitespace-nowrap">Learn to grow</span>
+        </p>
+
+        <form method="POST" action="/api/enquiry" class="mt-6 max-w-xl border-2 border-ink bg-paper-50 p-5 text-ink" aria-labelledby="callback-title">
+          <h2 id="callback-title" class="text-2xl font-bold">Ask for a call back</h2>
+          <p class="mt-1 text-sm text-paper-700">The admissions office will phone you.</p>
+          <div class="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-[1fr_1fr_auto] xl:items-end">
+            <label class="sm:col-span-2 xl:col-span-3">
+              <span class="text-sm font-semibold">Parent's name</span>
+              <input name="parentName" required autocomplete="name" class="mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none" />
+            </label>
+            <label>
+              <span class="text-sm font-semibold">Phone</span>
+              <input name="phone" type="tel" required inputmode="tel" autocomplete="tel" class="mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none" />
+            </label>
+            <label>
+              <span class="text-sm font-semibold">Class</span>
+              <select name="grade" required class="mt-1 h-12 w-full border-2 border-paper-400 bg-white px-2 text-base focus:border-ink focus:outline-none">
+                <option value="">Choose</option>
+                {classes.map((c) => <option>{c}</option>)}
+              </select>
+            </label>
+            <input type="hidden" name="preferredContact" value="phone" />
+            {turnstileKey && <div class="cf-turnstile sm:col-span-2 xl:col-span-3" data-sitekey={turnstileKey}></div>}
+            <button type="submit" class="inline-flex h-12 w-full items-center justify-center bg-saffron-500 px-5 text-lg font-bold text-ink hover:bg-saffron-400 active:bg-saffron-600 sm:col-span-2 xl:col-span-1 xl:w-auto">
+              Request a call back
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="relative flex flex-col bg-ink">
+      <Photo name="campus-aerial" loading="eager" sizes="(min-width: 1024px) 58vw, 100vw" class="h-64 w-full flex-1 object-cover sm:h-96 lg:h-auto" />
+      <div class="grid sm:grid-cols-2">
+        <a href="/admissions/" class="group block bg-forest-700 px-6 py-6 text-white hover:bg-forest-800 sm:px-8">
+          <span class="flex items-center justify-between font-display text-3xl font-bold [font-stretch:80%]">
+            Admissions
+            <svg class="h-6 w-6 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+          </span>
+          <span class="mt-1 block text-[0.9375rem] text-forest-50">How admission works, fees, apply online</span>
+        </a>
+        <a href="/parents/" class="group block bg-ink px-6 py-6 text-white hover:bg-paper-800 sm:px-8">
+          <span class="flex items-center justify-between font-display text-3xl font-bold [font-stretch:80%]">
+            Current parents
+            <svg class="h-6 w-6 transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+          </span>
+          <span class="mt-1 block text-[0.9375rem] text-paper-300">Notices, calendar, policies, documents</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="tie-spine" data-spine>
+    <!-- One school day, two halves -->
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28 lg:pl-14" aria-labelledby="day-title">
+      <h2 id="day-title" class="max-w-3xl text-4xl font-extrabold sm:text-5xl">One campus for school and entrance preparation</h2>
+      <p class="measure mt-5 text-lg text-paper-700">
+        Students follow the CBSE syllabus and prepare for competitive exams on the school premises, with coaching faculty from Baluni Classes and Doon Baluni Defence Academy. Programmes run for 2, 4 or 5 years.
+      </p>
+
+      <div class="mt-12 grid border-y-2 border-ink lg:grid-cols-2">
+        <div class="py-8 lg:border-r-2 lg:border-ink lg:pr-10">
+          <h3 class="text-3xl font-bold">School</h3>
+          <dl class="mt-6 divide-y divide-paper-300 text-base">
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Board</dt><dd>CBSE, New Delhi</dd></div>
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Classes</dt><dd>Nursery to XII, co-educational</dd></div>
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Primary years</dt><dd>XSEED, an activity-based way of teaching</dd></div>
+            <div class="grid grid-cols-[9rem_1fr] gap-4 py-3"><dt class="font-semibold">Day boarding</dt><dd>Available; <a class="text-crimson-700 underline" href="/academics/day-boarding/">see how it works</a></dd></div>
+          </dl>
+        </div>
+        <div class="border-t-2 border-ink py-8 lg:border-t-0 lg:pl-10">
+          <h3 class="text-3xl font-bold">Preparation</h3>
+          <ul class="mt-6 divide-y divide-paper-300" role="list">
+            {[
+              ['NEET (UG)', 'Medical entrance, with Baluni Classes', '/academics/integrated-programme/neet/'],
+              ['JEE Main and Advanced', 'Engineering entrance, with Baluni Classes', '/academics/integrated-programme/jee/'],
+              ['NTSE and Olympiads', 'Foundation for younger classes', '/academics/integrated-programme/ntse/'],
+              ['NDA and defence', 'With Doon Baluni Defence Academy', '/academics/integrated-programme/nda/'],
+            ].map(([t, d, href]) => (
+              <li>
+                <a href={href} class="group flex items-baseline justify-between gap-4 py-3">
+                  <span>
+                    <span class="block text-lg font-semibold group-hover:text-crimson-700 group-hover:underline">{t}</span>
+                    <span class="block text-[0.9375rem] text-paper-600">{d}</span>
+                  </span>
+                  <svg class="h-5 w-5 shrink-0 text-crimson-700" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p class="measure mt-6 text-[0.9375rem] text-paper-700">
+        Doubt-clearing sessions run on alternate days, and career counselling sessions are held every month.
+      </p>
+    </section>
+
+    <!-- Sports: the scoreboard -->
+    <section class="bg-ink text-white" aria-labelledby="sport-title">
+      <div class="tie-band" aria-hidden="true"></div>
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8 lg:py-24 lg:pl-14">
+        <div>
+          <h2 id="sport-title" class="text-4xl font-extrabold sm:text-5xl">Selected for the 38th National Games</h2>
+          <p class="measure mt-4 text-lg text-paper-300">
+            SBPS students were selected to compete for Uttarakhand at the 38th National Games, in five sports.
+          </p>
+          <table class="mt-8 w-full max-w-md text-left">
+            <caption class="sr-only">Students selected for the 38th National Games, by sport</caption>
+            <thead>
+              <tr class="border-b-2 border-saffron-500 text-sm text-paper-300">
+                <th scope="col" class="py-2 font-semibold">Sport</th>
+                <th scope="col" class="py-2 text-right font-semibold">Students</th>
+              </tr>
+            </thead>
+            <tbody>
+              {nationalGames.map((r) => (
+                <tr class="border-b border-white/15">
+                  <th scope="row" class="py-3 text-xl font-semibold">{r.sport}</th>
+                  <td class="py-3 text-right font-display text-3xl font-bold [font-stretch:75%]">{r.students}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <a href="/blog/38th-national-games-selections/" class="mt-6 inline-block text-[0.9375rem] font-semibold underline">Read the announcement</a>
+        </div>
+        <div class="flex flex-col gap-8">
+          <Photo name="sports-balance" sizes="(min-width: 1024px) 40vw, 100vw" class="aspect-[3/2] w-full object-cover" />
+          <div>
+            <h3 class="text-2xl font-bold">Runner-up, 2024 SFA Inter-School Competition</h3>
+            <p class="mt-2 text-paper-300">Also named best school in fencing, shooting and boxing, and rising school in sports.</p>
+            <a href="/campus-life/sports/" class="mt-4 inline-block text-[0.9375rem] font-semibold underline">All 15 sports at SBPS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admission, lettered steps -->
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28 lg:pl-14" aria-labelledby="adm-title">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <h2 id="adm-title" class="max-w-2xl text-4xl font-extrabold sm:text-5xl">How admission works</h2>
+        <a href="/admissions/apply/" class="inline-flex h-12 items-center border-2 border-ink px-5 font-semibold hover:bg-ink hover:text-white">Apply online</a>
+      </div>
+      <ol class="mt-10 grid border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4" role="list">
+        {steps.map((s, i) => (
+          <li class:list={[
+            'border-b-2 border-ink py-6 sm:pr-6',
+            i % 2 === 1 && 'sm:border-l-2 sm:pl-6',
+            i === 2 && 'lg:border-l-2 lg:pl-6',
+          ]}>
+            <span class="font-display text-6xl font-extrabold text-crimson-700 [font-stretch:75%]" aria-hidden="true">{s.letter}</span>
+            <h3 class="mt-2 text-2xl font-bold"><span class="sr-only">Step {s.letter}: </span>{s.title}</h3>
+            <p class="mt-2 text-[0.9375rem] text-paper-700">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-10 grid gap-10 lg:grid-cols-2">
+        <div>
+          <h3 class="text-2xl font-bold">Age on 1 April of the year of admission</h3>
+          <table class="mt-4 w-full max-w-sm text-left text-base">
+            <tbody>
+              {[['Nursery', '3+'], ['LKG', '4+'], ['UKG', '5+'], ['Class I', '6+']].map(([c, a]) => (
+                <tr class="border-b border-paper-300"><th scope="row" class="py-2.5 font-semibold">{c}</th><td class="py-2.5 text-right">{a} years</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold">Fees</h3>
+          <p class="measure mt-3 text-paper-700">
+            The current fee structure is in the school's official PDF. Fees are paid by crossed cheque, demand draft or cash at the City Office, in four quarterly instalments.
+          </p>
+          <a href="/admissions/fees/" class="mt-4 inline-block font-semibold text-crimson-700 underline">Fees and the fee PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current parents -->
+    <section class="border-y-2 border-ink bg-paper-50" aria-labelledby="parents-title">
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[7fr_5fr] lg:px-8 lg:pl-14">
+        <div>
+          <h2 id="parents-title" class="text-4xl font-extrabold sm:text-5xl">Notices</h2>
+          {notices.length > 0 ? (
+            <ul class="mt-8 border-t-2 border-ink" role="list">
+              {notices.map((n) => (
+                <li class="border-b border-paper-300">
+                  <a href={`/notices/${n.id}/`} class="group grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+                    <span class="text-sm text-paper-600">
+                      <time datetime={n.date}>{formatDate(n.date)}</time>
+                    </span>
+                    <span class="text-lg font-semibold group-hover:text-crimson-700 group-hover:underline">{n.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="mt-6 text-paper-700">No notices right now.</p>
+          )}
+          <a href="/notices/" class="mt-6 inline-block font-semibold text-crimson-700 underline">All notices</a>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">For current parents</h2>
+          <ul class="mt-6 border-t-2 border-ink text-lg" role="list">
+            {[
+              ['Academic calendar (PDF)', '/documents/2025/06/10.-ANNUAL-ACADEMIC-CALENDER-1.pdf'],
+              ['Fee structure (PDF)', '/documents/2026/01/FEE-1.pdf'],
+              ['Rules and policies', '/parents/policies/'],
+              ['Transfer certificate', '/parents/transfer-certificate/'],
+              ['CBSE mandatory disclosure', '/disclosure/'],
+            ].map(([t, href]) => (
+              <li class="border-b border-paper-300">
+                <a href={href} class="flex items-center justify-between py-3.5 font-semibold hover:text-crimson-700">
+                  {t}
+                  <svg class="h-5 w-5 text-crimson-700" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" /></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principal -->
+    {principal && principalQuote && (
+      <section class="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[5fr_7fr] lg:px-8 lg:py-28 lg:pl-14" aria-labelledby="principal-title">
+        <Photo name="students-uniform" sizes="(min-width: 1024px) 38vw, 100vw" class="aspect-[4/3] w-full object-cover" />
+        <figure>
+          <h2 id="principal-title" class="sr-only">From the Principal</h2>
+          <blockquote class="mt-4 font-display text-2xl font-semibold leading-snug [font-stretch:88%] sm:text-3xl">
+            <p>{principalQuote}</p>
+          </blockquote>
+          <figcaption class="mt-6 text-base">
+            <span class="font-bold">{principal.name}</span>, {principal.role}
+            <a href="/about/leadership/principal/" class="ml-2 text-crimson-700 underline">Read the full message</a>
+          </figcaption>
+        </figure>
+      </section>
+    )}
+
+    <!-- Life on campus -->
+    <section class="bg-paper-200" aria-labelledby="life-title">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:pl-14">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <h2 id="life-title" class="text-4xl font-extrabold sm:text-5xl">On campus</h2>
+          <a href="/campus-life/gallery/" class="font-semibold text-crimson-700 underline">Photo gallery</a>
+        </div>
+        <div class="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:grid-rows-2">
+          <figure class="col-span-2 lg:row-span-2 lg:flex lg:flex-col"><Photo name="cultural-programme" sizes="(min-width: 1024px) 50vw, 100vw" class="aspect-[3/2] w-full object-cover lg:min-h-0 lg:flex-1" /><figcaption class="mt-2 text-sm text-paper-700">A cultural programme in front of the main building</figcaption></figure>
+          <figure><Photo name="science-lab" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Science lab</figcaption></figure>
+          <figure><Photo name="music-room" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Music room</figcaption></figure>
+          <figure><Photo name="library-reading" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Library</figcaption></figure>
+          <figure><Photo name="yoga" sizes="(min-width: 1024px) 25vw, 50vw" class="aspect-[3/2] w-full object-cover" /><figcaption class="mt-2 text-sm text-paper-700">Yoga in the courtyard</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Houses -->
+    <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:pl-14" aria-labelledby="houses-title">
+      <h2 id="houses-title" class="text-4xl font-extrabold sm:text-5xl">Four houses, four Himalayan rivers</h2>
+      <p class="measure mt-4 text-lg text-paper-700">Every student belongs to a house. Houses earn points through the year for academics, cultural and sports events, discipline and behaviour.</p>
+      <ul class="mt-10 grid border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4" role="list">
+        {houses.map((h: any) => (
+          <li class="border-b border-paper-300 py-5 sm:pr-6">
+            <h3 class="text-3xl font-bold">{h.id.charAt(0).toUpperCase() + h.id.slice(1)}</h3>
+            <p class="mt-2 text-[0.9375rem] text-paper-700">{firstSentence(h.description)}</p>
+          </li>
+        ))}
+      </ul>
+      <a href="/about/house-system/" class="mt-6 inline-block font-semibold text-crimson-700 underline">About the house system</a>
+    </section>
+
+    {articles.length > 0 && (
+      <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 lg:pl-14" aria-labelledby="news-title">
+        <h2 id="news-title" class="text-4xl font-extrabold sm:text-5xl">News</h2>
+        <ul class="mt-8 grid gap-8 border-t-2 border-ink pt-8 md:grid-cols-3" role="list">
+          {articles.map((a) => (
+            <li>
+              <a href={`/blog/${a.slug}/`} class="group block">
+                <time class="text-sm text-paper-600" datetime={a.publishedAt}>{formatDate(a.publishedAt)}</time>
+                <h3 class="mt-1 text-2xl font-bold group-hover:text-crimson-700 group-hover:underline">{a.title}</h3>
+                <p class="mt-2 text-[0.9375rem] text-paper-700">{a.excerpt}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+
+  <!-- Close: visit the school -->
+  <section class="tie-field" aria-labelledby="visit-title">
+    <div class="bg-crimson-700/90">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-20 text-white sm:px-6 lg:grid-cols-[7fr_5fr] lg:px-8 lg:pl-14">
+        <div>
+          <h2 id="visit-title" class="text-4xl font-extrabold sm:text-6xl">Come and see the school</h2>
+          <p class="measure mt-4 text-lg text-crimson-50">{school.address}.</p>
+        </div>
+        <div class="flex flex-col gap-3 self-end">
+          <a href="/admissions/enquire/" class="inline-flex h-14 items-center justify-center bg-white px-6 text-lg font-bold text-crimson-800 hover:bg-crimson-50">Book a visit</a>
+          <a href={school.phoneHref} class="inline-flex h-14 items-center justify-center border-2 border-white px-6 text-lg font-semibold hover:bg-white hover:text-crimson-800" data-figure>Call {school.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Signature: the tie stripe draws itself down the page spine as you read.
+  const spine = document.querySelector<HTMLElement>('[data-spine]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (spine && !reduce) {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const r = spine.getBoundingClientRect();
+      const seen = (window.innerHeight * 0.85 - r.top) / r.height;
+      spine.style.setProperty('--spine-progress', String(Math.min(1, Math.max(0.04, seen))));
+    };
+    update();
+    window.addEventListener('scroll', () => (frame ||= requestAnimationFrame(update)), { passive: true });
+    window.addEventListener('resize', () => (frame ||= requestAnimationFrame(update)));
+  }
+</script>

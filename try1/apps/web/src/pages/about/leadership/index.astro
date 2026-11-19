@@ -1,0 +1,36 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { cms } from '../../../lib/cms';
+
+const leaders = await cms.getLeaders();
+const initials = (name: string) => name.replace(/^(Dr|Mr|Mrs|Ms)\.?\s*/, '').split(/[\s.]+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join('');
+const firstSentence = (m: string) => (m.replace(/\s+,/g, ',').match(/[^.!?]+[.!?]+/) ?? [m])[0].trim();
+---
+
+<PageLayout
+  title="Leadership"
+  description="Messages from the chairmen, managing directors and Principal of Social Baluni Public School."
+  breadcrumbs={[{ label: 'About', href: '/about/' }, { label: 'Leadership', href: '/about/leadership/' }]}
+>
+  <ul class="border-t-2 border-ink" role="list">
+    {leaders.map((l) => (
+      <li class="border-b border-paper-300">
+        <a href={`/about/leadership/${l.id}/`} class="group grid grid-cols-[4.5rem_1fr] gap-5 py-6 sm:grid-cols-[6rem_1fr_2fr] sm:gap-8">
+          {l.photo ? (
+            <img src={l.photo} alt={`Portrait of ${l.name}`} width="150" height="150" loading="lazy" class="aspect-square w-full object-cover" />
+          ) : (
+            <span class="flex aspect-square w-full items-center justify-center bg-crimson-700 font-display text-3xl font-bold text-white [font-stretch:80%]" aria-hidden="true">{initials(l.name)}</span>
+          )}
+          <div>
+            <h2 class="text-2xl font-bold group-hover:text-crimson-700">{l.name}</h2>
+            <p class="mt-1 text-paper-700">{l.role}, {l.org}</p>
+            {l.credentials && <p class="text-sm text-paper-600">{l.credentials}</p>}
+          </div>
+          <p class="col-span-2 text-paper-800 sm:col-span-1">
+            {firstSentence(l.message)} <span class="font-semibold text-crimson-700 underline">Read the message</span>
+          </p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

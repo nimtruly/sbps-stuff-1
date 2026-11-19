@@ -1,0 +1,14 @@
+---
+import InfoPage from '../components/InfoPage.astro';
+
+const body = "This page explains what happens to information you give through the Social Baluni Public School website.\n\n### What we collect\n\n- **Enquiry and contact forms:** your name, phone number, the class or topic, and anything you write. Email is optional.\n- **Online application:** the student's name, gender, date of birth, class, previous school, parents' names and occupations, mobile number, email and address.\n- **Job applications:** your name, contact details, position, experience, qualifications and note.\n- **Notice subscriptions:** your email address.\n\nWe also record the internet address (IP) a form was sent from, to stop spam and abuse.\n\n### Why\n\nOnly to answer your enquiry, process an application, consider a job applicant, or send school notices you asked for.\n\n### Who can see it\n\nAuthorised school staff. The information is stored on Cloudflare's servers and may be sent to the school by email through an email provider. We do not sell it or use it for advertising.\n\n### Your choices\n\nTo see, correct or delete information you have sent, or to stop receiving notices, contact the school office at [info@sbpsdoon.com](mailto:info@sbpsdoon.com) or [+91 96900 00890](tel:+919690000890).";
+---
+
+<InfoPage
+  title="Privacy"
+  description="What information this website collects, why, and who can see it."
+  breadcrumbs={[{"label": "Privacy", "href": "/privacy/"}]}
+  body={body}
+  
+  related={[["Terms of use", "/terms/"], ["Contact", "/contact/"]]}
+></InfoPage>

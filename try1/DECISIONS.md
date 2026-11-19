@@ -1,0 +1,29 @@
+# Architectural & Implementation Decisions
+
+This document records the architectural, security, and engineering decisions made during the construction of the Social Baluni Public School (SBPS) web platform in accordance with `docs/BUILD-SPEC.md`.
+
+| Date | Topic | Choice | Rationale |
+|---|---|---|---|
+| 2026-11-13 | Workspace Architecture | pnpm workspaces (`apps/web`, `studio`) | Clear separation between public front-end + edge backend and CMS studio as required by BUILD-SPEC.md. |
+| 2026-11-13 | Rendering Strategy | Astro 5 Static by default with `@astrojs/cloudflare` on-demand endpoints | Maximizes Cloudflare edge cacheability, sub-50ms TTFB worldwide, zero running cost, while allowing Astro Actions and dynamic API endpoints. |
+| 2026-11-13 | CSS & Design Tokens | Tailwind CSS v4 via `@tailwindcss/vite` | Modern token-based CSS engine via `@theme` with zero legacy preprocessors. Self-hosted typography, SBPS Crimson (`#A3262B`), Saffron Gold (`#EFCA10`), and Forest Green (`#0B6B2E`). |
+| 2026-11-13 | Typography | `Eczar` (Serif Display) + `Plus Jakarta Sans` (Body Sans) via Fontsource | Characterful, editorial presence suitable for an established Himalayan school. Self-hosted WOFF2 prevents external CDN blocking and eliminates layout shifts. |
+| 2026-11-13 | CMS Architecture | Dual-driver `CMS_DRIVER=local|sanity` | Enables 100% credential-free offline builds (`pnpm i && pnpm build`) using Astro Content Layer collections, while enabling live Sanity Studio editing when credentials are provided. |
+| 2026-11-13 | Truth & Accuracy | Strict `verified: false` enforcement | Zero invented facts. Unverified statistics, topper marks, and fees are hidden from production builds and tracked in `CONTENT-TODO.md`. |
+| 2026-11-13 | Regulatory RTE Badge | Computed RTE Expiry Badge | RTE Recognition document expired on 31.03.2026. The disclosure page dynamically compares `validTo` against current date and renders a clear "Renewal in process" badge rather than suppressing official records. |
+| 2026-11-13 | Database & Storage | Cloudflare D1 with Drizzle ORM + R2 Bindings | True edge database for enquiry and registration leads; fully functional in local development via `wrangler` without external database services. |
+| 2026-11-13 | Payment Architecture | Dual-tier payment workflow | Primary: Zero-maintenance Razorpay Payment Links for parents. Secondary: Gated programmatic order creation (`/api/razorpay/create-order`) and webhook signature verification (`/api/razorpay/webhook`). |
+| 2026-11-13 | Client Search Engine | ~~Custom `build-search.js` index~~ superseded 2026-11-14 | See the Pagefind entry below. |
+| 2026-11-13 | Legacy URL Migration | 100% 301 Redirect Coverage in `public/_redirects` | All 57 legacy WordPress URLs mapped to canonical Astro routes with an automated Vitest suite (`tests/redirects.test.ts`) guaranteeing zero 404 regressions. |
+| 2026-11-13 | Security Hardening | Strict `public/_headers` CSP & Security Policy | Enforces Content-Security-Policy (whitelisting Turnstile, Razorpay, OneSignal), HSTS, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, and `Permissions-Policy`. |
+| 2026-11-14 | Quality & A11y Suite | Playwright E2E + `@axe-core/playwright` | 40 route & interaction smoke tests and 7 automated WCAG 2.2 Level AA accessibility scans with zero critical or serious violations. |
+| 2026-11-14 | API routes | Hand-written API routes (`prerender = false`) with Zod, not Astro Actions | Plain `<form method="POST">` already works without JS and 303-redirects to `/thank-you/` or `/form-error/`. One shared handler (`src/lib/submission.ts`) does rate limiting, Turnstile, Zod validation, D1 insert and the Resend alert. In production a submission must be stored or emailed, or the visitor is told it failed. |
+| 2026-11-14 | Fail closed | Webhooks need their secrets; admin needs ADMIN_USER/ADMIN_PASS in production | Unsigned Razorpay/Sanity calls get 503 (no secret) or 401 (bad signature). The admin area returns 503 in production when credentials are unset. |
+| 2026-11-14 | Sanity signatures | Verify the real `t=…,v1=…` header (HMAC of `t.body`, base64url) with a 10-minute replay window | The earlier check used the wrong format and would have rejected every real webhook. |
+| 2026-11-14 | Search | Pagefind (`pagefind --site dist` after the Astro build) | Restores the spec's stack. `<main data-pagefind-body>` keeps header and footer out of the index. CSP allows `wasm-unsafe-eval`. |
+| 2026-11-14 | Legacy documents | 50 PDFs copied from the old site into `public/documents/<yyyy>/<mm>/` | Matches `/wp-content/uploads/*` → `/documents/:splat`, so old PDF links keep working. Students' TCs and similar personal files were deliberately not copied. |
+| 2026-11-14 | Content truth | All page copy rewritten from `docs/content-export`; invented items deleted | Removed: GPS buses, dietitian, 42 classrooms, staff counts, job openings, a bank account, a grievance helpline and email, refund rules, blog posts, notices and FAQ answers that had no source. |
+| 2026-11-14 | Design | "The House Tie" (impeccable direction round, user's choice) | Woven crimson/gold/green tie stripes as structure, square corners, flat surfaces, list and ledger layouts instead of card grids. Gold is reserved for the one primary action per page. |
+| 2026-11-14 | Typography | Anek Latin + Anek Devanagari (variable, Ek Type), self-hosted | The user asked for sans-serif. One family covers English and Hindi; condensed widths for headlines and figures, normal width for reading. The Latin file is preloaded and metric-matched fallbacks stop layout shift. |
+| 2026-11-14 | Notice numbers | Not shown | A derived "N-YYMMDD" number was tried and removed: the school office has never issued such numbers. |
+| 2026-11-14 | Gallery | Plain linked image grid, no lightbox island | Less JavaScript; every photo opens full size. |

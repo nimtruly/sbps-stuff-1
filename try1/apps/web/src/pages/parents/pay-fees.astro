@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "Fees are accepted by crossed cheque, demand draft or cash at the **City Office** only. Cheques and demand drafts are drawn in favour of **\"Social Baluni Public School, Dehradun\"**, payable at Dehradun.\n\nThe monthly fee is paid in four quarterly instalments from the beginning of the session. Pay on time: if fees are not paid on time, the school may strike the student's name off the rolls.\n\n**Online payment is not available yet.** The school will announce it in the notices when it starts. Do not pay into any bank account unless the school office has given you the details directly.\n\n- [Fee structure (PDF)](/documents/2026/01/FEE-1.pdf)\n- Questions about fees: call [+91 96900 00890](tel:+919690000890) or email [info@sbpsdoon.com](mailto:info@sbpsdoon.com)";
+---
+
+<InfoPage
+  title="Pay fees"
+  description="How to pay school fees at Social Baluni Public School."
+  breadcrumbs={[{"label": "Parents", "href": "/parents/"}, {"label": "Pay fees", "href": "/parents/pay-fees/"}]}
+  body={body}
+  
+  related={[["Fees explained", "/admissions/fees/"], ["Refund policy", "/refund-policy/"], ["Notices", "/notices/"]]}
+></InfoPage>

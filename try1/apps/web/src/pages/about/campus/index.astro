@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../../components/InfoPage.astro';
+
+const body = "### Academic block\n\nOne academic building houses every class. Split-level planning gives the rooms plenty of light and ventilation. Besides classrooms it has the library, computer laboratory, science laboratories, music room, dance room, drama room and a teacher resource room. The younger classes have their own library and computer room, and kindergarten children have a separate play area.\n\n### Classrooms\n\nClassrooms are airy and spacious, with natural light and ventilation, and room for up to 50 students.\n\n### Laboratories\n\nScience laboratories for each stream support practical work. There are separate computer labs for primary and secondary students, and a language laboratory for communication skills.\n\n### Library\n\nA computerised library holds a selection of books, journals, magazines and software, and is a quiet place for self-study.\n\n### Audio-visual laboratory\n\nThe audio-visual laboratory seats over 200 students and is used for multimedia presentations, films and documentaries.\n\n### Multipurpose hall\n\nThe hall is used for indoor sports such as badminton, taekwondo, shooting and table tennis.\n\n### Art and music rooms\n\nA separate art studio covers drawing, sketching and painting. The music room gives students a wide range of opportunities in music.\n\n### Administrative block\n\nThe administrative block has a computerised fee and management office, a stationery store, audio-visual facilities for staff training, and a lobby for parents and visitors.\n\n### Transport\n\nThe school runs buses for pick-up and drop from different areas of the city, with trained drivers and conductors.\n\n### Health and safety\n\nDoctors visit for regular health check-ups. The school has fire extinguishers, CCTV cameras and a guard at every gate. Pre-primary classes have two teachers and a helper in each class.";
+---
+
+<InfoPage
+  title="Campus"
+  description="Classrooms, laboratories, library, sports facilities, transport and safety at SBPS, Haridwar Bypass Road, Dehradun."
+  breadcrumbs={[{"label": "About", "href": "/about/"}, {"label": "Campus", "href": "/about/campus/"}]}
+  body={body}
+  photo="campus-aerial"
+  related={[["On campus: photos", "/campus-life/gallery/"], ["Sports", "/campus-life/sports/"], ["Day boarding", "/academics/day-boarding/"], ["Contact and directions", "/contact/"]]}
+></InfoPage>

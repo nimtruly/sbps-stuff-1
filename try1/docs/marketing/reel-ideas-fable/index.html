@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SBPS reel ideas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,400..800&family=Anek+Devanagari:wght@400..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --crimson:#8f1d22; --crimson-deep:#74171c; --crimson-wash:#fbf1f1; --crimson-mist:#f6e0e0;
+  --gold:#d9b21a; --gold-deep:#8a6d0b;
+  --green:#0d5c2c; --green-wash:#eef6f0;
+  --ink:#1d2226; --charcoal:#2a3035;
+  --paper:#fbfcfd; --cool:#f3f5f6; --shade:#e7eaec; --rule:#d3d8db;
+  --body:#3d444a; --quiet:#525a61;
+  --font:"Anek Latin","Anek Devanagari",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter:clamp(16px,4vw,48px);
+  --measure:68ch;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5.5rem;scrollbar-color:var(--crimson) var(--cool);scrollbar-width:thin}
+body{margin:0;background:var(--paper);color:var(--body);font-family:var(--font);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--crimson);color:#fff}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:2px}
+a{color:var(--crimson);text-decoration-thickness:1px;text-underline-offset:.2em}
+a:hover{color:var(--crimson-deep);text-decoration-thickness:2px}
+h1,h2,h3,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+.wrap{max-width:74rem;margin-inline:auto;padding-inline:var(--gutter)}
+
+/* tie stripe */
+.tie{height:14px;background:repeating-linear-gradient(-55deg,var(--crimson) 0 34px,var(--gold) 34px 40px,var(--crimson) 40px 74px,var(--green) 74px 80px)}
+
+/* masthead */
+.mast{padding-block:clamp(2.5rem,7vw,5rem) clamp(2rem,5vw,3.5rem)}
+.mast h1{font-size:clamp(2.75rem,9vw,5.75rem);line-height:.92;font-weight:800;font-stretch:82%;letter-spacing:-.025em;color:var(--ink);text-wrap:balance;max-width:14ch}
+.mast h1 em{font-style:normal;color:var(--crimson)}
+.lede{margin-top:1.5rem;max-width:var(--measure);font-size:clamp(1.0625rem,1.6vw,1.25rem);color:var(--body)}
+.facts{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.5rem 2.25rem;font-size:.9375rem;color:var(--quiet)}
+.facts b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+
+/* sticky bar */
+.bar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);border-block:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;gap:1rem 2rem;flex-wrap:wrap;padding-block:.6rem}
+.jump{display:flex;gap:.25rem;flex-wrap:wrap}
+.jump a{display:inline-flex;align-items:baseline;gap:.45rem;padding:.4rem .7rem;border-radius:6px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.9375rem}
+.jump a:hover{background:var(--cool)}
+.jump a[aria-current="true"]{background:var(--ink);color:#fff}
+.jump .n{font-variant-numeric:tabular-nums;font-weight:500;opacity:.7}
+.filter{margin-left:auto;display:flex;align-items:center;gap:.25rem;flex-wrap:wrap}
+.filter legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+fieldset{border:0;padding:0;margin:0;display:flex;gap:.25rem;flex-wrap:wrap}
+.chip{position:relative}
+.chip input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.chip span{display:block;padding:.35rem .8rem;border:1px solid var(--rule);border-radius:999px;font-size:.875rem;font-weight:600;color:var(--quiet);background:var(--paper);transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+.chip input:hover+span{border-color:var(--ink);color:var(--ink)}
+.chip input:checked+span{background:var(--crimson);border-color:var(--crimson);color:#fff}
+.chip input:focus-visible+span{outline:3px solid var(--gold);outline-offset:3px}
+
+@media (max-width:44rem){
+  html{scroll-padding-top:7.5rem}
+  .bar .wrap{flex-direction:column;align-items:stretch;gap:.35rem;padding-block:.45rem}
+  .filter{margin-left:0}
+  .jump,.filter fieldset{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gutter)*-1);padding-inline:var(--gutter)}
+  .jump::-webkit-scrollbar,.filter fieldset::-webkit-scrollbar{display:none}
+  .jump a,.chip span{white-space:nowrap}
+  .chip{flex:none}
+}
+
+/* sections */
+section.cat{padding-block:clamp(3rem,7vw,5.5rem) 0}
+.cat-head{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;padding-bottom:1.75rem;border-bottom:2px solid var(--ink)}
+@media (min-width:56rem){.cat-head{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:3rem;align-items:end}}
+.cat-head h2{font-size:clamp(2rem,5vw,3.25rem);line-height:1;font-weight:800;font-stretch:82%;letter-spacing:-.02em;color:var(--ink);text-wrap:balance}
+.cat-head .swatch{display:block;width:3.5rem;height:8px;margin-bottom:1.1rem;background:var(--c)}
+.cat-head p{max-width:60ch;color:var(--body)}
+.cat-head .when{margin-top:.6rem;font-size:.9375rem;color:var(--quiet)}
+#phone{--c:var(--green)} #cinematic{--c:var(--ink)} #viral{--c:var(--crimson)}
+
+/* idea rows */
+.ideas>li{border-bottom:1px solid var(--rule)}
+.ideas>li[hidden]{display:none}
+details>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:3.25rem minmax(0,1fr) auto;gap:.25rem 1rem;align-items:start;padding:1.25rem .75rem;margin-inline:-.75rem;border-radius:6px}
+details>summary::-webkit-details-marker{display:none}
+details>summary:hover{background:var(--cool)}
+.code{font-weight:800;font-stretch:78%;font-size:1.5rem;line-height:1.15;color:var(--c);font-variant-numeric:tabular-nums lining-nums}
+.title{font-size:clamp(1.25rem,2.4vw,1.5rem);line-height:1.2;font-weight:700;font-stretch:88%;color:var(--ink);text-wrap:balance}
+.line{margin-top:.3rem;max-width:62ch}
+.meta{margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;font-size:.8125rem}
+.tag{padding:.3rem .65rem;line-height:1.2;border-radius:4px;font-weight:700;letter-spacing:.01em}
+.tag.robotics{background:var(--green-wash);color:var(--green)}
+.tag.nda{background:var(--crimson-wash);color:var(--crimson-deep)}
+.tag.both{background:#fbf5d9;color:#5e4a05}
+.len,.ref{color:var(--quiet);font-variant-numeric:tabular-nums}
+.first{padding:.3rem .65rem;line-height:1.2;border-radius:4px;background:var(--ink);color:#fff;font-weight:700}
+.chev{width:2.25rem;height:2.25rem;display:grid;place-items:center;border:1px solid var(--rule);border-radius:999px;color:var(--ink);background:var(--paper);transition:transform .35s var(--ease),background .2s,color .2s,border-color .2s;margin-top:.1rem}
+summary:hover .chev{border-color:var(--ink)}
+details[open] .chev{transform:rotate(45deg);background:var(--ink);color:#fff;border-color:var(--ink)}
+.more{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem 3rem;padding:.25rem 0 2rem 4.25rem}
+@media (min-width:56rem){.more{grid-template-columns:minmax(0,7fr) minmax(0,4fr)}}
+@media (max-width:36rem){.more{padding-left:0} details>summary{grid-template-columns:2.5rem minmax(0,1fr) auto} .code{font-size:1.25rem}}
+.more h3{font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:.6rem}
+.beats{counter-reset:b;display:grid;gap:.55rem}
+.beats li{counter-increment:b;display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.5rem;max-width:64ch}
+.beats li::before{content:counter(b);font-weight:700;color:var(--c);font-variant-numeric:tabular-nums}
+.side{display:grid;gap:1.25rem;align-content:start;font-size:.9375rem}
+.side p{max-width:44ch}
+.side .path{font-size:.8125rem;color:var(--quiet);word-break:break-word}
+details[open] .more{animation:reveal .5s var(--ease)}
+@keyframes reveal{from{clip-path:inset(0 0 100% 0);opacity:.4}to{clip-path:inset(0 0 0 0);opacity:1}}
+.empty{padding:1.5rem 0;color:var(--quiet)}
+.empty[hidden]{display:none}
+
+/* notes + footer */
+.notes{margin-top:clamp(3.5rem,8vw,6rem);background:var(--ink);color:#dfe4e7;padding-block:clamp(2.5rem,6vw,4rem)}
+.notes h2{font-size:clamp(1.5rem,3.5vw,2.25rem);font-weight:800;font-stretch:82%;color:#fff;line-height:1.05;margin-bottom:1.5rem}
+.notes ul{display:grid;gap:1rem 3rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr))}
+.notes li{max-width:46ch}
+.notes b{color:#fff}
+.notes ::selection{background:var(--gold);color:var(--ink)}
+footer{padding-block:1.5rem 2.5rem;font-size:.875rem;color:var(--quiet)}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{.bar{position:static} details .more{display:grid!important} .chev{display:none}}
+</style>
+</head>
+<body>
+<div class="tie" aria-hidden="true"></div>
+
+<header class="mast wrap">
+  <h1>Twenty-five reels for <em>robotics</em> and <em>NDA</em></h1>
+  <p class="lede">Every idea shared so far for @sbpsdehradun, in one place. They are grouped by how they are made: quick phone shoots, cinematic films, and comedy built on entertainment formats that went viral. Open any idea for its beats, its reference reel and what the school has to arrange.</p>
+  <p class="facts"><span><b>25</b> ideas</span><span><b>3</b> kinds</span><span><b>~2,400</b> reels catalogued</span><span><b>75</b> downloaded and studied</span><span>Researched <b>16 Nov 2026</b></span></p>
+</header>
+
+<nav class="bar" aria-label="Sections and filter">
+  <div class="wrap">
+    <div class="jump" id="jump"></div>
+    <form class="filter" id="filter">
+      <fieldset>
+        <legend>Show ideas for</legend>
+        <label class="chip"><input type="radio" name="t" value="all" checked><span>All topics</span></label>
+        <label class="chip"><input type="radio" name="t" value="robotics"><span>Robotics</span></label>
+        <label class="chip"><input type="radio" name="t" value="nda"><span>NDA</span></label>
+        <label class="chip"><input type="radio" name="t" value="both"><span>Both together</span></label>
+        <label class="chip"><input type="radio" name="t" value="first"><span>Shoot first</span></label>
+      </fieldset>
+    </form>
+  </div>
+</nav>
+
+<main id="main" class="wrap"></main>
+
+<section class="notes" aria-labelledby="notes-h">
+  <div class="wrap">
+    <h2 id="notes-h">Before anything is shot</h2>
+    <ul>
+      <li><b>Consent.</b> Written parental consent for every child on camera, and agreement from every teacher or parent who acts.</li>
+      <li><b>Facts are blanks.</b> Class numbers, names, timings and kit details are left for the school to fill in. Nothing here claims a real achievement.</li>
+      <li><b>One programme claim.</b> "NDA preparation from Class 9" is the only claim used, because the school's own documents support it.</li>
+      <li><b>Brand last.</b> No logo or school name before the final three seconds. Admissions line and phone number go in the caption.</li>
+      <li><b>Music.</b> Original or licensed tracks, so the same cut can run as a boosted post.</li>
+      <li><b>No guarantee.</b> These copy the mechanism of reels that earned their reach. That raises the odds; it does not promise a hit.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="wrap">Full scripts live beside this page in <code>docs/marketing/</code>. Account baseline: 1,308 followers, median about 8,500 views per reel.</footer>
+
+<script>
+const IG = c => "https://www.instagram.com/reel/" + c + "/";
+const CATS = [
+ {id:"phone", name:"Phone-shot scripts", blurb:"Shot on a phone by anyone on staff, in a normal school day. Modelled on small accounts whose reels beat their follower count many times over: a working model, a challenge, a comparison, one emotional beat.", when:"Best for posting often and finding out what your audience responds to.", file:"docs/marketing/reels-robotics-nda-outlier-scripts.md", ideas:[
+  {code:"R1", title:"Chura ke dikhao", topic:"robotics", len:"25-30s", first:true, line:"Kids take turns trying to steal a chocolate from a student-built alarm box. Nobody can, including the teacher.", ref:["Try to steal the diamond","11.3M","DHtLwb1y9zi"], beats:["Hand creeps toward the chocolate, buzzer screams.","Builder: \"Yeh chocolate aaj tak koi nahi chura paaya.\"","Four quick failed attempts, then a teacher fails too.","Builder shows the sensor inside, names the class, eats the chocolate."], need:"A box with a proximity sensor and buzzer built by students."},
+  {code:"R2", title:"Giregi ya rukegi?", topic:"robotics", len:"15-20s", line:"A robot car drives straight at the table edge while three kids wince. It stops dead.", ref:["Clothes-folding machine","35.9M","DWY-F35D4KJ"], beats:["Low angle, car heading for the edge: \"Giregi ya rukegi?\"","Faces watching, slow motion for the last half second.","It stops. Builder shows the sensor.","Car set off again; cut before the result so it loops."], need:"A car that detects an edge or obstacle."},
+  {code:"R3", title:"Bina haath lagaye", topic:"robotics", len:"20-25s", line:"One junior student, one take, outdoors: a dustbin that opens without being touched, explained in their own words.", ref:["Water purification model","7.4M","DGkLsJAzEtI"], beats:["\"Bina haath lagaye yeh dustbin khol ke dikhaun?\"","Waves a hand, lid opens, twice.","Points at sensor, motor, lid.","Name, class, \"yeh maine banaya hai.\""], need:"Any working hands-free sensor project and a confident young student."},
+  {code:"R4", title:"9 baar fail", topic:"robotics", len:"25-30s", line:"Real failed attempts cut fast with a counter, then the one run that works, shown without a cut.", ref:["Wait-for-the-end student builds","11.3M","DHtLwb1y9zi"], beats:["Robot drives off the track and falls.","Fast cuts of real failures, counter ticking up.","Two students arguing over the code.","The run that works, start to finish. \"Tab jaake chala.\""], need:"Film every real attempt during a robotics period. Use the true count."},
+  {code:"R5", title:"Ek cadet insaan nahi hai", topic:"both", len:"15-20s", line:"Boots march in step. Last in line, rolling along behind the squad, is a small robot.", ref:["Sync marching plus student robot","no direct reference",""], beats:["Low shot of boots, drill command.","Pan to the end of the line: a robot keeping pace.","\"Tham!\" Everyone halts. The robot halts a beat late.","Builder runs in and salutes it."], need:"A line-following or remote robot and an NDA-wing squad."},
+  {code:"N1", title:"Normal school vs hamara school", topic:"nda", len:"20-25s", line:"The same students play both sides: the morning greeting, the bell, the late-comer, PT period.", ref:["School bus vs army school bus","2.4M from 183 followers","DZ-DjirBFl6"], beats:["\"Good moooorning ma'am\" against \"Jai Hind, sir!\"","Bell: strolling out against falling in.","Late-comer excuses against push-ups unasked.","Same boy on both sides: \"Yeh bhi main hi hoon.\""], need:"Only show things that really happen at SBPS."},
+  {code:"N2", title:"Class 9. NDA interview.", topic:"nda", len:"40-45s", first:true, line:"A student faces the instructor's hardest questions. The answers are real and unscripted.", ref:["11-year-old's military school interview","14M","DYt0CfwtqJL"], beats:["\"May I come in, sir?\"","\"Fauj mein kyun jaana hai? Salary ke liye?\"","Hold on the student's face through the pause.","\"Agar selection nahi hua toh?\" Then a salute."], need:"A well-spoken student and the NDA instructor."},
+  {code:"N3", title:"Fauji", topic:"nda", len:"15s", first:true, line:"\"Bade hoke kya banoge?\" Doctor, engineer, YouTuber. Then one student stands up.", ref:["फौजी","13M on a 5.8K account","DT1mwbAkq0E"], beats:["Teacher's view of the whole class.","Quick answers and laughter.","One student stands: \"Fauji, ma'am.\" The room goes quiet.","Hard cut to the same student at dawn drill, fade to black and white."], need:"The line has to be true for the child who says it."},
+  {code:"N4", title:"Aise chalte hain", topic:"nda", len:"7-9s", line:"A top-down shot of boots stepping off together. The last frame matches the first, so it loops.", ref:["NCC girls walk like this","3.1M","DUDjdlxiCLI"], beats:["Boots toe to toe, still.","\"Tez chal!\" All step off, camera follows the feet.","\"Tham!\" Feet snap together in the opening framing."], need:"Six to eight students in drill boots."},
+  {code:"N5", title:"Rank pehchano", topic:"nda", len:"25-30s", line:"A rapid-fire quiz on army rank insignia, ending on a full chart people will save.", ref:["Army legends poster","3.9M on 337 followers","Dea8z_lug0a"], beats:["A card held up: \"Yeh kaun si rank hai? 5 second.\"","Countdown, answer, reveal.","Three more, faster, with one honest wrong answer.","Hardest card, cut before the answer, then the full chart."], need:"Rank cards checked against the official chart."}
+ ]},
+ {id:"cinematic", name:"Cinematic films", blurb:"For the professional crew: macro lenses, shallow focus, rack focus, slow motion and proper sound. Each film is about one small true moment, because the polished campus-tour film was the format that did not travel.", when:"Best as the pieces you put ad money behind.", file:"docs/marketing/cinematic/", ideas:[
+  {code:"C1", title:"Pehli Baar Chala", topic:"robotics", len:"30s", line:"The thirty seconds before a child's robot moves for the first time, told almost entirely in close-up.", ref:["School nostalgia macro film","49.5M","C_hxpnny8YZ"], beats:["Macro: an eye with a green LED reflected in it.","Screw, keys, wire, each sharper and faster.","A finger over the switch. Click. Music cuts.","Two full seconds of nothing, then the wheels turn.","The builder's face in slow motion: \"Chal gaya.\""], need:"A room that can be blacked out and a real first run."},
+  {code:"C2", title:"Paanch Baje", topic:"nda", len:"30s", line:"One student in the hour before sunrise, with four lines in their own voice about why they get up.", ref:["Cadet in the rain with a poem","12.5M","DaFCy-ePeDp"], beats:["An alarm in the dark. A hand stops it and does not go back to sleep.","Bare feet on a cold floor, laces pulled tight.","A long-lens shot: one small figure on the ground in mist.","A side tracking shot as others join the run.","First sun breaks over the squad at attention."], need:"A 50-minute blue-hour window. The voice-over must be the student's own words."},
+  {code:"C3", title:"Ek Hi Bachcha", topic:"both", len:"25s", first:true, line:"A drill film and a robotics film cut together shot for shot, until the last frame shows it is the same student.", ref:["First day / last day of school","22.1M","DW8H7vtkXA1"], beats:["Boot lace pulled tight / cable tie pulled tight.","Boot stamps down / robot wheel drops onto the table.","Eyes front / eyes on a circuit, one continuous push-in.","Salute rises / hand rises to lower safety glasses.","One portrait, half cold light, half warm: \"Dono main hi hoon.\""], need:"A student genuinely in both programmes, and a shot sheet with monitor stills."},
+  {code:"C4", title:"Shot Ke Peeche", topic:"both", len:"20s", line:"A messy phone clip of the crew doing something that looks ridiculous, then a hard cut to the finished shot it produced.", ref:["Phone behind-the-scenes, then the graded shot","18.2M on 4.5K followers","DajqRCJJXOM"], beats:["Phone footage: operator on the floor, kids holding torches.","Text: \"Yeh log kar kya rahe hain?\"","One beat of black.","The finished letterboxed slow-motion shot.","Everyone crowding the monitor."], need:"Someone assigned to film the crew on a phone at every shoot."},
+  {code:"C5", title:"Taiyari", topic:"nda", len:"25s", line:"Getting ready for parade, told only through objects: polish, brush, belt, lace. The face comes last.", ref:["School nostalgia macro film","49.5M","C_hxpnny8YZ"], beats:["Polish tin lid, brush across a toe-cap in slow motion.","A window reflected in the shine.","Belt buckle, a crease in ironed cloth, a lace through an eyelet.","From behind: one adjustment at the mirror.","The face for the first time, then out into morning light to join the line."], need:"Only the student's own kit. No borrowed army uniform."}
+ ]},
+ {id:"viral", name:"Viral entertainment formats", blurb:"Comedy and story borrowed from what earned tens of millions of views: Vir Saini's role-swap films, Tanmay Bhat's say-the-quiet-part ads, satire appeals, heist spoofs, robots with human flaws and ten-second loop gags. Shot cinematically, played completely straight.", when:"Best chance at reaching people who have never heard of the school.", file:"docs/marketing/viral-entertainment-ideas.md", ideas:[
+  {code:"V1", title:"Agar Robotics Cricket Hota", topic:"robotics", len:"60-75s", first:true, line:"A world where India treats school robotics exactly the way it treats cricket.", ref:["Vir Saini, \"If baniyans...\"","23.4M, 62K shares","DZM9Z6NM0XA"], beats:["Uncles at a chai stall: \"Sharma ji ke bete ka sensor form mein nahi hai.\"","Gully robotics: a ball of wire through a window.","A family frozen at the TV: \"Bas ek semicolon.\"","Commentators: \"Kya khoobsurat soldering. Classical.\"","The real robotics room: \"Kuch schools mein yeh duniya already hai.\""], need:"Six to eight adult actors and three locations beyond the school."},
+  {code:"V2", title:"Robot Bachao", topic:"robotics", len:"45-60s", first:true, line:"A solemn charity appeal on behalf of robotics kits locked in school cupboards.", ref:["\"Save Bosses\" satire","10.8M","DPEhNaLkrC_"], beats:["Black and white: one LED blinking through a cupboard door.","A robot at the window watching children play.","\"Use sirf inspection ke din bahar nikala jaata hai. Photo ke liye.\"","Colour floods in as SBPS students pull a kit out.","\"SBPS mein robot almari mein nahi rehte.\""], need:"Copy the grammar of real charity appeals exactly. Never name another school."},
+  {code:"V3", title:"Honest Parent-Teacher Meeting", topic:"robotics", len:"45-60s", line:"A parent-teacher meeting where everyone says what they are really thinking.", ref:["Tanmay Bhat x Noice","26.9M","DPtTQzVDKJ1"], beats:["\"Aap usse theek kar dein, taaki mujhe na karna pade.\"","\"Marks se farak nahi padta. Bas Sharma ji ke bete se zyada.\"","Child to camera: \"Mujhe laga tha meri baat hogi.\"","Robotics teacher: \"Ab woh screen pe code likh raha hai.\"","Parent: \"...toh ab main kya complain karoon?\""], need:"Four adults who can play it dead straight. Real teachers are funnier than actors."},
+  {code:"V4", title:"Papa: 0, Class 7: 1", topic:"robotics", len:"30-40s", first:true, line:"An engineer father cannot get the robot to work. His daughter can, one-handed, without looking up.", ref:["Virgin Mobile ad re-post","38.2M","DQdp5YwDDQ8"], beats:["\"Beta, main engineer hoon. Hamare zamane mein toh...\"","Manual upside down, blowing on a wire, phoning a friend.","\"Papa.\" \"Ek minute beta.\"","She flips one switch. The robot drives into his lap.","A cricket-style scoreline in the corner."], need:"A parent willing to lose on camera."},
+  {code:"V5", title:"Homework Heist", topic:"robotics", len:"60s", line:"A full heist film in which a crew of students uses a robot to steal one samosa from the staff room.", ref:["The Potato Heist","57.9M, 129K shares","Dc8u5q5qCH5"], beats:["A chalk blueprint: \"Target: ek samosa. Chaar minute.\"","Freeze-frame introductions and a slow-motion corridor walk.","Robot's-eye view under the staff-room door.","A near miss beside a dustbin.","The principal behind them: \"Full marks. Samosa wapas rakho.\""], need:"A robot that fits under a door, and the principal's cameo."},
+  {code:"V6", title:"Robot Ka Pehla Din", topic:"robotics", len:"60s, a series", first:true, line:"A documentary crew follows a new student on his first day. The new student is a robot, and he is not coping.", ref:["Robot-with-a-flaw reels","up to 134M","DHRD_PfTpd9"], beats:["Late to assembly, stops in the wrong line.","Class teacher: \"Bachcha achha hai. Bas sunta nahi hai.\"","Roll call: a single beep.","Punished outside the door beside another boy.","Plugged in alone at lunch until a girl sits down next to it."], need:"A recurring character gives people a reason to follow the account."},
+  {code:"V7", title:"Hero Ki Entry", topic:"robotics", len:"20-25s", line:"A full Bollywood hero entrance, slow motion and dhol, for a robot the size of a lunchbox.", ref:["Bollywood spoofs","31M to 110M","DfR1Q0NogHX"], beats:["The gate opens. Dust, wind, a crowd turns.","A backlit silhouette. Someone drops their books.","The reveal: tiny, sunglasses, rolling very slowly.","It reaches a small bump and tips over. The dhol stops.","\"Hero abhi training mein hai.\""], need:"A fan, coloured powder and an original dhol track."},
+  {code:"V8", title:"Expectation vs Class 6", topic:"robotics", len:"20-30s", line:"A glossy fake advert robot on top, a cardboard Class 6 robot underneath. Only one of them actually works.", ref:["Movie scene re-created three ways","68M","DOdd6rdDNhy"], beats:["Split frame with labels.","The top one \"rotates\" on a turntable; the bottom one really turns.","The top one \"walks\" with a visible hand pushing it.","The top robot is lifted: hollow.","The cardboard one rolls up and bumps it over."], need:"Both halves shot by your crew. No footage from real films or adverts."},
+  {code:"V9", title:"Ustaad vs Robot", topic:"both", len:"30-40s", line:"The drill instructor tries to command a robot. It does not listen. A small child fixes it with a laptop.", ref:["Noice \"broken window\"","16.1M","Dba2B7BMXwv"], beats:["Inspection at dawn. A robot is in the line.","\"Savdhan!\" It rolls into his boot.","Louder, softer, in English, a whistle.","\"Sir, isse likh ke bolna padta hai.\" Four keys. It halts.","\"Kal se tum sab ko bhi likh ke bolunga.\""], need:"The real instructor playing himself, or a PT teacher. Never an actor as a serving soldier."},
+  {code:"V10", title:"Chalk", topic:"robotics", len:"9-12s", first:true, line:"A robot brings the teacher her chalk. Every time she reaches for it, it reverses.", ref:["Barbershop loop gag","604M in 9 seconds","DQk6deIkjKZ"], beats:["She holds out a hand without looking.","She reaches; it backs away.","She turns; it rolls forward, innocent.","The class loses it.","The last frame matches the first."], need:"A remote robot and a student driving it from under a desk. Ten takes."}
+ ]}
+];
+
+const TOPIC = {robotics:"Robotics", nda:"NDA", both:"Robotics + NDA"};
+const plus = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M7 1.5v11M1.5 7h11"/></svg>';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const main = document.getElementById("main");
+const jump = document.getElementById("jump");
+
+CATS.forEach(cat => {
+  jump.insertAdjacentHTML("beforeend", `<a href="#${cat.id}">${esc(cat.name)} <span class="n" data-count="${cat.id}">${cat.ideas.length}</span></a>`);
+  const rows = cat.ideas.map(i => {
+    const ref = i.ref[2] ? `<a href="${IG(i.ref[2])}" target="_blank" rel="noopener">${esc(i.ref[0])}</a>` : esc(i.ref[0]);
+    return `<li data-topic="${i.topic}" data-first="${i.first ? 1 : 0}">
+      <details>
+        <summary>
+          <span class="code">${i.code}</span>
+          <span>
+            <span class="title">${esc(i.title)}</span>
+            <p class="line">${esc(i.line)}</p>
+            <span class="meta"><span class="tag ${i.topic}">${TOPIC[i.topic]}</span><span class="len">${esc(i.len)}</span><span class="ref">Reference: ${esc(i.ref[1])}</span>${i.first ? '<span class="first">Shoot first</span>' : ""}</span>
+          </span>
+          <span class="chev">${plus}</span>
+        </summary>
+        <div class="more">
+          <div><h3>How it plays</h3><ol class="beats">${i.beats.map(b => `<li><span>${esc(b)}</span></li>`).join("")}</ol></div>
+          <div class="side">
+            <div><h3>Modelled on</h3><p>${ref}, ${esc(i.ref[1])}.</p></div>
+            <div><h3>What it needs</h3><p>${esc(i.need)}</p></div>
+            <p class="path">Full script: <code>${esc(cat.file)}</code></p>
+          </div>
+        </div>
+      </details>
+    </li>`;
+  }).join("");
+  main.insertAdjacentHTML("beforeend", `<section class="cat" id="${cat.id}" aria-labelledby="${cat.id}-h">
+    <div class="cat-head">
+      <div><span class="swatch" aria-hidden="true"></span><h2 id="${cat.id}-h">${esc(cat.name)}</h2></div>
+      <div><p>${esc(cat.blurb)}</p><p class="when">${esc(cat.when)}</p></div>
+    </div>
+    <ul class="ideas">${rows}</ul>
+    <p class="empty" hidden>Nothing in this group matches that filter. Choose "All topics" to see everything here.</p>
+  </section>`);
+});
+
+function applyFilter(v){
+  document.querySelectorAll("section.cat").forEach(sec => {
+    let shown = 0;
+    sec.querySelectorAll(".ideas > li").forEach(li => {
+      const ok = v === "all" || (v === "first" ? li.dataset.first === "1" : li.dataset.topic === v);
+      li.hidden = !ok; if (ok) shown++;
+    });
+    sec.querySelector(".empty").hidden = shown !== 0;
+    document.querySelector(`[data-count="${sec.id}"]`).textContent = shown;
+  });
+}
+document.getElementById("filter").addEventListener("change", e => applyFilter(e.target.value));
+
+const links = [...jump.querySelectorAll("a")];
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(a => a.setAttribute("aria-current", a.hash === "#" + e.target.id ? "true" : "false"));
+}), {rootMargin: "-20% 0px -70% 0px"});
+document.querySelectorAll("section.cat").forEach(s => io.observe(s));
+</script>
+</body>
+</html>

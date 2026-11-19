@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "The school has large playgrounds for football, cricket and athletics. Physical education helps students build fitness, strength and stamina, along with discipline, self-confidence and team spirit.\n\n### Fifteen sports\n\nCoaching is available after school hours, and students train to compete in inter-school competitions:\n\n- Football\n- Cricket\n- Athletics\n- Basketball\n- Volleyball\n- Table tennis\n- Badminton\n- Boxing\n- Shooting\n- Fencing\n- Archery\n- Mixed martial arts\n- Kabaddi\n- Yoga and meditation\n- Indoor sports\n\n### Academies and clubs\n\nBoxing Academy, Shooting Club, Cricket and Football Academy, martial arts, yoga and physical training, coached by experts.\n\n### Results\n\n- **38th National Games, Uttarakhand:** SBPS students were selected in fencing (10), badminton (5), archery (3), kalaripayattu (3) and shooting (2).\n- **2024 SFA Inter-School Competition:** runner-up, best school in fencing, shooting and boxing, and rising school in sports.";
+---
+
+<InfoPage
+  title="Sports"
+  description="Fifteen sports with coaching after school hours, a boxing academy, shooting club, and cricket and football academies."
+  breadcrumbs={[{"label": "Campus life", "href": "/campus-life/"}, {"label": "Sports", "href": "/campus-life/sports/"}]}
+  body={body}
+  photo="sports-cycling"
+  related={[["National Games announcement", "/blog/38th-national-games-selections/"], ["SFA 2024 result", "/blog/sfa-inter-school-competition-2024/"], ["Sports photos", "/campus-life/gallery/sports-and-activities/"], ["Co-curricular clubs", "/campus-life/co-curricular/"]]}
+></InfoPage>

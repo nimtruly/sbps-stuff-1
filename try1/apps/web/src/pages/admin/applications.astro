@@ -1,0 +1,113 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { checkAdminAuth } from '../../lib/adminAuth';
+import { getEnv } from '../../lib/forms';
+import { getDb } from '../../lib/db';
+import { applications } from '../../db/schema';
+import { desc } from 'drizzle-orm';
+
+const env = getEnv(Astro.locals);
+
+const authResponse = checkAdminAuth(Astro.request, env);
+if (authResponse) {
+  return authResponse;
+}
+
+const db = getDb(env.DB);
+let records: any[] = [];
+
+if (db) {
+  try {
+    records = await db.select().from(applications).orderBy(desc(applications.createdAt)).limit(100);
+  } catch (err) {
+    console.warn('Error fetching applications:', err);
+  }
+}
+---
+
+<BaseLayout title="Admission Applications | Admin Portal">
+  <div class="min-h-screen bg-paper-100 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <a href="/admin/" class="text-xs font-semibold text-crimson-700 hover:underline mb-1 inline-block">
+            ← Back to Dashboard
+          </a>
+          <h1 class="text-2xl sm:text-3xl font-serif font-bold text-ink">
+            Online Admission Applications ({records.length})
+          </h1>
+        </div>
+
+        <div>
+          <a
+            href="/api/admin/export?type=applications"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-forest-800 text-white font-semibold text-xs hover:bg-forest-900 transition-colors shadow-xs"
+          >
+            <span>📥 Download CSV</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-paper-300 overflow-hidden shadow-xs">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-paper-200/70 text-xs font-bold uppercase tracking-wider text-paper-700 border-b border-paper-300">
+                <th class="p-3.5">Ref ID / Date</th>
+                <th class="p-3.5">Student Name</th>
+                <th class="p-3.5">DOB / Gender</th>
+                <th class="p-3.5">Grade</th>
+                <th class="p-3.5">Father / Mother</th>
+                <th class="p-3.5">Mobile / Email</th>
+                <th class="p-3.5">Previous School</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-paper-200">
+              {records.length > 0 ? (
+                records.map((r) => (
+                  <tr class="hover:bg-paper-50 transition-colors">
+                    <td class="p-3.5">
+                      <div class="font-mono text-xs font-bold text-ink">{r.id}</div>
+                      <div class="text-paper-500 font-mono text-2xs">
+                        {new Date(r.createdAt).toLocaleDateString('en-IN')}
+                      </div>
+                    </td>
+                    <td class="p-3.5 font-bold text-ink">{r.studentName}</td>
+                    <td class="p-3.5 text-paper-700">
+                      {r.dob} ({r.gender})
+                    </td>
+                    <td class="p-3.5">
+                      <span class="px-2 py-0.5 rounded bg-forest-100 text-forest-800 text-xs font-semibold">
+                        {r.grade}
+                      </span>
+                    </td>
+                    <td class="p-3.5 text-paper-800">
+                      <div>{r.fatherName}</div>
+                      <div class="text-xs text-paper-500">{r.motherName}</div>
+                    </td>
+                    <td class="p-3.5 font-mono text-xs text-paper-800">
+                      <div>{r.mobile}</div>
+                      <div class="text-2xs text-paper-500">{r.email}</div>
+                    </td>
+                    <td class="p-3.5 text-paper-700 text-xs">
+                      <div>{r.previousSchool || '—'}</div>
+                      <div class="text-2xs text-paper-500">{r.previousBoard} • {r.lastClassPercentage}</div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colspan="7" class="p-8 text-center text-paper-500">
+                    No admission applications registered yet.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Search"
+  description="Search the Social Baluni Public School website: admissions, fees, notices, policies and news."
+  breadcrumbs={[{ label: 'Search', href: '/search/' }]}
+>
+  <form action="/search/" method="get" role="search" class="measure flex gap-2" data-search-form>
+    <label for="q" class="sr-only">Search the site</label>
+    <input id="q" name="q" type="search" autocomplete="off" placeholder="For example: fees, admission, NEET" class="h-14 w-full border-2 border-ink bg-white px-4 text-lg focus:outline-none" />
+    <button type="submit" class="h-14 shrink-0 bg-crimson-700 px-6 text-lg font-bold text-white hover:bg-crimson-800">Search</button>
+  </form>
+  <p class="measure mt-4 text-paper-600" data-search-status aria-live="polite"></p>
+  <ol class="measure mt-6 border-t-2 border-ink empty:border-0" data-search-results role="list"></ol>
+</PageLayout>
+
+<script>
+  type Result = { url: string; meta: { title?: string }; excerpt: string };
+  const form = document.querySelector<HTMLFormElement>('[data-search-form]')!;
+  const input = form.querySelector<HTMLInputElement>('input')!;
+  const status = document.querySelector<HTMLElement>('[data-search-status]')!;
+  const list = document.querySelector<HTMLOListElement>('[data-search-results]')!;
+  let pagefind: any;
+
+  async function run(q: string) {
+    list.replaceChildren();
+    if (!q.trim()) {
+      status.textContent = '';
+      return;
+    }
+    status.textContent = 'Searching…';
+    try {
+      // Built by `pagefind --site dist` after the Astro build
+      const bundle = '/pagefind/pagefind.js';
+      pagefind ??= await import(/* @vite-ignore */ bundle);
+      const search = await pagefind.search(q);
+      const results: Result[] = await Promise.all(search.results.slice(0, 15).map((r: any) => r.data()));
+      status.textContent = results.length ? `${search.results.length} result${search.results.length === 1 ? '' : 's'} for “${q}”` : `Nothing found for “${q}”. Try another word.`;
+      for (const r of results) {
+        const li = document.createElement('li');
+        li.className = 'border-b border-paper-300';
+        const a = document.createElement('a');
+        a.href = r.url;
+        a.className = 'block py-4 group';
+        const t = document.createElement('span');
+        t.className = 'block text-xl font-semibold group-hover:text-crimson-700 group-hover:underline';
+        t.textContent = r.meta.title ?? r.url;
+        const ex = document.createElement('span');
+        ex.className = 'mt-1 block text-paper-700';
+        // Pagefind excerpts contain only <mark> tags around matches
+        ex.innerHTML = r.excerpt.replace(/<(?!\/?mark>)[^>]*>/g, '');
+        a.append(t, ex);
+        li.append(a);
+        list.append(li);
+      }
+    } catch {
+      status.textContent = 'Search is not available right now.';
+    }
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    history.replaceState(null, '', `?q=${encodeURIComponent(input.value)}`);
+    run(input.value);
+  });
+  const q = new URLSearchParams(location.search).get('q') ?? '';
+  input.value = q;
+  if (q) run(q);
+</script>
+
+<style is:global>
+  [data-search-results] mark {
+    background: var(--color-saffron-200);
+    color: inherit;
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { cms } from '../../../lib/cms';
+
+const albums = await cms.getAlbums();
+---
+
+<PageLayout
+  title="Photo gallery"
+  description="Photographs of the campus, classrooms, sports and activities at Social Baluni Public School, Dehradun."
+  breadcrumbs={[{ label: 'Campus life', href: '/campus-life/' }, { label: 'Photo gallery', href: '/campus-life/gallery/' }]}
+>
+  <ul class="grid gap-10 md:grid-cols-2" role="list">
+    {albums.map((album) => (
+      <li>
+        <a href={`/campus-life/gallery/${album.slug}/`} class="group block">
+          <img src={album.cover} alt="" width="1280" height="853" loading="eager" class="aspect-[3/2] w-full object-cover" />
+          <h2 class="mt-4 text-3xl font-bold group-hover:text-crimson-700 group-hover:underline">{album.title}</h2>
+          <p class="mt-1 text-paper-600"><span data-figure>{album.images.length}</span> photos</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="measure mt-12 text-paper-700">
+    More photos and videos: <a class="font-semibold underline" href="https://www.facebook.com/SBPSDOON" rel="noopener">Facebook</a> and <a class="font-semibold underline" href="https://www.youtube.com/channel/UChjGT-I6ev3a95G11FlZ6cw" rel="noopener">YouTube</a>.
+  </p>
+</PageLayout>

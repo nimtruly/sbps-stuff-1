@@ -1,0 +1,46 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { cms } from '../../lib/cms';
+
+const institutions = await cms.getInstitutions();
+const order = ['baluni-classes-dehradun', 'doon-baluni-defence-academy', 'baluni-public-school-kotdwar', 'baluni-public-school-dayalbagh-agra', 'baluni-public-school-deori-road-agra'];
+institutions.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+---
+
+<PageLayout
+  title="Baluni Group"
+  description="The coaching institutes and schools of the Dr. Baluni Group of Education, SBPS's partner for NEET, JEE and NDA preparation."
+  breadcrumbs={[{ label: 'About', href: '/about/' }, { label: 'Baluni Group', href: '/baluni-group/' }]}
+>
+  <div class="prose-sbps">
+    <p>
+      The Dr. Baluni Group of Education has guided students preparing for IIT-JEE, medical and other competitive exams for two decades. It launched Baluni Public School at Bhauwala, Dehradun, in January 2011, Baluni Public School, Kotdwar, in March 2012, and Baluni Public School, Dayalbagh, Agra, in March 2013.
+    </p>
+    <p>
+      At SBPS, Baluni Classes provides the integrated NEET, JEE, NTSE and Olympiad preparation, and Doon Baluni Defence Academy the NDA and defence preparation.
+    </p>
+  </div>
+
+  <ul class="mt-12 border-t-2 border-ink" role="list">
+    {institutions.map((inst) => (
+      <li class="grid gap-3 border-b border-paper-300 py-6 md:grid-cols-[2fr_3fr] md:gap-10">
+        <div>
+          <h2 class="text-2xl font-bold">{inst.name}</h2>
+          <p class="mt-1 text-paper-700">{inst.type}</p>
+        </div>
+        <dl class="grid gap-1 text-base">
+          <div class="flex gap-2"><dt class="sr-only">Address</dt><dd>{inst.address}</dd></div>
+          {inst.phones.length > 0 && (
+            <div class="flex gap-2"><dt class="font-semibold">Phone</dt><dd data-figure>{inst.phones.join(', ')}</dd></div>
+          )}
+          {inst.email && (
+            <div class="flex gap-2"><dt class="font-semibold">Email</dt><dd><a class="underline" href={`mailto:${inst.email}`}>{inst.email}</a></dd></div>
+          )}
+          {inst.url && (
+            <div class="flex gap-2"><dt class="sr-only">Website</dt><dd><a class="font-semibold text-crimson-700 underline" href={inst.url} rel="noopener">{inst.url.replace(/^https?:\/\/(www\.)?|\/$/g, '')}</a></dd></div>
+          )}
+        </dl>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

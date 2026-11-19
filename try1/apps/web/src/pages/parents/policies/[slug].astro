@@ -1,0 +1,37 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Prose from '../../../components/ui/Prose.astro';
+import { cms } from '../../../lib/cms';
+
+export async function getStaticPaths() {
+  const policies = await cms.getPolicies();
+  return policies.map((p) => ({ params: { slug: p.slug }, props: { policy: p } }));
+}
+
+const { policy } = Astro.props;
+const others = (await cms.getPolicies()).filter((p) => p.slug !== policy.slug);
+---
+
+<PageLayout
+  title={policy.title}
+  description={policy.summary}
+  breadcrumbs={[
+    { label: 'Parents', href: '/parents/' },
+    { label: 'Rules and policies', href: '/parents/policies/' },
+    { label: policy.title, href: `/parents/policies/${policy.slug}/` },
+  ]}
+>
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,68ch)_1fr] lg:gap-16">
+    <Prose text={policy.body} />
+    <aside aria-labelledby="pol-title">
+      <div class="border-t-2 border-ink lg:sticky lg:top-36">
+        <h2 id="pol-title" class="py-3 text-xl font-bold">Other policies</h2>
+        <ul class="border-t border-paper-300" role="list">
+          {others.map((p) => (
+            <li class="border-b border-paper-300"><a href={`/parents/policies/${p.slug}/`} class="block py-3 font-semibold hover:text-crimson-700">{p.title}</a></li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</PageLayout>

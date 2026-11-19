@@ -1,0 +1,73 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Photo from '../components/ui/Photo.astro';
+import { school } from '../data/nav';
+
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const topics = ['Admissions', 'Day boarding', 'Integrated programmes', 'Fees', 'Transport', 'Something else'];
+const field = 'mt-1 h-12 w-full border-2 border-paper-400 bg-white px-3 text-base focus:border-ink focus:outline-none';
+---
+
+<PageLayout
+  title="Contact the school"
+  description="Address, phone numbers and email for Social Baluni Public School, Dehradun, and a form to send us a message."
+  breadcrumbs={[{ label: 'Contact', href: '/contact/' }]}
+>
+  <div class="grid gap-14 lg:grid-cols-[5fr_7fr]">
+    <div class="space-y-10">
+      <section aria-labelledby="addr-title">
+        <h2 id="addr-title" class="text-2xl font-bold">Address</h2>
+        <address class="mt-3 text-lg not-italic">
+          Social Baluni Public School<br />
+          Haridwar Bypass Road, Brahmanwala<br />
+          Near Radhaswami Satsang Bhawan<br />
+          Dehradun, Uttarakhand
+        </address>
+        <a href="https://maps.google.com/?q=Social+Baluni+Public+School+Dehradun" rel="noopener" class="mt-3 inline-block font-semibold text-crimson-700 underline">Open in Google Maps</a>
+      </section>
+      <section aria-labelledby="phone-title">
+        <h2 id="phone-title" class="text-2xl font-bold">Phone and email</h2>
+        <ul class="mt-3 space-y-1.5 text-lg" role="list">
+          {school.phones.map((p) => (
+            <li><a href={`tel:${p.replace(/\s/g, '')}`} class="font-semibold hover:text-crimson-700 hover:underline" data-figure>{p}</a></li>
+          ))}
+          <li><a href={`mailto:${school.email}`} class="font-semibold hover:text-crimson-700 hover:underline">{school.email}</a></li>
+          <li><a href={school.whatsapp} rel="noopener" class="font-semibold hover:text-crimson-700 hover:underline">WhatsApp the school</a></li>
+        </ul>
+      </section>
+      <Photo name="campus-entrance" sizes="(min-width: 1024px) 38vw, 100vw" class="aspect-[4/3] w-full object-cover" />
+    </div>
+
+    <section aria-labelledby="form-title" class="border-t-2 border-ink pt-6">
+      <h2 id="form-title" class="text-3xl font-bold">Send a message</h2>
+      <p class="mt-2 text-paper-700">The school office will reply by phone or email.</p>
+      <form method="POST" action="/api/enquiry" class="mt-6 grid gap-5 sm:grid-cols-2">
+        <label class="sm:col-span-2">
+          <span class="font-semibold">Your name</span>
+          <input name="parentName" required autocomplete="name" class={field} />
+        </label>
+        <label>
+          <span class="font-semibold">Phone</span>
+          <input name="phone" type="tel" required inputmode="tel" autocomplete="tel" class={field} />
+        </label>
+        <label>
+          <span class="font-semibold">Email <span class="font-normal text-paper-600">(optional)</span></span>
+          <input name="email" type="email" autocomplete="email" class={field} />
+        </label>
+        <label class="sm:col-span-2">
+          <span class="font-semibold">About</span>
+          <select name="grade" required class={field}>
+            {topics.map((t) => <option>{t}</option>)}
+          </select>
+        </label>
+        <label class="sm:col-span-2">
+          <span class="font-semibold">Message</span>
+          <textarea name="message" rows="5" maxlength="2000" class="mt-1 w-full border-2 border-paper-400 bg-white p-3 text-base focus:border-ink focus:outline-none"></textarea>
+        </label>
+        <input type="hidden" name="preferredContact" value="phone" />
+        {turnstileKey && <div class="cf-turnstile sm:col-span-2" data-sitekey={turnstileKey}></div>}
+        <button type="submit" class="h-12 bg-crimson-700 px-6 text-lg font-bold text-white hover:bg-crimson-800 sm:col-span-2 sm:justify-self-start">Send message</button>
+      </form>
+    </section>
+  </div>
+</PageLayout>

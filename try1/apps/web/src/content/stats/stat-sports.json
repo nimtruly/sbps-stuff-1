@@ -1,0 +1,9 @@
+{
+  "id": "stat-sports",
+  "label": "Sports offered",
+  "value": "15",
+  "context": "Including boxing, shooting, fencing, archery and cricket",
+  "source": "sports page",
+  "verified": true,
+  "order": 5
+}

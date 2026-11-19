@@ -1,0 +1,28 @@
+---
+export const prerender = false;
+
+import PageLayout from '../layouts/PageLayout.astro';
+
+const form = Astro.url.searchParams.get('form') ?? 'enquiry';
+const reason = (Astro.url.searchParams.get('reason') ?? 'Something went wrong.').slice(0, 300);
+
+const back: Record<string, string> = {
+  enquiry: '/admissions/enquire/',
+  apply: '/admissions/apply/',
+  careers: '/careers/',
+  subscribe: '/notices/',
+};
+Astro.response.status = 400;
+Astro.response.headers.set('Cache-Control', 'no-store');
+---
+
+<PageLayout title="Your form was not sent" description="Nothing was submitted. Please go back and try again." noindex>
+  <div class="max-w-2xl space-y-6">
+    <p role="alert" class="rounded-xl border border-crimson-300 bg-crimson-50 p-5 text-crimson-900">{reason}</p>
+    <p class="text-paper-700">
+      Use your browser's back button to keep what you typed, or call the school office on
+      <a class="font-semibold text-crimson-800 underline underline-offset-4" href="tel:+919690000890">+91 96900 00890</a>.
+    </p>
+    <a class="inline-flex min-h-11 items-center rounded-lg bg-crimson-700 px-5 font-semibold text-white hover:bg-crimson-800" href={back[form] ?? '/'}>Go back to the form</a>
+  </div>
+</PageLayout>

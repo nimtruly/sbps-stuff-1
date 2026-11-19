@@ -1,0 +1,154 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { checkAdminAuth } from '../../lib/adminAuth';
+import { getEnv } from '../../lib/forms';
+import { getDb } from '../../lib/db';
+import { enquiries, applications, careerApplications, payments } from '../../db/schema';
+import { count } from 'drizzle-orm';
+
+const env = getEnv(Astro.locals);
+
+// Check HTTP Basic Auth
+const authResponse = checkAdminAuth(Astro.request, env);
+if (authResponse) {
+  return authResponse;
+}
+
+const db = getDb(env.DB);
+
+let counts = {
+  enquiries: 0,
+  applications: 0,
+  careers: 0,
+  payments: 0,
+};
+
+if (db) {
+  try {
+    const enqCount = await db.select({ val: count() }).from(enquiries);
+    const appCount = await db.select({ val: count() }).from(applications);
+    const carCount = await db.select({ val: count() }).from(careerApplications);
+    const payCount = await db.select({ val: count() }).from(payments);
+
+    counts.enquiries = enqCount[0]?.val || 0;
+    counts.applications = appCount[0]?.val || 0;
+    counts.careers = carCount[0]?.val || 0;
+    counts.payments = payCount[0]?.val || 0;
+  } catch (err) {
+    console.warn('Admin dashboard count query error:', err);
+  }
+}
+---
+
+<BaseLayout title="Admin Dashboard | SBPS Dehradun">
+  <div class="min-h-screen bg-paper-100 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-block px-2.5 py-0.5 rounded bg-crimson-100 text-crimson-800 text-xs font-bold uppercase tracking-wider mb-2">
+            School Administration
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-serif font-bold text-ink">
+            Administrative Admissions & Form Dashboard
+          </h1>
+        </div>
+        <div class="text-xs text-paper-500 font-mono">
+          {!env.ADMIN_USER && (
+            <span class="text-amber-800 bg-amber-100 px-3 py-1 rounded-full border border-amber-300">
+              Dev Mode (No password set)
+            </span>
+          )}
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <a
+          href="/admin/enquiries/"
+          class="p-6 rounded-2xl bg-white border border-paper-300 shadow-xs hover:border-crimson-400 hover:shadow-md transition-all flex flex-col justify-between"
+        >
+          <div>
+            <span class="text-xs font-bold text-paper-500 uppercase tracking-wider block mb-1">
+              Admission Enquiries
+            </span>
+            <div class="text-3xl font-serif font-black text-crimson-800">
+              {counts.enquiries}
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-crimson-700 mt-4">
+            View & Export CSV →
+          </span>
+        </a>
+
+        <a
+          href="/admin/applications/"
+          class="p-6 rounded-2xl bg-white border border-paper-300 shadow-xs hover:border-crimson-400 hover:shadow-md transition-all flex flex-col justify-between"
+        >
+          <div>
+            <span class="text-xs font-bold text-paper-500 uppercase tracking-wider block mb-1">
+              Online Applications
+            </span>
+            <div class="text-3xl font-serif font-black text-forest-800">
+              {counts.applications}
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-forest-700 mt-4">
+            View & Export CSV →
+          </span>
+        </a>
+
+        <a
+          href="/admin/careers/"
+          class="p-6 rounded-2xl bg-white border border-paper-300 shadow-xs hover:border-crimson-400 hover:shadow-md transition-all flex flex-col justify-between"
+        >
+          <div>
+            <span class="text-xs font-bold text-paper-500 uppercase tracking-wider block mb-1">
+              Faculty Applications
+            </span>
+            <div class="text-3xl font-serif font-black text-ink">
+              {counts.careers}
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-crimson-700 mt-4">
+            View & Export CSV →
+          </span>
+        </a>
+
+        <a
+          href="/admin/payments/"
+          class="p-6 rounded-2xl bg-white border border-paper-300 shadow-xs hover:border-crimson-400 hover:shadow-md transition-all flex flex-col justify-between"
+        >
+          <div>
+            <span class="text-xs font-bold text-paper-500 uppercase tracking-wider block mb-1">
+              Payment Logs
+            </span>
+            <div class="text-3xl font-serif font-black text-saffron-800">
+              {counts.payments}
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-saffron-900 mt-4">
+            View & Export CSV →
+          </span>
+        </a>
+      </div>
+
+      <!-- Quick Links Navigation -->
+      <div class="bg-white rounded-2xl p-6 border border-paper-300 flex flex-wrap gap-4 items-center justify-between text-sm">
+        <div class="flex flex-wrap gap-4 font-semibold text-paper-700">
+          <a href="/admin/enquiries/" class="hover:text-crimson-700">Enquiries</a>
+          <span>•</span>
+          <a href="/admin/applications/" class="hover:text-crimson-700">Applications</a>
+          <span>•</span>
+          <a href="/admin/careers/" class="hover:text-crimson-700">Careers</a>
+          <span>•</span>
+          <a href="/admin/payments/" class="hover:text-crimson-700">Payments</a>
+        </div>
+        <a href="/" class="text-xs font-bold text-crimson-700 hover:underline">
+          Return to Public Site →
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

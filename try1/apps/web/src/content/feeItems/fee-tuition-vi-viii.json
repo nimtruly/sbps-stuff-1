@@ -1,0 +1,11 @@
+{
+  "id": "fee-tuition-vi-viii",
+  "label": "Tuition Fee (Monthly / Quarterly)",
+  "classRange": "VI to VIII",
+  "type": "quarterly",
+  "refundable": false,
+  "amount": 8550,
+  "note": "₹2,850/month payable quarterly in 4 instalments",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}

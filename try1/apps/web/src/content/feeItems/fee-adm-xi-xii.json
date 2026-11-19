@@ -1,0 +1,11 @@
+{
+  "id": "fee-adm-xi-xii",
+  "label": "Admission Fee",
+  "classRange": "XI to XII",
+  "type": "one-time",
+  "refundable": false,
+  "amount": 50000,
+  "note": "Includes entrance coaching enrolment",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}

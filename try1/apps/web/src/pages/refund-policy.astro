@@ -1,0 +1,14 @@
+---
+import InfoPage from '../components/InfoPage.astro';
+
+const body = "- **Registration and admission fees** are non-refundable. Amounts paid for registration and admission in one year cannot be transferred to another year.\n- **Caution (security) money** is refundable.\n- **Monthly fees** are non-refundable.\n\nFor any question about a refund, contact the school office:\n\n- Phone: [+91 96900 00890](tel:+919690000890)\n- Email: [info@sbpsdoon.com](mailto:info@sbpsdoon.com)";
+---
+
+<InfoPage
+  title="Fee refund policy"
+  description="Which fees Social Baluni Public School refunds, and how to ask about a refund."
+  breadcrumbs={[{"label": "Refund policy", "href": "/refund-policy/"}]}
+  body={body}
+  
+  related={[["Fees", "/admissions/fees/"], ["Pay fees", "/parents/pay-fees/"]]}
+></InfoPage>

@@ -1,0 +1,11 @@
+{
+  "id": "fee-tuition-ix-x",
+  "label": "Tuition Fee (Monthly / Quarterly)",
+  "classRange": "IX to X",
+  "type": "quarterly",
+  "refundable": false,
+  "amount": 9150,
+  "note": "₹3,050/month payable quarterly in 4 instalments",
+  "session": "2025–26 / 2026–27",
+  "verified": false
+}

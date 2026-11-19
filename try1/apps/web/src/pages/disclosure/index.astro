@@ -1,0 +1,73 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { cms } from '../../lib/cms';
+import { formatDate } from '../../lib/refs';
+import { school } from '../../data/nav';
+
+const docs = await cms.getDisclosureDocs();
+const groups = [
+  ['A', 'General Information'],
+  ['B', 'Documents and Information'],
+  ['C', 'Results and Academics'],
+  ['D', 'Staff (Teaching)'],
+  ['E', 'School Infrastructure'],
+] as const;
+
+const today = new Date().toISOString().slice(0, 10);
+const validity = (validTo?: string) =>
+  !validTo ? null : validTo < today ? { expired: true, text: `Validity ended ${formatDate(validTo)}` } : { expired: false, text: `Valid until ${formatDate(validTo)}` };
+---
+
+<PageLayout
+  title="CBSE mandatory public disclosure"
+  description="Information and documents Social Baluni Public School publishes under Appendix IX of the CBSE Affiliation Bye-Laws."
+  breadcrumbs={[{ label: 'CBSE disclosure', href: '/disclosure/' }]}
+>
+  <p class="measure text-lg text-paper-700">
+    Affiliation No. <strong data-figure>{school.affiliation}</strong>, School Code <strong data-figure>{school.schoolCode}</strong>. Documents open as PDF files.
+  </p>
+
+  {groups.map(([letter, group]) => {
+    const rows = docs.filter((d) => d.group === group);
+    if (!rows.length) return null;
+    return (
+      <section class="mt-14" aria-labelledby={`grp-${letter}`}>
+        <h2 id={`grp-${letter}`} class="flex items-baseline gap-3 text-3xl font-extrabold">
+          <span class="text-crimson-700" aria-hidden="true">{letter}</span>{group}
+        </h2>
+        <div class="mt-5">
+          <table class="w-full border-t-2 border-ink text-left text-base">
+            <thead>
+              <tr class="border-b-2 border-ink text-sm text-paper-600">
+                <th scope="col" class="w-14 py-2 font-semibold">No.</th>
+                <th scope="col" class="py-2 font-semibold">Information</th>
+                <th scope="col" class="py-2 font-semibold">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((d, i) => {
+                const v = validity(d.validTo);
+                return (
+                  <tr class="border-b border-paper-300 align-top">
+                    <td class="py-3 text-paper-600" data-figure>{i + 1}</td>
+                    <th scope="row" class="py-3 pr-6 font-semibold">{d.title}</th>
+                    <td class="py-3">
+                      {d.fileUrl ? (
+                        <a href={d.fileUrl} class="font-semibold text-crimson-700 underline">View PDF</a>
+                      ) : (
+                        <span>{d.value}</span>
+                      )}
+                      {v && (
+                        <span class:list={['mt-1 block text-sm', v.expired ? 'font-semibold text-crimson-800' : 'text-paper-600']}>{v.text}</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    );
+  })}
+</PageLayout>

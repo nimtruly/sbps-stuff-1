@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "### Quick links\n\n- [Notices](/notices/)\n- [Academic calendar (PDF)](/documents/2025/06/10.-ANNUAL-ACADEMIC-CALENDER-1.pdf)\n- [Fee structure (PDF)](/documents/2026/01/FEE-1.pdf) and [how to pay](/parents/pay-fees/)\n- [Rules and policies](/parents/policies/)\n- [Transfer certificate](/parents/transfer-certificate/)\n- [CBSE mandatory disclosure](/disclosure/)\n\n### What the school asks of parents\n\n- Attend every parent-teacher meeting. It is your chance to help us improve.\n- Do not enter classrooms or the staff room to speak to a teacher directly. All communication goes through the Principal.\n- Meet the Principal or teacher when you receive a note asking you to.\n- Do not write on the report card. Keep it safe: a duplicate costs ₹100.\n- Label lunch boxes and water bottles with name, class and section. Lost property is kept in the school office.\n- Do not send children to school when they are sick.\n- Take the Principal's permission before taking photographs in school.\n- School trips start and end at the school.\n- Check the student almanac for unit tests, examinations and holidays.\n- Pay fees on time. If fees are not paid on time, the school may strike the student's name off the rolls.\n- Transfer certificates are not issued until all dues are cleared.\n- Mobile phones, expensive watches, electronic devices and jewellery must not be brought to school.\n- The school expects discipline. Disobedience or any action that harms the school's name is a breach of discipline, and the management may expel a student for serious misconduct or long absence.";
+---
+
+<InfoPage
+  title="For parents"
+  description="Notices, the academic calendar, fees, policies and the school’s expectations of parents."
+  breadcrumbs={[{"label": "Parents", "href": "/parents/"}]}
+  body={body}
+  
+  related={[["Notices", "/notices/"], ["Pay fees", "/parents/pay-fees/"], ["Leave rules", "/parents/policies/leave-rules/"], ["Contact the school", "/contact/"]]}
+></InfoPage>

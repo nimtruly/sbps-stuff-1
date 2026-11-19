@@ -1,0 +1,26 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { cms } from '../../../lib/cms';
+
+const policies = await cms.getPolicies();
+---
+
+<PageLayout
+  title="Rules and policies"
+  description="The school's published rules on discipline, leave, tests and promotion, and student welfare."
+  breadcrumbs={[{ label: 'Parents', href: '/parents/' }, { label: 'Rules and policies', href: '/parents/policies/' }]}
+>
+  <ul class="border-t-2 border-ink" role="list">
+    {policies.map((p) => (
+      <li class="border-b border-paper-300">
+        <a href={`/parents/policies/${p.slug}/`} class="group grid gap-2 py-6 md:grid-cols-[2fr_3fr] md:gap-10">
+          <h2 class="text-2xl font-bold group-hover:text-crimson-700 group-hover:underline">{p.title}</h2>
+          <p class="text-paper-700">{p.summary}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="measure mt-8 text-paper-700">
+    Questions about a policy? Contact the school office on <a class="font-semibold underline" href="tel:+919690000890">+91 96900 00890</a> or <a class="font-semibold underline" href="mailto:info@sbpsdoon.com">info@sbpsdoon.com</a>.
+  </p>
+</PageLayout>

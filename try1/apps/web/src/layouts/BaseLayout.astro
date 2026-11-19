@@ -1,0 +1,120 @@
+---
+import anekLatin from '@fontsource-variable/anek-latin/files/anek-latin-latin-wdth-normal.woff2?url';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import MobileBottomBar from '../components/layout/MobileBottomBar.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  type?: 'website' | 'article';
+  schema?: Record<string, any> | Array<Record<string, any>>;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Social Baluni Public School | CBSE School in Dehradun',
+  description = 'Social Baluni Public School (SBPS) is a premier CBSE co-ed school in Dehradun offering Nursery to XII education with integrated NEET, JEE & NDA preparation.',
+  ogImage = '/brand/og-default.jpg',
+  canonicalUrl = Astro.url.href,
+  type = 'website',
+  schema,
+  noindex = false,
+} = Astro.props;
+
+const cfBeacon = import.meta.env.CF_BEACON_TOKEN;
+
+// Default School JSON-LD Organization Schema
+const defaultSchoolSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'School',
+  name: 'Social Baluni Public School',
+  alternateName: 'SBPS Dehradun',
+  url: 'https://www.sbpsdoon.com',
+  logo: 'https://www.sbpsdoon.com/brand/sbps-logo.png',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Haridwar Bypass Road, Brahmanwala, near Radhaswami Satsang Bhawan',
+    addressLocality: 'Dehradun',
+    addressRegion: 'Uttarakhand',
+    postalCode: '248001',
+    addressCountry: 'IN',
+  },
+  telephone: '+91-9690000890',
+  email: 'info@sbpsdoon.com',
+  sameAs: [
+    'https://www.facebook.com/SBPSDOON',
+    'https://www.youtube.com/channel/UChjGT-I6ev3a95G11FlZ6cw',
+  ],
+  parentOrganization: {
+    '@type': 'EducationalOrganization',
+    name: 'Mandakini Seva Samiti Education Society',
+  },
+};
+
+const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [defaultSchoolSchema];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preload" href={anekLatin} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#8f1d22" />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="SBPS Notices & Circulars" href="/notices/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="SBPS News & Articles" href="/blog/rss.xml" />
+
+    <!-- JSON-LD Structured Data -->
+    {pageSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    <!-- Cloudflare Web Analytics (env-gated) -->
+    {cfBeacon && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: cfBeacon })}
+      />
+    )}
+  </head>
+  <body class="flex flex-col min-h-screen selection:bg-crimson-700 selection:text-white">
+    <!-- Skip to Main Content Link for WCAG 2.2 AA -->
+    <a href="#main-content" class="skip-link">
+      Skip to main content
+    </a>
+
+    <Header />
+
+    <main id="main-content" class="flex-1" data-pagefind-body>
+      <slot />
+    </main>
+
+    <Footer />
+    <MobileBottomBar />
+  </body>
+</html>

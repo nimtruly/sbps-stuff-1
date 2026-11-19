@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../../components/InfoPage.astro';
+
+const body = "The school publishes its results for the last three years of CBSE board examinations (Classes X and XII) as part of its mandatory public disclosure.\n\n- [Results of the last three years of board examinations (PDF)](/documents/2025/06/13.-LAST-THREE-YEAR-RESULT-OF-THE-BOARD-EXAMINATION-1.pdf)\n\nSports results are on the [sports page](/campus-life/sports/).";
+---
+
+<InfoPage
+  title="Board results"
+  description="CBSE board examination results for Social Baluni Public School."
+  breadcrumbs={[{"label": "Academics", "href": "/academics/"}, {"label": "Board results", "href": "/academics/results/"}]}
+  body={body}
+  
+  related={[["CBSE disclosure", "/disclosure/"], ["Curriculum", "/academics/"], ["Integrated programmes", "/academics/integrated-programme/"]]}
+></InfoPage>

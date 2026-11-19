@@ -1,0 +1,83 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface BreadcrumbItem {
+  name?: string;
+  label?: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  ogImage?: string;
+  schema?: Record<string, any> | Array<Record<string, any>>;
+  noindex?: boolean;
+}
+
+const { title, description, breadcrumbs = [], ogImage, schema, noindex = false } = Astro.props;
+
+// Build BreadcrumbList JSON-LD
+const breadcrumbSchema = breadcrumbs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.sbpsdoon.com/',
+    },
+    ...breadcrumbs.map((b, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 2,
+      name: b.name || b.label || '',
+      item: `https://www.sbpsdoon.com${b.href}`,
+    })),
+  ],
+} : null;
+
+const combinedSchemas = [
+  ...(breadcrumbSchema ? [breadcrumbSchema] : []),
+  ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
+];
+---
+
+<BaseLayout title={`${title} | Social Baluni Public School, Dehradun`} description={description} ogImage={ogImage} schema={combinedSchemas} noindex={noindex}>
+  <section class="border-b-2 border-ink bg-paper-50">
+    <div class="mx-auto max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pb-12 lg:px-8 lg:pl-14">
+      {breadcrumbs.length > 0 && (
+        <nav class="mb-6 text-sm text-paper-600" aria-label="Breadcrumb">
+          <ol class="flex flex-wrap items-center gap-x-2 gap-y-1" role="list">
+            <li><a href="/" class="hover:text-crimson-700 hover:underline">Home</a></li>
+            {breadcrumbs.map((b, idx) => (
+              <li class="flex items-center gap-2">
+                <span aria-hidden="true" class="text-paper-400">/</span>
+                {idx === breadcrumbs.length - 1 ? (
+                  <span class="font-semibold text-ink" aria-current="page">{b.name || b.label}</span>
+                ) : (
+                  <a href={b.href} class="hover:text-crimson-700 hover:underline">{b.name || b.label}</a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+      <h1 class="max-w-4xl text-[2.5rem] font-extrabold text-ink sm:text-6xl">
+        {title}
+      </h1>
+      {description && (
+        <p class="measure mt-4 text-lg text-paper-700">
+          {description}
+        </p>
+      )}
+    </div>
+  </section>
+
+  <div class="tie-spine">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:pl-14">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

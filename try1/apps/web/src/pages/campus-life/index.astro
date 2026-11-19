@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "School at SBPS goes beyond the classroom. Students play sports with expert coaching, join clubs, and take part in cultural programmes and house competitions.\n\n### Sports\n\nFifteen sports, with a Boxing Academy, Shooting Club, and Cricket and Football Academy. SBPS students were selected for the 38th National Games, and the school was runner-up at the 2024 SFA Inter-School Competition. [See sports](/campus-life/sports/).\n\n### Clubs and activities\n\nFrom shooting and fencing to photography, cookery and chess. [See co-curricular activities](/campus-life/co-curricular/).\n\n### Houses\n\nEvery student belongs to one of four houses named after Himalayan rivers: Alaknanda, Bhilangna, Bhagirathi and Mandakini. [See the house system](/about/house-system/).";
+---
+
+<InfoPage
+  title="Campus life"
+  description="Sports, clubs, houses and cultural programmes at Social Baluni Public School."
+  breadcrumbs={[{"label": "Campus life", "href": "/campus-life/"}]}
+  body={body}
+  photo="cultural-programme"
+  related={[["Photo gallery", "/campus-life/gallery/"], ["News", "/blog/"], ["Day boarding", "/academics/day-boarding/"]]}
+></InfoPage>

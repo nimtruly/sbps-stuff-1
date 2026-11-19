@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "Transfer certificates are issued by the school office. A TC is not issued until all dues are cleared.\n\nTo ask for a transfer certificate, contact the school office by phone or email, or visit in person.\n\n### Contact\n\n- Phone: [+91 96900 00890](tel:+919690000890)\n- Email: [info@sbpsdoon.com](mailto:info@sbpsdoon.com)";
+---
+
+<InfoPage
+  title="Transfer certificate"
+  description="How to get a transfer certificate (TC) from Social Baluni Public School."
+  breadcrumbs={[{"label": "Parents", "href": "/parents/"}, {"label": "Transfer certificate", "href": "/parents/transfer-certificate/"}]}
+  body={body}
+  
+  related={[["For parents", "/parents/"], ["Contact", "/contact/"]]}
+></InfoPage>

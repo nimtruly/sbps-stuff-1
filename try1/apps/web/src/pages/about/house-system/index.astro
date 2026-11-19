@@ -1,0 +1,30 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { cms } from '../../../lib/cms';
+
+const houses = await cms.getHouses();
+---
+
+<PageLayout
+  title="House system"
+  description="Every SBPS student belongs to one of four houses named after Himalayan rivers: Alaknanda, Bhilangna, Bhagirathi and Mandakini."
+  breadcrumbs={[{ label: 'About', href: '/about/' }, { label: 'House system', href: '/about/house-system/' }]}
+>
+  <div class="prose-sbps">
+    <p>
+      To build healthy competition, team spirit, leadership and fair play, all students are divided into four houses. Each house is led by a House Captain, helped by a Vice Captain and prefects, and one teacher with a few colleagues oversees its activities.
+    </p>
+    <p>
+      Houses earn points through the year for academics, cultural and literary events, sports, discipline and behaviour. The house with the most points is named Best House of the year. House appointees also help keep discipline in the school.
+    </p>
+  </div>
+
+  <ul class="mt-12 grid border-t-2 border-ink md:grid-cols-2" role="list">
+    {houses.map((h: any, i: number) => (
+      <li class:list={['border-b-2 border-ink py-8', i % 2 === 0 ? 'md:border-r-2 md:pr-10' : 'md:pl-10']}>
+        <h2 class="text-4xl font-extrabold">{h.id.charAt(0).toUpperCase() + h.id.slice(1)}</h2>
+        <p class="measure mt-4 text-base text-paper-800">{h.description}</p>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

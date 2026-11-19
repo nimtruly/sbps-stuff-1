@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-14T00:00:00Z",
+  "title": "Design System: Social Baluni Public School",
+  "extensions": {
+    "colorMeta": {
+      "tie-crimson": { "role": "primary", "displayName": "Tie Crimson", "canonical": "#8f1d22", "cssVar": "--color-crimson-700", "tonalRamp": ["#34090b", "#5c1418", "#74171c", "#8f1d22", "#ad3b40", "#dc9294", "#f6e0e0", "#fbf1f1"] },
+      "tie-crimson-deep": { "role": "primary", "displayName": "Tie Crimson Deep", "canonical": "#74171c", "cssVar": "--color-crimson-800" },
+      "tie-crimson-wash": { "role": "primary", "displayName": "Tie Crimson Wash", "canonical": "#fbf1f1", "cssVar": "--color-crimson-50" },
+      "tie-crimson-mist": { "role": "primary", "displayName": "Tie Crimson Mist", "canonical": "#f6e0e0", "cssVar": "--color-crimson-100" },
+      "crest-gold": { "role": "secondary", "displayName": "Crest Gold", "canonical": "#d9b21a", "cssVar": "--color-saffron-500", "tonalRamp": ["#2d2206", "#4f3d0e", "#6b520e", "#8a6a0c", "#b58f0f", "#d9b21a", "#ecce52", "#fdf9e7"] },
+      "crest-gold-light": { "role": "secondary", "displayName": "Crest Gold Light", "canonical": "#e2bd2c", "cssVar": "--color-saffron-400" },
+      "crest-gold-deep": { "role": "secondary", "displayName": "Crest Gold Deep", "canonical": "#b58f0f", "cssVar": "--color-saffron-600" },
+      "crest-green": { "role": "tertiary", "displayName": "Crest Green", "canonical": "#0d5c2c", "cssVar": "--color-forest-700", "tonalRamp": ["#042111", "#093b1e", "#0b4a25", "#0d5c2c", "#23773f", "#77b78b", "#d6eadc", "#eef6f0"] },
+      "crest-green-deep": { "role": "tertiary", "displayName": "Crest Green Deep", "canonical": "#0b4a25", "cssVar": "--color-forest-800" },
+      "crest-green-wash": { "role": "tertiary", "displayName": "Crest Green Wash", "canonical": "#eef6f0", "cssVar": "--color-forest-50" },
+      "blazer-ink": { "role": "neutral", "displayName": "Blazer Ink", "canonical": "#1d2226", "cssVar": "--color-ink", "tonalRamp": ["#1d2226", "#2a3035", "#3d444a", "#525a61", "#69727a", "#b3b9bd", "#e7eaec", "#fbfcfd"] },
+      "blazer-charcoal": { "role": "neutral", "displayName": "Blazer Charcoal", "canonical": "#2a3035", "cssVar": "--color-paper-800" },
+      "shirting-white": { "role": "neutral", "displayName": "Shirting White", "canonical": "#fbfcfd", "cssVar": "--color-paper-50" },
+      "shirting-cool": { "role": "neutral", "displayName": "Shirting Cool", "canonical": "#f3f5f6", "cssVar": "--color-paper-100" },
+      "shirting-shade": { "role": "neutral", "displayName": "Shirting Shade", "canonical": "#e7eaec", "cssVar": "--color-paper-200" },
+      "rule-grey": { "role": "neutral", "displayName": "Rule Grey", "canonical": "#d3d8db", "cssVar": "--color-paper-300" },
+      "field-stroke": { "role": "neutral", "displayName": "Field Stroke", "canonical": "#b3b9bd", "cssVar": "--color-paper-400" },
+      "muted-text": { "role": "neutral", "displayName": "Muted Text", "canonical": "#69727a", "cssVar": "--color-paper-500" },
+      "quiet-text": { "role": "neutral", "displayName": "Quiet Text", "canonical": "#525a61", "cssVar": "--color-paper-600" },
+      "body-grey": { "role": "neutral", "displayName": "Body Grey", "canonical": "#3d444a", "cssVar": "--color-paper-700" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Homepage headline only; 2.75rem mobile to 4rem desktop, capped at about 14ch." },
+      "headline": { "displayName": "Headline", "purpose": "Section heads and page titles at 82% width." },
+      "title": { "displayName": "Title", "purpose": "Sub-section heads, ledger column heads, house names, door tabs." },
+      "figure": { "displayName": "Figure", "purpose": "Scoreboard counts and lettered steps; 75% width, tabular lining numerals." },
+      "body-lg": { "displayName": "Body Large", "purpose": "Lead paragraphs and the primary button label." },
+      "body": { "displayName": "Body", "purpose": "Reading text at a 68ch measure." },
+      "body-sm": { "displayName": "Body Small", "purpose": "Row descriptions, captions, nav items." },
+      "label": { "displayName": "Label", "purpose": "Mobile action bar labels and the utility strip; the smallest shipped size." }
+    },
+    "fontFaces": [
+      { "name": "Anek Fallback", "src": "local(Arial), local(Roboto), local(Helvetica Neue)", "sizeAdjust": "92%", "ascentOverride": "98%", "descentOverride": "30%", "purpose": "Metric-matched fallback for normal-width reading text." },
+      { "name": "Anek Display Fallback", "src": "local(Arial Narrow), local(Roboto Condensed), local(Arial), local(Roboto)", "sizeAdjust": "80%", "ascentOverride": "112%", "descentOverride": "34%", "purpose": "Metric-matched fallback for condensed headings." }
+    ],
+    "stripes": [
+      { "name": "tie-field", "value": "crimson-700 base; repeating-linear-gradient(135deg, transparent 0 96px, gold 96px 106px, transparent 106px 118px, green 118px 142px, transparent 142px 236px)", "purpose": "Large crimson fields: hero cap, closing band, footer." },
+      { "name": "tie-edge", "value": "crimson-800 base; repeating-linear-gradient(135deg, transparent 0 14px, gold 14px 18px, transparent 18px 22px, green 22px 30px, transparent 30px 40px)", "purpose": "Selvedge: vertical edge of the hero panel (28px wide)." },
+      { "name": "tie-band", "value": "14px tall, crimson-700 base; repeating-linear-gradient(135deg, transparent 0 14px, gold 14px 17px, transparent 17px 20px, green 20px 26px, transparent 26px 40px)", "purpose": "Rule between regions; cap of menus and the scoreboard; 6-8px under the header and atop the mobile menu." },
+      { "name": "tie-spine", "value": "6px: gold 0-2px, gap 2-3px, green 3-6px; scaleY(var(--spine-progress))", "purpose": "Vertical spine from the first viewport to the footer; hidden below 768px; static under reduced motion." }
+    ],
+    "shadows": [
+      { "name": "shadow-lg", "value": "0 8px 24px -8px rgb(29 34 38 / 0.28)", "purpose": "Floating layers only." },
+      { "name": "shadow-xl", "value": "0 12px 32px -10px rgb(29 34 38 / 0.32)", "purpose": "Desktop navigation dropdown panels." },
+      { "name": "shadow-2xl", "value": "0 16px 40px -12px rgb(29 34 38 / 0.36)", "purpose": "Floating layers only." },
+      { "name": "shadow-xs/sm/md", "value": "none", "purpose": "Surfaces at rest are flat." }
+    ],
+    "focus": { "value": "outline: 3px solid #d9b21a; outline-offset: 2px; border-radius: 1px", "purpose": "Global focus-visible ring in crest gold." },
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Arrow nudges and the skip link; 200-300ms." },
+      { "name": "spine-draw", "value": "scroll-linked scaleY on the tie spine, rAF-throttled", "purpose": "Signature interaction; disabled under prefers-reduced-motion." },
+      { "name": "reduced-motion", "value": "animation none; transitions limited to colour and opacity at 120ms", "purpose": "Keep state changes, drop travel." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px", "note": "tie spine appears" },
+      { "name": "lg", "value": "1024px", "note": "desktop nav replaces the mobile action bar and menu sheet" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "container", "value": "80rem" }
+    ],
+    "measure": "68ch"
+  },
+  "components": [
+    {
+      "name": "Primary Button (Gold)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single primary action on a page, such as Request a call back.",
+      "html": "<button class=\"ds-btn-gold\">Request a call back</button>",
+      "css": ".ds-btn-gold { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 20px; background: var(--color-saffron-500, #d9b21a); color: var(--color-ink, #1d2226); font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; font-size: 1.1875rem; font-weight: 700; border: none; border-radius: 0; cursor: pointer; } .ds-btn-gold:hover { background: var(--color-saffron-400, #e2bd2c); } .ds-btn-gold:active { background: var(--color-saffron-600, #b58f0f); } .ds-btn-gold:focus-visible { outline: 3px solid #d9b21a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Crimson Button",
+      "kind": "button",
+      "refersTo": "button-crimson",
+      "description": "The standing Enquire action in the header.",
+      "html": "<a href=\"#\" class=\"ds-btn-crimson\">Enquire</a>",
+      "css": ".ds-btn-crimson { display: inline-flex; align-items: center; height: 44px; padding: 0 16px; background: var(--color-crimson-700, #8f1d22); color: #fff; font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 0; } .ds-btn-crimson:hover { background: var(--color-crimson-800, #74171c); } .ds-btn-crimson:focus-visible { outline: 3px solid #d9b21a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary actions such as Pay fees and Apply online; inverts to ink on hover.",
+      "html": "<a href=\"#\" class=\"ds-btn-outline\">Apply online</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; height: 48px; padding: 0 20px; border: 2px solid var(--color-ink, #1d2226); color: var(--color-ink, #1d2226); background: transparent; font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; font-weight: 600; text-decoration: none; border-radius: 0; } .ds-btn-outline:hover { background: var(--color-ink, #1d2226); color: #fff; } .ds-btn-outline:focus-visible { outline: 3px solid #d9b21a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Square 48px field with a semibold label above; border turns ink on focus.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Parent's name</span><input class=\"ds-input\" /></label>",
+      "css": ".ds-field { display: block; font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; color: #1d2226; } .ds-field-label { font-size: 0.9375rem; font-weight: 600; } .ds-input { display: block; margin-top: 4px; width: 100%; height: 48px; padding: 0 12px; background: #fff; border: 2px solid var(--color-paper-400, #b3b9bd); border-radius: 0; font: inherit; font-size: 1.0625rem; caret-color: #8f1d22; } .ds-input:focus { outline: none; border-color: var(--color-ink, #1d2226); }"
+    },
+    {
+      "name": "Ledger Rows",
+      "kind": "custom",
+      "description": "Signature list pattern: 2px ink top rule, hairline rows, crimson arrow; replaces cards.",
+      "html": "<ul class=\"ds-ledger\"><li><a href=\"#\"><span><span class=\"ds-ledger-t\">NEET (UG)</span><span class=\"ds-ledger-d\">Medical entrance, with Baluni Classes</span></span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h15m-6-6 6 6-6 6\" stroke=\"currentColor\" stroke-width=\"2\"/></svg></a></li><li><a href=\"#\"><span><span class=\"ds-ledger-t\">NDA and defence</span><span class=\"ds-ledger-d\">With Doon Baluni Defence Academy</span></span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h15m-6-6 6 6-6 6\" stroke=\"currentColor\" stroke-width=\"2\"/></svg></a></li></ul>",
+      "css": ".ds-ledger { list-style: none; margin: 0; padding: 0; border-top: 2px solid #1d2226; font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; color: #1d2226; } .ds-ledger li { border-bottom: 1px solid #d3d8db; } .ds-ledger a { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; color: inherit; text-decoration: none; } .ds-ledger svg { color: #8f1d22; flex-shrink: 0; } .ds-ledger-t { display: block; font-size: 1.1875rem; font-weight: 600; } .ds-ledger-d { display: block; font-size: 0.9375rem; color: #525a61; } .ds-ledger a:hover .ds-ledger-t { color: #8f1d22; text-decoration: underline; text-underline-offset: 0.2em; } .ds-ledger a:focus-visible { outline: 3px solid #d9b21a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Door Tabs",
+      "kind": "custom",
+      "refersTo": "door-tab-admissions",
+      "description": "Green Admissions and ink Current parents blocks at the foot of the hero photograph.",
+      "html": "<div class=\"ds-doors\"><a href=\"#\" class=\"ds-door ds-door-green\"><span class=\"ds-door-t\">Admissions<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h15m-6-6 6 6-6 6\" stroke=\"currentColor\" stroke-width=\"2\"/></svg></span><span class=\"ds-door-d\">How admission works, fees, apply online</span></a><a href=\"#\" class=\"ds-door ds-door-ink\"><span class=\"ds-door-t\">Current parents<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h15m-6-6 6 6-6 6\" stroke=\"currentColor\" stroke-width=\"2\"/></svg></span><span class=\"ds-door-d\">Notices, calendar, policies, documents</span></a></div>",
+      "css": ".ds-doors { display: grid; grid-template-columns: 1fr 1fr; font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; } .ds-door { display: block; padding: 24px 32px; color: #fff; text-decoration: none; } .ds-door-green { background: #0d5c2c; } .ds-door-green:hover { background: #0b4a25; } .ds-door-ink { background: #1d2226; } .ds-door-ink:hover { background: #2a3035; } .ds-door-t { display: flex; align-items: center; justify-content: space-between; font-size: 1.875rem; font-weight: 700; font-stretch: 80%; } .ds-door-t svg { transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-door:hover .ds-door-t svg { transform: translateX(4px); } .ds-door-d { display: block; margin-top: 4px; font-size: 0.9375rem; opacity: 0.85; } .ds-door:focus-visible { outline: 3px solid #d9b21a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Tie Band",
+      "kind": "custom",
+      "description": "The regimental stripe as a 14px rule between regions.",
+      "html": "<div class=\"ds-tie-band\" aria-hidden=\"true\"></div>",
+      "css": ".ds-tie-band { height: 14px; background-color: #8f1d22; background-image: repeating-linear-gradient(135deg, transparent 0 14px, #d9b21a 14px 17px, transparent 17px 20px, #0d5c2c 20px 26px, transparent 26px 40px); }"
+    },
+    {
+      "name": "Desktop Navigation",
+      "kind": "nav",
+      "description": "Semibold ink triggers; current or open section gets a 3px crimson underline; dropdown panel is square, ink-bordered, stripe-capped, and the only shadowed surface.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-item is-current\">Admissions</a><a href=\"#\" class=\"ds-nav-item\">Academics</a><a href=\"#\" class=\"ds-nav-item\">Campus life</a></nav>",
+      "css": ".ds-nav { display: flex; height: 56px; background: #fbfcfd; font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; } .ds-nav-item { position: relative; display: inline-flex; align-items: center; padding: 0 14px; font-size: 0.9375rem; font-weight: 600; color: #1d2226; text-decoration: none; transition: color 150ms; } .ds-nav-item:hover { color: #8f1d22; } .ds-nav-item.is-current::after { content: ''; position: absolute; left: 14px; right: 14px; bottom: 0; height: 3px; background: #8f1d22; } .ds-nav-item:focus-visible { outline: 3px solid #d9b21a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Mobile Action Bar",
+      "kind": "nav",
+      "refersTo": "mobile-action-bar",
+      "description": "Fixed four-cell bar on every page below 1024px: Call, WhatsApp, Pay fees (green), Enquire (crimson).",
+      "html": "<nav class=\"ds-mbar\"><a href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M5.5 2.5h2.6l1.4 3.6-1.9 1.2a9.5 9.5 0 0 0 5.1 5.1l1.2-1.9 3.6 1.4v2.6a1.5 1.5 0 0 1-1.5 1.5A13.5 13.5 0 0 1 2.5 4 1.5 1.5 0 0 1 4 2.5Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/></svg>Call</a><a href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M10 2.5a7.5 7.5 0 0 0-6.5 11.2L2.5 17.5l3.9-1A7.5 7.5 0 1 0 10 2.5Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/></svg>WhatsApp</a><a href=\"#\" class=\"ds-mbar-green\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"5\" width=\"15\" height=\"10\" stroke=\"currentColor\" stroke-width=\"1.6\"/><path d=\"M2.5 8.5h15\" stroke=\"currentColor\" stroke-width=\"1.6\"/></svg>Pay fees</a><a href=\"#\" class=\"ds-mbar-crimson\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M3 4.5h14v9H8l-4 3v-3H3z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/></svg>Enquire</a></nav>",
+      "css": ".ds-mbar { display: grid; grid-template-columns: repeat(4, 1fr); height: 64px; border-top: 2px solid #1d2226; background: #fbfcfd; font-family: 'Anek Latin Variable', 'Anek Fallback', system-ui, sans-serif; } .ds-mbar a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 0.8125rem; font-weight: 600; color: #1d2226; text-decoration: none; } .ds-mbar a:active { background: #e7eaec; } .ds-mbar .ds-mbar-green { background: #0d5c2c; color: #fff; } .ds-mbar .ds-mbar-green:active { background: #0b4a25; } .ds-mbar .ds-mbar-crimson { background: #8f1d22; color: #fff; } .ds-mbar .ds-mbar-crimson:active { background: #74171c; } .ds-mbar a:focus-visible { outline: 3px solid #d9b21a; outline-offset: -3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The House Tie",
+    "overview": "The site is cut from the SBPS uniform. Blazer charcoal type sits on cool shirting white; a deep crimson tie field carries the homepage's lead panel, the closing invitation and the footer; and a woven regimental stripe of thin gold and broad green, taken from the crest, is the only ornament. The stripe is structural, not decorative: it edges the lead panel, rules the header, heads the scoreboard and menus, and runs as a spine from the first viewport to the footer.\n\nThe system is flat, square and tailored. Surfaces never lift; they are separated by 2px charcoal rules the way a blazer is separated by its seams. Content is set as ledgers (rows, columns, definition lists, tables) rather than cards, because the material is factual: dates, classes, ages, selections, documents. One condensed sans family does everything, wide for reading and narrow for headlines and numbers. Gold is scarce on purpose: as a fill it marks exactly one action per page.\n\nDensity is moderate and calm. Sections breathe (80 to 112px apart) while their contents are tight, ruled lists that a parent on a phone can scan in a few seconds.",
+    "keyCharacteristics": [
+      "Crimson, gold and green from the crest; cool charcoal and shirting-white neutrals.",
+      "One sans family (Anek Latin plus Anek Devanagari), condensed for display and figures.",
+      "Diagonal regimental stripes as the only ornament, used structurally.",
+      "Flat surfaces, square 0 to 4px corners, 2px charcoal rules.",
+      "Ledgers and lists, never card grids.",
+      "A fixed four-action bar on every mobile page."
+    ],
+    "rules": [
+      { "name": "The One Gold Button Rule", "body": "Crest gold appears as a fill on exactly one action per page: the page's primary conversion (the homepage call back, the enquiry and application submits). Every other action is crimson, ink-outlined, or a link. Gold as a thread, ring or rule is not a fill and does not count.", "section": "colors" },
+      { "name": "The Crest Only Rule", "body": "No hue enters the system that is not in the crest or the uniform. Status, emphasis and grouping are carried by crimson, ink and rules, not new colours.", "section": "colors" },
+      { "name": "The Width Not Weight Rule", "body": "Hierarchy is made by narrowing the same family (100% for reading, 82% for heads, 75 to 80% for figures and tabs), never by introducing a second typeface or a serif.", "section": "typography" },
+      { "name": "The 12px Floor Rule", "body": "No text renders below 12px; the smallest shipped size is 13px (0.8125rem).", "section": "typography" },
+      { "name": "The Ledger Figures Rule", "body": "Every number that a parent compares (dates, phone numbers, ages, fees, selection counts, affiliation codes) uses tabular lining numerals, applied to tables, time elements and anything marked as a figure.", "section": "typography" },
+      { "name": "The 68ch Measure Rule", "body": "Reading copy, CMS prose and page descriptions share one measure of 68ch.", "section": "typography" },
+      { "name": "The Ledger Rule", "body": "Groups of items are laid out as ruled rows or ruled columns (a 2px ink rule on top, 1px grey hairlines between rows, 2px ink between columns), not as a grid of boxed cards.", "section": "layout" },
+      { "name": "The Flat Cloth Rule", "body": "Nothing at rest casts a shadow. If a surface needs separating, give it a 2px ink rule or a tonal step, not a lift.", "section": "elevation" },
+      { "name": "The Only Ornament Rule", "body": "The regimental stripe is the system's only decoration. No gradients, textures, blobs or illustrations are added beside it.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do keep crest gold as a fill on one primary action per page; use crimson or the ink outline for every other button.",
+      "Do separate regions with a 2px ink rule, a tonal step, or a tie band.",
+      "Do set lists of things as ruled ledger rows with a crimson arrow, not as cards.",
+      "Do set headlines and figures in condensed Anek (75 to 82% width) and reading text at normal width, capped at 68ch.",
+      "Do give every comparable number tabular lining numerals.",
+      "Do keep corners at 0 to 4px.",
+      "Do use inline line icons at a 1.6 to 2px stroke, never icon fonts or glyphs.",
+      "Do keep the fixed four-action bar on mobile and reserve space for it above the footer."
+    ],
+    "donts": [
+      "Don't add shadows to surfaces at rest; only floating menus cast one.",
+      "Don't introduce a serif, a second sans, or a colour outside the crest and uniform.",
+      "Don't add gradients or ornament other than the regimental stripe.",
+      "Don't build card grids, banner sliders, news tickers or rows of icon cards.",
+      "Don't set any text below 12px.",
+      "Don't use rounded pills or soft corners above 4px."
+    ]
+  }
+}

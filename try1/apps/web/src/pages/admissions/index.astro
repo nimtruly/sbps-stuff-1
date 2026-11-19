@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "### A. Register\n\nRegistration runs from the **last week of December to the last week of February**. Fill in the registration form from the registration booklet and submit it to the school office. You can also [send an enquiry online](/admissions/enquire/) or [apply online](/admissions/apply/).\n\n### B. Admission test\n\nWhen you hand in the registration form, the office gives you a letter with the registration number, roll number, and the date and time of the admission test.\n\n### C. Interview\n\nStudents who qualify in the test are called for an interview.\n\n### D. Admission\n\nAdmission depends on the test, the interview and the seats available. All admissions are provisional until the required documents are submitted and the fee is paid.\n\n### Age on 1 April of the year of admission\n\n- Nursery: 3+ years\n- LKG: 4+ years\n- UKG: 5+ years\n- Class I: 6+ years\n- The same pattern continues for higher classes.\n\n### Documents for Nursery to Class I\n\n- Original birth certificate as proof of age\n- Two photographs of the child and one of the child with parents\n- Medical fitness certificate\n- Aadhaar card copies of the child and parents\n\n### Documents for Class II and above\n\n- Original school leaving / transfer certificate\n- Photocopy of the previous class report card (bring the original for verification)\n- Three passport-size colour photographs\n- Aadhaar card copies of the child and parents\n- Medical certificate and birth certificate";
+---
+
+<InfoPage
+  title="How admission works"
+  description="Registration dates, the admission test and interview, age criteria and the documents you need for admission to SBPS, Nursery to XII."
+  breadcrumbs={[{"label": "Admissions", "href": "/admissions/"}]}
+  body={body}
+  photo="students-uniform"
+  related={[["Enquire", "/admissions/enquire/"], ["Apply online", "/admissions/apply/"], ["Fees", "/admissions/fees/"], ["Questions", "/admissions/faq/"], ["Day boarding", "/academics/day-boarding/"]]}
+></InfoPage>

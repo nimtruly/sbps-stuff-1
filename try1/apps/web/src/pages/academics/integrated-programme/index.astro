@@ -1,0 +1,50 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Photo from '../../../components/ui/Photo.astro';
+import { cms } from '../../../lib/cms';
+
+const programmes = await cms.getProgrammes();
+const features = programmes[0]?.features ?? [];
+---
+
+<PageLayout
+  title="Integrated programmes"
+  description="CBSE schooling and competitive-exam preparation on the same campus: 2, 4 and 5-year programmes for NEET, JEE, NTSE, Olympiads and NDA."
+  breadcrumbs={[{ label: 'Academics', href: '/academics/' }, { label: 'Integrated programmes', href: '/academics/integrated-programme/' }]}
+>
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,68ch)_1fr]">
+    <div class="prose-sbps">
+      <p>
+        Students who finish Class X face a new, more competitive stage. The integrated programmes cover the school syllabus and entrance-exam preparation together, in line with each other, so students never fall behind in either. They run for 2, 4 or 5 years, with coaching by Baluni Classes and, for defence, Doon Baluni Defence Academy.
+      </p>
+    </div>
+    <Photo name="science-lab" sizes="(min-width: 1024px) 30vw, 100vw" class="aspect-[3/2] w-full object-cover" />
+  </div>
+
+  <ul class="mt-12 grid border-t-2 border-ink md:grid-cols-2" role="list">
+    {programmes.map((p, i) => (
+      <li class:list={['border-b-2 border-ink', i % 2 === 0 ? 'md:border-r-2' : '']}>
+        <a href={`/academics/integrated-programme/${p.slug}/`} class:list={['group block h-full py-8 md:px-8', i % 2 === 0 && 'md:pl-0']}>
+          <h2 class="text-3xl font-extrabold group-hover:text-crimson-700">{p.title}</h2>
+          <p class="measure mt-3 text-paper-700">{p.summary}</p>
+          <span class="mt-4 inline-flex items-center gap-2 font-semibold text-crimson-700 underline">Read more</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <section class="mt-16" aria-labelledby="how-title">
+    <h2 id="how-title" class="text-4xl font-extrabold">How it works</h2>
+    <ol class="mt-8 grid gap-x-12 border-t-2 border-ink md:grid-cols-2" role="list">
+      {features.map((f) => {
+        const [head, ...rest] = f.split(': ');
+        return (
+          <li class="border-b border-paper-300 py-5">
+            <h3 class="text-xl font-bold">{head}</h3>
+            <p class="mt-1 text-paper-700">{rest.join(': ')}</p>
+          </li>
+        );
+      })}
+    </ol>
+  </section>
+</PageLayout>

@@ -1,0 +1,58 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Prose from '../../../components/ui/Prose.astro';
+import { cms } from '../../../lib/cms';
+
+export async function getStaticPaths() {
+  const programmes = await cms.getProgrammes();
+  return programmes.map((p) => ({ params: { slug: p.slug }, props: { programme: p } }));
+}
+
+const { programme } = Astro.props;
+const others = (await cms.getProgrammes()).filter((p) => p.slug !== programme.slug);
+---
+
+<PageLayout
+  title={programme.title}
+  description={programme.summary}
+  breadcrumbs={[
+    { label: 'Academics', href: '/academics/' },
+    { label: 'Integrated programmes', href: '/academics/integrated-programme/' },
+    { label: programme.title, href: `/academics/integrated-programme/${programme.slug}/` },
+  ]}
+>
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,68ch)_1fr] lg:gap-16">
+    <div>
+      <dl class="mb-10 grid border-y-2 border-ink sm:grid-cols-2">
+        <div class="py-4 sm:pr-6"><dt class="text-sm text-paper-600">Duration</dt><dd class="text-lg font-semibold">{programme.duration}</dd></div>
+        <div class="border-t border-paper-300 py-4 sm:border-l-2 sm:border-t-0 sm:border-ink sm:pl-6"><dt class="text-sm text-paper-600">Taught with</dt><dd class="text-lg font-semibold">{programme.partner}</dd></div>
+      </dl>
+      <Prose text={programme.body.split('\n\n### How the integrated programme works')[0]} />
+      <h2 class="mt-12 text-3xl font-extrabold">How the programme works</h2>
+      <ul class="mt-6 border-t-2 border-ink" role="list">
+        {programme.features.map((f) => {
+          const [head, ...rest] = f.split(': ');
+          return (
+            <li class="border-b border-paper-300 py-4">
+              <h3 class="text-lg font-bold">{head}</h3>
+              <p class="mt-1 text-paper-700">{rest.join(': ')}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <a href="/admissions/enquire/" class="mt-10 inline-flex h-12 items-center bg-crimson-700 px-6 text-lg font-bold text-white hover:bg-crimson-800">Ask about this programme</a>
+    </div>
+    <aside aria-labelledby="other-title">
+      <div class="border-t-2 border-ink lg:sticky lg:top-36">
+        <h2 id="other-title" class="py-3 text-xl font-bold">Other programmes</h2>
+        <ul class="border-t border-paper-300" role="list">
+          {others.map((p) => (
+            <li class="border-b border-paper-300">
+              <a href={`/academics/integrated-programme/${p.slug}/`} class="block py-3 font-semibold hover:text-crimson-700">{p.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</PageLayout>

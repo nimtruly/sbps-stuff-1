@@ -1,0 +1,14 @@
+---
+import InfoPage from '../../components/InfoPage.astro';
+
+const body = "The academic session runs from **April to March**, in two terms:\n\n- **First term:** April to September\n- **Second term:** October to March\n\nDates for tests, examinations, holidays and events are in the school's annual academic calendar and in the student almanac.\n\n- [Annual academic calendar (PDF)](/documents/2025/06/10.-ANNUAL-ACADEMIC-CALENDER-1.pdf)\n\nChanges to dates are announced in the [notices](/notices/).";
+---
+
+<InfoPage
+  title="Academic calendar"
+  description="The SBPS academic year runs from April to March in two terms."
+  breadcrumbs={[{"label": "Parents", "href": "/parents/"}, {"label": "Academic calendar", "href": "/parents/year-planner/"}]}
+  body={body}
+  
+  related={[["Notices", "/notices/"], ["Leave rules", "/parents/policies/leave-rules/"], ["Tests, exams and promotion", "/parents/policies/test-exams-promotions/"]]}
+></InfoPage>

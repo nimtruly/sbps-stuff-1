@@ -1,0 +1,33 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { cms } from '../../../lib/cms';
+
+export async function getStaticPaths() {
+  const albums = await cms.getAlbums();
+  return albums.map((album) => ({ params: { album: album.slug }, props: { album } }));
+}
+
+const { album } = Astro.props;
+---
+
+<PageLayout
+  title={album.title}
+  description={`Photographs: ${album.title.toLowerCase()} at Social Baluni Public School, Dehradun.`}
+  breadcrumbs={[
+    { label: 'Campus life', href: '/campus-life/' },
+    { label: 'Photo gallery', href: '/campus-life/gallery/' },
+    { label: album.title, href: `/campus-life/gallery/${album.slug}/` },
+  ]}
+>
+  <ul class="grid gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-3" role="list">
+    {album.images.map((img, i) => (
+      <li>
+        <a href={img.url} class="group block" aria-label={`Open full-size photo: ${img.alt}`}>
+          <img src={img.url} alt={img.alt} width="1280" height="853" loading={i < 3 ? 'eager' : 'lazy'} class="aspect-[3/2] w-full object-cover outline-offset-4 group-hover:outline group-hover:outline-2 group-hover:outline-ink" />
+        </a>
+        <p class="mt-2 text-sm text-paper-700">{img.caption ?? img.alt}</p>
+      </li>
+    ))}
+  </ul>
+  <a href="/campus-life/gallery/" class="mt-12 inline-block font-semibold underline">All albums</a>
+</PageLayout>

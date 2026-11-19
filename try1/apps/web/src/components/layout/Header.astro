@@ -1,0 +1,151 @@
+---
+import Logo from '../ui/Logo.astro';
+import MobileNav from '../islands/MobileNav';
+import { navSections, utilityLinks, school } from '../../data/nav';
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header class="site-header sticky top-0 z-40 bg-paper-50">
+  <div class="hidden border-b border-paper-300 bg-paper-100 lg:block">
+    <div class="mx-auto flex h-9 max-w-7xl items-center justify-between px-8 text-xs text-paper-700">
+      <p>
+        Affiliated to CBSE, New Delhi · Affiliation No. <span data-figure>{school.affiliation}</span> · School Code <span data-figure>{school.schoolCode}</span>
+      </p>
+      <ul class="flex items-center gap-6" role="list">
+        <li><a class="hover:text-crimson-700 hover:underline" href={school.phoneHref} data-figure>{school.phone}</a></li>
+        {utilityLinks.map((l) => (
+          <li><a class="hover:text-crimson-700 hover:underline" href={l.href}>{l.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+    <Logo />
+
+    <nav class="hidden items-stretch self-stretch lg:flex" aria-label="Main">
+      <ul class="flex items-stretch" role="list">
+        {navSections.map((section, i) => (
+          <li class="nav-group relative flex items-stretch" data-nav-group>
+            <button
+              type="button"
+              class:list={[
+                'nav-trigger relative inline-flex items-center gap-1.5 px-3.5 text-[0.9375rem] font-semibold text-ink transition-colors hover:text-crimson-700',
+                isCurrent(section.href) && 'is-current',
+              ]}
+              aria-expanded="false"
+              aria-controls={`nav-panel-${i}`}
+            >
+              {section.title}
+              <svg class="h-3.5 w-3.5 transition-transform duration-200" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" />
+              </svg>
+            </button>
+            <div id={`nav-panel-${i}`} class="nav-panel absolute left-0 top-full z-50 w-64 border-2 border-ink bg-paper-50 shadow-xl" hidden>
+              <div class="tie-band" aria-hidden="true"></div>
+              <ul class="py-2" role="list">
+                {section.items.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      class="block px-4 py-2.5 text-[0.9375rem] text-ink hover:bg-paper-200 hover:text-crimson-700 focus-visible:bg-paper-200"
+                      aria-current={path === item.href ? 'page' : undefined}
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hidden shrink-0 items-center gap-2 lg:flex">
+      <a href="/search/" class="inline-flex h-11 w-11 items-center justify-center text-ink hover:bg-paper-200 hover:text-crimson-700" aria-label="Search the site">
+        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.75" />
+          <path d="m13 13 4.5 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" />
+        </svg>
+      </a>
+      <a href="/parents/pay-fees/" class="inline-flex h-11 items-center border-2 border-ink px-4 text-[0.9375rem] font-semibold text-ink hover:bg-ink hover:text-white">
+        Pay fees
+      </a>
+      <a href="/admissions/enquire/" class="inline-flex h-11 items-center bg-crimson-700 px-4 text-[0.9375rem] font-semibold text-white hover:bg-crimson-800">
+        Enquire
+      </a>
+    </div>
+
+    <MobileNav client:media="(max-width: 1023px)" sections={navSections} utility={utilityLinks} />
+  </div>
+  <div class="tie-band h-1.5" aria-hidden="true"></div>
+</header>
+
+<style>
+  .nav-trigger.is-current::after,
+  .nav-trigger[aria-expanded='true']::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0.875rem;
+    bottom: 0;
+    height: 3px;
+    background: var(--color-crimson-700);
+  }
+  .nav-trigger[aria-expanded='true'] svg {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  // Disclosure menus: click or Enter/Space toggles, hover opens on pointer devices,
+  // Escape closes and returns focus, focus leaving a group closes it.
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-group]'));
+  const closeAll = (except?: HTMLElement) =>
+    groups.forEach((g) => g !== except && setOpen(g, false));
+
+  function setOpen(group: HTMLElement, open: boolean) {
+    const btn = group.querySelector<HTMLButtonElement>('.nav-trigger');
+    const panel = group.querySelector<HTMLElement>('.nav-panel');
+    if (!btn || !panel) return;
+    btn.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+  }
+
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  groups.forEach((group) => {
+    const btn = group.querySelector<HTMLButtonElement>('.nav-trigger');
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      closeAll(group);
+      setOpen(group, open);
+    });
+    if (canHover) {
+      let timer: number | undefined;
+      group.addEventListener('pointerenter', () => {
+        window.clearTimeout(timer);
+        closeAll(group);
+        setOpen(group, true);
+      });
+      group.addEventListener('pointerleave', () => {
+        timer = window.setTimeout(() => setOpen(group, false), 160);
+      });
+    }
+    group.addEventListener('focusout', (e) => {
+      if (!group.contains(e.relatedTarget as Node)) setOpen(group, false);
+    });
+    group.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        setOpen(group, false);
+        btn?.focus();
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).closest('[data-nav-group]')) closeAll();
+  });
+</script>
