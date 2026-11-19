@@ -59,6 +59,34 @@ ITEMS = [
   "\"RANNVEER DEFENCE CLASSES\". A dusty campus path is softly blurred below. Natural daylight, shallow depth of field."),
 ]
 
+# Print-ready flat artwork (soft copies to print), matching the approved PP1, PP3, PP4 layouts
+FLAT = ("Flat 2D print-ready graphic design artwork, the finished poster file itself seen perfectly front-on. The design fills the entire "
+        "image edge to edge (full bleed) with straight edges: no table, wall, pins, hands or background surface, no perspective, no shadows, "
+        "no paper texture, no folds, no glare. Crisp, vector-sharp lettering, clean print colours, high resolution, safe margins of empty "
+        "space around all text.")
+PRINT = [
+ ("PF3", "Print file: A5 flyer, crimson", "2:3", "PL0", "A5 · 148 × 210 mm",
+  "Layout from top to bottom on a solid crimson red #C8102E background. Top left: the navy shield logo with gold outline, gold eagle wing and "
+  "gold star; to its right, the name in bold white capitals on three stacked lines: \"RANNVEER\", \"DEFENCE\", \"CLASSES\". Centre: a huge gold "
+  "#F2B705 headline on two lines, \"DEFENCE\" and \"COACHING\", in heavy rounded sans-serif. Under it, white capitals \"ADMISSION OPEN\". Below: a "
+  "rectangular photo with a thin white border showing an Indian teenage boy in a white polo shirt and navy track pants swinging over a white steel "
+  "bar on a green school ground with trees behind. Bottom centre: white bold text \"Call: 98XXX XXXXX\". Nothing else."),
+ ("PF4", "Print file: A5 flyer, navy", "2:3", "PL0", "A5 · 148 × 210 mm",
+  "Layout from top to bottom on a solid navy blue #0B2545 background. Top: the navy shield logo with gold outline, gold eagle wing and gold star, "
+  "and to its right the name in white: \"RANNVEER\" large on the first line and \"DEFENCE CLASSES\" smaller on the second line. Centre: a huge "
+  "white two-line headline \"NDA · SSB\" and \"COACHING\" in heavy rounded sans-serif. Below: a rectangular photo with a thin white border showing "
+  "six Indian teenage students in white polo shirts and navy track pants climbing a thick rope cargo net outdoors; a gold diagonal ribbon across "
+  "the photo's bottom-right corner reads \"LIMITED SEATS\" in navy capitals. Bottom centre: white bold text \"Call: 98XXX XXXXX\". Nothing else."),
+ ("PF1", "Print file: A2 poster, white", "3:4", "PL0", "A2 · 420 × 594 mm",
+  "Layout from top to bottom on a white background. Top: a full-width navy blue #0B2545 band with the navy shield logo (gold outline, gold eagle "
+  "wing, gold star) on the left and the name in bold white capitals on the right on two lines: \"RANNVEER\" and \"DEFENCE CLASSES\". Below the "
+  "band: a huge crimson #C8102E condensed headline \"NDA · CDS · SSB\". Under it: a gold #F2B705 ribbon banner with folded ends reading \"ADMISSION "
+  "OPEN 2027\" in navy capitals. Middle: a wide photo of four smiling Indian teenage students, two boys and two girls, in white school shirts "
+  "holding books in a bright school corridor. Below the photo: three icons in a row, navy line icons with crimson accents (a teacher at a "
+  "whiteboard, a clipboard with ticks, a running figure), each with a navy label underneath: \"Expert Faculty\", \"Daily Tests\", \"Physical "
+  "Training\". A thin navy rule, then a footer with \"Dehradun\" on the left and \"Call: 98XXX XXXXX\" on the right in bold navy. Nothing else."),
+]
+
 
 def prompt(body):
     return " ".join([REAL if body and "logo artwork" not in body else "", body, BRAND, TEXT_RULE]).strip()
@@ -91,6 +119,29 @@ def main():
         p = prompt(body)
         data.append({"id": pid, "title": title, "aspect": ratio, "ref": ref, "prompt": p})
         md += [f"### {pid}: {title}", f"Aspect ratio: {ratio} · Attach as reference: {ref or 'none'}", "", "```text", p, "```", ""]
+    md += [
+        "## Print-ready soft copies",
+        "",
+        "These are flat digital poster files for printing, not photos of a poster somewhere. They copy the approved layouts of PP3 (crimson flyer), "
+        "PP4 (navy flyer) and PP1 (A2 poster).",
+        "",
+        "**To get a print file:**",
+        "",
+        "1. Generate with Nano Banana Pro at **4K** (`generate_posters.py --only PF1,PF3,PF4` does this). In Flow or Gemini, choose the highest "
+        "resolution and attach the PL0 logo image.",
+        "2. In Canva, create a design at the print size listed for each file below, with **3 mm bleed**, and place the image to fill it.",
+        "3. Retype the name, headline and phone number in Canva over the AI text, so the letters print sharp. Use a bold rounded sans-serif such as "
+        "Montserrat ExtraBold or Poppins Bold.",
+        "4. Export as **PDF Print** with crop marks and bleed.",
+        "",
+        "Gemini's closest ratios to A-size paper are 2:3 for the flyers and 3:4 for the A2 poster. Canva crops or extends the few millimetres of difference.",
+        "",
+    ]
+    for pid, title, ratio, ref, size, body in PRINT:
+        p = " ".join([FLAT, body, BRAND, TEXT_RULE])
+        data.append({"id": pid, "title": title, "aspect": ratio, "ref": ref, "size": "4K", "prompt": p})
+        md += [f"### {pid}: {title}", f"Print size: {size} + 3 mm bleed · Aspect ratio: {ratio} · Attach as reference: {ref}",
+               "", "```text", p, "```", ""]
     (HERE.parent / "prompts-posters.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     (HERE / "posters.json").write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"{len(data)} poster prompts written")

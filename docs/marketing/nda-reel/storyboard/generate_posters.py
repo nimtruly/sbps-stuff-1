@@ -66,8 +66,11 @@ def main():
             parts = [{"text": i["prompt"] + (" Match the logo and name in the attached reference image exactly." if refs else "")}]
             for r in refs:
                 parts.append({"inline_data": {"mime_type": "image/png", "data": base64.b64encode(r.read_bytes()).decode()}})
+            image_config = {"aspectRatio": i["aspect"]}
+            if i.get("size"):
+                image_config["imageSize"] = i["size"]   # e.g. "4K" for print files (Nano Banana Pro)
             body = {"contents": [{"parts": parts}],
-                    "generationConfig": {"responseModalities": ["IMAGE"], "imageConfig": {"aspectRatio": i["aspect"]}}}
+                    "generationConfig": {"responseModalities": ["IMAGE"], "imageConfig": image_config}}
             try:
                 res = post(f"{API}/{a.model}:generateContent", key, body)
                 blob = next(p.get("inlineData") or p.get("inline_data")
