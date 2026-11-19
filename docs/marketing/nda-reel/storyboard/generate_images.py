@@ -104,8 +104,11 @@ def main():
             print(f"  {i['id']}_v{v}{refs}  {i['prompt'][:90]}...")
         return
     key = os.environ.get("GEMINI_API_KEY")
+    key_file = Path.home() / ".gemini_api_key"
+    if not key and key_file.exists():
+        key = key_file.read_text(encoding="utf-8").strip()
     if not key:
-        sys.exit("Set GEMINI_API_KEY first (see the top of this file).")
+        sys.exit(f"Set GEMINI_API_KEY or put the key in {key_file} (see the top of this file).")
 
     def run(job):
         i, v = job
